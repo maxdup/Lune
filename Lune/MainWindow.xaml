@@ -1,0 +1,52 @@
+﻿<Window x:Class="Lune.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" 
+        Height="420" 
+        Width="525"
+        WindowStyle="None"
+        Icon="../Images/lune.ico">
+    
+    <DockPanel LastChildFill="True">
+        <!--top panel (Title, close, minimize maximize and window drag)-->
+        <DockPanel DockPanel.Dock="Top">
+            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center">
+                <Hyperlink Click="TriggerClose" Style="{StaticResource WindowIconStyle}">r</Hyperlink>
+            </TextBlock>
+            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center">
+                <Hyperlink Click="TriggerMinimize" Style="{StaticResource WindowIconStyle}">0</Hyperlink>
+            </TextBlock>
+            <Image DockPanel.Dock="Right" MaxHeight="40" Margin="0,0,60,0" Source="{StaticResource logo}"/>
+            
+            <StatusBar Background="Transparent"
+                       MouseDoubleClick="TriggerMaximize"
+                       MouseMove="TriggerMoveWindow">
+                <TextBlock DockPanel.Dock="Left"
+                           Text=" Lune"
+                           FontSize="22"/>
+            </StatusBar>
+            
+        </DockPanel>
+        <!--bottom panel (current song info, media controls)-->
+        <Grid DockPanel.Dock="Bottom" Height="50 ">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <WrapPanel Grid.Column="1">
+                <Label x:Name="S_info" Content="info" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </WrapPanel>
+            <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" Grid.Column="2">
+                <Button x:Name="b_skip" Style="{StaticResource control}" Content="8" Height="25" Width="25" Margin="2" Click="b_skip_Click"/>
+                <Button x:Name="b_hybrid" Style="{StaticResource controlPlay}" Content="4" Height="40" Width="40" Margin="2" Click="b_hybrid_Click"/>
+                <Button x:Name="b_stop" Style="{StaticResource control}" Content="&lt;" Height="32" Width="32" Margin="2" Click="b_stop_Click"/>
+                <Button x:Name="b_prev" Style="{StaticResource control}" Content="7" Height="25" Width="25" Margin="2" Click="b_prev_Click"/>
+            </StackPanel>
+        </Grid>
+        <!--placeholder middle panel-->
+        <StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>
