@@ -50,6 +50,7 @@ namespace Lune
         //Everything down are window controls, resize, close, minimize etc...
         private void TriggerMoveWindow(object sender, MouseEventArgs e)
         {
+            Database bae = new Database(); //getto test
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 if (WindowState == System.Windows.WindowState.Maximized)
