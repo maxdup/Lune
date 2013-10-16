@@ -18,7 +18,7 @@ namespace Lune
         public Database()
         {
             //this constructor checks if the database exists and creates one if misisng
-            sql_conn = new SQLiteConnection("Data Source=lune.db;Version=3;FailIfMissing=True;");
+            sql_conn = new SQLiteConnection("Data Source=lune.ldb;Version=3;FailIfMissing=True;");
             try
             {
                 sql_conn.Open();
