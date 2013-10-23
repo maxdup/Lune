@@ -25,6 +25,7 @@ namespace Lune
         {
             InitializeComponent();
             player = new Player(S_info);
+            Database bae = new Database(); //getto test
         }
 
         private void b_hybrid_Click(object sender, RoutedEventArgs e)
@@ -50,7 +51,6 @@ namespace Lune
         //Everything down are window controls, resize, close, minimize etc...
         private void TriggerMoveWindow(object sender, MouseEventArgs e)
         {
-            Database bae = new Database(); //getto test
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 if (WindowState == System.Windows.WindowState.Maximized)
