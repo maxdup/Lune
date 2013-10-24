@@ -11,9 +11,7 @@ namespace Lune.Tests
         public void TestMethod1()
         {
             Database b = new Database();
-            b.DbInit();
             Assert.AreEqual(1, 1);
-
         }
     }
 }
