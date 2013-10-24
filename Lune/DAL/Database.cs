@@ -48,6 +48,7 @@ namespace Lune
                 "create table Label (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT);" +
                 "create table Album (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, idArtist int, idLabel int, FOREIGN KEY (idArtist) references Artist(id), FOREIGN KEY (idLabel) references Label(id));" +
                 "create table Song (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, trackNb int, path Text, idAlbum int, FOREIGN KEY (idAlbum) references Album(id));", sql_conn);
+
             sql_cmd.ExecuteNonQuery();
         }
 

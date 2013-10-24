@@ -1,14 +1,19 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Lune;
 
-namespace LuneTests
+namespace Lune.Tests
 {
     [TestClass]
-    public class DbTest
+    public class UnitTest1
     {
         [TestMethod]
         public void TestMethod1()
         {
+            Database b = new Database();
+            b.DbInit();
+            Assert.AreEqual(1, 1);
+
         }
     }
 }
