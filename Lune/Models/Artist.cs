@@ -12,15 +12,24 @@ namespace Lune
         int id;
         string name;
         LinkedList<Album> albums;
-
+        public Artist() : this("unknown"){}
+        public Artist(string name)
+        {
+            this.name = name;
+        }
+        public string getName()
+        {
+            return name;
+        }
         public int getId()
         {
             return id;
         }
-        public string ToString()
+
+        public override string ToString()
         //formated to be used in sql inserts/updates ex:"(name)"
         {
-            return "(" + name + ")";
+            return "('" + name + "')";
         }
     }
 }

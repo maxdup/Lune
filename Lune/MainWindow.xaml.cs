@@ -26,6 +26,7 @@ namespace Lune
             InitializeComponent();
             player = new Player(S_info);
             Database bae = new Database(); //getto test
+            //bae.addArtist(new Artist("bobby"));
         }
 
         private void b_hybrid_Click(object sender, RoutedEventArgs e)
