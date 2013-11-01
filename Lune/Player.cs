@@ -42,8 +42,8 @@ namespace Lune
             if (!_queue.IsEmpty())
             {
                 CloseWaveOut();
-                info.Content = _queue.GetCurrent().GetName();
-                _mainOutputStream = CreateInputStream(_queue.GetCurrent().GetPath());
+                info.Content = _queue.GetCurrent().getName();
+                _mainOutputStream = CreateInputStream(_queue.GetCurrent().getPath());
                 _waveOutDevice.Init(_mainOutputStream);
                 _waveOutDevice.Play();
                 _playing = true;
@@ -106,7 +106,7 @@ namespace Lune
             if (_queue.HasPrev())
             {
                 CloseWaveOut();
-                _mainOutputStream = CreateInputStream(_queue.GetPrev().GetPath());
+                _mainOutputStream = CreateInputStream(_queue.GetPrev().getPath());
                 _waveOutDevice.Init(_mainOutputStream);
             }
             if (_playing)

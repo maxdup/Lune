@@ -18,16 +18,17 @@ namespace Lune
         {
             this.name = name;
         }
-
         public int getId()
         {
             return id;
         }
-
-        public string ToString()
-        //formated to be used in sql inserts/updates ex:"(name)"
+        public string getName()
         {
-            return "(" + name + ")";
+            return name;
+        }
+        public string ToString()
+        {
+            return name;
         }
     }
 }

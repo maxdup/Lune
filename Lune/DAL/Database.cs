@@ -59,13 +59,20 @@ namespace Lune
         public void addSong(Song song)
         {
             sql_conn.Open();
-            sql_cmd = new SQLiteCommand("insert into Song (name, trackNb, path, idAlbum) values " + song.ToString(), sql_conn);
+            sql_cmd = new SQLiteCommand("insert into Song (name, trackNb, path, idAlbum) values (?, ?, ?, ?)", sql_conn);
+            sql_cmd.Parameters.Add(new SQLiteParameter(song.getName()));
+            sql_cmd.Parameters.Add(new SQLiteParameter(song.getTrackN().ToString()));
+            sql_cmd.Parameters.Add(new SQLiteParameter(song.getPath()));
+            sql_cmd.Parameters.Add(new SQLiteParameter(song.getAlbum().getId().ToString()));
             sql_cmd.ExecuteNonQuery();
         }
         public void addAlbum(Album album)
         {
             sql_conn.Open();
-            sql_cmd = new SQLiteCommand("insert into Album (name, idArtist, idLabel) values " + album.ToString(), sql_conn);
+            sql_cmd = new SQLiteCommand("insert into Album (name, idArtist, idLabel) values (?, ?, ?)", sql_conn);
+            sql_cmd.Parameters.Add(new SQLiteParameter(album.getName()));
+            sql_cmd.Parameters.Add(new SQLiteParameter(album.getArtist().getId().ToString()));
+            sql_cmd.Parameters.Add(new SQLiteParameter(album.getLabel().getName()));
             sql_cmd.ExecuteNonQuery();
         }
         public void addArtist(Artist artist)
@@ -79,7 +86,8 @@ namespace Lune
         public void addLabel(Label label)
         {
             sql_conn.Open();
-            sql_cmd = new SQLiteCommand("insert into Label (name) values " + label.ToString(), sql_conn);
+            sql_cmd = new SQLiteCommand("insert into Label (name) values (?)", sql_conn);
+            sql_cmd.Parameters.Add(new SQLiteParameter(label.getName()));
             sql_cmd.ExecuteNonQuery();
         }
         public List<Artist> getArtists() //just a quick test

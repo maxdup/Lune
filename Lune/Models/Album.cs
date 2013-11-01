@@ -21,15 +21,25 @@ namespace Lune
         {
             this.name = name;
         }
-
         public int getId()
         {
             return id;
         }
-        public string ToString()
-        //formated to be used in sql inserts/updates ex:"(name)"
+        public string getName()
         {
-            return "(" + name + ", " + artist.getId() + ", " + label.getId() + ")";
+            return name;
+        }
+        public Artist getArtist()
+        {
+            return artist;
+        }
+        public Label getLabel()
+        {
+            return label;
+        }
+        public string ToString()
+        {
+            return name;
         }
     }
 }

@@ -27,9 +27,8 @@ namespace Lune
         }
 
         public override string ToString()
-        //formated to be used in sql inserts/updates ex:"(name)"
         {
-            return "('" + name + "')";
+            return name;
         }
     }
 }

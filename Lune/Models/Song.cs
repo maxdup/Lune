@@ -15,7 +15,7 @@ namespace Lune
     {
         private string path; 
         private string name;
-        private uint trackN;
+        private int trackN;
         private Album album;
 
         public Song(string path)
@@ -23,25 +23,27 @@ namespace Lune
             this.path = path;
             TagLib.File f = TagLib.File.Create(path);
             name = f.Tag.Title;
-            trackN = f.Tag.TrackCount;
+            trackN = Convert.ToInt32(f.Tag.TrackCount);
         }
-        public string GetPath()
+        public string getPath()
         {
             return path;
         }
-        public string GetName()
+        public Album getAlbum()
+        {
+            return album;
+        }
+        public string getName()
         {
             return name;
         }
-        public uint GetTrackN()
+        public int getTrackN()
         {
             return trackN;
         }
-
         public string ToString()
-        //formated to be used in sql inserts/updates ex:"(name, trackN, path, albumId)"
         {
-            return "(" + name + ", " + trackN + "," + path + ", " + album.getId()+ ")";
+            return trackN + "-" + name;
         }
     }
 }
