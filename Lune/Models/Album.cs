@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Lune
 {
-    //this is mostly a placeholder
     class Album
     {
         int id;
@@ -17,9 +16,13 @@ namespace Lune
         LinkedList<Song> songs;
 
         public Album() : this("unknown") {}
-        public Album(string name)
+        public Album(string name) : this (name, new Artist("unknown"),new Label("unknown"), 0)  {}
+        public Album(string name, Artist artist, Label label, int year)
         {
             this.name = name;
+            this.artist = artist;
+            this.label = label;
+            this.year = year;
         }
         public int getId()
         {

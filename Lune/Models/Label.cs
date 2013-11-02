@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lune
 {
-    //this is mostly a placeholder
     class Label
     {
-        private int id;
+        private int id = 0;
         private String name;
         LinkedList<Album> albums;
 

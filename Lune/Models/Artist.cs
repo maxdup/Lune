@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lune
 {
-    //this is mostly a placeholder
     class Artist
     {
-        int id;
+        int id = 0;
         string name;
         LinkedList<Album> albums;
         public Artist() : this("unknown"){}
