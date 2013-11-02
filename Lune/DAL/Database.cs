@@ -56,43 +56,88 @@ namespace Lune
             sql_cmd.ExecuteNonQuery();
         }
 
+        [Obsolete("deprecated. Don't use this method in a loop when adding multiple songs, use addSongs() instead for better performances.")]
         public void addSong(Song song)
         {
+            addSongs(new List<Song>() {song});
+        }
+
+        public void addSongs(List<Song> songs)
+        {
             sql_conn.Open();
-            sql_cmd = new SQLiteCommand("insert into Song (name, trackNb, path, idAlbum) values (@name, @trackn, @path, @AlbId)", sql_conn);
-            sql_cmd.Parameters.Add(new SQLiteParameter("@name",song.getName()));
-            sql_cmd.Parameters.Add(new SQLiteParameter("@trackn", song.getTrackN().ToString()));
-            sql_cmd.Parameters.Add(new SQLiteParameter("@path", song.getPath()));
-            sql_cmd.Parameters.Add(new SQLiteParameter("@AlbId", song.getAlbum().getId().ToString()));
-            sql_cmd.ExecuteNonQuery();
+            SQLiteTransaction transaction = sql_conn.BeginTransaction();
+            foreach (Song song in songs)
+            {
+                sql_cmd = new SQLiteCommand("insert into Song (name, trackNb, path, idAlbum) values (@name, @trackn, @path, @AlbId)", sql_conn);
+                sql_cmd.Parameters.Add(new SQLiteParameter("@name", song.getName()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@trackn", song.getTrackN().ToString()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@path", song.getPath()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@AlbId", song.getAlbum().getId().ToString()));
+                sql_cmd.ExecuteNonQuery();
+            }
+            transaction.Commit();
             sql_conn.Close();
         }
+
+        [Obsolete("deprecated. Don't use this method in a loop when adding multiple albums, use addAlbums() instead for better performances.")]
         public void addAlbum(Album album)
         {
-            sql_conn.Open();
-            sql_cmd = new SQLiteCommand("insert into Album (name, idArtist, idLabel) values (@name, @artId, @labId)", sql_conn);
-            sql_cmd.Parameters.Add(new SQLiteParameter("@name", album.getName()));
-            sql_cmd.Parameters.Add(new SQLiteParameter("@artId", album.getArtist().getId()));
-            sql_cmd.Parameters.Add(new SQLiteParameter("@LabId", album.getLabel().getId()));
-            sql_cmd.ExecuteNonQuery();
-            sql_conn.Close();
+            addAlbums(new List<Album>() { album });
         }
-        public void addArtist(Artist artist)
+
+        public void addAlbums(List<Album> albums)
         {
             sql_conn.Open();
-            sql_cmd = new SQLiteCommand("insert into Artist (name) values(?)", sql_conn);
-            sql_cmd.Parameters.Add(new SQLiteParameter(artist.getName()));
-            sql_cmd.ExecuteNonQuery();
+            SQLiteTransaction transaction = sql_conn.BeginTransaction();
+            foreach (Album album in albums)
+            {
+                sql_cmd = new SQLiteCommand("insert into Album (name, idArtist, idLabel) values (@name, @artId, @labId)", sql_conn);
+                sql_cmd.Parameters.Add(new SQLiteParameter("@name", album.getName()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@artId", album.getArtist().getId()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@LabId", album.getLabel().getId()));
+                sql_cmd.ExecuteNonQuery();
+            }
+            transaction.Commit();
+            sql_conn.Close();
+        }
+
+        [Obsolete("deprecated. Don't use this method in a loop when adding multiple artists, use addArtists() instead for better performances.")]
+        public void addArtist(Artist artist)
+        {
+            addArtists(new List<Artist>() { artist });
+        }
+
+        public void addArtists(List<Artist> artists)
+        {
+            sql_conn.Open();
+            SQLiteTransaction transaction = sql_conn.BeginTransaction();
+            foreach (Artist artist in artists)
+            {
+                sql_cmd = new SQLiteCommand("insert into Artist (name) values(?)", sql_conn);
+                sql_cmd.Parameters.Add(new SQLiteParameter(artist.getName()));
+                sql_cmd.ExecuteNonQuery();
+            }
+            transaction.Commit();
             sql_conn.Close();
         }
         public void addLabel(Label label)
         {
+            addLabels(new List<Label>() { label });
+        }
+        public void addLabels(List<Label> labels)
+        {
             sql_conn.Open();
-            sql_cmd = new SQLiteCommand("insert into Label (name) values (?)", sql_conn);
-            sql_cmd.Parameters.Add(new SQLiteParameter(label.getName()));
-            sql_cmd.ExecuteNonQuery();
+            SQLiteTransaction transaction = sql_conn.BeginTransaction();
+            foreach (Label label in labels)
+            {
+                sql_cmd = new SQLiteCommand("insert into Label (name) values (?)", sql_conn);
+                sql_cmd.Parameters.Add(new SQLiteParameter(label.getName()));
+                sql_cmd.ExecuteNonQuery();
+            }
+            transaction.Commit();
             sql_conn.Close();
         }
+
         public List<Artist> getArtists() //Artist creation incomplete (quick test)
         {
             List<Artist> arts = new List<Artist>();
@@ -125,6 +170,17 @@ namespace Lune
                 albs.Add(new Album(Convert.ToString(row["name"])));// << update constructor when it's done
             }
             return albs;
+        }
+        public List<Song> getSongs() //Song creation incomplete (quick test)
+        {
+            List<Song> songs = new List<Song>();
+            DB = new SQLiteDataAdapter("select * from Song", sql_conn);
+            DB.Fill(DT);
+            foreach (DataRow row in DT.Rows)
+            {
+                songs.Add(new Song(Convert.ToString(row["name"])));// << update constructor when it's done
+            }
+            return songs;
         }
     }
 }

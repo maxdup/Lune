@@ -21,9 +21,20 @@ namespace Lune
         public Song(string path)
         {
             this.path = path;
-            TagLib.File f = TagLib.File.Create(path);
-            name = f.Tag.Title;
-            trackN = Convert.ToInt32(f.Tag.TrackCount);
+
+            try
+            {
+                TagLib.File f = TagLib.File.Create(path);
+                name = f.Tag.Title;
+                trackN = Convert.ToInt32(f.Tag.TrackCount);
+            }
+            catch (Exception e)
+            {
+                name = "unknown";
+                trackN = 0;
+            }
+            album = new Album();
+            
         }
         public string getPath()
         {

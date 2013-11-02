@@ -114,6 +114,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DAL\Database.cs" />
+    <Compile Include="DAL\MediaFiles.cs" />
     <Compile Include="Models\Library.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Artist.cs" />

@@ -14,6 +14,7 @@ namespace Lune
         public Library()
         {
             AlbumLibrary = new List<Album>();
+            SongLibrary = new List<Song>();
         }
         public List<Album> GetAlbums()
         {

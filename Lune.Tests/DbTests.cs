@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Lune.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class DbTests
     {
         Database dbTest = new Database();
         Library lib = new Library();
@@ -64,6 +64,7 @@ namespace Lune.Tests
             Assert.AreEqual(4, lib.GetAlbums().Count);
             Assert.AreEqual(4, dbTest.getAlbums().Count);
         }
+        [TestMethod]
         public void InsertSong()
         {
             List<Song> liSong = new List<Song>();
@@ -80,7 +81,32 @@ namespace Lune.Tests
                 dbTest.addSong(song);
             }
             Assert.AreEqual(5 ,lib.GetSongs().Count);
-            Assert.AreEqual(5, dbTest.getAlbums().Count);
+            Assert.AreEqual(5, dbTest.getSongs().Count);
+        }
+        [TestMethod]
+        public void InsertSongList()
+        {
+            List<Song> liSong = new List<Song>();
+
+            liSong.Add(new Song("hello world"));
+            liSong.Add(new Song("2"));
+            liSong.Add(new Song("3"));
+            liSong.Add(new Song("4"));
+            liSong.Add(new Song("bongo song"));
+
+            
+            dbTest.addSongs(liSong);
+
+            Assert.AreEqual(10, dbTest.getSongs().Count);
+        }
+        [TestMethod]
+        public void libraryPopulation()
+        {
+            string dir = "D:\\Music";
+            MediaFiles med = new MediaFiles(lib);
+            
+            Assert.AreEqual(-1, med.scrapper(dir));
+            Assert.AreEqual(0, lib.GetSongs().Count);
         }
     }
 }
