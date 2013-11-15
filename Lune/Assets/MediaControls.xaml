@@ -7,11 +7,11 @@
         <Setter Property="FontFamily" Value="Webdings" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="2"/>
         <Setter Property="FontSize" Value="16" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
+                <ControlTemplate TargetType="{x:Type Button}">
                     <Grid Width="{TemplateBinding Width}"  
                              Height="{TemplateBinding Height}" ClipToBounds="True">
 
@@ -34,9 +34,8 @@
         <Setter Property="FontFamily" Value="Webdings" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0"/>
-        <Setter Property="FontSize" Value="26
-                " />
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="FontSize" Value="26" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -68,14 +67,9 @@
                             </Grid.RowDefinitions>
                             <TickBar x:Name="TopTick" Visibility="Collapsed" Fill="{TemplateBinding Foreground}" Placement="Top" Height="4" Grid.Row="0"/>
                             <TickBar x:Name="BottomTick" Visibility="Collapsed" Fill="{TemplateBinding Foreground}" Placement="Bottom" Height="4" Grid.Row="0"/>
-                            <Border x:Name="TrackBackground"  
- BorderThickness="1" CornerRadius="1"
- Margin="5,0" VerticalAlignment="Center" Height="4.0" Grid.Row="1" >
+                            <Border x:Name="TrackBackground" BorderThickness="1" CornerRadius="1" Margin="5,0" VerticalAlignment="Center" Height="4.0" Grid.Row="1" >
                                 <Canvas Margin="-6,-1">
-                                    <Rectangle Visibility="Hidden" x:Name="PART_SelectionRange" Height="4.0"
- Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
- Stroke="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}"
- StrokeThickness="1.0"/>
+                                    <Rectangle Visibility="Hidden" x:Name="PART_SelectionRange" Height="4.0" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" StrokeThickness="1.0"/>
                                 </Canvas>
                             </Border>
                             <Track x:Name="PART_Track" Grid.Row="1">

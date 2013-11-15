@@ -35,15 +35,20 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10,0,0,0">
+                <Button Style="{StaticResource viewControl}" Content="Artists" Click="b_VArtist_click"/>
+                <Button Style="{StaticResource viewControl}" Content="Albums" Click="b_VAlbum_click"/>
+                <Button Style="{StaticResource viewControl}" Content="Songs" Click="b_VSong_click"/>
+            </StackPanel>
             <StackPanel Grid.Column="1">
                 <Label x:Name="S_info" Content="info" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Slider Style="{StaticResource SongProgress}" Width="250" HorizontalAlignment="Center" />
             </StackPanel>
-            <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal" Grid.Column="3" Margin="0,0,5,5">
-                <Button x:Name="b_skip" Style="{StaticResource control}" Content="8" Height="25" Width="25" Margin="2" Click="b_skip_Click"/>
-                <Button x:Name="b_hybrid" Style="{StaticResource controlPlay}" Content="4" Height="40" Width="40" Margin="2" Click="b_hybrid_Click"/>
-                <Button x:Name="b_stop" Style="{StaticResource control}" Content="&lt;" Height="32" Width="32" Margin="2" Click="b_stop_Click"/>
-                <Button x:Name="b_prev" Style="{StaticResource control}" Content="7" Height="25" Width="25" Margin="2" Click="b_prev_Click"/>
+            <StackPanel Grid.Column="2" FlowDirection="RightToLeft" Orientation="Horizontal"  Margin="0,0,5,5">
+                <Button x:Name="b_skip" Style="{StaticResource control}" Content="8" Height="25" Width="25" Click="b_skip_Click"/>
+                <Button x:Name="b_hybrid" Style="{StaticResource controlPlay}" Content="4" Height="40" Width="40" Click="b_hybrid_Click"/>
+                <Button x:Name="b_stop" Style="{StaticResource control}" Content="&lt;" Height="32" Width="32" Click="b_stop_Click"/>
+                <Button x:Name="b_prev" Style="{StaticResource control}" Content="7" Height="25" Width="25" Click="b_prev_Click"/>
             </StackPanel>
         </Grid>
         <!--Middle Panel (Library)-->

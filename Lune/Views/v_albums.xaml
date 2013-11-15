@@ -1,21 +1,19 @@
-﻿<UserControl x:Class="Lune.Views.v_artists"
+﻿<UserControl x:Class="Lune.Views.v_albums"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    
+    <Grid>
         <Grid HorizontalAlignment="Stretch" Margin="7,30,7,15">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" x:Name="listB_Artists"/>
-            <GridSplitter Grid.Column="0" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-            <ListBox Grid.Column="1" x:Name="listB_Albums"/>
+            <ListBox Grid.Column="0" x:Name="listB_Albums"/>
             <GridSplitter Grid.Column="1" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-            <ListBox Grid.Column="2" x:Name="listB_Songs"/>
+            <ListBox Grid.Column="1" x:Name="listB_Songs"/>
         </Grid>
+    </Grid>
 </UserControl>

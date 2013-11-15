@@ -6,6 +6,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Assets/MediaControls.xaml" />
+                <ResourceDictionary Source="Assets/ViewControls.xaml" />
                 <ResourceDictionary Source="Assets/Window.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

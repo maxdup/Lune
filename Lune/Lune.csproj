@@ -121,9 +121,19 @@
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="SongQueue.cs" />
+    <Compile Include="Views\v_albums.xaml.cs">
+      <DependentUpon>v_albums.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\v_artists.xaml.cs">
       <DependentUpon>v_artists.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\v_songs.xaml.cs">
+      <DependentUpon>v_songs.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Assets\ViewControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -144,7 +154,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\v_albums.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\v_artists.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\v_songs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

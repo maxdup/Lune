@@ -27,27 +27,41 @@ namespace Lune
             InitializeComponent();
             player = new Player(S_info);
             Database bae = new Database(); 
-            libraryDisplay.Children.Add(new v_artists());
+            libraryDisplay.Children.Add(new v_songs());
         }
 
         private void b_hybrid_Click(object sender, RoutedEventArgs e)
         {
             player.Hybrid();
         }
-
         private void b_prev_Click(object sender, RoutedEventArgs e)
         {
             player.Prev();
         }
-
         private void b_skip_Click(object sender, RoutedEventArgs e)
         {
             player.Skip();
         }
-
         private void b_stop_Click(object sender, RoutedEventArgs e)
         {
             player.Stop();
+        }
+
+
+        private void b_VArtist_click(object sender, RoutedEventArgs e)
+        {
+            libraryDisplay.Children.Clear();
+            libraryDisplay.Children.Add(new v_artists()); 
+        }
+        private void b_VAlbum_click(object sender, RoutedEventArgs e)
+        {
+            libraryDisplay.Children.Clear();
+            libraryDisplay.Children.Add(new v_albums());
+        }
+        private void b_VSong_click(object sender, RoutedEventArgs e)
+        {
+            libraryDisplay.Children.Clear();
+            libraryDisplay.Children.Add(new v_songs());
         }
 
         //Everything down are window controls, resize, close, minimize etc...
