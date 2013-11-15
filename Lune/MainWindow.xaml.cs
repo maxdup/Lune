@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Lune.Views;
 
 namespace Lune
 {
@@ -25,8 +26,8 @@ namespace Lune
         {
             InitializeComponent();
             player = new Player(S_info);
-            Database bae = new Database(); //getto test
-            //bae.addArtist(new Artist("bobby"));
+            Database bae = new Database(); 
+            libraryDisplay.Children.Add(new v_artists());
         }
 
         private void b_hybrid_Click(object sender, RoutedEventArgs e)

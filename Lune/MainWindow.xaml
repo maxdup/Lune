@@ -47,17 +47,7 @@
             </StackPanel>
         </Grid>
         <!--Middle Panel (Library)-->
-        <Grid HorizontalAlignment="Stretch" Margin="7,30,7,15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0"/>
-            <GridSplitter Grid.Column="0" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-            <ListBox Grid.Column="1"/>
-            <GridSplitter Grid.Column="1" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-            <ListBox Grid.Column="2"/>
-        </Grid>
+        <DockPanel x:Name="libraryDisplay" HorizontalAlignment="Stretch"/>
+
     </DockPanel>
 </Window>
