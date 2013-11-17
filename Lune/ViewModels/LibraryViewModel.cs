@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Diagnostics;
+using System.Windows.Documents;
+using System.Windows.Controls;
 
 using Lune.Commands;
 using Lune;
-using System.Windows.Documents;
+
 namespace Lune.ViewModels
 {
     internal class LibraryViewModel
@@ -20,17 +22,24 @@ namespace Lune.ViewModels
         List<Album> _albumsDisplayed;
         List<Artist> _artistsDisplayed;
 
-        public LibraryViewModel(Player player)
+        Panel _libraryDisplay;
+
+        public ICommand libViews { get; private set; }
+
+        public LibraryViewModel(Player player, Panel panel)
         {
+            _libraryDisplay = panel;
             _playah = player;
             _lib = new Library();
             
             _songsDisplayed = _lib.GetSongs();
             _albumsDisplayed = _lib.GetAlbums();
             //_artistsDisplayed = _lib.GetArtists(); uncomment when implemented
+
+            libViews = new LibViewCommands(this, _libraryDisplay);
         }
 
-        public void Play(object sender)//this method 
+        public void Play(object sender)//this method needs to be improved
         {
             _playah.setQueue(new SongQueue(_songsDisplayed));
             _playah.Start();

@@ -99,14 +99,5 @@ namespace Lune.Tests
 
             Assert.AreEqual(10, dbTest.getSongs().Count);
         }
-        [TestMethod]
-        public void libraryPopulation()
-        {
-            string dir = "D:\\Music";
-            MediaFiles med = new MediaFiles(lib);
-            
-            Assert.AreEqual(-1, med.scrapper(dir));
-            Assert.AreEqual(0, lib.GetSongs().Count);
-        }
     }
 }

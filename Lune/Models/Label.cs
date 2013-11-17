@@ -25,7 +25,7 @@ namespace Lune
         {
             return name;
         }
-        public string ToString()
+        public override string ToString()
         {
             return name;
         }

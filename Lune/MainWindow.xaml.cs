@@ -32,16 +32,13 @@ namespace Lune
         {
             InitializeComponent();
             
-
             player = new Player();
-            LibVm = new LibraryViewModel(player);
+            LibVm = new LibraryViewModel(player, libraryDisplay);
             PlayVm = new PlaybackViewModel(player);
 
             InitViews();
 
             Database bae = new Database();//dunno what to make of this yet
-
-            b_View_click(new Button(), null);
         }
 
         private void InitViews()
@@ -52,48 +49,9 @@ namespace Lune
 
             v_ViewControls viewControls= new v_ViewControls();
             viewControls.DataContext = LibVm;
-            libraryDisplay.Children.Add(viewControls);
-        }
+            ViewsDisplay.Children.Add(viewControls);
 
-        //event for player controls (play, pause, stop, skip...)
-        private void b_media_click(object sender, RoutedEventArgs e)
-        {
-            switch (((Button)sender).Name)
-            {
-                case "b_skip":
-                    player.Skip();
-                    break;
-                case "b_hybrid":
-                    player.Hybrid();
-                    break;
-                case "b_stop":
-                    player.Stop();
-                    break;
-                case "b_prev":
-                    player.Prev();
-                    break;
-            }
-        }
-
-        //selects from different view to display the music Library
-        private void b_View_click(object sender, RoutedEventArgs e)
-        {
-            libraryDisplay.Children.Clear();
-            switch (((Button)sender).Name)
-            {
-                case "vAlbum":
-                    libraryDisplay.Children.Add(new v_albums());
-                    break;
-                case "vSong":
-                    v_songs songs = new v_songs();
-                    songs.getListBox().ItemsSource = LibVm.getSongsDisplayed();
-                    songs.DataContext = LibVm;
-                    libraryDisplay.Children.Add(songs);
-                    break;
-                default:
-                    libraryDisplay.Children.Add(new v_artists());
-                    break;
-            }
+            libraryDisplay.Children.Add(new v_songs()); // not going to cut it
         }
 
         //Everything down are window controls, resize, close, minimize etc...

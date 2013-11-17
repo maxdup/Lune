@@ -69,10 +69,10 @@ namespace Lune
             foreach (Song song in songs)
             {
                 sql_cmd = new SQLiteCommand("insert into Song (name, trackNb, path, idAlbum) values (@name, @trackn, @path, @AlbId)", sql_conn);
-                sql_cmd.Parameters.Add(new SQLiteParameter("@name", song.getName()));
-                sql_cmd.Parameters.Add(new SQLiteParameter("@trackn", song.getTrackN().ToString()));
-                sql_cmd.Parameters.Add(new SQLiteParameter("@path", song.getPath()));
-                sql_cmd.Parameters.Add(new SQLiteParameter("@AlbId", song.getAlbum().getId().ToString()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@name", song.name));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@trackn", song.trackN.ToString()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@path", song.path));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@AlbId", song.album.getId().ToString()));
                 sql_cmd.ExecuteNonQuery();
             }
             transaction.Commit();
@@ -92,7 +92,7 @@ namespace Lune
             foreach (Album album in albums)
             {
                 sql_cmd = new SQLiteCommand("insert into Album (name, idArtist, idLabel) values (@name, @artId, @labId)", sql_conn);
-                sql_cmd.Parameters.Add(new SQLiteParameter("@name", album.getName()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@name", album.name));
                 sql_cmd.Parameters.Add(new SQLiteParameter("@artId", album.getArtist().getId()));
                 sql_cmd.Parameters.Add(new SQLiteParameter("@LabId", album.getLabel().getId()));
                 sql_cmd.ExecuteNonQuery();

@@ -14,10 +14,12 @@ namespace Lune
      */
     class Song
     {
-        private string path; 
-        private string name;
-        private int trackN;
-        private Album album;
+        public string path {get; set; }
+        public string name { get; set; }
+        public int trackN {get; set; }
+        public Album album { get; set; }
+        public Artist artist { get; set; }
+
 
         public Song(string path)
         {
@@ -27,32 +29,17 @@ namespace Lune
             {
                 TagLib.File f = TagLib.File.Create(path);
                 name = f.Tag.Title;
-                trackN = Convert.ToInt32(f.Tag.TrackCount);
+                trackN = Convert.ToInt32(f.Tag.Track);
+                album = new Album(f.Tag.Album);
+                artist = new Artist(f.Tag.FirstAlbumArtist);
             }
             catch (Exception e)
             {
                 name = "unknown";
                 trackN = 0;
             }
-            album = new Album();
-            
         }
-        public string getPath()
-        {
-            return path;
-        }
-        public Album getAlbum()
-        {
-            return album;
-        }
-        public string getName()
-        {
-            return name;
-        }
-        public int getTrackN()
-        {
-            return trackN;
-        }
+        
         public override string ToString()
         {
             return trackN + " - " + name;

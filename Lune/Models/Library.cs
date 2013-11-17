@@ -17,7 +17,7 @@ namespace Lune
             SongLibrary = new List<Song>();
 
             MediaFiles files = new MediaFiles(this);
-            files.scrapper("D:\\Music\\"); //insert w/e directory you wish to scan
+            files.scrapper("D:\\Music\\air\\"); //insert w/e directory you wish to scan
         }
         public List<Album> GetAlbums()
         {

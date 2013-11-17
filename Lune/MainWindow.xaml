@@ -35,11 +35,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="10,0,0,0">
-                <Button x:Name="vArtist"  Style="{StaticResource viewControl}" Content="Artists" Click="b_View_click"/>
-                <Button x:Name="vAlbum"  Style="{StaticResource viewControl}" Content="Albums" Click="b_View_click"/>
-                <Button x:Name="vSong" Style="{StaticResource viewControl}" Content="Songs" Click="b_View_click"/>
-            </StackPanel>
+            <StackPanel Grid.Column="0" x:Name="ViewsDisplay"/>
             <StackPanel Grid.Column="1">
                 <Label x:Name="S_info" Content="info" HorizontalAlignment="Center" VerticalAlignment="Top"/>
                 <Slider Style="{StaticResource SongProgress}" Width="250" HorizontalAlignment="Center" />

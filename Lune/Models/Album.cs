@@ -10,7 +10,7 @@ namespace Lune
     {
         int id;
         int year;
-        string name;
+        public string name { get; set; }
         Label label = new Label();
         Artist artist = new Artist();
         LinkedList<Song> songs;
@@ -28,10 +28,6 @@ namespace Lune
         {
             return id;
         }
-        public string getName()
-        {
-            return name;
-        }
         public Artist getArtist()
         {
             return artist;
@@ -40,7 +36,7 @@ namespace Lune
         {
             return label;
         }
-        public string ToString()
+        public override string ToString()
         {
             return name;
         }
