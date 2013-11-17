@@ -21,13 +21,11 @@ namespace Lune
         private SongQueue _queue;
         private Boolean _playing;
 
-        private System.Windows.Controls.Label info;
+        private string currSongInfo;
 
-
-        public Player(System.Windows.Controls.Label info)
+        public Player()
         {
             _queue = new SongQueue();
-            this.info = info;
             _waveOutDevice = new WaveOut();
             _waveOutDevice.PlaybackStopped += new EventHandler<StoppedEventArgs>(waveOutDevice_playbackstopped);
         }
@@ -42,7 +40,7 @@ namespace Lune
             if (!_queue.IsEmpty())
             {
                 CloseWaveOut();
-                info.Content = _queue.GetCurrent().getName();
+                currSongInfo = _queue.GetCurrent().getName();
                 _mainOutputStream = CreateInputStream(_queue.GetCurrent().getPath());
                 _waveOutDevice.Init(_mainOutputStream);
                 _waveOutDevice.Play();
@@ -69,7 +67,7 @@ namespace Lune
             _waveOutDevice.Stop();
             _mainOutputStream = null;
             _queue = new SongQueue();
-            info.Content = "";
+            currSongInfo = "";
             CloseWaveOut();
             _playing = false;
         }
@@ -113,6 +111,12 @@ namespace Lune
                 Start();
  
         }
+
+        public void setQueue(SongQueue queue)
+        {
+            _queue = queue;
+        }
+
 
         private void waveOutDevice_playbackstopped(object sender, StoppedEventArgs e)
         {

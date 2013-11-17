@@ -1,5 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Lune;
+using System.Collections.Generic;
+
 
 namespace Lune.Tests
 {

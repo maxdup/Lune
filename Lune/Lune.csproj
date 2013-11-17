@@ -113,6 +113,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\PlaybackCommands.cs" />
     <Compile Include="DAL\Database.cs" />
     <Compile Include="DAL\MediaFiles.cs" />
     <Compile Include="Models\Library.cs" />
@@ -121,14 +122,22 @@
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="SongQueue.cs" />
+    <Compile Include="ViewModels\LibraryViewModel.cs" />
+    <Compile Include="ViewModels\PlaybackViewModel.cs" />
     <Compile Include="Views\v_albums.xaml.cs">
       <DependentUpon>v_albums.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\v_artists.xaml.cs">
       <DependentUpon>v_artists.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\v_mediaControls.xaml.cs">
+      <DependentUpon>v_mediaControls.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\v_songs.xaml.cs">
       <DependentUpon>v_songs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\v_ViewControls.xaml.cs">
+      <DependentUpon>v_ViewControls.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\ViewControls.xaml">
       <SubType>Designer</SubType>
@@ -162,7 +171,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\v_mediaControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\v_songs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\v_ViewControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -227,6 +244,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -15,12 +15,12 @@ namespace Lune
         {
             this.lib = lib;
         }
-        public int scrapper(string sDir)
+        public int scrapper(string searchDir)
         {
             int i = 0; //file count
             try
             {
-                foreach (string d in System.IO.Directory.GetDirectories(sDir))
+                foreach (string d in System.IO.Directory.GetDirectories(searchDir))
                 {
                     foreach (string f in Directory.GetFiles(d))
                     {

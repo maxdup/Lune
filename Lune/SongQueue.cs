@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NAudio;
+using Lune;
 
 namespace Lune
 {   
@@ -19,8 +20,14 @@ namespace Lune
         public SongQueue()
         {
             queue = new LinkedList<Song>();
-            //for tests, you can declare new songs in this constructor. example:
-            //Add(new Song("C:/example.mp3"));
+        }
+        public SongQueue(List<Song> list)
+        {
+            queue = new LinkedList<Song>();
+            foreach (Song s in list)
+            {
+                queue.AddLast(s);
+            }
         }
         public bool IsEmpty()
         {

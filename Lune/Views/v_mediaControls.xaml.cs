@@ -18,24 +18,13 @@ using Lune.ViewModels;
 namespace Lune.Views
 {
     /// <summary>
-    /// Interaction logic for v_songs.xaml
+    /// Interaction logic for v_mediaControls.xaml
     /// </summary>
-    public partial class v_songs : UserControl
+    public partial class v_mediaControls : UserControl
     {
-        LibraryViewModel vm;
-        public v_songs()
+        public v_mediaControls()
         {
             InitializeComponent();
-        }
-        public ListBox getListBox()
-        {
-            return listB_Songs;
-        }
-        public void wowfuck(object sender, RoutedEventArgs e)//consider refactoring
-        {
-            if (vm == null)
-                vm = (LibraryViewModel)DataContext;
-            vm.Play(sender);
         }
     }
 }

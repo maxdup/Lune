@@ -15,6 +15,9 @@ namespace Lune
         {
             AlbumLibrary = new List<Album>();
             SongLibrary = new List<Song>();
+
+            MediaFiles files = new MediaFiles(this);
+            files.scrapper("D:\\Music\\"); //insert w/e directory you wish to scan
         }
         public List<Album> GetAlbums()
         {
@@ -33,7 +36,7 @@ namespace Lune
             {
                 AlbumLibrary.Add((Album)something);
             }
-
         }
+                    
     }
 }
