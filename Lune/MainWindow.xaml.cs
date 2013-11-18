@@ -43,18 +43,22 @@ namespace Lune
 
         private void InitViews()
         {
+            v_ViewControls viewControls = new v_ViewControls();
+            viewControls.DataContext = LibVm;
+            ViewsDisplay.Children.Add(viewControls);
+
+            v_playbackStatus playbackStatus = new v_playbackStatus();
+            playbackStatus.DataContext = PlayVm.getPlayer();
+            StatusDisplay.Children.Add(playbackStatus);
+
             v_mediaControls mediaControls = new v_mediaControls();
             mediaControls.DataContext = PlayVm;
             ControlsDisplay.Children.Add(mediaControls);
 
-            v_ViewControls viewControls= new v_ViewControls();
-            viewControls.DataContext = LibVm;
-            ViewsDisplay.Children.Add(viewControls);
-
             libraryDisplay.Children.Add(new v_songs()); // not going to cut it
         }
 
-        //Everything down are window controls, resize, close, minimize etc...
+        //Everything down are window controls, resize, close, minimize etc...  (move to new viwemodel?)
         private void TriggerMoveWindow(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)

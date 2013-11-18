@@ -14,7 +14,14 @@ namespace Lune
         public Artist() : this("unknown"){}
         public Artist(string name)
         {
-            this.name = name;
+            if (name != null)
+            {
+                this.name = name;
+            }
+            else
+            {
+                this.name = "unknown";
+            }
         }
         public string getName()
         {

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using NAudio;
 using NAudio.Wave;
 using System.Windows.Controls;
+using System.ComponentModel;
 
 namespace Lune
 {
-    /*This is the man-meat of the program. It deals with the audio library and plays audio
+    /* This is the man-meat of the program. It deals with the audio library and plays audio
      * TODO: add support for other audio formats
      */
-    class Player
+    class Player : INotifyPropertyChanged
     {
         private IWavePlayer _waveOutDevice;
         private WaveStream _mainOutputStream;
@@ -21,13 +22,17 @@ namespace Lune
         private SongQueue _queue;
         private Boolean _playing;
 
-        private string currSongInfo;
+
+        private string _currSongInfo;
+        public string currSongInfo { get { return _currSongInfo; } set { _currSongInfo = value; PropertyChange("currSongInfo"); } }
+
 
         public Player()
         {
             _queue = new SongQueue();
             _waveOutDevice = new WaveOut();
             _waveOutDevice.PlaybackStopped += new EventHandler<StoppedEventArgs>(waveOutDevice_playbackstopped);
+            currSongInfo = "default"; // this needs to notify on change
         }
 
         public bool IsPlaying()
@@ -150,6 +155,16 @@ namespace Lune
                 _waveOutDevice = new WaveOut();
                 _waveOutDevice.PlaybackStopped += new EventHandler<StoppedEventArgs>(waveOutDevice_playbackstopped);
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void PropertyChange(string prop)
+        {
+           if( PropertyChanged != null )
+           {
+              PropertyChanged(this, new PropertyChangedEventArgs(prop));
+           }
         }
     }
 }

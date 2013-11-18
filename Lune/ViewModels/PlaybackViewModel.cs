@@ -15,11 +15,16 @@ namespace Lune.ViewModels
     {
         Player player;
         public ICommand ctrls { get; private set; }
+        public string songinfo { get { return player.currSongInfo; }  set {player.currSongInfo = value; } }
 
         public PlaybackViewModel(Player player)
         {
             this.player = player;
             ctrls = new PlaybackCommands(this, player);
+        }
+        public Player getPlayer()
+        {
+            return player;
         }
     }
 }

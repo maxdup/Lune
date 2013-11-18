@@ -125,6 +125,9 @@
     <Compile Include="SongQueue.cs" />
     <Compile Include="ViewModels\LibraryViewModel.cs" />
     <Compile Include="ViewModels\PlaybackViewModel.cs" />
+    <Compile Include="Views\v_playbackStatus.xaml.cs">
+      <DependentUpon>v_playbackStatus.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\v_songs2.xaml.cs">
       <DependentUpon>v_songs2.xaml</DependentUpon>
     </Compile>
@@ -170,6 +173,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\v_playbackStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\v_songs2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

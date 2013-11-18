@@ -30,8 +30,8 @@ namespace Lune
                 TagLib.File f = TagLib.File.Create(path);
                 name = f.Tag.Title;
                 trackN = Convert.ToInt32(f.Tag.Track);
-                album = new Album(f.Tag.Album);
-                artist = new Artist(f.Tag.FirstAlbumArtist);
+                album = new Album(f.Tag.Album); //probably inadequate
+                artist = new Artist(f.Tag.FirstAlbumArtist);//probably inadequate
             }
             catch (Exception e)
             {

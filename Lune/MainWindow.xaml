@@ -34,16 +34,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-
             <StackPanel Grid.Column="0" x:Name="ViewsDisplay"/>
-            <StackPanel Grid.Column="1">
-                <Label x:Name="S_info" Content="info" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Slider Style="{StaticResource SongProgress}" Width="250" HorizontalAlignment="Center" />
-            </StackPanel>
+            <StackPanel Grid.Column="1" x:Name="StatusDisplay"/>
             <StackPanel Grid.Column="2" x:Name="ControlsDisplay"/>
         </Grid>
         <!--Middle Panel (Library)-->
         <DockPanel x:Name="libraryDisplay" HorizontalAlignment="Stretch"/>
-
     </DockPanel>
 </Window>
