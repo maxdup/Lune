@@ -125,6 +125,9 @@
     <Compile Include="SongQueue.cs" />
     <Compile Include="ViewModels\LibraryViewModel.cs" />
     <Compile Include="ViewModels\PlaybackViewModel.cs" />
+    <Compile Include="Views\v_bottomBar.xaml.cs">
+      <DependentUpon>v_bottomBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\v_playbackStatus.xaml.cs">
       <DependentUpon>v_playbackStatus.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,9 @@
     </Compile>
     <Compile Include="Views\v_songs.xaml.cs">
       <DependentUpon>v_songs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\v_topBar.xaml.cs">
+      <DependentUpon>v_topBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\v_ViewControls.xaml.cs">
       <DependentUpon>v_ViewControls.xaml</DependentUpon>
@@ -173,6 +179,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\v_bottomBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\v_playbackStatus.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\v_songs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\v_topBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

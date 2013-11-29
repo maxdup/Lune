@@ -9,36 +9,10 @@
     
     <DockPanel LastChildFill="True">
         <!--top panel (Title, close, minimize maximize and window drag)-->
-        <DockPanel DockPanel.Dock="Top">
-            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center">
-                <Hyperlink Click="TriggerClose" Style="{StaticResource WindowIconStyle}">r</Hyperlink>
-            </TextBlock>
-            <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center">
-                <Hyperlink Click="TriggerMinimize" Style="{StaticResource WindowIconStyle}">0</Hyperlink>
-            </TextBlock>
-            <Image DockPanel.Dock="Right" MaxHeight="40" Margin="0,0,60,0" Source="{StaticResource logo}"/>
-            
-            <StatusBar Background="Transparent"
-                       MouseDoubleClick="TriggerMaximize"
-                       MouseMove="TriggerMoveWindow">
-                <TextBlock DockPanel.Dock="Left"
-                           Text=" Lune"
-                           FontSize="22"/>
-            </StatusBar>
-            
-        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" x:Name="topBarDisplay"/>
         <!--bottom panel (current song info, media controls)-->
-        <Grid DockPanel.Dock="Bottom" Height="50">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" x:Name="ViewsDisplay"/>
-            <StackPanel Grid.Column="1" x:Name="StatusDisplay"/>
-            <StackPanel Grid.Column="2" x:Name="ControlsDisplay"/>
-        </Grid>
+        <DockPanel DockPanel.Dock="Bottom" x:Name="bottomBarDisplay"/>
         <!--Middle Panel (Library)-->
-        <DockPanel x:Name="libraryDisplay" HorizontalAlignment="Stretch"/>
+        <DockPanel x:Name="libraryDisplay"/>
     </DockPanel>
 </Window>

@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Lune.Views.v_topBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="300">
+
+    <DockPanel LastChildFill="True">
+        
+        <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center">
+            <Hyperlink Click="TriggerMinimize" Style="{StaticResource WindowIconStyle}">0</Hyperlink>
+            <Hyperlink Click="TriggerClose" Style="{StaticResource WindowIconStyle}">r</Hyperlink>
+        </TextBlock>
+
+        <DockPanel LastChildFill="True">
+            <Image DockPanel.Dock="Right" MaxHeight="40" Margin="0,0,60,0" Source="{StaticResource logo}"/>
+            <StatusBar Background="Transparent" MouseDoubleClick="TriggerMaximize" MouseMove="TriggerMoveWindow">
+                <TextBlock DockPanel.Dock="Left" Text=" Lune" FontSize="22"/>
+            </StatusBar>
+        </DockPanel>
+    </DockPanel>
+    
+</UserControl>
