@@ -8,6 +8,7 @@ using System.Windows.Controls;
 
 using Lune.Views;
 using Lune.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace Lune.Commands
 {
@@ -38,7 +39,9 @@ namespace Lune.Commands
                     break;
                 case "Songs":
                     v_songs2 songs = new v_songs2();
+
                     songs.getDatagrid().ItemsSource = _vm.getSongsDisplayed();
+                    
                     songs.DataContext = _vm;
                     _libraryDisplay.Children.Add(songs);
                     break;

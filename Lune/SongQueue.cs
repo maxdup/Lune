@@ -17,16 +17,22 @@ namespace Lune
     {
         private LinkedList<Song> queue;
         private LinkedListNode<Song> _current;
-        public SongQueue()
+
+        public SongQueue() : this(new List<Song>()) { }
+        public SongQueue(List<Song> list) : this(list, 0) { }
+        public SongQueue(List<Song> list, int from)
         {
             queue = new LinkedList<Song>();
-        }
-        public SongQueue(List<Song> list)
-        {
-            queue = new LinkedList<Song>();
-            foreach (Song s in list)
+            for (int i = from; i < list.Count; i++)
             {
-                queue.AddLast(s);
+                queue.AddLast(list[i]);
+            }
+            if (from != 0)
+            {
+                for (int i = 0; i < from; i++)
+                {
+                    queue.AddLast(list[i]);
+                }
             }
         }
         public bool IsEmpty()

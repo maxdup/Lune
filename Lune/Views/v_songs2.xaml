@@ -20,7 +20,7 @@
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding}"  Header="Song"/>
+                <DataGridTextColumn Binding="{Binding name}"  Header="Song"/>
                 <DataGridTextColumn Binding="{Binding album}" Header="Album" />
                 <DataGridTextColumn Binding="{Binding artist}" Header="Artist" Width="*"/>
             </DataGrid.Columns>

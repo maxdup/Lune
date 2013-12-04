@@ -39,9 +39,11 @@ namespace Lune.ViewModels
             libViews = new LibViewCommands(this, _libraryDisplay);
         }
 
-        public void Play(object sender)//this method needs to be improved
+        public void Play(object sender)
         {
-            _playah.setQueue(new SongQueue(_songsDisplayed));
+            _playah.setQueue(new SongQueue(_songsDisplayed, ((DataGridRow)sender).GetIndex()));
+            DataGridRow dgr = new DataGridRow();
+            
             _playah.Start();
         }
 

@@ -14,8 +14,9 @@ namespace Lune
      */
     class Song
     {
+        private string _name;
         public string path {get; set; }
-        public string name { get; set; }
+        public string name { get { return _name; } set { _name = value; OnPropertyChanged("name"); } }
         public int trackN {get; set; }
         public Album album { get; set; }
         public Artist artist { get; set; }
@@ -43,6 +44,20 @@ namespace Lune
         public override string ToString()
         {
             return trackN + " - " + name;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        }
+        protected bool SetField<T>(ref T field, T value, string propertyName)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
         }
     }
 }
