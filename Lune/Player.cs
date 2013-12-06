@@ -46,7 +46,7 @@ namespace Lune
             {
                 CloseWaveOut();
                 currSongInfo = _queue.GetCurrent().name;
-                _queue.GetCurrent().name += "•";
+                _queue.GetCurrent().name += "•";//just a test
                 _mainOutputStream = CreateInputStream(_queue.GetCurrent().path);
                 _waveOutDevice.Init(_mainOutputStream);
                 _waveOutDevice.Play();

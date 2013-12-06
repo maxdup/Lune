@@ -33,10 +33,15 @@ namespace Lune
             InitializeComponent();
             
             player = new Player();
+            
             LibVm = new LibraryViewModel(player, libraryDisplay);
             PlayVm = new PlaybackViewModel(player);
 
             InitViews();
+            if (Properties.Settings.Default.LibraryPaths == null)
+            {
+                Properties.Settings.Default.LibraryPaths = new System.Collections.Specialized.StringCollection();
+            }
 
             Database bae = new Database();//dunno what to make of this yet
         }

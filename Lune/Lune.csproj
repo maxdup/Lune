@@ -93,6 +93,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\System.Data.SQLite.1.0.88.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -115,6 +116,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\LibViewCommands.cs" />
     <Compile Include="Commands\PlaybackCommands.cs" />
+    <Compile Include="Commands\SettingsCommands.cs" />
     <Compile Include="DAL\Database.cs" />
     <Compile Include="DAL\MediaFiles.cs" />
     <Compile Include="Models\Library.cs" />
@@ -125,13 +127,17 @@
     <Compile Include="SongQueue.cs" />
     <Compile Include="ViewModels\LibraryViewModel.cs" />
     <Compile Include="ViewModels\PlaybackViewModel.cs" />
+    <Compile Include="ViewModels\UserSettingsViewModel.cs" />
+    <Compile Include="Views\Settings\v_LibrarySubsetting.xaml.cs">
+      <DependentUpon>v_LibrarySubsetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\v_bottomBar.xaml.cs">
       <DependentUpon>v_bottomBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\v_playbackStatus.xaml.cs">
       <DependentUpon>v_playbackStatus.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\v_settings.xaml.cs">
+    <Compile Include="Views\Settings\v_settings.xaml.cs">
       <DependentUpon>v_settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\v_songs2.xaml.cs">
@@ -182,6 +188,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Settings\v_LibrarySubsetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\v_bottomBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,7 +200,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\v_settings.xaml">
+    <Page Include="Views\Settings\v_settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

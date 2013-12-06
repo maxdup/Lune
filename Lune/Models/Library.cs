@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Specialized;
 using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Lune
@@ -17,7 +18,21 @@ namespace Lune
             SongLibrary = new List<Song>();
 
             MediaFiles files = new MediaFiles(this);
-            files.scrapper("D:\\Music\\air\\"); //insert w/e directory you wish to scan
+
+            //this loop goes through all directories listed in user settings for folders to add to the library
+            List<String> paths;
+            if (Properties.Settings.Default.LibraryPaths != null)
+            {
+                paths = new List<string>(Properties.Settings.Default.LibraryPaths.Cast<string>());
+                if (paths.Count != 0)
+                {
+                    foreach (string path in paths)
+                    {
+                        files.scrapper(path);
+                    }
+                }
+            }
+            files.scrapper("F:\\music"); //quick and dirty test, remove eventually
         }
         public List<Album> GetAlbums()
         {

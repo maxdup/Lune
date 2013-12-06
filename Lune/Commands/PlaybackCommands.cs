@@ -14,12 +14,10 @@ namespace Lune.Commands
 {
     internal class PlaybackCommands : ICommand
     {
-        private PlaybackViewModel _viewmodel; //not required?
         private Player _player;
 
         public PlaybackCommands(PlaybackViewModel viewmodel, Player player)
         {
-            _viewmodel = viewmodel;
             _player = player;
         }
 

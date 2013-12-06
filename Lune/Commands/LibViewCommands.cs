@@ -35,7 +35,13 @@ namespace Lune.Commands
             switch ((string)parameter)
             {
                 case "Albums":
-                    _libraryDisplay.Children.Add(new v_albums());
+                    //_libraryDisplay.Children.Add(new v_albums());
+
+                    
+                    v_LibrarySubsetting libsubset = new v_LibrarySubsetting();
+                    UserSettingsViewModel uSettingVM = new UserSettingsViewModel(libsubset);
+                    libsubset.DataContext = uSettingVM;
+                    _libraryDisplay.Children.Add(libsubset);//ghetto life
                     break;
                 case "Songs":
                     v_songs2 songs = new v_songs2();
