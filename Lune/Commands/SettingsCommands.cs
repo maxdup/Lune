@@ -20,7 +20,7 @@ namespace Lune.Commands
         public SettingsCommands(v_LibrarySubsetting pathView, UserSettingsViewModel vm)
         {
             _pathView = pathView;
-            _vmSettings = vm;
+            _vmSettings = vm;//probably remove
         }
         #region ICommand Members
 

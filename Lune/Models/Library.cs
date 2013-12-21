@@ -19,20 +19,14 @@ namespace Lune
 
             MediaFiles files = new MediaFiles(this);
 
-            //this loop goes through all directories listed in user settings for folders to add to the library
-            List<String> paths;
-            if (Properties.Settings.Default.LibraryPaths != null)
+            if (Properties.Settings.Default.LibraryPaths != null && Properties.Settings.Default.LibraryPaths.Count > 0)
             {
-                paths = new List<string>(Properties.Settings.Default.LibraryPaths.Cast<string>());
-                if (paths.Count != 0)
+                //this loop goes through all directories listed in user settings for folders to add to the library
+                foreach (string path in Properties.Settings.Default.LibraryPaths)
                 {
-                    foreach (string path in paths)
-                    {
-                        files.scrapper(path);
-                    }
+                    files.scrapper(path);
                 }
             }
-            files.scrapper("F:\\music"); //quick and dirty test, remove eventually
         }
         public List<Album> GetAlbums()
         {
