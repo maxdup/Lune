@@ -30,5 +30,11 @@ namespace Lune.Views
                 paths = new StringCollection() { "none"};
             InitializeComponent();
         }
+        public void DeletePath(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.LibraryPaths.Remove((string)((Button)sender).DataContext); //holy macaroni
+            Properties.Settings.Default.Save();
+            this.listPaths.Items.Refresh();
+        }
     }
 }

@@ -16,7 +16,7 @@
                                   IsReadOnly="True">
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">
-                    <EventSetter Event="MouseDoubleClick" Handler="wowfuck"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="sendListForPlay"/>
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>

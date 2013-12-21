@@ -15,11 +15,11 @@ namespace Lune.ViewModels
     class UserSettingsViewModel
     {
         public ICommand settings { get; private set; }
-        public StringCollection paths{ get; private set;}
+        public StringCollection paths{ get; set;}
 
         public UserSettingsViewModel(v_LibrarySubsetting pathView)
         {
-            settings = new SettingsCommands(pathView);
+            settings = new SettingsCommands(pathView, this);
             paths = Properties.Settings.Default.LibraryPaths;
         }
     }

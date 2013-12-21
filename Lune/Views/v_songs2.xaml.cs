@@ -31,7 +31,7 @@ namespace Lune.Views
         {
             return listB_Songs;
         }
-        public void wowfuck(object sender, RoutedEventArgs e)//consider refactoring
+        public void sendListForPlay(object sender, RoutedEventArgs e)//consider refactoring
         {
             if (vm == null)
                 vm = (LibraryViewModel)DataContext;
