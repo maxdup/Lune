@@ -7,6 +7,6 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
         <Label x:Name="S_info" Content="{Binding currSongInfo}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Slider Style="{StaticResource SongProgress}" Width="250" HorizontalAlignment="Center" />
+        <Slider Style="{StaticResource SongProgress}" Width="250" HorizontalAlignment="Center" Value="{Binding SliderPosition, Mode=TwoWay}" />
     </StackPanel>
 </UserControl>

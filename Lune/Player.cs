@@ -7,6 +7,7 @@ using NAudio;
 using NAudio.Wave;
 using System.Windows.Controls;
 using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace Lune
 {
@@ -18,21 +19,53 @@ namespace Lune
         private IWavePlayer _waveOutDevice;
         private WaveStream _mainOutputStream;
         private WaveChannel32 _volumeStream;
+        private DispatcherTimer timer = new DispatcherTimer();
         
         private SongQueue _queue;
         private Boolean _playing;
 
 
+        const double sliderMax = 10.0;
         private string _currSongInfo;
-        public string currSongInfo { get { return _currSongInfo; } set { _currSongInfo = value; PropertyChange("currSongInfo"); } }
+        public string currSongInfo { 
+            get { return _currSongInfo; } 
+            set { _currSongInfo = value; PropertyChange("currSongInfo"); } 
+        }
+        private double _sliderPosition;
+        public double SliderPosition
+        {
+            get { return _sliderPosition; }
+            set {
+                if (_sliderPosition != value)
+                {
+                    _sliderPosition = value;
+                    if (_mainOutputStream != null)
+                    {
+                        var pos = (long)(_mainOutputStream.Length * _sliderPosition / sliderMax);
+                        _mainOutputStream.Position = pos;
+                    }
+                    PropertyChange("SliderPosition");
+                }
+            }
+        }
 
+        private void TimerOnTick(object sender, EventArgs eventArgs)
+        {
+            if (_mainOutputStream != null)
+            {
+                _sliderPosition = Math.Min(sliderMax, _mainOutputStream.Position * sliderMax / _mainOutputStream.Length);
+                PropertyChange("SliderPosition");
+            }
+        }
 
         public Player()
         {
             _queue = new SongQueue();
             _waveOutDevice = new WaveOut();
             _waveOutDevice.PlaybackStopped += new EventHandler<StoppedEventArgs>(waveOutDevice_playbackstopped);
-            currSongInfo = "default"; // this needs to notify on change
+            currSongInfo = "";
+            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Tick += TimerOnTick;
         }
 
         public bool IsPlaying()
@@ -46,11 +79,12 @@ namespace Lune
             {
                 CloseWaveOut();
                 currSongInfo = _queue.GetCurrent().name;
-                _queue.GetCurrent().name += "•";//just a test
+                //_queue.GetCurrent().name += "•";//just a test for a future feature (should notify)
                 _mainOutputStream = CreateInputStream(_queue.GetCurrent().path);
                 _waveOutDevice.Init(_mainOutputStream);
                 _waveOutDevice.Play();
                 _playing = true;
+                timer.Start();
             }
         }
 
@@ -126,6 +160,8 @@ namespace Lune
 
         private void waveOutDevice_playbackstopped(object sender, StoppedEventArgs e)
         {
+            SliderPosition = 0;
+            timer.Stop();
             if (_queue.HasNext())
                 Skip();
         }
