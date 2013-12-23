@@ -17,33 +17,31 @@ namespace Lune
         }
         public int scrapper(string searchDir)
         {
-            int i = 0; //file count
+            int SongCount = 0; //file count
             try
             {
-                foreach (string d in System.IO.Directory.GetDirectories(searchDir))
+                foreach (string f in Directory.GetFiles(searchDir)) //checks for files
                 {
-                    foreach (string f in Directory.GetFiles(d))
+                    try
                     {
-                        try
+                        if (f.EndsWith(".mp3")) //todo: update this condition later on
                         {
-                            if (f.EndsWith(".mp3")) //todo: update this condition later on
-                            {
-                                lib.Add(new Song(f));
-                                i++;
-                            }
-                        }
-                        catch (Exception e)
-                        {
+                            lib.Add(new Song(f));
+                            SongCount++;
                         }
                     }
-                    i += scrapper(d);
+                    catch (Exception e){}
+                }
+                foreach (string d in System.IO.Directory.GetDirectories(searchDir)) //checks for subdirectories
+                {
+                    SongCount += scrapper(d);
                 }
             }
             catch (System.Exception excpt)
             {
                 return 0;
             }
-            return i;
+            return SongCount;
         }
     }
 }

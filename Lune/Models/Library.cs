@@ -46,6 +46,5 @@ namespace Lune
                 AlbumLibrary.Add((Album)something);
             }
         }
-                    
     }
 }
