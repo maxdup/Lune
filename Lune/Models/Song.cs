@@ -20,6 +20,7 @@ namespace Lune
         public int trackN {get; set; }
         public Album album { get; set; }
         public Artist artist { get; set; }
+        public TimeSpan Duration { get; private set; }
 
 
         public Song(string path)
@@ -31,6 +32,7 @@ namespace Lune
                 TagLib.File f = TagLib.File.Create(path);
                 name = f.Tag.Title;
                 trackN = Convert.ToInt32(f.Tag.Track);
+                Duration = f.Properties.Duration;
                 album = new Album(f.Tag.Album); //probably inadequate
                 artist = new Artist(f.Tag.FirstAlbumArtist);//probably inadequate
             }

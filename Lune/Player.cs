@@ -20,22 +20,37 @@ namespace Lune
         private WaveStream _mainOutputStream;
         private WaveChannel32 _volumeStream;
         private DispatcherTimer timer = new DispatcherTimer();
-        
+
         private SongQueue _queue;
         private Boolean _playing;
 
-
-        const double sliderMax = 10.0;
-        private string _currSongInfo;
-        public string currSongInfo { 
-            get { return _currSongInfo; } 
-            set { _currSongInfo = value; PropertyChange("currSongInfo"); } 
+        private string _currentTime;
+        public string currentTime
+        {
+            get { return _currentTime; }
+            set { _currentTime = value; PropertyChange("currentTime"); }
         }
+        private string _songLength;
+        public string songLength
+        {
+            get { return _songLength; }
+            set { _songLength = value; PropertyChange("songLength"); }
+        }
+        const double sliderMax = 10.0;
+
+        private string _currSongInfo;
+        public string currSongInfo
+        {
+            get { return _currSongInfo; }
+            set { _currSongInfo = value; PropertyChange("currSongInfo"); }
+        }
+
         private double _sliderPosition;
         public double SliderPosition
         {
             get { return _sliderPosition; }
-            set {
+            set
+            {
                 if (_sliderPosition != value)
                 {
                     _sliderPosition = value;
@@ -45,6 +60,8 @@ namespace Lune
                         _mainOutputStream.Position = pos;
                     }
                     PropertyChange("SliderPosition");
+                    _currentTime = _mainOutputStream.CurrentTime.Minutes.ToString() + ":" + _mainOutputStream.CurrentTime.Seconds.ToString();
+                    PropertyChange("currentTime");
                 }
             }
         }
@@ -55,6 +72,8 @@ namespace Lune
             {
                 _sliderPosition = Math.Min(sliderMax, _mainOutputStream.Position * sliderMax / _mainOutputStream.Length);
                 PropertyChange("SliderPosition");
+                _currentTime = _mainOutputStream.CurrentTime.Minutes.ToString() + ":" + _mainOutputStream.CurrentTime.Seconds.ToString();
+                PropertyChange("currentTime");
             }
         }
 
@@ -64,7 +83,7 @@ namespace Lune
             _waveOutDevice = new WaveOut();
             _waveOutDevice.PlaybackStopped += new EventHandler<StoppedEventArgs>(waveOutDevice_playbackstopped);
             currSongInfo = "";
-            timer.Interval = TimeSpan.FromMilliseconds(500);
+            timer.Interval = TimeSpan.FromMilliseconds(1000);
             timer.Tick += TimerOnTick;
         }
 
@@ -79,8 +98,11 @@ namespace Lune
             {
                 CloseWaveOut();
                 currSongInfo = _queue.GetCurrent().name;
-                //_queue.GetCurrent().name += "•";//just a test for a future feature (should notify)
+                _queue.GetCurrent();
+                //_queue.GetCurrent().name += "•";//just a test for a future feature (should notify too)
+                songLength = (_queue.GetCurrent().Duration.Minutes).ToString() + ":" + (_queue.GetCurrent().Duration.Seconds).ToString();
                 _mainOutputStream = CreateInputStream(_queue.GetCurrent().path);
+                _currentTime = _mainOutputStream.CurrentTime.Minutes.ToString() + ":" + _mainOutputStream.CurrentTime.Seconds.ToString();
                 _waveOutDevice.Init(_mainOutputStream);
                 _waveOutDevice.Play();
                 _playing = true;
@@ -90,7 +112,8 @@ namespace Lune
 
         public void Resume()
         {
-            if (_mainOutputStream != null){
+            if (_mainOutputStream != null)
+            {
                 _waveOutDevice.Play();
                 _playing = true;
             }
@@ -149,7 +172,7 @@ namespace Lune
             }
             if (_playing)
                 Start();
- 
+
         }
 
         public void setQueue(SongQueue queue)
@@ -198,10 +221,10 @@ namespace Lune
 
         private void PropertyChange(string prop)
         {
-           if( PropertyChanged != null )
-           {
-              PropertyChanged(this, new PropertyChangedEventArgs(prop));
-           }
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
         }
     }
 }
