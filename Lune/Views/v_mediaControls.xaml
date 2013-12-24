@@ -7,7 +7,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal"  Margin="0,0,5,5">
         <Button x:Name="b_skip" Style="{StaticResource control}" Command="{Binding ctrls}"  CommandParameter="skip"  Content="8" Height="25" Width="25"/>
-        <Button x:Name="b_hybrid" Style="{StaticResource controlPlay}" Command="{Binding ctrls}"  CommandParameter="hybrid" Content="4" Height="40" Width="40"/>
+        <Button x:Name="b_hybrid" Style="{StaticResource controlPlay}" Command="{Binding ctrls}"  CommandParameter="hybrid" Content="{Binding playingDisplay}" Height="40" Width="40"/>
         <Button x:Name="b_stop" Style="{StaticResource control}" Command="{Binding ctrls}"  CommandParameter="stop" Content="&lt;" Height="32" Width="32"/>
         <Button x:Name="b_prev" Style="{StaticResource control}" Command="{Binding ctrls}"  CommandParameter="prev" Content="7" Height="25" Width="25"/>
     </StackPanel>

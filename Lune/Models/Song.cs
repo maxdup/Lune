@@ -12,7 +12,7 @@ namespace Lune
      it uses the taglib library to get track infos
      TODO: there's a lot to do.
      */
-    class Song
+    class Song : INotifyPropertyChanged
     {
         private string _name;
         public string path {get; set; }
@@ -30,7 +30,7 @@ namespace Lune
             try
             {
                 TagLib.File f = TagLib.File.Create(path);
-                name = f.Tag.Title;
+                _name = f.Tag.Title;
                 trackN = Convert.ToInt32(f.Tag.Track);
                 Duration = f.Properties.Duration;
                 album = new Album(f.Tag.Album); //probably inadequate
@@ -42,7 +42,7 @@ namespace Lune
                 trackN = 0;
             }
         }
-        
+
         public override string ToString()
         {
             return trackN + " - " + name;

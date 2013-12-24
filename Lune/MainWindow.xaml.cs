@@ -60,7 +60,7 @@ namespace Lune
             bottomBar.StatusDisplay.Children.Add(playbackStatus);
 
             v_mediaControls mediaControls = new v_mediaControls();
-            mediaControls.DataContext = PlayVm;
+            mediaControls.DataContext = PlayVm.getPlayer();
             bottomBar.ControlsDisplay.Children.Add(mediaControls);
 
             topBarDisplay.Children.Add(topBar);

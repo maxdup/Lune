@@ -16,7 +16,7 @@ namespace Lune.Commands
     {
         private Player _player;
 
-        public PlaybackCommands(PlaybackViewModel viewmodel, Player player)
+        public PlaybackCommands(Player player)
         {
             _player = player;
         }

@@ -20,7 +20,7 @@ namespace Lune.ViewModels
         public PlaybackViewModel(Player player)
         {
             this.player = player;
-            ctrls = new PlaybackCommands(this, player);
+            ctrls = new PlaybackCommands(player);
         }
         public Player getPlayer()
         {

@@ -8,6 +8,8 @@ using NAudio.Wave;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Windows.Threading;
+using System.Windows.Input;
+using Lune.Commands;
 
 namespace Lune
 {
@@ -16,12 +18,14 @@ namespace Lune
      */
     class Player : INotifyPropertyChanged
     {
+        public ICommand ctrls { get; private set; }
         private IWavePlayer _waveOutDevice;
         private WaveStream _mainOutputStream;
         private WaveChannel32 _volumeStream;
         private DispatcherTimer timer = new DispatcherTimer();
 
         private SongQueue _queue;
+        public Boolean playing {get{return _playing;} set {_playing = value; PropertyChange("playingDisplay");}}
         private Boolean _playing;
 
         private string _currentTime;
@@ -65,20 +69,12 @@ namespace Lune
                 }
             }
         }
-
-        private void TimerOnTick(object sender, EventArgs eventArgs)
-        {
-            if (_mainOutputStream != null)
-            {
-                _sliderPosition = Math.Min(sliderMax, _mainOutputStream.Position * sliderMax / _mainOutputStream.Length);
-                PropertyChange("SliderPosition");
-                _currentTime = TimeFormat(_mainOutputStream.CurrentTime); 
-                PropertyChange("currentTime");
-            }
-        }
-
+        #region
+        public char playingDisplay { get { if (_playing) { return ';'; } else return '4'; } private set { PropertyChange("playingDisplay"); } }
+        #endregion
         public Player()
         {
+            ctrls = new PlaybackCommands(this);
             _queue = new SongQueue();
             _waveOutDevice = new WaveOut();
             _waveOutDevice.PlaybackStopped += new EventHandler<StoppedEventArgs>(waveOutDevice_playbackstopped);
@@ -98,14 +94,12 @@ namespace Lune
             {
                 CloseWaveOut();
                 currSongInfo = _queue.GetCurrent().name;
-                _queue.GetCurrent();
-                //_queue.GetCurrent().name += "•";//just a test for a future feature (should notify too)
                 songLength = TimeFormat(_queue.GetCurrent().Duration);
                 _mainOutputStream = CreateInputStream(_queue.GetCurrent().path);
                 _currentTime = TimeFormat(_mainOutputStream.CurrentTime);
                 _waveOutDevice.Init(_mainOutputStream);
                 _waveOutDevice.Play();
-                _playing = true;
+                playing = true;
                 timer.Start();
                 PropertyChange("currentTime");
             }
@@ -116,14 +110,14 @@ namespace Lune
             if (_mainOutputStream != null)
             {
                 _waveOutDevice.Play();
-                _playing = true;
+                playing = true;
             }
         }
 
         public void Pause()
         {
             _waveOutDevice.Pause();
-            _playing = false;
+            playing = false;
         }
 
         public void Stop()
@@ -223,8 +217,19 @@ namespace Lune
             if (time.Hours != 0)
                 formated = time.ToString("HH':'mm':'ss");
             else
-                formated = time.ToString("mm':'ss");
+                formated = time.ToString("m':'ss");
             return formated;
+        }
+
+        private void TimerOnTick(object sender, EventArgs eventArgs)
+        {
+            if (_mainOutputStream != null)
+            {
+                _sliderPosition = Math.Min(sliderMax, _mainOutputStream.Position * sliderMax / _mainOutputStream.Length);
+                PropertyChange("SliderPosition");
+                _currentTime = TimeFormat(_mainOutputStream.CurrentTime);
+                PropertyChange("currentTime");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
