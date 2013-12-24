@@ -60,7 +60,7 @@ namespace Lune
                         _mainOutputStream.Position = pos;
                     }
                     PropertyChange("SliderPosition");
-                    _currentTime = _mainOutputStream.CurrentTime.Minutes.ToString() + ":" + _mainOutputStream.CurrentTime.Seconds.ToString();
+                    _currentTime = TimeFormat(_mainOutputStream.CurrentTime);
                     PropertyChange("currentTime");
                 }
             }
@@ -72,7 +72,7 @@ namespace Lune
             {
                 _sliderPosition = Math.Min(sliderMax, _mainOutputStream.Position * sliderMax / _mainOutputStream.Length);
                 PropertyChange("SliderPosition");
-                _currentTime = _mainOutputStream.CurrentTime.Minutes.ToString() + ":" + _mainOutputStream.CurrentTime.Seconds.ToString();
+                _currentTime = TimeFormat(_mainOutputStream.CurrentTime); 
                 PropertyChange("currentTime");
             }
         }
@@ -100,13 +100,14 @@ namespace Lune
                 currSongInfo = _queue.GetCurrent().name;
                 _queue.GetCurrent();
                 //_queue.GetCurrent().name += "•";//just a test for a future feature (should notify too)
-                songLength = (_queue.GetCurrent().Duration.Minutes).ToString() + ":" + (_queue.GetCurrent().Duration.Seconds).ToString();
+                songLength = TimeFormat(_queue.GetCurrent().Duration);
                 _mainOutputStream = CreateInputStream(_queue.GetCurrent().path);
-                _currentTime = _mainOutputStream.CurrentTime.Minutes.ToString() + ":" + _mainOutputStream.CurrentTime.Seconds.ToString();
+                _currentTime = TimeFormat(_mainOutputStream.CurrentTime);
                 _waveOutDevice.Init(_mainOutputStream);
                 _waveOutDevice.Play();
                 _playing = true;
                 timer.Start();
+                PropertyChange("currentTime");
             }
         }
 
@@ -215,6 +216,15 @@ namespace Lune
                 _waveOutDevice = new WaveOut();
                 _waveOutDevice.PlaybackStopped += new EventHandler<StoppedEventArgs>(waveOutDevice_playbackstopped);
             }
+        }
+
+        private string TimeFormat(TimeSpan time){ //time? mr.freeman?
+            string formated;
+            if (time.Hours != 0)
+                formated = time.ToString("HH':'mm':'ss");
+            else
+                formated = time.ToString("mm':'ss");
+            return formated;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
