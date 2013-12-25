@@ -34,25 +34,29 @@ namespace Lune.Commands
 
             switch ((string)parameter)
             {
-                case "Albums":
-                    //_libraryDisplay.Children.Add(new v_albums());
-
-                    
+                case "Settings":
                     v_LibrarySubsetting libsubset = new v_LibrarySubsetting();
                     UserSettingsViewModel uSettingVM = new UserSettingsViewModel(libsubset);
                     libsubset.DataContext = uSettingVM;
-                    _libraryDisplay.Children.Add(libsubset);//ghetto life
+                    _libraryDisplay.Children.Add(libsubset);
                     break;
+
+                case "Albums":
+                    v_albums albums = new v_albums();
+                    albums.DataContext = _vm;
+                    _libraryDisplay.Children.Add(albums);
+                    break;
+
                 case "Songs":
                     v_songs2 songs = new v_songs2();
-
-                    songs.getDatagrid().ItemsSource = _vm.getSongsDisplayed();
-                    
                     songs.DataContext = _vm;
                     _libraryDisplay.Children.Add(songs);
                     break;
+
                 default:
-                    _libraryDisplay.Children.Add(new v_artists());
+                    v_artists artists = new v_artists();
+                    artists.DataContext = _vm;
+                    _libraryDisplay.Children.Add(artists);
                     break;
             }
         }

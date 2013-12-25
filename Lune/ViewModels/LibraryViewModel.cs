@@ -18,9 +18,9 @@ namespace Lune.ViewModels
         Player _playah;
         Library _lib;
 
-        List<Song> _songsDisplayed;
-        List<Album> _albumsDisplayed;
-        List<Artist> _artistsDisplayed;
+        public List<Song> songsDisplayed{ get; set;}
+        public List<Album> albumsDisplayed{ get; set;}
+        public List<Artist> artistsDisplayed { get; set; }
 
         Panel _libraryDisplay;
 
@@ -32,24 +32,22 @@ namespace Lune.ViewModels
             _playah = player;
             _lib = new Library();
             
-            _songsDisplayed = _lib.GetSongs();
-            _albumsDisplayed = _lib.GetAlbums();
-            //_artistsDisplayed = _lib.GetArtists(); uncomment when implemented
+            songsDisplayed = _lib.GetSongs();
+            albumsDisplayed = _lib.GetAlbums();
+            artistsDisplayed = _lib.GetArtists();
 
             libViews = new LibViewCommands(this, _libraryDisplay);
         }
 
         public void Play(object sender)
         {
-            _playah.setQueue(new SongQueue(_songsDisplayed, ((DataGridRow)sender).GetIndex()));
-            DataGridRow dgr = new DataGridRow();
-            
+            _playah.setQueue(new SongQueue(songsDisplayed, ((DataGridRow)sender).GetIndex()));
             _playah.Start();
         }
 
         public List<Song> getSongsDisplayed()
         {
-            return _songsDisplayed;
+            return songsDisplayed;
         }
     }
 }

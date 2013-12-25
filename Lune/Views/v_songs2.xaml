@@ -13,7 +13,8 @@
                                   HorizontalAlignment="Left"
                                   VerticalAlignment="Top"
                                   HeadersVisibility="All"
-                                  IsReadOnly="True">
+                                  IsReadOnly="True"
+                                  ItemsSource="{Binding songsDisplayed}">
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">
                     <EventSetter Event="MouseDoubleClick" Handler="sendListForPlay"/>

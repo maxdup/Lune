@@ -12,10 +12,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" x:Name="listB_Artists"/>
+            <ListBox Grid.Column="0" x:Name="listB_Artists" ItemsSource="{Binding artistsDisplayed}"/>
             <GridSplitter Grid.Column="0" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-            <ListBox Grid.Column="1" x:Name="listB_Albums"/>
+            <ListBox Grid.Column="1" x:Name="listB_Albums" ItemsSource="{Binding albumsDisplayed}"/>
             <GridSplitter Grid.Column="1" Width="3" VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-            <ListBox Grid.Column="2" x:Name="listB_Songs"/>
+            <ListBox Grid.Column="2" x:Name="listB_Songs" ItemsSource="{Binding songsDisplayed}"/>
         </Grid>
 </UserControl>
