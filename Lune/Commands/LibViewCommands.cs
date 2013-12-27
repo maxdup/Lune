@@ -31,7 +31,7 @@ namespace Lune.Commands
         public void Execute(object parameter)
         {
             _libraryDisplay.Children.Clear();
-
+            _vm.resetFilters();
             switch ((string)parameter)
             {
                 case "Settings":
@@ -57,6 +57,7 @@ namespace Lune.Commands
                     v_artists artists = new v_artists();
                     artists.DataContext = _vm;
                     _libraryDisplay.Children.Add(artists);
+                    
                     break;
             }
         }

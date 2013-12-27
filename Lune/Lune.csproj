@@ -140,13 +140,13 @@
     <Compile Include="Views\Settings\v_settings.xaml.cs">
       <DependentUpon>v_settings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\v_songs2.xaml.cs">
+    <Compile Include="Views\Library\v_songs2.xaml.cs">
       <DependentUpon>v_songs2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\v_albums.xaml.cs">
+    <Compile Include="Views\Library\v_albums.xaml.cs">
       <DependentUpon>v_albums.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\v_artists.xaml.cs">
+    <Compile Include="Views\Library\v_artists.xaml.cs">
       <DependentUpon>v_artists.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\v_main.xaml.cs">
@@ -155,13 +155,13 @@
     <Compile Include="Views\v_mediaControls.xaml.cs">
       <DependentUpon>v_mediaControls.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\v_songs.xaml.cs">
+    <Compile Include="Views\Library\v_songs.xaml.cs">
       <DependentUpon>v_songs.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\v_topBar.xaml.cs">
       <DependentUpon>v_topBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\v_ViewControls.xaml.cs">
+    <Compile Include="Views\Library\v_ViewControls.xaml.cs">
       <DependentUpon>v_ViewControls.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\ViewControls.xaml">
@@ -204,15 +204,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\v_songs2.xaml">
+    <Page Include="Views\Library\v_songs2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\v_albums.xaml">
+    <Page Include="Views\Library\v_albums.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\v_artists.xaml">
+    <Page Include="Views\Library\v_artists.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,7 +224,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\v_songs.xaml">
+    <Page Include="Views\Library\v_songs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,7 +232,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\v_ViewControls.xaml">
+    <Page Include="Views\Library\v_ViewControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

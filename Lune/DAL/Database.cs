@@ -93,8 +93,8 @@ namespace Lune
             {
                 sql_cmd = new SQLiteCommand("insert into Album (name, idArtist, idLabel) values (@name, @artId, @labId)", sql_conn);
                 sql_cmd.Parameters.Add(new SQLiteParameter("@name", album.name));
-                sql_cmd.Parameters.Add(new SQLiteParameter("@artId", album.getArtist().getId()));
-                sql_cmd.Parameters.Add(new SQLiteParameter("@LabId", album.getLabel().getId()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@artId", album.artist.getId()));
+                sql_cmd.Parameters.Add(new SQLiteParameter("@LabId", album.label.getId()));
                 sql_cmd.ExecuteNonQuery();
             }
             transaction.Commit();

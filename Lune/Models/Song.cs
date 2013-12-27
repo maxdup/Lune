@@ -17,11 +17,12 @@ namespace Lune
         private string _name;
         public string path {get; set; }
         public string name { get { return _name; } set { _name = value; OnPropertyChanged("name"); } }
-        public string ArtistName { get { return artist.getName(); } set {} }
         public int trackN {get; set; }
         public Album album { get; set; }
-        public Artist artist { get; set; }
+        public Artist artist { get { return album.artist; } set {album.artist = value;} }
         public TimeSpan Duration { get; private set; }
+
+        public string ArtistName { get { return artist.getName(); } set { } }
 
 
         public Song(string path)

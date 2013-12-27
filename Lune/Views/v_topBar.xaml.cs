@@ -25,7 +25,7 @@ namespace Lune.Views
         {
             InitializeComponent();
         }
-        //Everything down are window controls, resize, close, minimize etc... (move to viewmodel?)
+        //Everything down are window controls, resize, close, minimize etc... (move to viewmodel commands?)
         private void TriggerMoveWindow(object sender, MouseEventArgs e)
         {
             if (window == null)

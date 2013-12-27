@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lune.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,21 @@ using System.Windows.Shapes;
 
 namespace Lune.Views
 {
-    /// <summary>
-    /// Interaction logic for v_artists.xaml
-    /// </summary>
-    public partial class v_artists : UserControl
+
+    public partial class v_albums : UserControl
     {
-        public v_artists()
+        private LibraryViewModel vm { get { return DataContext as LibraryViewModel; } }
+
+        public v_albums()
         {
             InitializeComponent();
+        }
+        private void AlbumSelection(object sender, RoutedEventArgs e)
+        {
+            if (listB_Albums.SelectedValue != null)
+            {
+                vm.albumFilter(listB_Albums.SelectedValue.ToString());
+            }
         }
     }
 }

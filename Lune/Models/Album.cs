@@ -11,8 +11,8 @@ namespace Lune
         int id;
         int year;
         public string name { get; set; }
-        Label label = new Label();
-        Artist artist = new Artist();
+        public Label label { get; set; }
+        public Artist artist { get; set; }
         LinkedList<Song> songs;
 
         public Album() : this("unknown") {}
@@ -28,14 +28,7 @@ namespace Lune
         {
             return id;
         }
-        public Artist getArtist()
-        {
-            return artist;
-        }
-        public Label getLabel()
-        {
-            return label;
-        }
+
         public override string ToString()
         {
             return name;

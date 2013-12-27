@@ -18,24 +18,26 @@ using Lune.ViewModels;
 namespace Lune.Views
 {
     /// <summary>
-    /// Interaction logic for v_songs.xaml
+    /// Interaction logic for v_artists.xaml
     /// </summary>
-    public partial class v_songs2 : UserControl
+    public partial class v_artists : UserControl
     {
-        LibraryViewModel vm;
-        public v_songs2()
+        private LibraryViewModel vm { get { return DataContext as LibraryViewModel; } }
+
+        public v_artists()
         {
             InitializeComponent();
         }
-        public DataGrid getDatagrid()
+        private void ArtistSelection(object sender, RoutedEventArgs e)
         {
-            return listB_Songs;
+            vm.artistFilter(listB_Artists.SelectedValue.ToString());
         }
-        public void sendListForPlay(object sender, RoutedEventArgs e)//consider refactoring
+        private void AlbumSelection(object sender, RoutedEventArgs e)
         {
-            if (vm == null)
-                vm = (LibraryViewModel)DataContext;
-            vm.Play(sender);
+            if (listB_Albums.SelectedValue != null)
+            {
+                vm.albumFilter(listB_Albums.SelectedValue.ToString());
+            }
         }
     }
 }

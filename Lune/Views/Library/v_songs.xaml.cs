@@ -13,16 +13,28 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Lune.ViewModels;
+
 namespace Lune.Views
 {
     /// <summary>
-    /// Interaction logic for v_albums.xaml
+    /// Interaction logic for v_songs.xaml
     /// </summary>
-    public partial class v_albums : UserControl
+    public partial class v_songs : UserControl
     {
-        public v_albums()
+        private LibraryViewModel vm { get { return DataContext as LibraryViewModel; } }
+
+        public v_songs()
         {
             InitializeComponent();
+        }
+        public ListBox getListBox()
+        {
+            return listB_Songs;
+        }
+        public void sendListForPlay(object sender, RoutedEventArgs e)//consider refactoring
+        {
+            vm.Play(sender);
         }
     }
 }

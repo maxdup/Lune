@@ -20,21 +20,20 @@ namespace Lune.Views
     /// <summary>
     /// Interaction logic for v_songs.xaml
     /// </summary>
-    public partial class v_songs : UserControl
+    public partial class v_songs2 : UserControl
     {
-        LibraryViewModel vm;
-        public v_songs()
+        private LibraryViewModel vm { get { return DataContext as LibraryViewModel; } }
+
+        public v_songs2()
         {
             InitializeComponent();
         }
-        public ListBox getListBox()
+        public DataGrid getDatagrid()
         {
             return listB_Songs;
         }
-        public void wowfuck(object sender, RoutedEventArgs e)//consider refactoring
+        public void sendListForPlay(object sender, RoutedEventArgs e)//consider refactoring
         {
-            if (vm == null)
-                vm = (LibraryViewModel)DataContext;
             vm.Play(sender);
         }
     }
