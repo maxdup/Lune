@@ -6,11 +6,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
-        <Label Content="{Binding currSongInfo}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="{Binding currSongInfo}" Foreground="#CCCCCC" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Slider Style="{StaticResource songProgress}" Width="250" HorizontalAlignment="Center" Value="{Binding SliderPosition, Mode=TwoWay}" />
         <DockPanel>
-            <Label Content="{Binding currentTime}" DockPanel.Dock="Left"/>
-            <Label Content="{Binding songLength}" DockPanel.Dock="Right" HorizontalAlignment="Right"/>
+            <Label Content="{Binding currentTime}" DockPanel.Dock="Left" Foreground="#CCCCCC"/>
+            <Label Content="{Binding songLength}" DockPanel.Dock="Right" Foreground="#CCCCCC" HorizontalAlignment="Right"/>
         </DockPanel>
     </StackPanel>
 </UserControl>

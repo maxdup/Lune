@@ -164,6 +164,10 @@
     <Compile Include="Views\Library\v_ViewControls.xaml.cs">
       <DependentUpon>v_ViewControls.xaml</DependentUpon>
     </Compile>
+    <Page Include="Assets\Library.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\ViewControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

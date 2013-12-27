@@ -8,6 +8,7 @@
                 <ResourceDictionary Source="Assets/MediaControls.xaml" />
                 <ResourceDictionary Source="Assets/ViewControls.xaml" />
                 <ResourceDictionary Source="Assets/Window.xaml" />
+                <ResourceDictionary Source="Assets/Library.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

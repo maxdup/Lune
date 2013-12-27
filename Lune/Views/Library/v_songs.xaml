@@ -6,8 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid HorizontalAlignment="Stretch">
-        <ListBox x:Name="listB_Songs" ItemsSource="{Binding songsDisplayed}" ListBoxItem.MouseDoubleClick="sendListForPlay" >
-        </ListBox>
+        <ListBox x:Name="listB_Songs" ItemsSource="{Binding songsDisplayed}" ListBoxItem.MouseDoubleClick="sendListForPlay" Style="{StaticResource LibraryListBoxStyle}" ItemContainerStyle="{StaticResource LibraryListBoxItemStyle}"/>
         <!--<ListBox x:Name="listB_Songs" ItemsSource="{Binding songsDisplayed}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">

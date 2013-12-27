@@ -6,8 +6,9 @@
         Width="800"
         WindowStyle="None"
         Icon="Images\lune.ico">
-    
-    <DockPanel LastChildFill="True">
+        <!--ResizeMode="NoResize" would allow us to get rid of the border but then we need to manually handle the resizing code-->
+
+    <DockPanel LastChildFill="True" Style="{StaticResource RootDockStyle}">
         <!--top panel (Title, close, minimize maximize and window drag)-->
         <DockPanel DockPanel.Dock="Top" x:Name="topBarDisplay"/>
         <!--bottom panel (current song info, media controls)-->

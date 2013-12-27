@@ -9,7 +9,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Label Content="{TemplateBinding Content}" />
+                    <Label Content="{TemplateBinding Content}" Foreground="#CCCCCC"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

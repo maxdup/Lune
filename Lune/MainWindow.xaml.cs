@@ -40,6 +40,7 @@ namespace Lune
             InitViews();
             if (Properties.Settings.Default.LibraryPaths == null)
             {
+                //call a welcome screen (first time use)
                 Properties.Settings.Default.LibraryPaths = new System.Collections.Specialized.StringCollection();
             }
 
@@ -64,7 +65,7 @@ namespace Lune
             bottomBar.ControlsDisplay.Children.Add(mediaControls);
 
             topBarDisplay.Children.Add(topBar);
-            libraryDisplay.Children.Add(new v_songs()); // not going to cut it
+            LibVm.libViews.Execute("Artists"); //todo: make this a user setting eventually
             bottomBarDisplay.Children.Add(bottomBar);
         }
     }

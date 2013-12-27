@@ -6,17 +6,16 @@
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="300">
 
-    <DockPanel LastChildFill="True">
-        
+    <DockPanel LastChildFill="True" Margin="10,0,10,0">
         <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center">
-            <Hyperlink Click="TriggerMinimize" Style="{StaticResource WindowIconStyle}">0</Hyperlink>
-            <Hyperlink Click="TriggerClose" Style="{StaticResource WindowIconStyle}">r</Hyperlink>
+            <Hyperlink Click="TriggerMinimize" Style="{StaticResource TopBarWindowIconStyle}">0</Hyperlink>
+            <Hyperlink Click="TriggerClose" Style="{StaticResource TopBarWindowIconStyle}">r</Hyperlink>
         </TextBlock>
 
-        <DockPanel LastChildFill="True">
+        <DockPanel LastChildFill="True" MouseMove="TriggerMoveWindow">
             <Image DockPanel.Dock="Right" MaxHeight="40" Margin="0,0,60,0" Source="{StaticResource logo}"/>
-            <StatusBar Background="Transparent" MouseDoubleClick="TriggerMaximize" MouseMove="TriggerMoveWindow">
-                <TextBlock DockPanel.Dock="Left" Text=" Lune" FontSize="22"/>
+            <StatusBar Background="Transparent"  MouseDoubleClick="TriggerMaximize">
+                <TextBlock DockPanel.Dock="Left" Text="Lune" FontSize="22" Foreground="#CCCCCC"/>
             </StatusBar>
         </DockPanel>
     </DockPanel>
