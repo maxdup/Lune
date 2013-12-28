@@ -5,12 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <Label Content="{Binding currSongInfo}" Foreground="#CCCCCC" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Slider Style="{StaticResource songProgress}" Width="250" HorizontalAlignment="Center" Value="{Binding SliderPosition, Mode=TwoWay}" />
-        <DockPanel>
+    <DockPanel LastChildFill="True">
+        <Label Content="{Binding currSongInfo}" DockPanel.Dock="Top" Foreground="#CCCCCC" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <DockPanel DockPanel.Dock="Bottom">
             <Label Content="{Binding currentTime}" DockPanel.Dock="Left" Foreground="#CCCCCC"/>
             <Label Content="{Binding songLength}" DockPanel.Dock="Right" Foreground="#CCCCCC" HorizontalAlignment="Right"/>
         </DockPanel>
-    </StackPanel>
+        <Slider Style="{StaticResource songProgress}" HorizontalAlignment="Stretch" Value="{Binding SliderPosition, Mode=TwoWay}" />
+    </DockPanel>
 </UserControl>
