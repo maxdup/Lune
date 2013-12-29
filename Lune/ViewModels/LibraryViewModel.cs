@@ -26,13 +26,15 @@ namespace Lune.ViewModels
         public List<Album> albumsDisplayed { get{ return _albumsDisplayed; } set { _albumsDisplayed = value; PropertyChange("albumsDisplayed"); } }
         public List<Artist> artistsDisplayed { get; set; }
 
-        Panel _libraryDisplay;
+        public Panel MainPanel { get; set; }
+        public Panel libraryDisplay {get; set;}
 
         public ICommand libViews { get; private set; }
 
         public LibraryViewModel(Player player, Panel panel)
         {
-            _libraryDisplay = panel;
+            MainPanel = panel;
+            libraryDisplay = MainPanel.Children.OfType<DockPanel>().ElementAt(1);//if something break someday, blame this line
             _playah = player;
             _lib = new Library();
             
@@ -40,7 +42,7 @@ namespace Lune.ViewModels
             albumsDisplayed = _lib.GetAlbums();
             artistsDisplayed = _lib.GetArtists();
 
-            libViews = new LibViewCommands(this, _libraryDisplay);
+            libViews = new LibViewCommands(this);
         }
 
         public void Play(object sender)
@@ -50,7 +52,7 @@ namespace Lune.ViewModels
                 startAt = ((DataGridRow)sender).GetIndex();
             }else if (sender is ListBox){
                 startAt = ((ListBox)sender).SelectedIndex;
-            }else if (sender is ListBoxItem){//I would much prefer this but
+            }else if (sender is ListBoxItem){//I would much prefer if the event was handled by items but...
                 //???
             }
             if (startAt != -1)

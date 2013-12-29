@@ -15,12 +15,12 @@ namespace Lune.Commands
     internal class LibViewCommands : ICommand
     {
         LibraryViewModel _vm;
-        Panel _libraryDisplay;
+        Panel _libraryDisplay {  get { return _vm.libraryDisplay; } set {} }
+        UIElementCollection UIonHold;
 
-        public LibViewCommands(LibraryViewModel vm, Panel panel)
+        public LibViewCommands(LibraryViewModel vm)
         {
             _vm = vm;
-            _libraryDisplay = panel;
         }
 
         public bool CanExecute(object parameter)
@@ -30,15 +30,24 @@ namespace Lune.Commands
 
         public void Execute(object parameter)
         {
+            UIElementCollection returnUI = _vm.MainPanel.Children;
             _libraryDisplay.Children.Clear();
             _vm.resetFilters();
             switch ((string)parameter)
             {
+                case "back":
+                    _vm.MainPanel.Children.Clear();
+                    foreach(Panel ele in UIonHold){
+                        _vm.MainPanel.Children.Add(ele);
+                    }
+                    break;
                 case "Settings":
+                    UIonHold = returnUI;
                     v_LibrarySubsetting libsubset = new v_LibrarySubsetting();
                     UserSettingsViewModel uSettingVM = new UserSettingsViewModel(libsubset);
                     libsubset.DataContext = uSettingVM;
-                    _libraryDisplay.Children.Add(libsubset);
+                    _vm.MainPanel.Children.Clear();
+                    _vm.MainPanel.Children.Add(libsubset);
                     break;
 
                 case "Albums":

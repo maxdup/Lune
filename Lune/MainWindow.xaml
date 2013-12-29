@@ -10,10 +10,11 @@
 
     <DockPanel LastChildFill="True" Style="{StaticResource RootDockStyle}">
         <!--top panel (Title, close, minimize maximize and window drag)-->
-        <DockPanel DockPanel.Dock="Top" x:Name="topBarDisplay"/>
+        <DockPanel x:Name="topBarDisplay" DockPanel.Dock="Top"/>
         <!--bottom panel (current song info, media controls)-->
-        <DockPanel DockPanel.Dock="Bottom" x:Name="bottomBarDisplay"/>
-        <!--Middle Panel (Library)-->
-        <DockPanel x:Name="libraryDisplay"/>
+        <DockPanel x:Name="MainPanel" DockPanel.Dock="Bottom" LastChildFill="True">
+            <DockPanel DockPanel.Dock="Bottom" x:Name="bottomBarDisplay"/>
+            <DockPanel x:Name="LibraryDisplay"/>
+        </DockPanel>
     </DockPanel>
 </Window>

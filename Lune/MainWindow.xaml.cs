@@ -34,7 +34,7 @@ namespace Lune
             
             player = new Player();
             
-            LibVm = new LibraryViewModel(player, libraryDisplay);
+            LibVm = new LibraryViewModel(player, MainPanel);
             PlayVm = new PlaybackViewModel(player);
 
             InitViews();
@@ -65,7 +65,7 @@ namespace Lune
             bottomBar.ControlsDisplay.Children.Add(mediaControls);
 
             topBarDisplay.Children.Add(topBar);
-            LibVm.libViews.Execute("Artists"); //todo: make this a user setting eventually
+            LibVm.libViews.Execute("Artists"); //todo: make this a user setting eventually (prefered welcome screen)
             bottomBarDisplay.Children.Add(bottomBar);
         }
     }

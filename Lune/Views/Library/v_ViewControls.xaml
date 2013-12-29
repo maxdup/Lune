@@ -9,5 +9,6 @@
         <Button x:Name="vArtist"  Style="{StaticResource viewControl}" Content="Artists" Command="{Binding libViews}"  CommandParameter="Artists"/>
         <Button x:Name="vAlbum"  Style="{StaticResource viewControl}" Content="Albums" Command="{Binding libViews}"  CommandParameter="Albums"/>
         <Button x:Name="vSong" Style="{StaticResource viewControl}" Content="Songs" Command="{Binding libViews}"  CommandParameter="Songs"/>
+        <Button x:Name="vSetting" Style="{StaticResource viewControl}" Content="Settings" Command="{Binding libViews}" CommandParameter="Settings"/> 
     </StackPanel>
 </UserControl>

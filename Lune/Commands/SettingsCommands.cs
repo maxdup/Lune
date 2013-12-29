@@ -10,13 +10,17 @@ using System.Collections.Specialized;
 using Lune.Views;
 using Lune.ViewModels;
 using System.IO;
+using System.Windows.Controls;
 
 namespace Lune.Commands
 {
+    //this class is kinda gettho
     class SettingsCommands : ICommand
     {
         v_LibrarySubsetting _pathView;
         UserSettingsViewModel _vmSettings;
+        UIElementCollection _returnUI;
+
         public SettingsCommands(v_LibrarySubsetting pathView, UserSettingsViewModel vm)
         {
             _pathView = pathView;
