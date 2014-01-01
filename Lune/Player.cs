@@ -52,10 +52,10 @@ namespace Lune
         private double _sliderPosition;
         public double SliderPosition
         {
-            get { return _sliderPosition; }
+            get { if (_mainOutputStream != null) { return _sliderPosition; } else return 10; }
             set
             {
-                if (_sliderPosition != value)
+                if (_sliderPosition != value && _mainOutputStream != null)
                 {
                     _sliderPosition = value;
                     if (_mainOutputStream != null)
@@ -70,6 +70,7 @@ namespace Lune
             }
         }
         #region
+        //this method controls what is displayed on the play button in the dingbat font
         public char playingDisplay { get { if (_playing) { return ';'; } else return '4'; } private set { PropertyChange("playingDisplay"); } }
         #endregion
         public Player()
@@ -102,6 +103,7 @@ namespace Lune
                 playing = true;
                 timer.Start();
                 PropertyChange("currentTime");
+                PropertyChange("SliderPosition");
             }
         }
 
@@ -122,12 +124,16 @@ namespace Lune
 
         public void Stop()
         {
-            _waveOutDevice.Stop();
-            _mainOutputStream = null;
-            _queue = new SongQueue();
-            currSongInfo = "";
             CloseWaveOut();
+
             _playing = false;
+            SliderPosition = 10;
+            currSongInfo = string.Empty;
+            songLength = string.Empty;
+            currentTime = string.Empty;
+
+            _queue = new SongQueue();
+            _mainOutputStream = null;
         }
 
         //the hybrid method combines Start, Resume and Pause depending on the context of the player

@@ -11,6 +11,6 @@
             <Label Content="{Binding currentTime}" DockPanel.Dock="Left" Foreground="#CCCCCC"/>
             <Label Content="{Binding songLength}" DockPanel.Dock="Right" Foreground="#CCCCCC" HorizontalAlignment="Right"/>
         </DockPanel>
-        <Slider Style="{StaticResource songProgress}" HorizontalAlignment="Stretch" Value="{Binding SliderPosition, Mode=TwoWay}" />
+        <Slider Style="{StaticResource songProgress}" HorizontalAlignment="Stretch" IsMoveToPointEnabled="True" Value="{Binding SliderPosition, Mode=TwoWay}" />
     </DockPanel>
 </UserControl>
