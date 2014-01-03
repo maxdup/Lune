@@ -27,6 +27,7 @@ namespace Lune
 
         PlaybackViewModel PlayVm;
         LibraryViewModel LibVm;
+        WindowViewModel WinVm;
 
         public MainWindow()
         {
@@ -36,6 +37,8 @@ namespace Lune
             
             LibVm = new LibraryViewModel(player, MainPanel);
             PlayVm = new PlaybackViewModel(player);
+            WinVm = new WindowViewModel(MainPanel);
+           
 
             InitViews();
             if (Properties.Settings.Default.LibraryPaths == null)
@@ -50,6 +53,9 @@ namespace Lune
         private void InitViews()
         {
             v_topBar topBar = new v_topBar();
+            topBar.DataContext = WinVm;
+            topBarDisplay.Children.Add(topBar);
+
             v_bottomBar bottomBar = new v_bottomBar();
 
             v_ViewControls viewControls = new v_ViewControls();
@@ -64,8 +70,7 @@ namespace Lune
             mediaControls.DataContext = PlayVm.getPlayer();
             bottomBar.ControlsDisplay.Children.Add(mediaControls);
 
-            topBarDisplay.Children.Add(topBar);
-            LibVm.libViews.Execute("Artists"); //todo: make this a user setting eventually (prefered welcome screen)
+            LibVm.libViews.Execute("Artists"); //todo: make this a user setting eventually, instead of hardcoding (prefered welcome screen)
             bottomBarDisplay.Children.Add(bottomBar);
         }
     }

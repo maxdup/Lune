@@ -12,20 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Lune.ViewModels;
 
 namespace Lune.Views
 {
     /// <summary>
     /// Interaction logic for v_topBar.xaml
+    /// 
+    /// see if most of this class can be moved to windowCommands.cs
+    /// 
     /// </summary>
     public partial class v_topBar : UserControl
     {
         Window window;
+        UIElementCollection UIonHold;
         public v_topBar()
         {
             InitializeComponent();
         }
-        //Everything down are window controls, resize, close, minimize etc... (move to viewmodel commands?)
+
         private void TriggerMoveWindow(object sender, MouseEventArgs e)
         {
             if (window == null)
@@ -43,8 +48,16 @@ namespace Lune.Views
                 window.DragMove();
             }
         }
-
-        private void TriggerMaximize(object sender, MouseButtonEventArgs e)
+        private void TriggerMaximize(object sender, RoutedEventArgs e)
+        {
+            if (window == null)
+                getWindow();
+            if (window.WindowState == System.Windows.WindowState.Maximized)
+                window.WindowState = System.Windows.WindowState.Normal;
+            else if (window.WindowState == System.Windows.WindowState.Normal)
+                window.WindowState = System.Windows.WindowState.Maximized;
+        }
+        private void TriggerMaximize(object sender, MouseEventArgs e)
         {
             if (window == null)
                 getWindow();

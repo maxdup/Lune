@@ -13,6 +13,7 @@ namespace Lune.Tests
         public void SongConstruct()
         {
             Song song = new Song("D:\\Music\\01 Take Care Of You.mp3");
+            Assert.IsNotNull(song.getImage());
             Assert.AreEqual(song.name, "Take Care Of You");
         }
     }

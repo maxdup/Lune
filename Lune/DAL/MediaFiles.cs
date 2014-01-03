@@ -33,9 +33,11 @@ namespace Lune
                             if (existingAlbum.Count > 0)
                             {
                                 thisSong.album = existingAlbum.ElementAt(0);
+                                existingAlbum.ElementAt(0).AddSong(thisSong);
                             }
                             else
                             {
+                                thisSong.album.AddSong(thisSong);
                                 var existingArtist = lib.GetArtists().Where(x => x.getName() == thisSong.ArtistName).ToList();
                                 if (existingArtist.Count > 0)
                                 {

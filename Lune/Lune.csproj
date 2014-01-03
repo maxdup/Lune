@@ -117,6 +117,7 @@
     <Compile Include="Commands\LibViewCommands.cs" />
     <Compile Include="Commands\PlaybackCommands.cs" />
     <Compile Include="Commands\SettingsCommands.cs" />
+    <Compile Include="Commands\WindowCommands.cs" />
     <Compile Include="DAL\Database.cs" />
     <Compile Include="DAL\MediaFiles.cs" />
     <Compile Include="Models\Library.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="ViewModels\LibraryViewModel.cs" />
     <Compile Include="ViewModels\PlaybackViewModel.cs" />
     <Compile Include="ViewModels\UserSettingsViewModel.cs" />
+    <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\Settings\v_LibrarySubsetting.xaml.cs">
       <DependentUpon>v_LibrarySubsetting.xaml</DependentUpon>
     </Compile>

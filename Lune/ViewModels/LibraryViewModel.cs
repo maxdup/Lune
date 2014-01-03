@@ -34,7 +34,7 @@ namespace Lune.ViewModels
         public LibraryViewModel(Player player, Panel panel)
         {
             MainPanel = panel;
-            libraryDisplay = MainPanel.Children.OfType<DockPanel>().ElementAt(1);//if something break someday, blame this line
+            libraryDisplay = MainPanel.Children.OfType<DockPanel>().ElementAt(1);//if something breaks someday, blame this line
             _playah = player;
             _lib = new Library();
             

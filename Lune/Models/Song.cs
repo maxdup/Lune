@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using TagLib;
 
 namespace Lune
@@ -45,6 +47,20 @@ namespace Lune
             }
         }
 
+        public MemoryStream getImage()
+        {
+            TagLib.File f = TagLib.File.Create(path);
+            TagLib.IPicture pic = null;
+            try
+            {
+                pic = f.Tag.Pictures[0];
+                return new MemoryStream(pic.Data.Data);
+            }
+            catch (Exception e) { }
+            return null;
+
+        }
+
         public override string ToString()
         {
             return trackN + " - " + name;
@@ -63,5 +79,6 @@ namespace Lune
             OnPropertyChanged(propertyName);
             return true;
         }
+
     }
 }

@@ -16,7 +16,7 @@ namespace Lune.Commands
     {
         LibraryViewModel _vm;
         Panel _libraryDisplay {  get { return _vm.libraryDisplay; } set {} }
-        UIElementCollection UIonHold;
+        
 
         public LibViewCommands(LibraryViewModel vm)
         {
@@ -30,26 +30,11 @@ namespace Lune.Commands
 
         public void Execute(object parameter)
         {
-            UIElementCollection returnUI = _vm.MainPanel.Children;
+           
             _libraryDisplay.Children.Clear();
             _vm.resetFilters();
             switch ((string)parameter)
             {
-                case "back":
-                    _vm.MainPanel.Children.Clear();
-                    foreach(Panel ele in UIonHold){
-                        _vm.MainPanel.Children.Add(ele);
-                    }
-                    break;
-                case "Settings":
-                    UIonHold = returnUI;
-                    v_LibrarySubsetting libsubset = new v_LibrarySubsetting();
-                    UserSettingsViewModel uSettingVM = new UserSettingsViewModel(libsubset);
-                    libsubset.DataContext = uSettingVM;
-                    _vm.MainPanel.Children.Clear();
-                    _vm.MainPanel.Children.Add(libsubset);
-                    break;
-
                 case "Albums":
                     v_albums albums = new v_albums();
                     albums.DataContext = _vm;

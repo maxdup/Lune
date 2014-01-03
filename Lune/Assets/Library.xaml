@@ -174,58 +174,59 @@
         <Setter Property="Background" Value="#EEEEEE" />
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Width" Value="128"/>
-        <Setter Property="Height" Value="128"/>
+        <Setter Property="Height" Value="145"/>
         <Setter Property="Margin" Value="8"/>
         <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Grid Background="{TemplateBinding Background}">
-                            <vsm:VisualStateManager.VisualStateGroups>
-                                <vsm:VisualStateGroup x:Name="CommonStates">
-                                    <vsm:VisualState x:Name="Normal" />
-                                    <vsm:VisualState x:Name="MouseOver">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="fillColorHover" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To=".35"/>
-                                        </Storyboard>
-                                    </vsm:VisualState>
-                                    <vsm:VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="Opacity" Duration="0" To=".55" />
-                                        </Storyboard>
-                                    </vsm:VisualState>
-                                </vsm:VisualStateGroup>
-                                <vsm:VisualStateGroup x:Name="SelectionStates">
-                                    <vsm:VisualState x:Name="Unselected" />
-                                    <vsm:VisualState x:Name="Selected">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="fillColorSelected" Storyboard.TargetProperty="Opacity" Duration="0" To=".75"/>
-                                        </Storyboard>
-                                    </vsm:VisualState>
-                                </vsm:VisualStateGroup>
-                                <vsm:VisualStateGroup x:Name="FocusStates">
-                                    <vsm:VisualState x:Name="Focused">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FocusVisualElement" Storyboard.TargetProperty="Visibility" Duration="0">
-                                                <DiscreteObjectKeyFrame KeyTime="0">
-                                                    <DiscreteObjectKeyFrame.Value>
-                                                        <Visibility>Visible</Visibility>
-                                                    </DiscreteObjectKeyFrame.Value>
-                                                </DiscreteObjectKeyFrame>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </vsm:VisualState>
-                                    <vsm:VisualState x:Name="Unfocused"/>
-                                </vsm:VisualStateGroup>
-                            </vsm:VisualStateManager.VisualStateGroups>
-                            <Rectangle x:Name="fillColorHover" Opacity="0" Fill="#AAAAAA" IsHitTestVisible="False" RadiusX="1" RadiusY="1"/>
-                            <Rectangle x:Name="fillColorSelected" Opacity="0" Fill="#888888" IsHitTestVisible="False" RadiusX="1" RadiusY="1"/>
-                            <ContentPresenter
-                                x:Name="contentPresenter"
-                                Content="{TemplateBinding Content}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Margin="{TemplateBinding Padding}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Bottom"/>
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid Background="{TemplateBinding Background}">
+                        <vsm:VisualStateManager.VisualStateGroups>
+                            <vsm:VisualStateGroup x:Name="CommonStates">
+                                <vsm:VisualState x:Name="Normal" />
+                                <vsm:VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="fillColorHover" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To=".35"/>
+                                    </Storyboard>
+                                </vsm:VisualState>
+                                <vsm:VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="contentPresenter" Storyboard.TargetProperty="Opacity" Duration="0" To=".55" />
+                                    </Storyboard>
+                                </vsm:VisualState>
+                            </vsm:VisualStateGroup>
+                            <vsm:VisualStateGroup x:Name="SelectionStates">
+                                <vsm:VisualState x:Name="Unselected" />
+                                <vsm:VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="fillColorSelected" Storyboard.TargetProperty="Opacity" Duration="0" To=".75"/>
+                                    </Storyboard>
+                                </vsm:VisualState>
+                            </vsm:VisualStateGroup>
+                            <vsm:VisualStateGroup x:Name="FocusStates">
+                                <vsm:VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="FocusVisualElement" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </vsm:VisualState>
+                                <vsm:VisualState x:Name="Unfocused"/>
+                            </vsm:VisualStateGroup>
+                        </vsm:VisualStateManager.VisualStateGroups>
+                        <Rectangle x:Name="fillColorHover" Opacity="0" Fill="#888888" IsHitTestVisible="False" RadiusX="1" RadiusY="1"/>
+                        <Rectangle x:Name="fillColorSelected" Opacity="0" Fill="#666666" IsHitTestVisible="False" RadiusX="1" RadiusY="1"/>
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Content="{TemplateBinding Content}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"/>
+                        <ContentControl Margin="3" Content="{Binding Artwork}" Height="120" Width="120" VerticalAlignment="Top"/>
                         <Rectangle x:Name="FocusVisualElement" Stroke="#EB008B" StrokeThickness="1" Visibility="Collapsed" RadiusX="1" RadiusY="1" />
                         </Grid>
                     </ControlTemplate>
