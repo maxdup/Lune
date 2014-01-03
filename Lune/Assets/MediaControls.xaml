@@ -30,30 +30,9 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!--probably should consider style heritage-->
-    <Style x:Key="controlPlay" TargetType="{x:Type Button}">
-        <Setter Property="FontFamily" Value="Webdings" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="2"/>
+    
+    <Style x:Key="controlPlay" BasedOn="{StaticResource control}" TargetType="{x:Type Button}">
         <Setter Property="FontSize" Value="26" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid Width="{TemplateBinding Width}"  
-                             Height="{TemplateBinding Height}" ClipToBounds="True">
-                        <!-- button shape -->
-                        <Rectangle x:Name="innerRectangle" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                                   Stroke="#999999" StrokeThickness="3" Fill="Transparent" RadiusX="25" RadiusY="25"   />
-                        <!-- button text -->
-                        <DockPanel Name="myContentPresenterDockPanel">
-                            <ContentPresenter x:Name="myContentPresenter" Margin="0" Content="{TemplateBinding  Content}"  
-                                  TextBlock.Foreground="#999999" TextBlock.TextAlignment="Center" VerticalAlignment="Center" />
-                        </DockPanel>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
     </Style>
 <!--End button controls-->
 
@@ -63,6 +42,8 @@
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Height" Value="5"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
@@ -79,11 +60,14 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
     <Style x:Key="IncreaseSliderButtonStyle" TargetType="{x:Type RepeatButton}">
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="OverridesDefaultStyle" Value="true"/>
         <Setter Property="IsTabStop" Value="false"/>
         <Setter Property="Focusable" Value="false"/>
+        <Setter Property="Height" Value="5"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
@@ -92,20 +76,44 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="Width" Value="0"/>
+        <Setter Property="Height" Value="12"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Rectangle x:Name="Ellipse" StrokeThickness="1">
+                        <Rectangle.Fill>
+                            <SolidColorBrush Color="White"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Slider},
+                                               Path=IsMouseOver}" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+                <Setter Property="Width" Value="3"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style x:Key="songProgress" TargetType="{x:Type Slider}">
+        <Setter Property="Height" Value="15"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Slider}">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <Border Background="{TemplateBinding Background}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                                <RowDefinition Height="Auto" MinHeight="15"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <TickBar x:Name="TopTick" Visibility="Collapsed" Fill="{TemplateBinding Foreground}" Placement="Top" Height="4" Grid.Row="0"/>
-                            <TickBar x:Name="BottomTick" Visibility="Collapsed" Fill="{TemplateBinding Foreground}" Placement="Bottom" Height="4" Grid.Row="0"/>
-                            <Border x:Name="TrackBackground" BorderThickness="1" CornerRadius="1" Margin="5,0" VerticalAlignment="Center" Height="4.0" Grid.Row="1" >
+                            <Border x:Name="TrackBackground" BorderThickness="1" CornerRadius="1" Margin="5,0" VerticalAlignment="Center" Height="15" Grid.Row="1" >
                                 <Canvas Margin="-6,-1">
                                     <Rectangle Visibility="Hidden" x:Name="PART_SelectionRange" Height="4.0" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Stroke="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" StrokeThickness="1.0"/>
                                 </Canvas>
@@ -118,7 +126,7 @@
                                     <RepeatButton Command="{x:Static Slider.IncreaseLarge}" Style="{StaticResource IncreaseSliderButtonStyle}"/>
                                 </Track.IncreaseRepeatButton>
                                 <Track.Thumb>
-                                    <Thumb x:Name="Thumb" Background="Black"/>
+                                    <Thumb Style="{StaticResource SliderThumbStyle}" />
                                 </Track.Thumb>
                             </Track>
                         </Grid>

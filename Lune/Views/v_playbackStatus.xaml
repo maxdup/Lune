@@ -6,10 +6,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <DockPanel LastChildFill="True">
-        <Label Content="{Binding currSongInfo}" DockPanel.Dock="Top" Foreground="#CCCCCC" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Label Content="{Binding currSongInfo}" DockPanel.Dock="Top" Foreground="#CCCCCC" Margin="0 0 0 -8 " HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <DockPanel DockPanel.Dock="Bottom">
-            <Label Content="{Binding currentTime}" DockPanel.Dock="Left" Foreground="#CCCCCC"/>
-            <Label Content="{Binding songLength}" DockPanel.Dock="Right" Foreground="#CCCCCC" HorizontalAlignment="Right"/>
+            <Label Content="{Binding currentTime}" DockPanel.Dock="Left" Foreground="#CCCCCC" Margin="0 -8 0 0"/>
+            <Label Content="{Binding songLength}" DockPanel.Dock="Right" Foreground="#CCCCCC" Margin="0 -8 0 0" HorizontalAlignment="Right"/>
         </DockPanel>
         <Slider Style="{StaticResource songProgress}" HorizontalAlignment="Stretch" IsMoveToPointEnabled="True" Value="{Binding SliderPosition, Mode=TwoWay}" />
     </DockPanel>
