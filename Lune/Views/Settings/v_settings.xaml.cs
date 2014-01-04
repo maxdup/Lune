@@ -20,9 +20,12 @@ namespace Lune.Views
     /// </summary>
     public partial class v_settings : UserControl
     {
+
         public v_settings()
         {
             InitializeComponent();
+            v_LibrarySubsetting subset = new v_LibrarySubsetting();
+            this.pathsPanel.Children.Add(subset);
         }
     }
 }

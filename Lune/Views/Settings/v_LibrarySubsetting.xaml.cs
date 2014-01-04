@@ -21,20 +21,9 @@ namespace Lune.Views
     /// </summary>
     public partial class v_LibrarySubsetting : UserControl
     {
-        StringCollection paths;
         public v_LibrarySubsetting()
         {
-            if (Properties.Settings.Default.LibraryPaths != null)
-                paths = Properties.Settings.Default.LibraryPaths;
-            else
-                paths = new StringCollection() { "none"};
             InitializeComponent();
-        }
-        public void DeletePath(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.LibraryPaths.Remove((string)((Button)sender).DataContext); //holy macaroni
-            Properties.Settings.Default.Save();
-            this.listPaths.Items.Refresh();
         }
     }
 }

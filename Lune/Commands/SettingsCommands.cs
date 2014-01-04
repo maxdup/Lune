@@ -4,27 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Forms;
 using System.Collections.Specialized;
+using System.IO;
+using System.Windows.Controls;
 
 using Lune.Views;
 using Lune.ViewModels;
-using System.IO;
-using System.Windows.Controls;
+using System.Windows.Forms;
 
 namespace Lune.Commands
 {
     //this class is kinda gettho
     class SettingsCommands : ICommand
     {
-        v_LibrarySubsetting _pathView;
-        UserSettingsViewModel _vmSettings;
-        UIElementCollection _returnUI;
+        private UserSettingsViewModel _vmSettings;
 
-        public SettingsCommands(v_LibrarySubsetting pathView, UserSettingsViewModel vm)
+        public SettingsCommands( UserSettingsViewModel vm)
         {
-            _pathView = pathView;
-            _vmSettings = vm;//probably remove
+            _vmSettings = vm;//probably remove?
         }
         #region ICommand Members
 
@@ -36,8 +33,14 @@ namespace Lune.Commands
         public void Execute(object sender)
         {
 
+            if (sender is System.Windows.Controls.ListBoxItem)
+            {
+                sender = ((System.Windows.Controls.ListBoxItem)sender).Content;
+            }
+            
             switch ((string)sender)
             {
+                
                 case "AddDir":
                     FolderBrowserDialog dialog = new FolderBrowserDialog();
                     dialog.ShowDialog();
@@ -71,22 +74,17 @@ namespace Lune.Commands
                                     Properties.Settings.Default.LibraryPaths.Remove(path);
                                 }
                             }
+                            _vmSettings.paths.Add(dialog.SelectedPath);
                             Properties.Settings.Default.LibraryPaths.Add(dialog.SelectedPath);
                             Properties.Settings.Default.Save();
-                            _pathView.listPaths.Items.Refresh();
                         }
                     }
                     break;
-
-                /* It's probably impossible to remove paths from here, paths will be removed from the view's code behind for now.
-                 * Having the sender be a parameter string is kinda problematic
-                case "DeletePath":
-                    ((StringCollection)_pathView.listPaths.ItemsSource).RemoveAt(0); //yeah.....
-                    
+                default:
+                    _vmSettings.paths.Remove((string)sender);
+                    Properties.Settings.Default.LibraryPaths.Remove((string)sender);
                     Properties.Settings.Default.Save();
-                    _pathView.listPaths.Items.Refresh();
                     break;
-                 */
             }
         }
 

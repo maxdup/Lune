@@ -38,7 +38,6 @@ namespace Lune
             LibVm = new LibraryViewModel(player, MainPanel);
             PlayVm = new PlaybackViewModel(player);
             WinVm = new WindowViewModel(MainPanel);
-           
 
             InitViews();
             if (Properties.Settings.Default.LibraryPaths == null)

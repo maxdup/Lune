@@ -151,9 +151,6 @@
     <Compile Include="Views\Library\v_artists.xaml.cs">
       <DependentUpon>v_artists.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\v_main.xaml.cs">
-      <DependentUpon>v_main.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\v_mediaControls.xaml.cs">
       <DependentUpon>v_mediaControls.xaml</DependentUpon>
     </Compile>
@@ -219,10 +216,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Library\v_artists.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\v_main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

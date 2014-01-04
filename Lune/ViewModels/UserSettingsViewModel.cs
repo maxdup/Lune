@@ -4,23 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Collections.Specialized;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 using Lune.Commands;
 using Lune.Views;
-using System.Collections.Specialized;
-using System.Collections.ObjectModel;
+
 
 namespace Lune.ViewModels
 {
     class UserSettingsViewModel
     {
-        public ICommand settings { get; private set; }
-        public StringCollection paths{ get; set;}
+        public ObservableCollection<string> paths { get; set; }
+        public ICommand settingsCtrl { get; private set; }
 
-        public UserSettingsViewModel(v_LibrarySubsetting pathView)
+        public UserSettingsViewModel(Panel Mainpanel)
         {
-            settings = new SettingsCommands(pathView, this);
-            paths = Properties.Settings.Default.LibraryPaths;
+            settingsCtrl = new SettingsCommands(this);
+            paths = new ObservableCollection<string>(Properties.Settings.Default.LibraryPaths.Cast<string>());
         }
     }
 }

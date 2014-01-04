@@ -21,7 +21,6 @@ namespace Lune.Commands
         {
             this.MainPanel = MainPanel;
         }
-
         #region
         public bool CanExecute(object parameter)
         {
@@ -34,12 +33,15 @@ namespace Lune.Commands
                 case "Settings":
                     UIonHold = new UIElement[MainPanel.Children.Count];
                     MainPanel.Children.CopyTo(UIonHold,0);
-                    v_LibrarySubsetting libsubset = new v_LibrarySubsetting();
-                    UserSettingsViewModel uSettingVM = new UserSettingsViewModel(libsubset);
-                    libsubset.DataContext = uSettingVM;
+
+                    v_settings vSettings = new v_settings();
+                    UserSettingsViewModel settingsVm = new UserSettingsViewModel(MainPanel);
+                    vSettings.DataContext = settingsVm;
+
                     MainPanel.Children.Clear();
-                    MainPanel.Children.Add(libsubset);
+                    MainPanel.Children.Add(vSettings);
                     break;
+
                 case "Back":
                     if (UIonHold != null){
                         MainPanel.Children.Clear();
