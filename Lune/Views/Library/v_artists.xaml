@@ -22,7 +22,6 @@
             </ListBox.ItemsPanel>
         </ListBox>
         <GridSplitter Grid.Column="1" Style="{StaticResource LibraryGridSplitterStyle}"/>
-        <!-- this is the old song container(the one under is the new one), I feel like keeping it around for a while <ListBox Grid.Column="2" x:Name="listB_Songs" ItemsSource="{Binding songsDisplayed}"/>-->
         <local:v_songs Grid.Column="2" VerticalAlignment="Stretch" />
     </Grid>
 </UserControl>

@@ -233,7 +233,71 @@
                 </Setter.Value>
             </Setter>
         </Style>
-<!--End Listboxes-->
+    <Style TargetType="Button" x:Key="ListBoxItemButtonStyle">
+        <Setter Property="Height" Value="15"/>
+        <Setter Property="Width" Value="15"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Foreground" Value="white"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.5" />
+                                    <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="HoverRectangle" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" To="1"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ClickRectangle" Storyboard.TargetProperty="Opacity" Duration="0:0:0" To="1"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <!--<Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)" Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="Black" />
+                                        </ColorAnimationUsingKeyFrames>
+        
+                                    </Storyboard>-->
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle x:Name="HoverRectangle" Fill="LightGray" Opacity="0"/>
+                        <Rectangle x:Name="ClickRectangle" Fill="White" Opacity="0"/>
+                        <ContentPresenter Margin="0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            RecognizesAccessKey="True"/>
+                        
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="ListBoxItem" x:Key="SettingsListBoxItemStyle" BasedOn="{StaticResource LibraryListBoxItemStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <DockPanel>
+                        <TextBlock Text="{Binding}" />
+                        <Button Content="X" Command="{Binding Path=DataContext.settingsCtrl, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" 
+                                Style="{StaticResource ListBoxItemButtonStyle}"/>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--End Listboxes-->
     
     <Style TargetType="GridSplitter" x:Key="LibraryGridSplitterStyle">
         <Setter Property="Background" Value="Transparent" />

@@ -31,8 +31,11 @@ namespace Lune.Commands
         {
             switch((string)sender){
                 case "Settings":
-                    UIonHold = new UIElement[MainPanel.Children.Count];
-                    MainPanel.Children.CopyTo(UIonHold,0);
+                    if (UIonHold == null)
+                    {
+                        UIonHold = new UIElement[MainPanel.Children.Count];
+                        MainPanel.Children.CopyTo(UIonHold, 0);
+                    }
 
                     v_settings vSettings = new v_settings();
                     UserSettingsViewModel settingsVm = new UserSettingsViewModel(MainPanel);
