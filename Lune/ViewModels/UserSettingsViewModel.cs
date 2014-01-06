@@ -10,6 +10,7 @@ using System.Windows.Controls;
 
 using Lune.Commands;
 using Lune.Views;
+using Lune.ViewModels;
 
 
 namespace Lune.ViewModels
@@ -19,9 +20,9 @@ namespace Lune.ViewModels
         public ObservableCollection<string> paths { get; set; }
         public ICommand settingsCtrl { get; private set; }
 
-        public UserSettingsViewModel(Panel Mainpanel)
+        public UserSettingsViewModel(LibraryViewModel LibVm)
         {
-            settingsCtrl = new SettingsCommands(this);
+            settingsCtrl = new SettingsCommands(this, LibVm);
             paths = new ObservableCollection<string>(Properties.Settings.Default.LibraryPaths.Cast<string>());
         }
     }

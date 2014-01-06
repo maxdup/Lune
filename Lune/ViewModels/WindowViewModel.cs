@@ -14,10 +14,10 @@ namespace Lune.ViewModels
     {
         public ICommand windowCtrls { get; private set; }
         public Panel MainPanel { get; private set; }//remove or keep for later use
-        public WindowViewModel(Panel panel)
+        public WindowViewModel(Panel panel, UserSettingsViewModel vm)
         {
             MainPanel = panel;
-            windowCtrls = new WindowCommands(panel);
+            windowCtrls = new WindowCommands(panel, vm);
         }
     }
 }

@@ -17,17 +17,18 @@ namespace Lune.ViewModels
     internal class LibraryViewModel : INotifyPropertyChanged
     {
         Player _playah;
-        Library _lib;
 
         private List<Song> _songsDisplayed;
         private List<Album> _albumsDisplayed;
         private List<Artist> _artistsDisplayed;
         public List<Song> songsDisplayed { get { return _songsDisplayed; } set { _songsDisplayed = value; PropertyChange("songsDisplayed"); } }
         public List<Album> albumsDisplayed { get{ return _albumsDisplayed; } set { _albumsDisplayed = value; PropertyChange("albumsDisplayed"); } }
-        public List<Artist> artistsDisplayed { get; set; }
+        public List<Artist> artistsDisplayed { get { return _artistsDisplayed; } set { _artistsDisplayed = value; PropertyChange("artistDisplayed"); } }
 
         public Panel MainPanel { get; set; }
         public Panel libraryDisplay {get; set;}
+
+        public Library lib { get; private set; }
 
         public ICommand libViews { get; private set; }
 
@@ -36,11 +37,11 @@ namespace Lune.ViewModels
             MainPanel = panel;
             libraryDisplay = MainPanel.Children.OfType<DockPanel>().ElementAt(1);//if something breaks someday, blame this line
             _playah = player;
-            _lib = new Library();
+            lib = new Library();
             
-            songsDisplayed = _lib.GetSongs();
-            albumsDisplayed = _lib.GetAlbums();
-            artistsDisplayed = _lib.GetArtists();
+            songsDisplayed = lib.GetSongs();
+            albumsDisplayed = lib.GetAlbums();
+            artistsDisplayed = lib.GetArtists();
 
             libViews = new LibViewCommands(this);
         }
@@ -63,23 +64,23 @@ namespace Lune.ViewModels
         }
         public void artistFilter(string ArtistName)
         {
-            albumsDisplayed = _lib.GetAlbums().Where(x => x.artist.getName() == ArtistName).ToList();
-            songsDisplayed = _lib.GetSongs().Where(x => x.artist.getName() == ArtistName).ToList();
+            albumsDisplayed = lib.GetAlbums().Where(x => x.artist.getName() == ArtistName).ToList();
+            songsDisplayed = lib.GetSongs().Where(x => x.artist.getName() == ArtistName).ToList();
         }
         public void albumFilter(string AlbumName)
         {
-            songsDisplayed = _lib.GetSongs().Where(x => x.album.name == AlbumName).ToList();
+            songsDisplayed = lib.GetSongs().Where(x => x.album.name == AlbumName).ToList();
         }
         public void resetFilters()
         {
-            songsDisplayed = _lib.GetSongs();
-            albumsDisplayed = _lib.GetAlbums();
-            artistsDisplayed = _lib.GetArtists(); // may or may not be needed depending on views developed in the future
+            songsDisplayed = lib.GetSongs();
+            albumsDisplayed = lib.GetAlbums();
+            artistsDisplayed = lib.GetArtists(); // may or may not be needed depending on views developed in the future
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void PropertyChange(string prop)
+        public void PropertyChange(string prop)
         {
             if (PropertyChanged != null)
             {

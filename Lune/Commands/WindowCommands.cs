@@ -16,10 +16,12 @@ namespace Lune.Commands
     {
         Panel MainPanel;
         UIElement[] UIonHold;
+        UserSettingsViewModel _vm;
 
-        public WindowCommands(Panel MainPanel)
+        public WindowCommands(Panel MainPanel, UserSettingsViewModel vm)
         {
             this.MainPanel = MainPanel;
+            _vm = vm;
         }
         #region
         public bool CanExecute(object parameter)
@@ -38,8 +40,8 @@ namespace Lune.Commands
                     }
 
                     v_settings vSettings = new v_settings();
-                    UserSettingsViewModel settingsVm = new UserSettingsViewModel(MainPanel);
-                    vSettings.DataContext = settingsVm;
+                    
+                    vSettings.DataContext = _vm;
 
                     MainPanel.Children.Clear();
                     MainPanel.Children.Add(vSettings);
