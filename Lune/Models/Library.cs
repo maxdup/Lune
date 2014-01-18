@@ -5,19 +5,28 @@ using System.Collections.Specialized;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace Lune
 {
+    
     class Library //this class I don't even
     {
         private List<Album> AlbumLibrary;
         private List<Song> SongLibrary;
         private List<Artist> ArtistLibrary;
+
+        private static object _lock = new object();
+
         public Library()
         {
             AlbumLibrary = new List<Album>();
             SongLibrary = new List<Song>();
             ArtistLibrary = new List<Artist>();
+
+            BindingOperations.EnableCollectionSynchronization(ArtistLibrary, _lock);
+            BindingOperations.EnableCollectionSynchronization(AlbumLibrary, _lock);
+            BindingOperations.EnableCollectionSynchronization(SongLibrary, _lock);
 
             //this code is going to move else where in the future, because we will be loading the library from the database instead.
             //right now, it scans folders every time the app is opened
