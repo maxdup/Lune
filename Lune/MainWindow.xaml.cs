@@ -57,6 +57,7 @@ namespace Lune
             topBar.DataContext = WinVm;
             topBarDisplay.Children.Add(topBar);
 
+            #region bottombar
             v_bottomBar bottomBar = new v_bottomBar();
 
             v_ViewControls viewControls = new v_ViewControls();
@@ -70,8 +71,9 @@ namespace Lune
             v_mediaControls mediaControls = new v_mediaControls();
             mediaControls.DataContext = PlayVm.getPlayer();
             bottomBar.ControlsDisplay.Children.Add(mediaControls);
+            #endregion
 
-            LibVm.libViews.Execute("Artists"); //todo: make this a user setting eventually, instead of hardcoding (prefered welcome screen)
+            //LibVm.libViews.Execute("Artists"); //todo: make this a user setting eventually, instead of hardcoding (prefered welcome screen)
             bottomBarDisplay.Children.Add(bottomBar);
         }
     }

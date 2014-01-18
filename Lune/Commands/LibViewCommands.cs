@@ -15,12 +15,24 @@ namespace Lune.Commands
     internal class LibViewCommands : ICommand
     {
         LibraryViewModel _vm;
-        Panel _libraryDisplay {  get { return _vm.libraryDisplay; } set {} }
+        TabControl _libraryDisplay {  get { return _vm.libraryDisplay; } set {} }
         
 
         public LibViewCommands(LibraryViewModel vm)
         {
             _vm = vm;
+
+            v_artists artists = new v_artists();
+            artists.DataContext = _vm;
+            _libraryDisplay.Items.Add(artists);
+
+            v_albums albums = new v_albums();
+            albums.DataContext = _vm;
+            _libraryDisplay.Items.Add(albums);
+
+            v_songs2 songs = new v_songs2();
+            songs.DataContext = _vm;
+            _libraryDisplay.Items.Add(songs);
         }
 
         public bool CanExecute(object parameter)
@@ -30,28 +42,19 @@ namespace Lune.Commands
 
         public void Execute(object parameter)
         {
-           
-            _libraryDisplay.Children.Clear();
             _vm.resetFilters();
             switch ((string)parameter)
             {
                 case "Albums":
-                    v_albums albums = new v_albums();
-                    albums.DataContext = _vm;
-                    _libraryDisplay.Children.Add(albums);
+                    _libraryDisplay.SelectedIndex = 1;
                     break;
 
                 case "Songs":
-                    v_songs2 songs = new v_songs2();
-                    songs.DataContext = _vm;
-                    _libraryDisplay.Children.Add(songs);
+                    _libraryDisplay.SelectedIndex = 2;
                     break;
 
                 default:
-                    v_artists artists = new v_artists();
-                    artists.DataContext = _vm;
-                    _libraryDisplay.Children.Add(artists);
-                    
+                    _libraryDisplay.SelectedIndex = 0;
                     break;
             }
         }

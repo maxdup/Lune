@@ -14,8 +14,8 @@
         <!--bottom panel (current song info, media controls)-->
         <TabControl x:Name="AppTab" Background="Transparent">
             <DockPanel x:Name="MainPanel" DockPanel.Dock="Bottom" LastChildFill="True">
-                <DockPanel DockPanel.Dock="Bottom" x:Name="bottomBarDisplay"/>
-                <DockPanel x:Name="LibraryDisplay"/>
+                <DockPanel x:Name="bottomBarDisplay" DockPanel.Dock="Bottom" />
+                <TabControl x:Name="LibraryDisplay" Background="Transparent" />
             </DockPanel>
         </TabControl>
     </DockPanel>

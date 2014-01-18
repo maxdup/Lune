@@ -26,7 +26,7 @@ namespace Lune.ViewModels
         public List<Artist> artistsDisplayed { get { return _artistsDisplayed; } set { _artistsDisplayed = value; PropertyChange("artistDisplayed"); } }
 
         public Panel MainPanel { get; set; }
-        public Panel libraryDisplay {get; set;}
+        public TabControl libraryDisplay {get; set;}
 
         public Library lib { get; private set; }
 
@@ -35,7 +35,7 @@ namespace Lune.ViewModels
         public LibraryViewModel(Player player, Panel panel)
         {
             MainPanel = panel;
-            libraryDisplay = MainPanel.Children.OfType<DockPanel>().ElementAt(1);//if something breaks someday, blame this line
+            libraryDisplay = MainPanel.Children.OfType<TabControl>().ElementAt(0);//if something breaks someday, blame this line
             _playah = player;
             lib = new Library();
 
@@ -73,7 +73,7 @@ namespace Lune.ViewModels
         {
             songsDisplayed = lib.SongLibrary;
             albumsDisplayed = lib.AlbumLibrary;
-            artistsDisplayed = lib.ArtistLibrary; // may or may not be needed depending on views developed in the future
+            artistsDisplayed = lib.ArtistLibrary;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
