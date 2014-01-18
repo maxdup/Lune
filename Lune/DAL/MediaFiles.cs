@@ -29,7 +29,7 @@ namespace Lune
                             
                             Song thisSong = new Song(f); //this song http://www.youtube.com/watch?v=XxlhECbIW4g
 
-                            var existingAlbum = lib.GetAlbums().Where(x => x.name == thisSong.album.name).ToList();
+                            var existingAlbum = lib.AlbumLibrary.Where(x => x.name == thisSong.album.name).ToList();
                             if (existingAlbum.Count > 0)
                             {
                                 thisSong.album = existingAlbum.ElementAt(0);
@@ -38,7 +38,7 @@ namespace Lune
                             else
                             {
                                 thisSong.album.AddSong(thisSong);
-                                var existingArtist = lib.GetArtists().Where(x => x.getName() == thisSong.ArtistName).ToList();
+                                var existingArtist = lib.ArtistLibrary.Where(x => x.getName() == thisSong.ArtistName).ToList();
                                 if (existingArtist.Count > 0)
                                 {
                                     thisSong.artist = existingArtist.ElementAt(0);

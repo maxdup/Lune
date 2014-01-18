@@ -13,11 +13,9 @@ namespace Lune.ViewModels
     class WindowViewModel
     {
         public ICommand windowCtrls { get; private set; }
-        public Panel MainPanel { get; private set; }//remove or keep for later use
-        public WindowViewModel(Panel panel, UserSettingsViewModel vm)
+        public WindowViewModel(TabControl appTab, UserSettingsViewModel vm)
         {
-            MainPanel = panel;
-            windowCtrls = new WindowCommands(panel, vm);
+            windowCtrls = new WindowCommands(appTab, vm);
         }
     }
 }

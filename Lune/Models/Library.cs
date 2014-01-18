@@ -6,15 +6,20 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.ComponentModel;
 
 namespace Lune
 {
-    
-    class Library //this class I don't even
+
+    class Library : INotifyPropertyChanged //this class I don't even
     {
-        private List<Album> AlbumLibrary;
-        private List<Song> SongLibrary;
-        private List<Artist> ArtistLibrary;
+        private List<Song> _SongLibrary;
+        private List<Album> _AlbumLibrary;
+        private List<Artist> _ArtistLibrary;
+
+        public List<Song> SongLibrary { get { return _SongLibrary; } set { _SongLibrary = value; PropertyChange("SongLibrary"); } }
+        public List<Album> AlbumLibrary { get { return _AlbumLibrary; } set { _AlbumLibrary = value; PropertyChange("AlbumLibrary"); } }
+        public List<Artist> ArtistLibrary { get { return _ArtistLibrary; } set { _ArtistLibrary = value; PropertyChange("ArtistLibrary"); } }
 
         private static object _lock = new object();
 
@@ -40,18 +45,6 @@ namespace Lune
                 }
             }
         }
-        public List<Artist> GetArtists()
-        {
-            return ArtistLibrary;
-        }
-        public List<Album> GetAlbums()
-        {
-            return AlbumLibrary;
-        }
-        public List<Song> GetSongs()
-        {
-            return SongLibrary;
-        }
         public void Add(object something)
         {
             if (something is Song ){
@@ -64,6 +57,16 @@ namespace Lune
             else if (something is Artist)
             {
                 ArtistLibrary.Add((Artist)something);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void PropertyChange(string prop)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
             }
         }
     }

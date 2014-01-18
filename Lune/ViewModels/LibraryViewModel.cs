@@ -38,10 +38,8 @@ namespace Lune.ViewModels
             libraryDisplay = MainPanel.Children.OfType<DockPanel>().ElementAt(1);//if something breaks someday, blame this line
             _playah = player;
             lib = new Library();
-            
-            songsDisplayed = lib.GetSongs();
-            albumsDisplayed = lib.GetAlbums();
-            artistsDisplayed = lib.GetArtists();
+
+            resetFilters();
 
             libViews = new LibViewCommands(this);
         }
@@ -64,18 +62,18 @@ namespace Lune.ViewModels
         }
         public void artistFilter(string ArtistName)
         {
-            albumsDisplayed = lib.GetAlbums().Where(x => x.artist.getName() == ArtistName).ToList();
-            songsDisplayed = lib.GetSongs().Where(x => x.artist.getName() == ArtistName).ToList();
+            albumsDisplayed = lib.AlbumLibrary.Where(x => x.artist.getName() == ArtistName).ToList();
+            songsDisplayed = lib.SongLibrary.Where(x => x.artist.getName() == ArtistName).ToList();
         }
         public void albumFilter(string AlbumName)
         {
-            songsDisplayed = lib.GetSongs().Where(x => x.album.name == AlbumName).ToList();
+            songsDisplayed = lib.SongLibrary.Where(x => x.album.name == AlbumName).ToList();
         }
         public void resetFilters()
         {
-            songsDisplayed = lib.GetSongs();
-            albumsDisplayed = lib.GetAlbums();
-            artistsDisplayed = lib.GetArtists(); // may or may not be needed depending on views developed in the future
+            songsDisplayed = lib.SongLibrary;
+            albumsDisplayed = lib.AlbumLibrary;
+            artistsDisplayed = lib.ArtistLibrary; // may or may not be needed depending on views developed in the future
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

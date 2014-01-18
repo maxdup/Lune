@@ -12,9 +12,11 @@
         <!--top panel (Title, close, minimize maximize and window drag)-->
         <DockPanel x:Name="topBarDisplay" DockPanel.Dock="Top"/>
         <!--bottom panel (current song info, media controls)-->
-        <DockPanel x:Name="MainPanel" DockPanel.Dock="Bottom" LastChildFill="True">
-            <DockPanel DockPanel.Dock="Bottom" x:Name="bottomBarDisplay"/>
-            <DockPanel x:Name="LibraryDisplay"/>
-        </DockPanel>
+        <TabControl x:Name="AppTab" Background="Transparent">
+            <DockPanel x:Name="MainPanel" DockPanel.Dock="Bottom" LastChildFill="True">
+                <DockPanel DockPanel.Dock="Bottom" x:Name="bottomBarDisplay"/>
+                <DockPanel x:Name="LibraryDisplay"/>
+            </DockPanel>
+        </TabControl>
     </DockPanel>
 </Window>

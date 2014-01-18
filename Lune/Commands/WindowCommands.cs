@@ -14,13 +14,12 @@ namespace Lune.Commands
 {
     class WindowCommands : ICommand
     {
-        Panel MainPanel;
-        UIElement[] UIonHold;
+        TabControl _appTab;
         UserSettingsViewModel _vm;
 
-        public WindowCommands(Panel MainPanel, UserSettingsViewModel vm)
+        public WindowCommands(TabControl appTab, UserSettingsViewModel vm)
         {
-            this.MainPanel = MainPanel;
+            _appTab = appTab;
             _vm = vm;
         }
         #region
@@ -33,29 +32,17 @@ namespace Lune.Commands
         {
             switch((string)sender){
                 case "Settings":
-                    if (UIonHold == null)
+                    if (_appTab.Items.Count == 1)
                     {
-                        UIonHold = new UIElement[MainPanel.Children.Count];
-                        MainPanel.Children.CopyTo(UIonHold, 0);
+                        v_settings vSettings = new v_settings();
+                        vSettings.DataContext = _vm;
+                        _appTab.Items.Add(vSettings);
                     }
-
-                    v_settings vSettings = new v_settings();
-                    
-                    vSettings.DataContext = _vm;
-
-                    MainPanel.Children.Clear();
-                    MainPanel.Children.Add(vSettings);
+                    _appTab.SelectedIndex = 1;
                     break;
 
                 case "Back":
-                    if (UIonHold != null){
-                        MainPanel.Children.Clear();
-                        foreach (UIElement ele in UIonHold)
-                        {
-                            MainPanel.Children.Add(ele);
-                        }
-                        UIonHold = null;
-                    }
+                    _appTab.SelectedIndex = 0;
                     break;
              }
         }
