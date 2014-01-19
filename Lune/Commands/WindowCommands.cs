@@ -15,12 +15,14 @@ namespace Lune.Commands
     class WindowCommands : ICommand
     {
         TabControl _appTab;
-        UserSettingsViewModel _vm;
+        UserSettingsViewModel _usrVm;
+        WindowViewModel _winVm;
 
-        public WindowCommands(TabControl appTab, UserSettingsViewModel vm)
+        public WindowCommands(TabControl appTab, UserSettingsViewModel usrVm, WindowViewModel winVm)
         {
             _appTab = appTab;
-            _vm = vm;
+            _usrVm = usrVm;
+            _winVm = winVm;
         }
         #region
         public bool CanExecute(object parameter)
@@ -35,7 +37,11 @@ namespace Lune.Commands
                     if (_appTab.Items.Count == 1)
                     {
                         v_settings vSettings = new v_settings();
-                        vSettings.DataContext = _vm;
+                        vSettings.DataContext = _winVm;
+                        v_LibrarySubsetting subset = new v_LibrarySubsetting();
+                        subset.DataContext = _usrVm;
+
+                        vSettings.pathsPanel.Children.Add(subset);
                         _appTab.Items.Add(vSettings);
                     }
                     _appTab.SelectedIndex = 1;

@@ -34,7 +34,7 @@
     <Style x:Key="controlPlay" BasedOn="{StaticResource control}" TargetType="{x:Type Button}">
         <Setter Property="FontSize" Value="26" />
     </Style>
-<!--End button controls-->
+    <!--End button controls-->
 
 <!--Start Progress slider-->
     <Style x:Key="DecreaseSliderButtonStyle" TargetType="{x:Type RepeatButton}">

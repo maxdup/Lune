@@ -8,7 +8,6 @@
 
     <DockPanel LastChildFill="True" Margin="10,0,10,0">
         <TextBlock DockPanel.Dock="Right" VerticalAlignment="Center">
-            <Hyperlink Style="{StaticResource TopBarWindowIconStyle}" Command="{Binding windowCtrls}" CommandParameter="Back">3</Hyperlink>
             <Hyperlink Style="{StaticResource TopBarWindowIconStyle}" Command="{Binding windowCtrls}" CommandParameter="Settings">@</Hyperlink>
             <Hyperlink Click="TriggerMinimize" Style="{StaticResource TopBarWindowIconStyle}">0</Hyperlink>
             <Hyperlink Click="TriggerMaximize" Style="{StaticResource TopBarWindowIconStyle}">1</Hyperlink>

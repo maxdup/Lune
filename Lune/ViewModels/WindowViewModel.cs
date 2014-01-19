@@ -12,10 +12,12 @@ namespace Lune.ViewModels
 {
     class WindowViewModel
     {
+        public UserSettingsViewModel usrVm {get; private set;}
         public ICommand windowCtrls { get; private set; }
         public WindowViewModel(TabControl appTab, UserSettingsViewModel vm)
         {
-            windowCtrls = new WindowCommands(appTab, vm);
+            windowCtrls = new WindowCommands(appTab, vm, this);
+            usrVm = vm;
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Lune.ViewModels
         public LibraryViewModel(Player player, Panel panel)
         {
             MainPanel = panel;
-            libraryDisplay = MainPanel.Children.OfType<TabControl>().ElementAt(0);//if something breaks someday, blame this line
+            libraryDisplay = MainPanel.Children.OfType<TabControl>().ElementAt(0);
             _playah = player;
             lib = new Library();
 

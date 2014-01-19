@@ -24,6 +24,7 @@ namespace Lune.ViewModels
         {
             settingsCtrl = new SettingsCommands(this, LibVm);
             paths = new ObservableCollection<string>(Properties.Settings.Default.LibraryPaths.Cast<string>());
+            
         }
     }
 }

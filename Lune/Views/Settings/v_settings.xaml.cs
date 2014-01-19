@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Lune.ViewModels;
+
 namespace Lune.Views
 {
     /// <summary>
@@ -24,8 +26,6 @@ namespace Lune.Views
         public v_settings()
         {
             InitializeComponent();
-            v_LibrarySubsetting subset = new v_LibrarySubsetting();
-            this.pathsPanel.Children.Add(subset);
         }
     }
 }
