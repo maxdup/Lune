@@ -39,5 +39,10 @@ namespace Lune.Views
                 vm.albumFilter(listB_Albums.SelectedValue.ToString());
             }
         }
+        public void syncToLib()
+        {
+            listB_Albums.DisplayMemberPath = "";
+            listB_Artists.DisplayMemberPath = "";
+        }
     }
 }

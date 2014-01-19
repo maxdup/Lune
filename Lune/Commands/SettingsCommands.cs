@@ -49,7 +49,13 @@ namespace Lune.Commands
                     addPath(dialog.SelectedPath);
                     break;
                 default: //assumes we are looking to delete a path
-                    _vmLibrary.lib.SongLibrary.RemoveAll(r=> r.path.StartsWith((string)sender));
+                    var itemsToDelete = _vmLibrary.lib.SongLibrary.Where(r => r.path.StartsWith((string)sender)).ToList();
+
+                    foreach (var item in itemsToDelete)
+                    {
+                        _vmLibrary.lib.SongLibrary.Remove(item);
+                    }
+
                     _vmSettings.paths.Remove((string)sender);
                     Properties.Settings.Default.LibraryPaths.Remove((string)sender);
                     Properties.Settings.Default.Save();

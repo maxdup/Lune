@@ -154,13 +154,8 @@
                         </vsm:VisualStateManager.VisualStateGroups>
                         <Rectangle x:Name="fillColorHover" Opacity="0" Fill="#AAAAAA" IsHitTestVisible="False" RadiusX="1" RadiusY="1"/>
                         <Rectangle x:Name="fillColorSelected" Opacity="0" Fill="#888888" IsHitTestVisible="False" RadiusX="1" RadiusY="1"/>
-                        <ContentPresenter
-                                x:Name="contentPresenter"
-                                Content="{TemplateBinding Content}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Margin="{TemplateBinding Padding}"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"/>
+                        <ContentPresenter x:Name="contentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Margin="{TemplateBinding Padding}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                         <Rectangle x:Name="FocusVisualElement" Stroke="#EB008B" StrokeThickness="1" Visibility="Collapsed" RadiusX="1" RadiusY="1" />
                     </Grid>
                 </ControlTemplate>

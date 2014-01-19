@@ -7,31 +7,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace Lune
 {
 
     class Library : INotifyPropertyChanged //this class I don't even
     {
-        private List<Song> _SongLibrary;
-        private List<Album> _AlbumLibrary;
-        private List<Artist> _ArtistLibrary;
-
-        public List<Song> SongLibrary { get { return _SongLibrary; } set { _SongLibrary = value; PropertyChange("SongLibrary"); } }
-        public List<Album> AlbumLibrary { get { return _AlbumLibrary; } set { _AlbumLibrary = value; PropertyChange("AlbumLibrary"); } }
-        public List<Artist> ArtistLibrary { get { return _ArtistLibrary; } set { _ArtistLibrary = value; PropertyChange("ArtistLibrary"); } }
+        public ObservableCollection<Song> SongLibrary { get; set; }
+        public ObservableCollection<Album> AlbumLibrary { get; set; }
+        public ObservableCollection<Artist> ArtistLibrary { get; set; }
 
         private static object _lock = new object();
 
         public Library()
         {
-            AlbumLibrary = new List<Album>();
-            SongLibrary = new List<Song>();
-            ArtistLibrary = new List<Artist>();
 
-            BindingOperations.EnableCollectionSynchronization(ArtistLibrary, _lock);
-            BindingOperations.EnableCollectionSynchronization(AlbumLibrary, _lock);
-            BindingOperations.EnableCollectionSynchronization(SongLibrary, _lock);
+            ArtistLibrary = new ObservableCollection<Artist>();
+            AlbumLibrary = new ObservableCollection<Album>();
+            SongLibrary = new ObservableCollection<Song>();
+
+            BindingOperations.CollectionRegistering += BindingOperations_CollectionRegistering;
 
             //this code is going to move else where in the future, because we will be loading the library from the database instead.
             //right now, it scans folders every time the app is opened
@@ -45,6 +41,7 @@ namespace Lune
                 }
             }
         }
+
         public void Add(object something)
         {
             if (something is Song ){
@@ -68,6 +65,13 @@ namespace Lune
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
             }
+        }
+
+        private void BindingOperations_CollectionRegistering(object sender, CollectionRegisteringEventArgs e)
+        {
+            BindingOperations.EnableCollectionSynchronization(ArtistLibrary, _lock);
+            BindingOperations.EnableCollectionSynchronization(AlbumLibrary, _lock);
+            BindingOperations.EnableCollectionSynchronization(SongLibrary, _lock);
         }
     }
 }

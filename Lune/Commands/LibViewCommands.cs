@@ -47,14 +47,21 @@ namespace Lune.Commands
             {
                 case "Albums":
                     _libraryDisplay.SelectedIndex = 1;
+                    ((v_albums)_libraryDisplay.SelectedValue).listB_Albums.Items.Refresh();
                     break;
 
                 case "Songs":
                     _libraryDisplay.SelectedIndex = 2;
+                    ((v_songs2)_libraryDisplay.SelectedValue).listB_Songs.Items.Refresh();
                     break;
 
-                default:
+                default:// "Artist"
                     _libraryDisplay.SelectedIndex = 0;
+                    ((v_artists)_libraryDisplay.SelectedValue).syncToLib();
+                    _vm.PropertyChange("songsDisplayed");
+                    _vm.PropertyChange("albumsDisplayed");
+                    _vm.PropertyChange("artistDisplayed");
+                    ((v_artists)_libraryDisplay.SelectedValue).listB_Artists.Items.Refresh();
                     break;
             }
         }

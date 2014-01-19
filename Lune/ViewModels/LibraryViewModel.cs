@@ -7,10 +7,11 @@ using System.Windows.Input;
 using System.Diagnostics;
 using System.Windows.Documents;
 using System.Windows.Controls;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 using Lune.Commands;
 using Lune;
-using System.ComponentModel;
 
 namespace Lune.ViewModels
 {
@@ -18,12 +19,9 @@ namespace Lune.ViewModels
     {
         Player _playah;
 
-        private List<Song> _songsDisplayed;
-        private List<Album> _albumsDisplayed;
-        private List<Artist> _artistsDisplayed;
-        public List<Song> songsDisplayed { get { return _songsDisplayed; } set { _songsDisplayed = value; PropertyChange("songsDisplayed"); } }
-        public List<Album> albumsDisplayed { get{ return _albumsDisplayed; } set { _albumsDisplayed = value; PropertyChange("albumsDisplayed"); } }
-        public List<Artist> artistsDisplayed { get { return _artistsDisplayed; } set { _artistsDisplayed = value; PropertyChange("artistDisplayed"); } }
+        public ObservableCollection<Song> songsDisplayed { get; set; }
+        public ObservableCollection<Album> albumsDisplayed { get; set; }
+        public ObservableCollection<Artist> artistsDisplayed { get; set; }
 
         public Panel MainPanel { get; set; }
         public TabControl libraryDisplay {get; set;}
@@ -56,18 +54,18 @@ namespace Lune.ViewModels
             }
             if (startAt != -1)
             {
-                _playah.setQueue(new SongQueue(songsDisplayed, startAt));
+                _playah.setQueue(new SongQueue(songsDisplayed.ToList<Song>(), startAt));
                 _playah.Start();
             }
         }
         public void artistFilter(string ArtistName)
         {
-            albumsDisplayed = lib.AlbumLibrary.Where(x => x.artist.getName() == ArtistName).ToList();
-            songsDisplayed = lib.SongLibrary.Where(x => x.artist.getName() == ArtistName).ToList();
+            albumsDisplayed = new ObservableCollection<Album>(lib.AlbumLibrary.Where(x => x.artist.getName() == ArtistName));
+            songsDisplayed = new ObservableCollection<Song>(lib.SongLibrary.Where(x => x.artist.getName() == ArtistName));
         }
         public void albumFilter(string AlbumName)
         {
-            songsDisplayed = lib.SongLibrary.Where(x => x.album.name == AlbumName).ToList();
+            songsDisplayed = new ObservableCollection<Song>(lib.SongLibrary.Where(x => x.album.name == AlbumName));
         }
         public void resetFilters()
         {
