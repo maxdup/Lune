@@ -53,14 +53,17 @@ namespace Lune
                 if (ms != null)
                 {
                     ms.Seek(0, SeekOrigin.Begin);
+                    try
+                    {
+                        // ImageSource for System.Windows.Controls.Image
+                        BitmapImage bitmap = new BitmapImage();
+                        bitmap.BeginInit();
+                        bitmap.StreamSource = ms;
+                        bitmap.EndInit();
 
-                    // ImageSource for System.Windows.Controls.Image
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.StreamSource = ms;
-                    bitmap.EndInit();
-
-                    img.Source = bitmap;
+                        img.Source = bitmap;
+                    }
+                    catch (Exception e) { }
                 }
             }
             return img;

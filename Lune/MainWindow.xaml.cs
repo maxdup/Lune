@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using Lune.Views;
 using Lune.ViewModels;
+using System.Threading;
 
 namespace Lune
 {
@@ -32,21 +33,26 @@ namespace Lune
 
         public MainWindow()
         {
+            
+            #if DEBUG // uncomment to remove all user settings on application start
+            //Properties.Settings.Default.Reset();
+            #endif
+
             InitializeComponent();
-            
+
+            if (Properties.Settings.Default.LibraryPaths == null)
+            {
+                //call a welcome screen (first time use)
+                Properties.Settings.Default.LibraryPaths = new System.Collections.Specialized.StringCollection();
+            }
+
             player = new Player();
-            
             LibVm = new LibraryViewModel(player, MainPanel);
             PlayVm = new PlaybackViewModel(player);
             SetVm = new UserSettingsViewModel(LibVm);
             WinVm = new WindowViewModel(AppTab, SetVm);
 
             InitViews();
-            if (Properties.Settings.Default.LibraryPaths == null)
-            {
-                //call a welcome screen (first time use)
-                Properties.Settings.Default.LibraryPaths = new System.Collections.Specialized.StringCollection();
-            }
 
             Database bae = new Database();//dunno what to make of this yet
         }
