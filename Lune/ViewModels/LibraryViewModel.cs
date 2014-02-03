@@ -62,13 +62,13 @@ namespace Lune.ViewModels
         {
             albumsDisplayed = new ObservableCollection<Album>(lib.AlbumLibrary.Where(x => x.artist.getName() == ArtistName));
             songsDisplayed = new ObservableCollection<Song>(lib.SongLibrary.Where(x => x.artist.getName() == ArtistName));
-            PropertyChange("songsDisplayed");
-            PropertyChange("albumsDisplayed");
+            PropertyChange(PlayerProperties.SONGS_DISPLAYED);
+            PropertyChange(PlayerProperties.ALBUMS_DISPLAYED);
         }
         public void albumFilter(string AlbumName)
         {
             songsDisplayed = new ObservableCollection<Song>(lib.SongLibrary.Where(x => x.album.name == AlbumName));
-            PropertyChange("songsDisplayed");
+            PropertyChange(PlayerProperties.SONGS_DISPLAYED);
         }
         public void resetFilters()
         {

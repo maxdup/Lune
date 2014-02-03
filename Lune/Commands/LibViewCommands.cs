@@ -58,9 +58,9 @@ namespace Lune.Commands
                 default:// "Artist"
                     _libraryDisplay.SelectedIndex = 0;
                     ((v_artists)_libraryDisplay.SelectedValue).syncToLib();
-                    _vm.PropertyChange("songsDisplayed");
-                    _vm.PropertyChange("albumsDisplayed");
-                    _vm.PropertyChange("artistDisplayed");
+                    _vm.PropertyChange(PlayerProperties.SONGS_DISPLAYED);
+                    _vm.PropertyChange(PlayerProperties.ALBUMS_DISPLAYED);
+                    _vm.PropertyChange(PlayerProperties.ARTIST_DISPLAYED);
                     ((v_artists)_libraryDisplay.SelectedValue).listB_Artists.Items.Refresh();
                     break;
             }

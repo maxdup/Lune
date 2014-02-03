@@ -13,15 +13,6 @@ using Lune.Commands;
 
 namespace Lune
 {
-    class PlayerProperties
-    {
-        public static string PLAYING_DISPLAY = "playingDisplay";
-        public static string CURRENT_TIME = "currentTime";
-        public static string SONG_LENGTH = "songLength";
-        public static string CURR_SONG_INFO = "currSongInfo";
-        public static string SLIDER_POSITION = "SliderPosition";
-    }
-
     /* This is the man-meat of the program. It deals with the audio library and plays audio
      * TODO: add support for other audio formats
      */
