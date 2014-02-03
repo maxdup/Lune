@@ -13,6 +13,15 @@ using Lune.Commands;
 
 namespace Lune
 {
+    class PlayerProperties
+    {
+        public static string PLAYING_DISPLAY = "playingDisplay";
+        public static string CURRENT_TIME = "currentTime";
+        public static string SONG_LENGTH = "songLength";
+        public static string CURR_SONG_INFO = "currSongInfo";
+        public static string SLIDER_POSITION = "SliderPosition";
+    }
+
     /* This is the man-meat of the program. It deals with the audio library and plays audio
      * TODO: add support for other audio formats
      */
@@ -25,20 +34,20 @@ namespace Lune
         private DispatcherTimer timer = new DispatcherTimer();
 
         private SongQueue _queue;
-        public Boolean playing {get{return _playing;} set {_playing = value; PropertyChange("playingDisplay");}}
+        public Boolean playing {get{return _playing;} set {_playing = value; PropertyChange(PlayerProperties.PLAYING_DISPLAY);}}
         private Boolean _playing;
 
         private string _currentTime;
         public string currentTime
         {
             get { return _currentTime; }
-            set { _currentTime = value; PropertyChange("currentTime"); }
+            set { _currentTime = value; PropertyChange(PlayerProperties.CURRENT_TIME); }
         }
         private string _songLength;
         public string songLength
         {
             get { return _songLength; }
-            set { _songLength = value; PropertyChange("songLength"); }
+            set { _songLength = value; PropertyChange(PlayerProperties.SONG_LENGTH); }
         }
         const double sliderMax = 10.0;
 
@@ -46,7 +55,7 @@ namespace Lune
         public string currSongInfo
         {
             get { return _currSongInfo; }
-            set { _currSongInfo = value; PropertyChange("currSongInfo"); }
+            set { _currSongInfo = value; PropertyChange(PlayerProperties.CURR_SONG_INFO); }
         }
 
         private double _sliderPosition;
@@ -63,9 +72,9 @@ namespace Lune
                         var pos = (long)(_mainOutputStream.Length * _sliderPosition / sliderMax);
                         _mainOutputStream.Position = pos;
                     }
-                    PropertyChange("SliderPosition");
+                    PropertyChange(PlayerProperties.SLIDER_POSITION);
                     _currentTime = TimeFormat(_mainOutputStream.CurrentTime);
-                    PropertyChange("currentTime");
+                    PropertyChange(PlayerProperties.CURRENT_TIME);
                 }
             }
         }
@@ -102,8 +111,8 @@ namespace Lune
                 _waveOutDevice.Play();
                 playing = true;
                 timer.Start();
-                PropertyChange("currentTime");
-                PropertyChange("SliderPosition");
+                PropertyChange(PlayerProperties.CURRENT_TIME);
+                PropertyChange(PlayerProperties.SLIDER_POSITION);
             }
         }
 
@@ -232,9 +241,9 @@ namespace Lune
             if (_mainOutputStream != null)
             {
                 _sliderPosition = Math.Min(sliderMax, _mainOutputStream.Position * sliderMax / _mainOutputStream.Length);
-                PropertyChange("SliderPosition");
+                PropertyChange(PlayerProperties.SLIDER_POSITION);
                 _currentTime = TimeFormat(_mainOutputStream.CurrentTime);
-                PropertyChange("currentTime");
+                PropertyChange(PlayerProperties.CURRENT_TIME);
             }
         }
 
