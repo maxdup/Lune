@@ -1,15 +1,18 @@
 import sys
+from PyQt4.QtCore import QUrl, Qt
 from PyQt4 import QtGui
+from PyQt4.QtDeclarative import QDeclarativeView
+
 
 def main():
     app = QtGui.QApplication(sys.argv)
-    w = QtGui.QWidget()
-    w.resize(150, 150)
-    w.move(300, 300)
-    w.setWindowTitle('Lune')
-    w.show()
-    
-    sys.exit(app.exec_())
+    view = QDeclarativeView()
+    view.setSource(QUrl('views/Lune.qml'))
+    view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
+    #view.setWindowFlags(Qt.FramelessWindowHint)
+    view.show()
+    app.exec_()
+
     
 if __name__ == '__main__':
     main()
