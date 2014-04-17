@@ -11,7 +11,7 @@ def main():
     view.setSource(QUrl('views/Lune.qml'))
     view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
     #view.setWindowFlags(Qt.FramelessWindowHint)
-    player = player()
+    player = Player()
     view.show()
     app.exec_()
 

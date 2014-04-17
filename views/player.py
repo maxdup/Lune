@@ -1,4 +1,4 @@
-from models.songqueue import SongQueue
+from models.songQueue import SongQueue
 
 class Player():
     def __init__(self):
