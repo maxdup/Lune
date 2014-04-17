@@ -2,7 +2,8 @@ import sys
 from PyQt4.QtCore import QUrl, Qt
 from PyQt4 import QtGui
 from PyQt4.QtDeclarative import QDeclarativeView
-
+from models.songQueue import SongQueue
+from views.player import Player
 
 def main():
     app = QtGui.QApplication(sys.argv)
@@ -10,6 +11,7 @@ def main():
     view.setSource(QUrl('views/Lune.qml'))
     view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
     #view.setWindowFlags(Qt.FramelessWindowHint)
+    player = player()
     view.show()
     app.exec_()
 
