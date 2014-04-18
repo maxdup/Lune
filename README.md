@@ -1,7 +1,7 @@
-Lune
+Lune Prototype
 ====
-Lune is a media player for Windows aiming at providing the widest possible support of audio formats and the best user experience.
-...we'll get there (eventually)
+This is a c# WPF prototype on which development has stopped for now, it is only kept here for future reference.
+From now on, efforts should be directed toward the python project (any branch of this repo but this one).
 
 Install
 ====
