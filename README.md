@@ -5,4 +5,4 @@ a cross-platform music player for Windows, linux and mac aiming to provide the w
 
 Technologies used
 ====
-python 3 with Qt4
+python 3 with Qt4 and the VLC api.
