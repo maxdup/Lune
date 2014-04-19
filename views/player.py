@@ -1,4 +1,5 @@
 from models.songQueue import SongQueue
+import vlc
 
 class Player():
     def __init__(self):
