@@ -1,7 +1,7 @@
 import sys
-from PyQt4.QtCore import QUrl, Qt
-from PyQt4 import QtGui
-from PyQt4.QtDeclarative import QDeclarativeView
+from PySide.QtCore import QUrl, Qt
+from PySide import QtGui
+from PySide.QtDeclarative import QDeclarativeView
 from models.songQueue import SongQueue
 from views.player import Player
 
@@ -12,6 +12,7 @@ def main():
     view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
     #view.setWindowFlags(Qt.FramelessWindowHint)
     player = Player()
+    player.play()
     view.show()
     app.exec_()
 
