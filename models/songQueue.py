@@ -3,6 +3,7 @@ class SongQueue:
     def __init__(self, queue = [], startFrom = 0):
         self.queue = queue
         self.startFrom = startFrom
+
     def isEmpty(self):
         if len(queue) != 0: 
             return false
@@ -26,6 +27,7 @@ class SongQueue:
         if self.at != self.startFrom and not self.isEmpty():
             return true
         return false           
+
     def getPrev():
         if not self.at:
             self.at = self.startFrom 
