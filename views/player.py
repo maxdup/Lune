@@ -1,4 +1,5 @@
 from models.songQueue import SongQueue
+from models.song import Song
 import vlc
 
 class Player():
@@ -21,7 +22,7 @@ class Player():
         return self.playing
 
     def play(self):
-        self.media = self.instance.media_new(self.Queue.getCurrent())
+        self.media = self.instance.media_new(self.Queue.getCurrent().getPath())
         self.mediaplayer.set_media(self.media)
         self.mediaplayer.play()
         self.playing = True

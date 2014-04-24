@@ -1,3 +1,5 @@
+from models.song import Song
+
 class SongQueue:
     
     def __init__(self, queue = [], startFrom = 0):
@@ -38,4 +40,4 @@ class SongQueue:
 
     def getCurrent(self):
         #return self.queue[self.at]
-        return "Beyond_the_Golden_Valleys.mp3"
+        return Song("Beyond_the_Golden_Valleys.mp3")
