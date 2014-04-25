@@ -1,8 +1,7 @@
 class Song:
     #todo: find a library for id3 tags
-    def __init__(self, path = None):
+    def __init__(self, path=None):
         self.path = path
-        
         self.trackInfo = {}
 
     def getPath(self):
@@ -10,5 +9,3 @@ class Song:
 
     def getFileImage(self):
         return None
-    
-    

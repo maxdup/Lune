@@ -2,8 +2,8 @@ import sys
 from PySide.QtCore import QUrl, Qt
 from PySide import QtGui
 from PySide.QtDeclarative import QDeclarativeView
-from models.songQueue import SongQueue
-from views.player import Player
+from .views.player import Player
+
 
 def main():
     app = QtGui.QApplication(sys.argv)
@@ -15,6 +15,6 @@ def main():
     player.play()
     view.show()
     app.exec_()
-    
+
 if __name__ == '__main__':
     main()

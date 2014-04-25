@@ -1,6 +1,6 @@
 from models.songQueue import SongQueue
-from models.song import Song
 import vlc
+
 
 class Player():
     def __init__(self):
@@ -8,6 +8,9 @@ class Player():
         self.mediaplayer = self.instance.media_player_new()
         self.Queue = SongQueue()
         self.playing = False
+        self.events = self.mediaplayer.event_manager()
+        self.events.event_attach(
+            vlc.EventType.MediaPlayerEndReached, self.songEnded, 1)
 
     def setQueue(self, newQueue):
         self.Queue = newQueue
@@ -46,3 +49,10 @@ class Player():
             self.play()
         else:
             self.resume()
+
+    #todo, figure out what's being sent by the callback'
+    def songEnded(self, data, moredata):
+        print(data)
+        print(moredata)
+        self.Queue.getNext()
+        self.play()

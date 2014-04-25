@@ -1,21 +1,24 @@
 from models.song import Song
 
+
 class SongQueue:
-    
-    def __init__(self, queue = [], startFrom = 0):
+
+    def __init__(self, queue=[], startFrom=0):
         self.queue = queue
         self.startFrom = startFrom
+        self.at = startFrom
 
     def isEmpty(self):
-        if len(queue) != 0: 
-            return false
+        if len(self.queue) != 0:
+            return False
         else:
-            return true
+            return True
 
     def hasNext(self):
-        if not self.isEmpty() and self.at not in [self.startFrom, len(self.queue) ]:
-            return true
-        return false
+        if (not self.isEmpty() and
+            self.at not in [self.startFrom, len(self.queue)]):
+            return True
+        return False
 
     def getNext(self):
         if not self.at:
@@ -23,20 +26,20 @@ class SongQueue:
         else:
             if self.hasNext():
                 self.at += 1
-        return self.getCurrent();
+        return self.getCurrent()
 
-    def hasPrev():
+    def hasPrev(self):
         if self.at != self.startFrom and not self.isEmpty():
-            return true
-        return false           
+            return True
+        return False
 
-    def getPrev():
+    def getPrev(self):
         if not self.at:
-            self.at = self.startFrom 
+            self.at = self.startFrom
         else:
             if self.hasPrev():
                 self.at -= 1
-        return self.getCurrent();
+        return self.getCurrent()
 
     def getCurrent(self):
         #return self.queue[self.at]
