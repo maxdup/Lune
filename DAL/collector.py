@@ -14,4 +14,4 @@ class Collector():
             for file in files:
                 if file.split('.').pop() in self.FORMATS:
                     self.library.append(os.path.join(root, file))
-        print((len(self.library)))
+        print(('Found ' + str(len(self.library)) + ' audio files'))

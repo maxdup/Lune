@@ -4,14 +4,25 @@ from models.song import Song
 class SongQueue:
 
     def __init__(self, queue=[], startFrom=0):
-        self.queue = queue
+        self.queue = []
+        self.addLast(queue)
         #testdata
-        self.queue = [Song("Avalanche Rock.mp3"),
-                Song("Beyond_the_Golden_Valleys.mp3"),
-                Song("Ocean.flac")]
+        self.addLast(Song("Avalanche Rock.mp3"))
+        self.addLast([Song("Beyond_the_Golden_Valleys.mp3"),
+                    Song("Ocean.flac")])
 
         self.startFrom = startFrom
         self.at = None
+
+    def addLast(self, songs):
+        def appendSong(song):
+            if type(song) == Song:
+                self.queue.append(song)
+        if type(songs) == list:
+            for song in songs:
+                appendSong(song)
+        else:
+            appendSong(songs)
 
     def isEmpty(self):
         if len(self.queue) != 0:
