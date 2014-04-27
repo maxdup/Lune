@@ -19,10 +19,11 @@ class SongQueue:
         else:
             return True
 
+    def getCurrent(self):
+        return self.queue[self.at]
+
     def hasNext(self):
-        if (not self.isEmpty() and
-            #-1 is really bad
-            self.at not in [self.startFrom - 1, len(self.queue)]):
+        if (not self.isEmpty() and self.at + 1 != len(self.queue)):
             return True
         return False
 
@@ -31,7 +32,9 @@ class SongQueue:
             self.at = self.startFrom
         else:
             if self.hasNext():
-                self.at += 1  # inadequate, must wrap around
+                self.at += 1
+            else:
+                return None
         return self.getCurrent()
 
     def hasPrev(self):
@@ -46,6 +49,3 @@ class SongQueue:
             if self.hasPrev():
                 self.at -= 1
         return self.getCurrent()
-
-    def getCurrent(self):
-        return self.queue[self.at].getPath()

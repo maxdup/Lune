@@ -11,7 +11,7 @@ class Player():
 
     def PlayPrep(self):
         self.mediaplayer = self.instance.media_player_new()
-        self.media = self.instance.media_new(self.Queue.getNext())
+        self.media = self.instance.media_new(self.Queue.getNext().getPath())
         self.mediaplayer.set_media(self.media)
 
         self.events = self.mediaplayer.event_manager()
@@ -35,6 +35,12 @@ class Player():
     def PlayPause(self):
         # need to test this
         self.mediaplayer.pause()
+
+    def skip(self):
+        return None
+
+    def previous():
+        return None
 
     def SetQueue(self, newQueue):
         return None
