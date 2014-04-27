@@ -4,14 +4,17 @@ import vlc
 
 class Player():
     def __init__(self):
-        self.Queue = SongQueue()
+        self.queue = SongQueue()
 
         self.instance = vlc.Instance()
-        self.PlayPrep()
+
+    def getCount(self):
+        print((self.queue.count()))
+        return self.queue.count()
 
     def PlayPrep(self):
         self.mediaplayer = self.instance.media_player_new()
-        self.media = self.instance.media_new(self.Queue.getNext().getPath())
+        self.media = self.instance.media_new(self.queue.getNext().getPath())
         self.mediaplayer.set_media(self.media)
 
         self.events = self.mediaplayer.event_manager()
@@ -36,14 +39,15 @@ class Player():
         # need to test this
         self.mediaplayer.pause()
 
-    def skip(self):
+    def Skip(self):
         return None
 
-    def previous():
+    def Previous():
         return None
 
-    def SetQueue(self, newQueue):
-        return None
+    def SetQueue(self, queue):
+        self.queue = queue
+        self.PlayPrep()
 
     def SetVolume(self, volume):
         return None

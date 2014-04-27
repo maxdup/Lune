@@ -5,12 +5,8 @@ class SongQueue:
 
     def __init__(self, queue=[], startFrom=0):
         self.queue = []
-        self.addLast(queue)
-        #testdata
-        self.addLast(Song("Avalanche Rock.mp3"))
-        self.addLast([Song("Beyond_the_Golden_Valleys.mp3"),
-                    Song("Ocean.flac")])
-
+        if len(queue) != 0:
+            self.addLast(queue)
         self.startFrom = startFrom
         self.at = None
 
