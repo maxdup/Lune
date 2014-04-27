@@ -5,8 +5,13 @@ class SongQueue:
 
     def __init__(self, queue=[], startFrom=0):
         self.queue = queue
+        #testdata
+        self.queue = [Song("Avalanche Rock.mp3"),
+                Song("Beyond_the_Golden_Valleys.mp3"),
+                Song("Ocean.flac")]
+
         self.startFrom = startFrom
-        self.at = startFrom
+        self.at = None
 
     def isEmpty(self):
         if len(self.queue) != 0:
@@ -16,16 +21,17 @@ class SongQueue:
 
     def hasNext(self):
         if (not self.isEmpty() and
-            self.at not in [self.startFrom, len(self.queue)]):
+            #-1 is really bad
+            self.at not in [self.startFrom - 1, len(self.queue)]):
             return True
         return False
 
     def getNext(self):
-        if not self.at:
+        if self.at is None:
             self.at = self.startFrom
         else:
             if self.hasNext():
-                self.at += 1
+                self.at += 1  # inadequate, must wrap around
         return self.getCurrent()
 
     def hasPrev(self):
@@ -42,5 +48,4 @@ class SongQueue:
         return self.getCurrent()
 
     def getCurrent(self):
-        #return self.queue[self.at]
-        return Song("Beyond_the_Golden_Valleys.mp3")
+        return self.queue[self.at].getPath()

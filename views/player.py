@@ -4,55 +4,54 @@ import vlc
 
 class Player():
     def __init__(self):
-        self.instance = vlc.Instance()
-        self.mediaplayer = self.instance.media_player_new()
         self.Queue = SongQueue()
-        self.playing = False
+
+        self.instance = vlc.Instance()
+        self.PlayPrep()
+
+    def PlayPrep(self):
+        self.mediaplayer = self.instance.media_player_new()
+        self.media = self.instance.media_new(self.Queue.getNext())
+        self.mediaplayer.set_media(self.media)
+
         self.events = self.mediaplayer.event_manager()
         self.events.event_attach(
             vlc.EventType.MediaPlayerEndReached, self.songEnded, 1)
 
-    def setQueue(self, newQueue):
-        self.Queue = newQueue
-
-    def setVolume(self, volume):
-        self.mediaplayer.audio_set_volume(volume)
-
-    def seek(self, position):
-        self.mediaplayer.set_position(position / 500)
-
-    def isPlaying(self):
-        return self.playing
-
-    def play(self):
-        self.media = self.instance.media_new(self.Queue.getCurrent().getPath())
-        self.mediaplayer.set_media(self.media)
+    def Play(self):
         self.mediaplayer.play()
-        self.playing = True
 
-    def pause(self):
-        self.mediaplayer.pause()
-        self.playing = False
+    def Pause(self):
+        if self.mediaplayer.is_playing():
+            self.mediaplayer.pause()
 
-    def resume(self):
-        self.mediaplayer.play()
-        self.playing = True
+    def Resume(self):
+        if not self.mediaplayer.is_playing():
+            self.mediaplayer.play()
 
-    def stop(self):
+    def Stop(self):
         self.mediaplayer.stop()
-        self.playing = False
 
-    def playPause(self):
-        if self.playing:
-            self.pause()
-        elif self.mediaplayer.play() == -1:
-            self.play()
-        else:
-            self.resume()
+    def PlayPause(self):
+        # need to test this
+        self.mediaplayer.pause()
+
+    def SetQueue(self, newQueue):
+        return None
+
+    def SetVolume(self, volume):
+        return None
+
+    def Seek(self, position):
+        return None
+
+    def IsPlaying(self):
+        return self.mediaplayer.is_playing()
 
     #todo, figure out what's being sent by the callback'
     def songEnded(self, data, moredata):
         print(data)
         print(moredata)
-        self.Queue.getNext()
-        self.play()
+
+        self.PlayPrep()
+        self.Play()

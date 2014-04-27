@@ -2,7 +2,7 @@ import sys
 from PySide.QtCore import QUrl, Qt
 from PySide import QtGui
 from PySide.QtDeclarative import QDeclarativeView
-from .views.player import Player
+from views.player import Player
 
 
 def main():
@@ -12,7 +12,7 @@ def main():
     view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
     #view.setWindowFlags(Qt.FramelessWindowHint)
     player = Player()
-    player.play()
+    player.Play()
     view.show()
     app.exec_()
 
