@@ -11,9 +11,9 @@ from views.mainWindow import MainWindow
 
 def main():
     app = QtGui.QApplication(sys.argv)
-    view = QDeclarativeView()
-    view.setSource(QUrl('views/Lune.qml'))
-    view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
+    #view = QDeclarativeView()
+    #view.setSource(QUrl('views/Lune.qml'))
+    #view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
     #view.setWindowFlags(Qt.FramelessWindowHint)
     library = Library()
     collector = Collector(library)
