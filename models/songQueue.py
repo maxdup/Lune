@@ -21,18 +21,15 @@ class SongQueue:
             appendSong(songs)
 
     def isEmpty(self):
-        if len(self.queue) != 0:
-            return False
-        else:
-            return True
+        return len(self.queue) == 0
 
     def getCurrent(self):
+        if self.at is None:
+            self.at = self.startFrom
         return self.queue[self.at]
 
     def hasNext(self):
-        if (not self.isEmpty() and self.at + 1 != len(self.queue)):
-            return True
-        return False
+        return not self.isEmpty() and self.at + 1 != len(self.queue)
 
     def getNext(self):
         if self.at is None:
@@ -45,9 +42,7 @@ class SongQueue:
         return self.getCurrent()
 
     def hasPrev(self):
-        if self.at != self.startFrom and not self.isEmpty():
-            return True
-        return False
+        return self.at != self.startFrom and not self.isEmpty()
 
     def getPrev(self):
         if not self.at:

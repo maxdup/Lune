@@ -5,7 +5,7 @@ import vlc
 class Player():
     def __init__(self):
         self.queue = SongQueue()
-
+        self.playing = False
         self.instance = vlc.Instance()
 
     def getCount(self):
@@ -14,7 +14,7 @@ class Player():
 
     def PlayPrep(self):
         self.mediaplayer = self.instance.media_player_new()
-        self.media = self.instance.media_new(self.queue.getNext().getPath())
+        self.media = self.instance.media_new(self.queue.getCurrent().getPath())
         self.mediaplayer.set_media(self.media)
 
         self.events = self.mediaplayer.event_manager()
@@ -23,27 +23,34 @@ class Player():
 
     def Play(self):
         self.mediaplayer.play()
-
-    def Pause(self):
-        if self.mediaplayer.is_playing():
-            self.mediaplayer.pause()
-
-    def Resume(self):
-        if not self.mediaplayer.is_playing():
-            self.mediaplayer.play()
+        self.playing = True
 
     def Stop(self):
         self.mediaplayer.stop()
+        self.playing = False
 
     def PlayPause(self):
-        # need to test this
-        self.mediaplayer.pause()
+        if self.mediaplayer.get_time() == -1:
+            self.mediaplayer.play()
+        else:
+            self.mediaplayer.pause()
+        self.playing = not self.playing
 
     def Skip(self):
-        return None
+        self.mediaplayer.stop()
+        self.queue.getNext()
+        self.PlayPrep()
+        if self.playing:
+            self.Play()
 
-    def Previous():
-        return None
+    def Previous(self):
+        time = self.mediaplayer.get_time() < 2500
+        self.mediaplayer.stop()
+        if time:
+            self.queue.getPrev()
+        self.PlayPrep()
+        if self.playing:
+            self.mediaplayer.play()
 
     def SetQueue(self, queue):
         self.queue = queue
@@ -58,10 +65,10 @@ class Player():
     def IsPlaying(self):
         return self.mediaplayer.is_playing()
 
-    #todo, figure out what's being sent by the callback'
+    # todo, figure out what's being sent by the callback
+    # altho it's probably not useful all that useful
     def songEnded(self, data, moredata):
-        print(data)
-        print(moredata)
-
+        self.mediaplayer.stop()
+        self.queue.getNext()
         self.PlayPrep()
         self.Play()

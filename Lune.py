@@ -6,6 +6,7 @@ from views.player import Player
 from DAL.collector import Collector
 from models.library import Library
 from models.songQueue import SongQueue
+from views.mainWindow import MainWindow
 
 
 def main():
@@ -22,6 +23,8 @@ def main():
     player = Player()
     player.SetQueue(songQueue)
     player.Play()
+
+    view = MainWindow(player)
 
     view.show()
     app.exec_()
