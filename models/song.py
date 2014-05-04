@@ -1,8 +1,10 @@
 class Song:
-    #todo: find a library for id3 tags
-    def __init__(self, path=None):
+    def __init__(self, path=None, trackinfo={}):
         self.path = path
-        self.trackInfo = {}
+        self.trackInfo = trackinfo
+
+    def getTrackInfo(self):
+        return trackinfo
 
     def getPath(self):
         return self.path
