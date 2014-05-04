@@ -3,23 +3,58 @@ from PySide import QtGui
 
 class PlaybackControls(QtGui.QWidget):
 
+    STYLE = '''QPushButton{
+        background-color: transparent;
+        border-style: solid;
+        border-width:3px;
+        border-radius:15px;
+        color:gray;
+        min-height:24px;
+        min-width:24px;
+        max-height:24px;
+        max-width:24px;
+        font-size:15px;
+        font-family:webdings;
+    }
+    QPushButton#stop{
+        border-radius:18px;
+        min-height:32px;
+        min-width:32px;
+        max-height:32px;
+        max-width:32px;
+        font-size:20px;
+    }
+    QPushButton#pauseresume{
+        border-radius:22px;
+        min-height:40px;
+        min-width:40px;
+        max-height:40px;
+        max-width:40px;
+        font-size:32px;
+    }
+    '''
+
     def __init__(self, player):
         QtGui.QWidget.__init__(self)
-        self.previous = QtGui.QPushButton('previous')
+        self.setStyleSheet(self.STYLE)
+
+        self.previous = QtGui.QPushButton('7')
         self.previous.clicked.connect(player.Previous)
 
-        self.pauseresume = QtGui.QPushButton('play/pause/resume')
-        self.pauseresume.clicked.connect(player.PlayPause)
-
-        self.stop = QtGui.QPushButton('stop')
+        self.stop = QtGui.QPushButton('<')
         self.stop.clicked.connect(player.Stop)
+        self.stop.setObjectName('stop')
 
-        self.skip = QtGui.QPushButton('skip')
+        self.pauseresume = QtGui.QPushButton('4')
+        self.pauseresume.clicked.connect(player.PlayPause)
+        self.pauseresume.setObjectName('pauseresume')
+
+        self.skip = QtGui.QPushButton('8')
         self.skip.clicked.connect(player.Skip)
 
-        layout = QtGui.QVBoxLayout(self)
+        layout = QtGui.QHBoxLayout(self)
 
         layout.addWidget(self.previous)
-        layout.addWidget(self.pauseresume)
         layout.addWidget(self.stop)
+        layout.addWidget(self.pauseresume)
         layout.addWidget(self.skip)
