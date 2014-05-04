@@ -1,4 +1,5 @@
 from PySide import QtGui
+from sys import platform
 
 
 class PlaybackControls(QtGui.QWidget):
@@ -40,17 +41,26 @@ class PlaybackControls(QtGui.QWidget):
 
         self.previous = QtGui.QPushButton('7')
         self.previous.clicked.connect(player.Previous)
+        if platform == "linux" or platform == "linux2" or platform == 'darwin':
+            self.previous.setText('prev')
 
         self.stop = QtGui.QPushButton('<')
         self.stop.clicked.connect(player.Stop)
         self.stop.setObjectName('stop')
+        if platform == "linux" or platform == "linux2" or platform == 'darwin':
+            self.stop.setText('stop')
 
         self.pauseresume = QtGui.QPushButton('4')
         self.pauseresume.clicked.connect(player.PlayPause)
         self.pauseresume.setObjectName('pauseresume')
 
+        if platform == "linux" or platform == "linux2" or platform == 'darwin':
+            self.pauseresume.setText('play')
+
         self.skip = QtGui.QPushButton('8')
         self.skip.clicked.connect(player.Skip)
+        if platform == "linux" or platform == "linux2" or platform == 'darwin':
+            self.skip.setText('skip')
 
         layout = QtGui.QHBoxLayout(self)
 
