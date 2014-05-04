@@ -4,7 +4,7 @@ class Song:
         self.trackInfo = trackinfo
 
     def getTrackInfo(self):
-        return trackinfo
+        return self.trackinfo
 
     def getPath(self):
         return self.path

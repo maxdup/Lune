@@ -16,7 +16,6 @@ class Player():
         self.mediaplayer = self.instance.media_player_new()
         self.media = self.instance.media_new(self.queue.getCurrent().getPath())
         self.mediaplayer.set_media(self.media)
-
         self.events = self.mediaplayer.event_manager()
         self.events.event_attach(
             vlc.EventType.MediaPlayerEndReached, self.songEnded, 1)
@@ -68,7 +67,10 @@ class Player():
     # todo, figure out what's being sent by the callback
     # altho it's probably not useful all that useful
     def songEnded(self, data, moredata):
-        self.mediaplayer.stop()
-        self.queue.getNext()
-        self.PlayPrep()
-        self.Play()
+        if self.queue.getNext():
+            self.PlayPrep()
+            self.Play()
+        else:
+            self.playing = False
+            self.queue.resetQueue()
+            self.PlayPrep()

@@ -51,3 +51,13 @@ class SongQueue:
             if self.hasPrev():
                 self.at -= 1
         return self.getCurrent()
+
+    def hasIndex(self, index):
+        return index < len(self.queue)
+
+    def getAtIndex(self, index):
+        if self.hasIndex():
+            self.at = index
+
+    def resetQueue(self):
+        self.at = None

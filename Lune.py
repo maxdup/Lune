@@ -19,6 +19,7 @@ def main():
     settings = UserSettings()
     #settings.addPath('D:\Music\SebastiAn\Ross Ross Ross')
     #settings.addPath('D:\Music\Scratch Massive\Time')
+    #settings.removePath('D:\Music\Scratch Massive\Time')
     library = Library()
     collector = Collector(library)
     for path in settings.getPaths():
@@ -30,7 +31,6 @@ def main():
     player.Play()
 
     view = MainWindow(player)
-
     view.show()
     app.exec_()
 

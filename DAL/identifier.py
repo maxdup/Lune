@@ -11,13 +11,13 @@ class Identifier():
         media.get_meta(vlc.Meta.Album)
         try:
             trackinfo = {
-                'title': media.get_meta(vlc.Meta.Title),
-                'album': media.get_meta(vlc.Meta.Artist),
-                'artist': media.get_meta(vlc.Meta.Album),
-                'genre': media.get_meta(vlc.Meta.Genre),
                 'track_nb': media.get_meta(vlc.Meta.TrackNumber),
+                'title': media.get_meta(vlc.Meta.Title),
+                'album': media.get_meta(vlc.Meta.Album),
+                'artist': media.get_meta(vlc.Meta.Artist),
+                'label': media.get_meta(vlc.Meta.Publisher),
                 'date': media.get_meta(vlc.Meta.Date),
-                'label': media.get_meta(vlc.Meta.Publisher)
+                'genre': media.get_meta(vlc.Meta.Genre),
             }
             print(trackinfo)
         except:
