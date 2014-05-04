@@ -7,6 +7,7 @@ class Player():
         self.queue = SongQueue()
         self.playing = False
         self.instance = vlc.Instance()
+        self.prepped = False
 
     def getCount(self):
         print((self.queue.count()))
@@ -19,41 +20,47 @@ class Player():
         self.events = self.mediaplayer.event_manager()
         self.events.event_attach(
             vlc.EventType.MediaPlayerEndReached, self.songEnded, 1)
+        self.prepped = True
 
     def Play(self):
         self.mediaplayer.play()
         self.playing = True
 
     def Stop(self):
-        self.mediaplayer.stop()
-        self.playing = False
+        if self.prepped:
+            self.mediaplayer.stop()
+            self.playing = False
 
     def PlayPause(self):
-        if self.mediaplayer.get_time() == -1:
-            self.mediaplayer.play()
-        else:
-            self.mediaplayer.pause()
-        self.playing = not self.playing
+        if self.prepped:
+            if self.mediaplayer.get_time() == -1:
+                self.mediaplayer.play()
+            else:
+                self.mediaplayer.pause()
+            self.playing = not self.playing
 
     def Skip(self):
-        self.mediaplayer.stop()
-        self.queue.getNext()
-        self.PlayPrep()
-        if self.playing:
-            self.Play()
+        if self.prepped:
+            self.mediaplayer.stop()
+            self.queue.getNext()
+            self.PlayPrep()
+            if self.playing:
+                self.Play()
 
     def Previous(self):
-        time = self.mediaplayer.get_time() < 2500
-        self.mediaplayer.stop()
-        if time:
-            self.queue.getPrev()
-        self.PlayPrep()
-        if self.playing:
-            self.mediaplayer.play()
+        if self.prepped:
+            time = self.mediaplayer.get_time() < 2500
+            self.mediaplayer.stop()
+            if time:
+                self.queue.getPrev()
+            self.PlayPrep()
+            if self.playing:
+                self.mediaplayer.play()
 
     def SetQueue(self, queue):
         self.queue = queue
-        self.PlayPrep()
+        if not queue.isEmpty():
+            self.PlayPrep()
 
     def SetVolume(self, volume):
         return None

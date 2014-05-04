@@ -24,6 +24,8 @@ class SongQueue:
         return len(self.queue) == 0
 
     def getCurrent(self):
+        if self.isEmpty():
+            return None
         if self.at is None:
             self.at = self.startFrom
         return self.queue[self.at]
