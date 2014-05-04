@@ -27,4 +27,5 @@ class Identifier():
             - figure out why TagLib won't shut up about "invalid sample rate"'
             '''
             pass
-        return trackinfo
+        #return trackinfo
+        song.trackInfo = trackinfo
