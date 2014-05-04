@@ -33,6 +33,8 @@ var/
 *.mp3
 *.flac
 
+settings.txt
+
 
 # TODO Clean this for the python branch
 

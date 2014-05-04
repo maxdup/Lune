@@ -7,6 +7,7 @@ from DAL.collector import Collector
 from models.library import Library
 from models.songQueue import SongQueue
 from views.mainWindow import MainWindow
+from DAL.userSettings import UserSettings
 
 
 def main():
@@ -15,9 +16,13 @@ def main():
     #view.setSource(QUrl('views/Lune.qml'))
     #view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
     #view.setWindowFlags(Qt.FramelessWindowHint)
+    settings = UserSettings()
+    #settings.addPath('D:\Music\SebastiAn\Ross Ross Ross')
+    #settings.addPath('D:\Music\Scratch Massive\Time')
     library = Library()
     collector = Collector(library)
-    collector.searchDir("D:\Music")  # path to your library
+    for path in settings.getPaths():
+        collector.searchDir(path)
     songQueue = SongQueue()
     songQueue.addLast(library.getLibrary())
     player = Player()

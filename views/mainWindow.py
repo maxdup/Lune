@@ -1,6 +1,7 @@
 from PySide import QtGui
 from views.playbackControls import PlaybackControls
 
+
 class MainWindow(QtGui.QWidget):
 
     def __init__(self, player):
