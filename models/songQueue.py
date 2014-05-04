@@ -58,8 +58,9 @@ class SongQueue:
         return index < len(self.queue)
 
     def getAtIndex(self, index):
-        if self.hasIndex():
+        if self.hasIndex(index):
             self.at = index
 
     def resetQueue(self):
         self.at = None
+
