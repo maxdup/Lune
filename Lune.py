@@ -1,4 +1,5 @@
 import sys
+from sys import platform
 from PySide.QtCore import QUrl, Qt
 from PySide import QtGui
 from PySide.QtDeclarative import QDeclarativeView
@@ -29,6 +30,11 @@ def main():
 
     player = Player()
     player.SetQueue(songQueue)
+
+    if platform == "win32":
+        import ctypes
+        myappid = 'Lune.Atlas'
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     view = MainWindow(player)
     view.show()

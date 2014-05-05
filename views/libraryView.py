@@ -1,13 +1,18 @@
 from PySide import QtGui
 
+from views.playbackControls import PlaybackControls
+from views.progressBar import ProgressBar
+
 class LibraryView(QtGui.QWidget):
 
   def __init__(self, player):
     QtGui.QWidget.__init__(self)
-    
+
     self.player = player
-    
-    self.layout = QtGui.QVBoxLayout(self)
+
+    self.controls = PlaybackControls(player)
+    self.progress = ProgressBar(player)
+
     self.list = QtGui.QListWidget()
     self.list.itemDoubleClicked.connect(self._songDoubleClicked)
     index = 0
@@ -18,8 +23,12 @@ class LibraryView(QtGui.QWidget):
         item.setData(1000, index) # role, index. Created a dummy role '1000' for now.
       except KeyError: pass
       index += 1
-    self.layout.addWidget(self.list)
-    
+
+    layout = QtGui.QGridLayout(self)
+    layout.addWidget(self.list, 0, 0, 1, 0)
+    layout.addWidget(self.progress, 1, 0)
+    layout.addWidget(self.controls, 1, 1)
+
   def _songDoubleClicked(self, item):
     index = item.data(1000)
     if (self.player.IsPlaying()):

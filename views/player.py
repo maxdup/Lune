@@ -24,7 +24,7 @@ class Player():
     def Play(self):
         self.mediaplayer.play()
         self.playing = True
-        if self.timer:
+        if self.timer is not None:
             self.timer.start()
 
     def Stop(self):

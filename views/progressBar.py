@@ -15,13 +15,12 @@ class ProgressBar(QtGui.QWidget):
         self.connect(self.PositionSlider,
             QtCore.SIGNAL("sliderMoved(int)"), player.Seek)
 
-        layout.addWidget(self.PositionSlider)
-
         self.timer = QtCore.QTimer(self)
         self.timer.setInterval(200)
         self.connect(self.timer, QtCore.SIGNAL("timeout()"), self.update)
-
         self.player.setTimer(self.timer)
+
+        layout.addWidget(self.PositionSlider)
 
     def update(self):
         if not self.player.IsPlaying():

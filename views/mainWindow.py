@@ -1,22 +1,40 @@
 from PySide import QtGui
 
-from views.playbackControls import PlaybackControls
 from views.libraryView import LibraryView
-from views.progressBar import ProgressBar
+from views.settingsView import SettingsView
 
 
 class MainWindow(QtGui.QWidget):
 
     def __init__(self, player):
         QtGui.QWidget.__init__(self)
-        self.library = LibraryView(player)
-        self.controls = PlaybackControls(player)
-        self.progress = ProgressBar(player)
+        self.StackContainer = QtGui.QFrame()
 
-        layout = QtGui.QGridLayout(self)
-        layout.addWidget(self.library, 0, 0, 1, 0)
-        layout.addWidget(self.progress, 1, 0)
-        layout.addWidget(self.controls, 1, 1)
+        self.library = LibraryView(player)
+        self.settings = SettingsView()
+
+        self.viewStack = QtGui.QStackedLayout()
+        self.viewStack.addWidget(self.library)
+        self.viewStack.addWidget(self.settings)
+
+        self.StackContainer.setLayout(self.viewStack)
+
+        self.viewSwitch = QtGui.QHBoxLayout()
+
+        self.gotoLibrary = QtGui.QPushButton('Library')
+        self.gotoLibrary.clicked.connect(lambda: self.viewStack.setCurrentIndex(0))
+        self.gotoSettings = QtGui.QPushButton('Settings')
+        self.gotoSettings.clicked.connect(lambda: self.viewStack.setCurrentIndex(1))
+
+        #self.viewSwitch.addWidget(self.gotoSettings)
+        #self.viewSwitch.addWidget(self.gotoLibrary)
+
+        self.mainContainer = QtGui.QVBoxLayout()
+        #self.mainContainer.addWidget(self.viewSwitch)
+        self.mainContainer.addWidget(self.gotoLibrary)
+        self.mainContainer.addWidget(self.gotoSettings)
+        self.mainContainer.addWidget(self.StackContainer)
+        self.setLayout(self.mainContainer)
 
         #self.setWindowFlags(Qt.FramelessWindowHint)
         self.setWindowIcon(QtGui.QIcon('lune.png'))
