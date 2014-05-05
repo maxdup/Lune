@@ -12,10 +12,6 @@ from DAL.userSettings import UserSettings
 
 def main():
     app = QtGui.QApplication(sys.argv)
-    #view = QDeclarativeView()
-    #view.setSource(QUrl('views/Lune.qml'))
-    #view.setResizeMode(QDeclarativeView.SizeRootObjectToView)
-    #view.setWindowFlags(Qt.FramelessWindowHint)
 
     settings = UserSettings()
     #settings.addPath('D:\Music\SebastiAn\Ross Ross Ross')

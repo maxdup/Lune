@@ -10,7 +10,6 @@ class Player():
         self.prepped = False
 
     def getCount(self):
-        print((self.queue.count()))
         return self.queue.count()
 
     def PlayPrep(self):
@@ -25,6 +24,8 @@ class Player():
     def Play(self):
         self.mediaplayer.play()
         self.playing = True
+        if self.timer:
+            self.timer.start()
 
     def Stop(self):
         if self.prepped:
@@ -37,6 +38,8 @@ class Player():
                 self.mediaplayer.play()
             else:
                 self.mediaplayer.pause()
+                if not self.playing:
+                    self.timer.start()
             self.playing = not self.playing
 
     def Skip(self):
@@ -66,10 +69,16 @@ class Player():
         return None
 
     def Seek(self, position):
-        return None
+        self.mediaplayer.set_position(position / 500)
+
+    def getPosition(self):
+        return self.mediaplayer.get_position()
 
     def IsPlaying(self):
         return self.mediaplayer.is_playing()
+
+    def setTimer(self, timer):
+        self.timer = timer
 
     # todo, figure out what's being sent by the callback
     # altho it's probably not useful all that useful
