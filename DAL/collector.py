@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 from models.song import Song
 from DAL.identifier import Identifier

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from PySide import QtGui
 
 from views.libraryView import LibraryView
