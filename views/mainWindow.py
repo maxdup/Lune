@@ -8,12 +8,12 @@ from views.settingsView import SettingsView
 
 class MainWindow(QtGui.QWidget):
 
-    def __init__(self, player):
+    def __init__(self, player, settings):
         QtGui.QWidget.__init__(self)
         self.StackContainer = QtGui.QFrame()
 
         self.library = LibraryView(player)
-        self.settings = SettingsView()
+        self.settings = SettingsView(settings)
 
         self.viewStack = QtGui.QStackedLayout()
         self.viewStack.addWidget(self.library)

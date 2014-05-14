@@ -38,7 +38,7 @@ def main():
         myappid = 'Lune.Atlas'
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
-    view = MainWindow(player)
+    view = MainWindow(player, settings)
     view.show()
 
     app.exec_()
