@@ -4,7 +4,7 @@ import json
 import os
 
 
-class UserSettings():
+class Settings():
 
     '''
     settings are saved as json.
@@ -29,11 +29,14 @@ class UserSettings():
     def addPath(self, path):
         #validate path?
         self.uSettings['libpaths'].append(path)
+
+    def writePath(self, path):
+        self.uSettings['libpaths'].append(path)
         self.save()
 
-    def removePath(self, path):
-        if path in self.uSettings['libPaths']:
-            self.uSettings['libPaths'].remove(path)
+    def delPath(self, path):
+        if path in self.uSettings['libpaths']:
+            self.uSettings['libpaths'].remove(path)
             self.save()
 
     def save(self):

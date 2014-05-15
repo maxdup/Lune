@@ -1,49 +1,67 @@
 # -*- coding: utf-8 -*-
 
 from PySide import QtGui, QtCore
+from models.userSettings import Path
 
 class SettingsView(QtGui.QWidget):
 
-    def __init__(self, settings):
-        self.settings = settings
+    def __init__(self, usettings):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
-        pathManager = PathManager(settings)
+        pathManager = PathManager(usettings)
 
         layout.addWidget(pathManager)
         self.setLayout(layout)
 
 
 class PathManager(QtGui.QWidget):
-    def __init__(self, settings):
+    def __init__(self, usettings):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
-        libraryList = QtGui.QListWidget()
-        btnAddPaths = QtGui.QPushButton('add paths') # todo
+        self.usettings = usettings
+        self.libraryList = QtGui.QListWidget()
 
-        size = QtCore.QSize(40,40)
+        def addPathDialog():
+            path = QtGui.QFileDialog.getExistingDirectory()
+            pathObj = self.usettings.addPath(path)
+            self.addPath(pathObj)
 
-        for path in settings.getPaths():
-            item = QtGui.QListWidgetItem(libraryList)
-            item.setSizeHint(size)
-            itemWidget = ItemPath(path)
-            libraryList.setItemWidget(item, itemWidget)
+        btnAddPaths = QtGui.QPushButton('add paths')
+        btnAddPaths.clicked.connect(addPathDialog)
 
-        layout.addWidget(libraryList)
+        for pathObj in self.usettings.pathList:
+            self.addPath(pathObj)
+
+        layout.addWidget(self.libraryList)
         layout.addWidget(btnAddPaths)
         self.setLayout(layout)
 
+    def addPath(self, pathObj):
+        size = QtCore.QSize(40,40)
+        item = QtGui.QListWidgetItem(self.libraryList)
+        item.setSizeHint(size)
+        itemWidget = ItemPath(pathObj, item, self)
+        self.libraryList.setItemWidget(item, itemWidget)
+
 
 class ItemPath(QtGui.QWidget):
-    #we will eventually want to receive a Path object instead of a string
-    def __init__(self, text):
+    def __init__(self, pathObj, item, pathManager):
+        self.pathObj = pathObj
+        self.item = item
+        self.pathManager = pathManager
+
         QtGui.QWidget.__init__(self)
         layout = QtGui.QHBoxLayout()
 
-        label = QtGui.QLabel(text)
+        label = QtGui.QLabel(pathObj.path)
         remove = QtGui.QPushButton('x')
-        # todo bind this button to path removal
+        remove.clicked.connect(self.remove)
 
         layout.addWidget(label)
         layout.addWidget(remove)
         self.setLayout(layout)
+
+    def remove(self):
+        self.pathObj.remove()
+        index = self.item.listWidget().row(self.item)
+        self.pathManager.libraryList.takeItem(index)

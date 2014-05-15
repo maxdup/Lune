@@ -10,21 +10,16 @@ from DAL.collector import Collector
 from models.library import Library
 from models.songQueue import SongQueue
 from views.mainWindow import MainWindow
-from DAL.userSettings import UserSettings
-
+from models.userSettings import UserSettings
 
 def main():
     app = QtGui.QApplication(sys.argv)
 
     settings = UserSettings()
-    #settings.addPath('D:\Music\SebastiAn\Ross Ross Ross')
-    #settings.addPath('D:\Music\Scratch Massive\Time')
-    #settings.removePath('D:\Music\Scratch Massive\Time')
-
     library = Library()
 
     collector = Collector(library)
-    for path in settings.getPaths():
+    for path in settings.pathList:
         collector.searchDir(path)
 
     songQueue = SongQueue()
