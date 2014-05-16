@@ -15,12 +15,9 @@ from models.userSettings import UserSettings
 def main():
     app = QtGui.QApplication(sys.argv)
 
-    settings = UserSettings()
     library = Library()
-
     collector = Collector(library)
-    for path in settings.pathList:
-        collector.searchDir(path)
+    settings = UserSettings(collector)
 
     songQueue = SongQueue()
     songQueue.addLast(library.getLibrary())
@@ -33,7 +30,7 @@ def main():
         myappid = 'Lune.Atlas'
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
-    view = MainWindow(player, settings)
+    view = MainWindow(library, player, settings)
     view.show()
 
     app.exec_()

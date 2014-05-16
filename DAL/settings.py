@@ -16,29 +16,29 @@ class Settings():
     '''
 
     def __init__(self):
-        self.uSettings = {
+        self.settings = {
             'libpaths': []
             }
         if os.path.isfile('settings.txt'):
             with open('settings.txt', 'r') as inputfile:
-                self.uSettings = json.load(inputfile)
+                self.settings = json.load(inputfile)
 
     def getPaths(self):
-        return self.uSettings['libpaths']
+        return self.settings['libpaths']
 
     def addPath(self, path):
         #validate path?
-        self.uSettings['libpaths'].append(path)
+        self.settings['libpaths'].append(path)
 
     def writePath(self, path):
-        self.uSettings['libpaths'].append(path)
+        self.settings['libpaths'].append(path)
         self.save()
 
     def delPath(self, path):
-        if path in self.uSettings['libpaths']:
-            self.uSettings['libpaths'].remove(path)
+        if path in self.settings['libpaths']:
+            self.settings['libpaths'].remove(path)
             self.save()
 
     def save(self):
         with open('settings.txt', 'w') as outfile:
-            json.dump(self.uSettings, outfile)
+            json.dump(self.settings, outfile)

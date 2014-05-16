@@ -14,6 +14,3 @@ class Library:
         elif type(songs) == list:
             for song in songs:
                 self.songs.append(song)
-
-    def getLibrary(self):
-        return self.songs

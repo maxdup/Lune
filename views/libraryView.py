@@ -7,7 +7,7 @@ from views.progressBar import ProgressBar
 
 class LibraryView(QtGui.QWidget):
 
-  def __init__(self, player):
+  def __init__(self, player, library):
     QtGui.QWidget.__init__(self)
 
     self.player = player
@@ -18,7 +18,7 @@ class LibraryView(QtGui.QWidget):
     self.list = QtGui.QListWidget()
     self.list.itemDoubleClicked.connect(self._songDoubleClicked)
     index = 0
-    for song in player.queue.queue:
+    for song in library.songs:
       try:
         item = QtGui.QListWidgetItem(self.list)
         item.setText(song.trackInfo['title'])
@@ -38,3 +38,6 @@ class LibraryView(QtGui.QWidget):
     self.player.queue.getAtIndex(index)
     self.player.PlayPrep()
     self.player.Play()
+
+  def update(self):
+    return None

@@ -8,31 +8,25 @@ from views.settingsView import SettingsView
 
 class MainWindow(QtGui.QWidget):
 
-    def __init__(self, player, settings):
+    def __init__(self, library, player, settings):
         QtGui.QWidget.__init__(self)
         self.StackContainer = QtGui.QFrame()
 
-        self.library = LibraryView(player)
-        self.settings = SettingsView(settings)
+        self.vLibrary = LibraryView(player, library)
+        self.vSettings = SettingsView(settings)
 
         self.viewStack = QtGui.QStackedLayout()
-        self.viewStack.addWidget(self.library)
-        self.viewStack.addWidget(self.settings)
+        self.viewStack.addWidget(self.vLibrary)
+        self.viewStack.addWidget(self.vSettings)
 
         self.StackContainer.setLayout(self.viewStack)
 
-        self.viewSwitch = QtGui.QHBoxLayout()
-
         self.gotoLibrary = QtGui.QPushButton('Library')
-        self.gotoLibrary.clicked.connect(lambda: self.viewStack.setCurrentIndex(0))
+        self.gotoLibrary.clicked.connect(self.gotoLib)
         self.gotoSettings = QtGui.QPushButton('Settings')
         self.gotoSettings.clicked.connect(lambda: self.viewStack.setCurrentIndex(1))
 
-        #self.viewSwitch.addWidget(self.gotoSettings)
-        #self.viewSwitch.addWidget(self.gotoLibrary)
-
         self.mainContainer = QtGui.QVBoxLayout()
-        #self.mainContainer.addWidget(self.viewSwitch)
         self.mainContainer.addWidget(self.gotoLibrary)
         self.mainContainer.addWidget(self.gotoSettings)
         self.mainContainer.addWidget(self.StackContainer)
@@ -41,5 +35,9 @@ class MainWindow(QtGui.QWidget):
         #self.setWindowFlags(Qt.FramelessWindowHint)
         self.setWindowIcon(QtGui.QIcon('lune.png'))
         self.setWindowTitle('Lune')
+
+    def gotoLib(self):
+        self.vLibrary.update()
+        self.viewStack.setCurrentIndex(0)
 
 
