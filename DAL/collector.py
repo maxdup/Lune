@@ -25,4 +25,4 @@ class Collector():
                     found.append(song)
 
         self.library.addSong(found)
-        print(('Found ' + str(len(self.library.getLibrary())) + ' audio files'))
+        print(('Found ' + str(len(self.library.songs)) + ' audio files'))

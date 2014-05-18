@@ -20,7 +20,7 @@ def main():
     settings = UserSettings(collector)
 
     songQueue = SongQueue()
-    songQueue.addLast(library.getLibrary())
+    songQueue.addLast(library.songs)
 
     player = Player()
     player.SetQueue(songQueue)

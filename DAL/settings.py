@@ -19,8 +19,8 @@ class Settings():
         self.settings = {
             'libpaths': []
             }
-        if os.path.isfile('settings.txt'):
-            with open('settings.txt', 'r') as inputfile:
+        if os.path.isfile('settings.json'):
+            with open('settings.json', 'r') as inputfile:
                 self.settings = json.load(inputfile)
 
     def getPaths(self):
@@ -40,5 +40,5 @@ class Settings():
             self.save()
 
     def save(self):
-        with open('settings.txt', 'w') as outfile:
+        with open('settings.json', 'w') as outfile:
             json.dump(self.settings, outfile)
