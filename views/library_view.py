@@ -17,16 +17,14 @@ class LibraryView(QtGui.QWidget):
 
         self.list = QtGui.QListWidget()
         self.list.itemDoubleClicked.connect(self._song_double_clicked)
-        index = 0
-        for song in library.songs:
+        for idx, song in enumerate(library.songs):
             try:
                 item = QtGui.QListWidgetItem(self.list)
                 item.setText(song.track_info['title'])
                 # role, index. Created a dummy role '1000' for now.
-                item.setData(1000, index)
+                item.setData(1000, idx)
             except KeyError:
                 pass
-            index += 1
 
         layout = QtGui.QGridLayout(self)
         layout.addWidget(self.list, 0, 0, 1, 0)
