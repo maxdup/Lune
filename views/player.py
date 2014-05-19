@@ -14,6 +14,9 @@ class Player():
     def get_count(self):
         return self.queue.count()
 
+    def get_current(self):
+        return self.queue.get_current()
+
     def play_prep(self):
         self.media_player = self.instance.media_player_new()
         self.media = self.instance.media_new(self.queue.get_current().get_path())

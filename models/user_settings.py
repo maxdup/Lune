@@ -33,7 +33,6 @@ class UserSettings:
 
         self.settings.write_path(path_obj.path)
         self.path_list.append(path_obj)
-        print(type(self.collector))
         self.collector.search_dir(path_obj)
         return path_obj
 

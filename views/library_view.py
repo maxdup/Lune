@@ -4,6 +4,7 @@ from PySide import QtGui
 
 from views.playback_controls import PlaybackControls
 from views.progress_bar import ProgressBar
+from views.trackinfo import Trackinfo
 
 
 class LibraryView(QtGui.QWidget):
@@ -14,6 +15,7 @@ class LibraryView(QtGui.QWidget):
 
         self.controls = PlaybackControls(player)
         self.progress = ProgressBar(player)
+        self.trackinfo = Trackinfo(player)
 
         self.list = QtGui.QListWidget()
         self.list.itemDoubleClicked.connect(self._song_double_clicked)
@@ -28,8 +30,9 @@ class LibraryView(QtGui.QWidget):
 
         layout = QtGui.QGridLayout(self)
         layout.addWidget(self.list, 0, 0, 1, 0)
-        layout.addWidget(self.progress, 1, 0)
-        layout.addWidget(self.controls, 1, 1)
+        layout.addWidget(self.trackinfo, 1, 0)
+        layout.addWidget(self.progress, 1, 1)
+        layout.addWidget(self.controls, 1, 2)
 
     def _song_double_clicked(self, item):
         index = item.data(1000)
