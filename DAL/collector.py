@@ -3,7 +3,7 @@
 import os
 
 from models.song import Song
-from DAL.identifier import Identifier
+from dal.identifier import Identifier
 
 
 class Collector():

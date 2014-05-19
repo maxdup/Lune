@@ -1,6 +1,6 @@
 import os
 
-from DAL.settings import Settings
+from dal.settings import Settings
 
 
 class UserSettings:

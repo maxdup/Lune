@@ -2,8 +2,8 @@
 
 from PySide import QtGui
 
-from views.playbackControls import PlaybackControls
-from views.progressBar import ProgressBar
+from views.playback_controls import PlaybackControls
+from views.progress_bar import ProgressBar
 
 
 class LibraryView(QtGui.QWidget):

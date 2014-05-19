@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from models.songQueue import SongQueue
+from models.song_queue import SongQueue
 import vlc
 
 

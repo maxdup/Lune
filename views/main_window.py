@@ -2,8 +2,8 @@
 
 from PySide import QtGui
 
-from views.libraryView import LibraryView
-from views.settingsView import SettingsView
+from views.library_view import LibraryView
+from views.settings_view import SettingsView
 
 
 class MainWindow(QtGui.QWidget):

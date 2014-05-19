@@ -6,11 +6,11 @@ from sys import platform
 from PySide import QtGui
 
 from views.player import Player
-from DAL.collector import Collector
+from dal.collector import Collector
 from models.library import Library
-from models.songQueue import SongQueue
-from views.mainWindow import MainWindow
-from models.userSettings import UserSettings
+from models.song_queue import SongQueue
+from views.main_window import MainWindow
+from models.user_settings import UserSettings
 
 
 def main():
