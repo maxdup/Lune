@@ -11,84 +11,84 @@ class Player():
         self.instance = vlc.Instance()
         self.prepped = False
 
-    def getCount(self):
+    def get_count(self):
         return self.queue.count()
 
-    def PlayPrep(self):
-        self.mediaplayer = self.instance.media_player_new()
-        self.media = self.instance.media_new(self.queue.getCurrent().getPath())
-        self.mediaplayer.set_media(self.media)
-        self.events = self.mediaplayer.event_manager()
+    def play_prep(self):
+        self.media_player = self.instance.media_player_new()
+        self.media = self.instance.media_new(self.queue.get_current().get_path())
+        self.media_player.set_media(self.media)
+        self.events = self.media_player.event_manager()
         self.events.event_attach(
             vlc.EventType.MediaPlayerEndReached, self.songEnded, 1)
         self.prepped = True
 
-    def Play(self):
-        self.mediaplayer.play()
+    def play(self):
+        self.media_player.play()
         self.playing = True
         if self.timer is not None:
             self.timer.start()
 
-    def Stop(self):
+    def stop(self):
         if self.prepped:
-            self.mediaplayer.stop()
+            self.media_player.stop()
             self.playing = False
 
-    def PlayPause(self):
+    def play_pause(self):
         if self.prepped:
-            if self.mediaplayer.get_time() == -1:
-                self.mediaplayer.play()
+            if self.media_player.get_time() == -1:
+                self.media_player.play()
             else:
-                self.mediaplayer.pause()
+                self.media_player.pause()
                 if not self.playing:
                     self.timer.start()
             self.playing = not self.playing
 
-    def Skip(self):
+    def skip(self):
         if self.prepped:
-            self.mediaplayer.stop()
-            self.queue.getNext()
-            self.PlayPrep()
+            self.media_player.stop()
+            self.queue.get_text()
+            self.play_prep()
             if self.playing:
-                self.Play()
+                self.play()
 
-    def Previous(self):
+    def previous(self):
         if self.prepped:
-            time = self.mediaplayer.get_time() < 2500
-            self.mediaplayer.stop()
+            time = self.media_player.get_time() < 2500
+            self.media_player.stop()
             if time:
-                self.queue.getPrev()
-            self.PlayPrep()
+                self.queue.get_prev()
+            self.play_prep()
             if self.playing:
-                self.mediaplayer.play()
+                self.media_player.play()
 
-    def SetQueue(self, queue):
+    def set_queue(self, queue):
         self.queue = queue
-        if not queue.isEmpty():
-            self.PlayPrep()
+        if not queue.is_empty():
+            self.play_prep()
 
-    def SetVolume(self, volume):
+    def set_volume(self, volume):
         return None
 
-    def Seek(self, position):
-        self.mediaplayer.set_position(position / 500)
+    def seek(self, position):
+        self.media_player.set_position(position / 500)
 
-    def getPosition(self):
-        return self.mediaplayer.get_position()
+    def get_position(self):
+        return self.media_player.get_position()
 
-    def IsPlaying(self):
-        return self.mediaplayer.is_playing()
+    def is_playing(self):
+        return self.media_player.is_playing()
 
-    def setTimer(self, timer):
+    def set_timer(self, timer):
         self.timer = timer
 
     # todo, figure out what's being sent by the callback
     # altho it's probably not useful all that useful
     def songEnded(self, data, moredata):
-        if self.queue.getNext():
-            self.PlayPrep()
-            self.Play()
+        if self.queue.get_text():
+            self.play_prep()
+            self.play()
         else:
             self.playing = False
-            self.queue.resetQueue()
-            self.PlayPrep()
+            self.queue.reset_queue()
+            self.play_prep()

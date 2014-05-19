@@ -2,15 +2,15 @@
 
 
 class Song:
-    def __init__(self, path=None, trackinfo={}):
+    def __init__(self, path=None, track_info={}):
         self.path = path
-        self.trackInfo = trackinfo
+        self.track_info = track_info
 
-    def getTrackInfo(self):
-        return self.trackinfo
+    def get_track_info(self):
+        return self.track_info
 
-    def getPath(self):
+    def get_path(self):
         return self.path
 
-    def getFileImage(self):
+    def get_file_image(self):
         return None

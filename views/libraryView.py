@@ -16,12 +16,12 @@ class LibraryView(QtGui.QWidget):
         self.progress = ProgressBar(player)
 
         self.list = QtGui.QListWidget()
-        self.list.itemDoubleClicked.connect(self._songDoubleClicked)
+        self.list.itemDoubleClicked.connect(self._song_double_clicked)
         index = 0
         for song in library.songs:
             try:
                 item = QtGui.QListWidgetItem(self.list)
-                item.setText(song.trackInfo['title'])
+                item.setText(song.track_info['title'])
                 # role, index. Created a dummy role '1000' for now.
                 item.setData(1000, index)
             except KeyError:
@@ -33,13 +33,13 @@ class LibraryView(QtGui.QWidget):
         layout.addWidget(self.progress, 1, 0)
         layout.addWidget(self.controls, 1, 1)
 
-    def _songDoubleClicked(self, item):
+    def _song_double_clicked(self, item):
         index = item.data(1000)
-        if (self.player.IsPlaying()):
-            self.player.Stop()
-        self.player.queue.getAtIndex(index)
-        self.player.PlayPrep()
-        self.player.Play()
+        if self.player.is_playing():
+            self.player.stop()
+        self.player.queue.get_at_index(index)
+        self.player.play_prep()
+        self.player.play()
 
     def update(self):
         return None

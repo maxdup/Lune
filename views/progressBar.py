@@ -10,20 +10,20 @@ class ProgressBar(QtGui.QWidget):
 
         layout = QtGui.QHBoxLayout(self)
 
-        self.PositionSlider = QtGui.QSlider(QtCore.Qt.Horizontal, self)
-        self.PositionSlider.setToolTip("Position")
-        self.PositionSlider.setMaximum(500)
-        self.connect(self.PositionSlider,
-                     QtCore.SIGNAL("sliderMoved(int)"), player.Seek)
+        self.position_slider = QtGui.QSlider(QtCore.Qt.Horizontal, self)
+        self.position_slider.setToolTip("Position")
+        self.position_slider.setMaximum(500)
+        self.connect(self.position_slider,
+                     QtCore.SIGNAL("sliderMoved(int)"), player.seek)
 
         self.timer = QtCore.QTimer(self)
         self.timer.setInterval(200)
         self.connect(self.timer, QtCore.SIGNAL("timeout()"), self.update)
-        self.player.setTimer(self.timer)
+        self.player.set_timer(self.timer)
 
-        layout.addWidget(self.PositionSlider)
+        layout.addWidget(self.position_slider)
 
     def update(self):
-        if not self.player.IsPlaying():
+        if not self.player.is_playing():
             self.timer.stop()
-        self.PositionSlider.setValue(self.player.getPosition() * 500)
+        self.position_slider.setValue(self.player.get_position() * 500)

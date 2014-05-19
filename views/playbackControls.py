@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from PySide import QtGui
 from sys import platform
+
+from PySide import QtGui
 
 
 class PlaybackControls(QtGui.QWidget):
@@ -42,25 +43,25 @@ class PlaybackControls(QtGui.QWidget):
         self.setStyleSheet(self.STYLE)
 
         self.previous = QtGui.QPushButton('7')
-        self.previous.clicked.connect(player.Previous)
+        self.previous.clicked.connect(player.previous)
         if platform == "linux" or platform == "linux2" or platform == 'darwin':
             self.previous.setText('prev')
 
         self.stop = QtGui.QPushButton('<')
-        self.stop.clicked.connect(player.Stop)
+        self.stop.clicked.connect(player.stop)
         self.stop.setObjectName('stop')
         if platform == "linux" or platform == "linux2" or platform == 'darwin':
             self.stop.setText('stop')
 
-        self.pauseresume = QtGui.QPushButton('4')
-        self.pauseresume.clicked.connect(player.PlayPause)
-        self.pauseresume.setObjectName('pauseresume')
+        self.pause_resume = QtGui.QPushButton('4')
+        self.pause_resume.clicked.connect(player.play_pause)
+        self.pause_resume.setObjectName('pauseresume')
 
         if platform == "linux" or platform == "linux2" or platform == 'darwin':
-            self.pauseresume.setText('play')
+            self.pause_resume.setText('play')
 
         self.skip = QtGui.QPushButton('8')
-        self.skip.clicked.connect(player.Skip)
+        self.skip.clicked.connect(player.skip)
         if platform == "linux" or platform == "linux2" or platform == 'darwin':
             self.skip.setText('skip')
 
@@ -68,5 +69,5 @@ class PlaybackControls(QtGui.QWidget):
 
         layout.addWidget(self.previous)
         layout.addWidget(self.stop)
-        layout.addWidget(self.pauseresume)
+        layout.addWidget(self.pause_resume)
         layout.addWidget(self.skip)

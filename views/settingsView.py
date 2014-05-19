@@ -1,60 +1,59 @@
 # -*- coding: utf-8 -*-
 
 from PySide import QtGui, QtCore
-from models.userSettings import Path
 
 
 class SettingsView(QtGui.QWidget):
-    def __init__(self, usettings):
+    def __init__(self, user_settings):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
-        pathManager = PathManager(usettings)
+        path_manager = PathManager(user_settings)
 
-        layout.addWidget(pathManager)
+        layout.addWidget(path_manager)
         self.setLayout(layout)
 
 
 class PathManager(QtGui.QWidget):
-    def __init__(self, usettings):
+    def __init__(self, user_settings):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
-        self.usettings = usettings
-        self.libraryList = QtGui.QListWidget()
+        self.user_settings = user_settings
+        self.library_list = QtGui.QListWidget()
 
-        def addPathDialog():
+        def add_path_dialog():
             path = QtGui.QFileDialog.getExistingDirectory()
             if path:
-                pathObj = self.usettings.addPath(path)
-                self.addPath(pathObj)
+                path_obj = self.user_settings.add_path(path)
+                self.add_path(path_obj)
 
-        btnAddPaths = QtGui.QPushButton('add paths')
-        btnAddPaths.clicked.connect(addPathDialog)
+        btn_add_paths = QtGui.QPushButton('add paths')
+        btn_add_paths.clicked.connect(add_path_dialog)
 
-        for pathObj in self.usettings.pathList:
-            self.addPath(pathObj)
+        for path_obj in self.user_settings.path_list:
+            self.add_path(path_obj)
 
-        layout.addWidget(self.libraryList)
-        layout.addWidget(btnAddPaths)
+        layout.addWidget(self.library_list)
+        layout.addWidget(btn_add_paths)
         self.setLayout(layout)
 
-    def addPath(self, pathObj):
+    def add_path(self, path_obj):
         size = QtCore.QSize(40, 40)
-        item = QtGui.QListWidgetItem(self.libraryList)
+        item = QtGui.QListWidgetItem(self.library_list)
         item.setSizeHint(size)
-        itemWidget = ItemPath(pathObj, item, self)
-        self.libraryList.setItemWidget(item, itemWidget)
+        item_widget = ItemPath(path_obj, item, self)
+        self.library_list.setItemWidget(item, item_widget)
 
 
 class ItemPath(QtGui.QWidget):
-    def __init__(self, pathObj, item, pathManager):
-        self.pathObj = pathObj
+    def __init__(self, path_obj, item, path_manager):
+        self.path_obj = path_obj
         self.item = item
-        self.pathManager = pathManager
+        self.path_manager = path_manager
 
         QtGui.QWidget.__init__(self)
         layout = QtGui.QHBoxLayout()
 
-        label = QtGui.QLabel(pathObj.path)
+        label = QtGui.QLabel(path_obj.path)
         remove = QtGui.QPushButton('x')
         remove.clicked.connect(self.remove)
 
@@ -63,6 +62,6 @@ class ItemPath(QtGui.QWidget):
         self.setLayout(layout)
 
     def remove(self):
-        self.pathObj.remove()
+        self.path_obj.remove()
         index = self.item.listWidget().row(self.item)
-        self.pathManager.libraryList.takeItem(index)
+        self.path_manager.library_list.takeItem(index)
