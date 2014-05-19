@@ -5,7 +5,6 @@ import os
 
 
 class Settings():
-
     '''
     settings are saved as json.
     the json object should look something like:
@@ -18,23 +17,23 @@ class Settings():
     def __init__(self):
         self.settings = {
             'libpaths': []
-            }
+        }
         if os.path.isfile('settings.json'):
-            with open('settings.json', 'r') as inputfile:
-                self.settings = json.load(inputfile)
+            with open('settings.json', 'r') as input_file:
+                self.settings = json.load(input_file)
 
-    def getPaths(self):
+    def get_paths(self):
         return self.settings['libpaths']
 
-    def addPath(self, path):
+    def add_path(self, path):
         # validate path?
         self.settings['libpaths'].append(path)
 
-    def writePath(self, path):
+    def write_path(self, path):
         self.settings['libpaths'].append(path)
         self.save()
 
-    def delPath(self, path):
+    def del_path(self, path):
         if path in self.settings['libpaths']:
             self.settings['libpaths'].remove(path)
             self.save()

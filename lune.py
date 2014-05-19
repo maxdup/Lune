@@ -2,15 +2,15 @@
 
 import sys
 from sys import platform
-from PySide.QtCore import QUrl, Qt
+
 from PySide import QtGui
-from PySide.QtDeclarative import QDeclarativeView
+
 from views.player import Player
-from DAL.collector import Collector
+from dal.collector import Collector
 from models.library import Library
-from models.songQueue import SongQueue
-from views.mainWindow import MainWindow
-from models.userSettings import UserSettings
+from models.song_queue import SongQueue
+from views.main_window import MainWindow
+from models.user_settings import UserSettings
 
 
 def main():
@@ -20,13 +20,13 @@ def main():
     collector = Collector(library)
     settings = UserSettings(collector)
 
-    songQueue = SongQueue()
-    songQueue.addLast(library.songs)
+    song_queue = SongQueue()
+    song_queue.add_last(library.songs)
 
     player = Player()
-    player.SetQueue(songQueue)
+    player.set_queue(song_queue)
 
-    if platform == "win32":
+    if platform == 'win32':
         import ctypes
         myappid = 'Lune.Atlas'
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)

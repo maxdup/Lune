@@ -4,11 +4,10 @@ from models.song import Song
 
 
 class Library:
-
     def __init__(self):
         self.songs = []
 
-    def addSong(self, songs):
+    def add_song(self, songs):
         if type(songs) == Song:
             self.songs.append(songs)
         elif type(songs) == list:
