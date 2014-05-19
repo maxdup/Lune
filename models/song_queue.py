@@ -4,7 +4,6 @@ from models.song import Song
 
 
 class SongQueue:
-
     def __init__(self, queue=[], start_from=0):
         self.queue = []
         if len(queue) != 0:

@@ -4,7 +4,6 @@ from models.song import Song
 
 
 class Library:
-
     def __init__(self):
         self.songs = []
 

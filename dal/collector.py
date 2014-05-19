@@ -7,7 +7,6 @@ from dal.identifier import Identifier
 
 
 class Collector():
-
     FORMATS = ['mp3', 'flac', 'aac', 'ogg']
 
     def __init__(self, library):

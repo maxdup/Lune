@@ -6,7 +6,6 @@ from PySide import QtGui
 
 
 class PlaybackControls(QtGui.QWidget):
-
     STYLE = '''QPushButton{
         background-color: transparent;
         border-style: solid;
