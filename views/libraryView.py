@@ -28,10 +28,10 @@ class LibraryView(QtGui.QWidget):
                 pass
             index += 1
 
-    layout = QtGui.QGridLayout(self)
-    layout.addWidget(self.list, 0, 0, 1, 0)
-    layout.addWidget(self.progress, 1, 0)
-    layout.addWidget(self.controls, 1, 1)
+        layout = QtGui.QGridLayout(self)
+        layout.addWidget(self.list, 0, 0, 1, 0)
+        layout.addWidget(self.progress, 1, 0)
+        layout.addWidget(self.controls, 1, 1)
 
     def _songDoubleClicked(self, item):
         index = item.data(1000)
