@@ -8,7 +8,14 @@ class Trackinfo(QtGui.QWidget):
         
         layout = QtGui.QVBoxLayout(self)
     
-        self.info = player.get_current().track_info
+        if player.get_current():
+            self.info = player.get_current().track_info
+        else:
+            self.info = {
+                'title':'',
+                'album':'',
+                'artist':''
+                }
 
         self.title_display = QtGui.QLabel(self.info['title'])
         self.album_display = QtGui.QLabel(self.info['album'])
@@ -19,3 +26,7 @@ class Trackinfo(QtGui.QWidget):
 
     def update(self):
         self.info = player.get_current().trackInfo
+        self.title_display.setText(self.info['title'])
+        self.album_display.setText(self.info['album'])
+        self.artist_display.setText(self.info['artist'])
+        self.repaint()
