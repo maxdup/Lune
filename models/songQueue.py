@@ -65,4 +65,3 @@ class SongQueue:
 
     def resetQueue(self):
         self.at = None
-

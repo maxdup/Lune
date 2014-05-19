@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class Song:
     def __init__(self, path=None, trackinfo={}):
         self.path = path
