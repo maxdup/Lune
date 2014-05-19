@@ -3,8 +3,8 @@
 from PySide import QtGui, QtCore
 from models.userSettings import Path
 
-class SettingsView(QtGui.QWidget):
 
+class SettingsView(QtGui.QWidget):
     def __init__(self, usettings):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
@@ -38,7 +38,7 @@ class PathManager(QtGui.QWidget):
         self.setLayout(layout)
 
     def addPath(self, pathObj):
-        size = QtCore.QSize(40,40)
+        size = QtCore.QSize(40, 40)
         item = QtGui.QListWidgetItem(self.libraryList)
         item.setSizeHint(size)
         itemWidget = ItemPath(pathObj, item, self)

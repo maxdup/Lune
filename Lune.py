@@ -12,6 +12,7 @@ from models.songQueue import SongQueue
 from views.mainWindow import MainWindow
 from models.userSettings import UserSettings
 
+
 def main():
     app = QtGui.QApplication(sys.argv)
 

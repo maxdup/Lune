@@ -27,7 +27,7 @@ class Settings():
         return self.settings['libpaths']
 
     def addPath(self, path):
-        #validate path?
+        # validate path?
         self.settings['libpaths'].append(path)
 
     def writePath(self, path):

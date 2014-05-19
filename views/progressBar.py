@@ -4,7 +4,6 @@ from PySide import QtGui, QtCore
 
 
 class ProgressBar(QtGui.QWidget):
-
     def __init__(self, player):
         self.player = player
         QtGui.QWidget.__init__(self)
@@ -15,7 +14,7 @@ class ProgressBar(QtGui.QWidget):
         self.PositionSlider.setToolTip("Position")
         self.PositionSlider.setMaximum(500)
         self.connect(self.PositionSlider,
-            QtCore.SIGNAL("sliderMoved(int)"), player.Seek)
+                     QtCore.SIGNAL("sliderMoved(int)"), player.Seek)
 
         self.timer = QtCore.QTimer(self)
         self.timer.setInterval(200)
