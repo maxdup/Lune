@@ -116,6 +116,9 @@ _TeamCity*
 *.ncrunch*
 .*crunch*.local.xml
 
+# PyCharm
+.idea
+
 # Installshield output folder
 [Ee]xpress/
 
