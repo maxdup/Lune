@@ -2,6 +2,7 @@
 
 import sys
 from sys import platform
+import signal
 
 from PySide import QtGui
 
@@ -12,9 +13,10 @@ from models.song_queue import SongQueue
 from views.main_window import MainWindow
 from models.user_settings import UserSettings
 
-
 def main():
     app = QtGui.QApplication(sys.argv)
+
+    signal.signal(signal.SIGINT, signal.SIG_DFL)
 
     library = Library()
     collector = Collector(library)
