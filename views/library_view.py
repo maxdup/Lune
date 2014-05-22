@@ -2,7 +2,7 @@
 
 from PySide import QtGui
 
-from views.status import Status
+from views.status.status import Status
 
 
 class LibraryView(QtGui.QWidget):
