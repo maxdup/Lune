@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from sys import platform
 import signal
 
 from PySide import QtGui
 
-from views.player import Player
 from dal.collector import Collector
+from models.user_settings import UserSettings
 from models.library import Library
 from models.song_queue import SongQueue
 from views.main_window import MainWindow
-from models.user_settings import UserSettings
+from views.player import Player
+
 
 def main():
     app = QtGui.QApplication(sys.argv)
@@ -28,7 +28,7 @@ def main():
     player = Player()
     player.set_queue(song_queue)
 
-    if platform == 'win32':
+    if sys.platform == 'win32':
         import ctypes
         myappid = 'Lune.Atlas'
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)

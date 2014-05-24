@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from models.song_queue import SongQueue
 import vlc
+
+from models.song_queue import SongQueue
 
 
 class Player():

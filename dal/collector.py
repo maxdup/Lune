@@ -2,8 +2,8 @@
 
 import os
 
-from models.song import Song
 from dal.identifier import Identifier
+from models.song import Song
 
 
 class Collector():
