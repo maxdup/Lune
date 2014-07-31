@@ -9,12 +9,12 @@ class UserSettings:
         self.settings = Settings()
         self.path_list = []
         for path in self.settings.get_paths():
-            path_obj = Path(path, self)
+            path_obj = LibPath(path, self)
             self.path_list.append(path_obj)  # use self.addPath instead?
             self.collector.search_dir(path_obj)
 
     def add_path(self, path):
-        path_obj = Path(path, self)
+        path_obj = LibPath(path, self)
 
         if self.path_list:
             for old_path in self.path_list:
@@ -37,14 +37,14 @@ class UserSettings:
         return path_obj
 
 
-class Path:
+class LibPath:
     def __init__(self, path, user_settings):
         if os.path.exists(path):
             self.path = path
-            self.user_settings = user_settings
         else:
-            self = None
+            self.path = ''
             # could be a permission error
+        self.user_settings = user_settings
 
     def remove(self):
         self.user_settings.path_list.remove(self)

@@ -28,8 +28,11 @@ class Player():
         self.prepped = True
 
     def play(self):
+        if not self.prepped:
+            self.play_prep()
         self.media_player.play()
         self.playing = True
+        print('playing')
         if self.timer is not None:
             self.timer.start()
 
