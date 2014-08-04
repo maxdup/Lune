@@ -11,7 +11,7 @@ class MainWindow(QtGui.QWidget):
         QtGui.QWidget.__init__(self)
         self.stack_container = QtGui.QFrame()
 
-        self.v_library = LibraryView(player, library)
+        self.v_library = LibraryView(player, library.lib_vm)
         self.v_settings = SettingsView(settings)
 
         self.view_stack = QtGui.QStackedLayout()

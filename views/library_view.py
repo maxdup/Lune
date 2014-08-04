@@ -3,36 +3,28 @@
 from PySide import QtGui
 
 from views.status.status import Status
+from models.libraryViewModel import LibraryViewModel
 
 
 class LibraryView(QtGui.QWidget):
-    def __init__(self, player, library):
+    def __init__(self, player, library_vm):
         QtGui.QWidget.__init__(self)
 
         self.player = player
         self.status_bar = Status(self.player)
-
-        self.list = QtGui.QListWidget()
+        self.library = library_vm
+        self.songlist = library_vm.songs
         self.list.itemDoubleClicked.connect(self._song_double_clicked)
-        for idx, song in enumerate(library.songs):
-            try:
-                item = QtGui.QListWidgetItem(self.list)
-                item.setText(song.track_info['title'])
-                # role, index. Created a dummy role '1000' for now.
-                item.setData(1000, idx)
-            except KeyError:
-                pass
 
         layout = QtGui.QVBoxLayout(self)
         layout.addWidget(self.list)
         layout.addWidget(self.status_bar)
 
-
     def _song_double_clicked(self, item):
-        index = item.data(1000)
         if self.player.is_playing():
             self.player.stop()
-        self.player.queue.get_at_index(index)
+        print (item.data)
+        self.player.queue.add_last(item.data)
         self.player.play_prep()
         self.player.play()
 
