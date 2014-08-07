@@ -9,13 +9,10 @@ class LibraryViewModel:
         self.albums = QListWidget()
         self.artists = QListWidget()
         self.genras = QListWidget()
-        self.years = QlistWidget()
+        self.years = QListWidget()
 
     def add_any(self, something):
-        print(type(something))
-
         if type(something) == Song:
-            print('added')
             item = QListWidgetItem(self.songs)
             item.setText(something.track_info['title'])
             item.setData(1000, something)

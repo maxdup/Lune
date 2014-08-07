@@ -14,19 +14,16 @@ class LibraryView(QtGui.QWidget):
         self.status_bar = Status(self.player)
         self.library = library_vm
         self.songlist = library_vm.songs
-        self.list.itemDoubleClicked.connect(self._song_double_clicked)
+        self.songlist.itemDoubleClicked.connect(self._song_double_clicked)
 
         layout = QtGui.QVBoxLayout(self)
-        layout.addWidget(self.list)
+        layout.addWidget(self.songlist)
         layout.addWidget(self.status_bar)
 
     def _song_double_clicked(self, item):
         if self.player.is_playing():
             self.player.stop()
-        print (item.data)
         self.player.queue.add_last(item.data)
         self.player.play_prep()
         self.player.play()
 
-    def update(self):
-        return None
