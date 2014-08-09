@@ -12,14 +12,12 @@ class SongQueue:
         self.at = None
 
     def add_last(self, songs):
-        def append_song(song):
-            if type(song) == Song:
-                self.queue.append(song)
         if type(songs) == list:
             for song in songs:
-                append_song(song)
+                self.queue.append(song)
         else:
-            append_song(songs)
+            self.queue.append(songs)
+        print(self.queue)
 
     def is_empty(self):
         return len(self.queue) == 0

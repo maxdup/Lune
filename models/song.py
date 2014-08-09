@@ -9,8 +9,5 @@ class Song:
     def get_track_info(self):
         return self.track_info
 
-    def get_path(self):
-        return self.path
-
     def get_file_image(self):
         return None

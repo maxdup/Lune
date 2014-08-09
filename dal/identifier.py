@@ -8,7 +8,7 @@ class Identifier():
         self.instance = vlc.Instance()
 
     def identify(self, song):
-        media = self.instance.media_new(song.get_path())
+        media = self.instance.media_new(song.path)
         media.parse()
         media.get_meta(vlc.Meta.Album)
         try:

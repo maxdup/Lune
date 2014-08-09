@@ -20,6 +20,7 @@ class LibraryViewModel:
             item = QListWidgetItem(self.albums)
             item.setText(something.title)
             item.setData(1001, something)
+            item.setData(1002, something)
             self.albums.addItem(item)
         #elif type(something) == Artist:
         #elif type(something) == Genre:
