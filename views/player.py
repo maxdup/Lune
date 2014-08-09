@@ -3,6 +3,7 @@
 import vlc
 
 from models.song_queue import SongQueue
+from models.status_vm import StatusViewModel
 from controllers.bouncer import Bouncer
 
 
@@ -13,6 +14,7 @@ class Player():
         self.instance = vlc.Instance()
         self.prepped = False
         self.bouncer = Bouncer(self)
+        self.status_vm = StatusViewModel(self)
 
     def get_count(self):
         return self.queue.count()
@@ -34,6 +36,7 @@ class Player():
             self.play_prep()
         self.media_player.play()
         self.playing = True
+        self.status_vm.update()
         if self.timer is not None:
             self.timer.start()
 
@@ -43,6 +46,8 @@ class Player():
             self.playing = False
             self.prepped = False
             self.queue = SongQueue()
+            self.status_vm.update()
+
 
     def play_pause(self):
         if self.prepped:

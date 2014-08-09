@@ -23,7 +23,8 @@ class MainWindow(QtGui.QWidget):
         self.stack_container.setLayout(self.view_stack)
 
         self.goto_library = QtGui.QPushButton('Library')
-        self.goto_library.clicked.connect(self.goto_lib)
+        self.goto_library.clicked.connect(
+            lambda: self.view_stack.setCurrentIndex(0))
         self.goto_settings = QtGui.QPushButton('Settings')
         self.goto_settings.clicked.connect(
             lambda: self.view_stack.setCurrentIndex(1))
@@ -37,6 +38,3 @@ class MainWindow(QtGui.QWidget):
         # self.setWindowFlags(Qt.FramelessWindowHint)
         self.setWindowIcon(QtGui.QIcon('lune.png'))
         self.setWindowTitle('Lune')
-
-    def goto_lib(self):
-        self.view_stack.setCurrentIndex(0)

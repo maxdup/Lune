@@ -2,7 +2,7 @@
 
 from models.song import Song
 from models.album import Album
-from models.libraryViewModel import LibraryViewModel
+from models.library_vm import LibraryViewModel
 
 
 class Library:

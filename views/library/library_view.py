@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 from PySide import QtGui
 
 from views.status.status import Status
-from models.libraryViewModel import LibraryViewModel
+from models.library_vm import LibraryViewModel
 
 FILTER = 1001
 PLAY = 1002

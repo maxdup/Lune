@@ -9,7 +9,6 @@ class Bouncer():
     def ask_nicely(self, something):
         self.player.stop()
         if type(something) == Song:
-            print(something.path)
             self.player.queue.add_last(something)
         elif type(something) == Album:
             self.player.queue.add_last(something.songs)

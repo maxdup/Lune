@@ -17,7 +17,6 @@ class SongQueue:
                 self.queue.append(song)
         else:
             self.queue.append(songs)
-        print(self.queue)
 
     def is_empty(self):
         return len(self.queue) == 0
