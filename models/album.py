@@ -1,4 +1,4 @@
-class album:
+class Album:
     def __init__(self, title='unknown', songs=[]):
         self.title = title
         self.songs = songs

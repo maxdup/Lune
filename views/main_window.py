@@ -2,8 +2,9 @@
 
 from PySide import QtGui
 
-from views.library.song_v import Song_v
 from views.library.album_v import Album_v
+from views.library.song_v import Song_v
+
 from views.settings_view import SettingsView
 
 
@@ -38,5 +39,5 @@ class MainWindow(QtGui.QWidget):
         self.setWindowTitle('Lune')
 
     def goto_lib(self):
-        self.v_library.update()
+        self.library_v.update()
         self.view_stack.setCurrentIndex(0)
