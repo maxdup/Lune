@@ -1,5 +1,6 @@
 from models.song import Song
 from models.album import Album
+from models.artist import Artist
 from PySide.QtGui import QListWidget, QListWidgetItem
 
 class LibraryViewModel:
@@ -22,7 +23,13 @@ class LibraryViewModel:
             item.setData(1001, something)
             item.setData(1002, something)
             self.albums.addItem(item)
-        #elif type(something) == Artist:
+        elif type(something) == Artist:
+            item = QListWidgetItem(self.artists)
+            item.setText(something.name)
+            item.setData(1001, something)
+            item.setData(1002, something)
+            self.artists.addItem(item)
+        #elif type(something) == Record:
         #elif type(something) == Genre:
         #elif type(something) == Year:
 
@@ -31,4 +38,10 @@ class LibraryViewModel:
             self.songs.clear()
             for song in something.songs:
                 self.add_any(song)
-
+        if type(something) == Artist:
+            self.albums.clear()
+            self.songs.clear()
+            for album in something.albums:
+                self.add_any(album)
+                for song in album.songs:
+                    self.add_any(song)

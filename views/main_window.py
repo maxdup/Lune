@@ -2,6 +2,7 @@
 
 from PySide import QtGui
 
+from views.library.artist_v import Artist_v
 from views.library.album_v import Album_v
 from views.library.song_v import Song_v
 
@@ -13,7 +14,7 @@ class MainWindow(QtGui.QWidget):
         QtGui.QWidget.__init__(self)
         self.stack_container = QtGui.QFrame()
 
-        self.library_v = Album_v(player, library.lib_vm)
+        self.library_v = Artist_v(player, library.lib_vm)
         self.settings_v = SettingsView(settings)
 
         self.view_stack = QtGui.QStackedLayout()

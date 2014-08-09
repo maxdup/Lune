@@ -12,4 +12,7 @@ class Bouncer():
             self.player.queue.add_last(something)
         elif type(something) == Album:
             self.player.queue.add_last(something.songs)
+        elif type(something) == Artist:
+            for album in something.albums:
+                self.player.queue.add_last(album.songs)
         self.player.play()

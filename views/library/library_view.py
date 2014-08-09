@@ -23,6 +23,10 @@ class LibraryView(QtGui.QWidget):
         self.album_list.itemClicked.connect(self._item_clicked)
         self.album_list.itemDoubleClicked.connect(self._item_double_clicked)
 
+        self.artist_list = library_vm.artists
+        self.artist_list.itemClicked.connect(self._item_clicked)
+        self.artist_list.itemDoubleClicked.connect(self._item_double_clicked)
+
     @abstractmethod
     def _item_clicked(self, item):
         self.library.filtering(item.data(FILTER))
