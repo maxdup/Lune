@@ -39,5 +39,4 @@ class MainWindow(QtGui.QWidget):
         self.setWindowTitle('Lune')
 
     def goto_lib(self):
-        self.library_v.update()
         self.view_stack.setCurrentIndex(0)

@@ -14,7 +14,7 @@ class LibraryViewModel:
         if type(something) == Song:
             item = QListWidgetItem(self.songs)
             item.setText(something.track_info['title'])
-            item.setData(1000, something)
+            item.setData(1002, something)
             self.songs.addItem(item)
         elif type(something) == Album:
             item = QListWidgetItem(self.albums)
@@ -25,7 +25,7 @@ class LibraryViewModel:
         #elif type(something) == Genre:
         #elif type(something) == Year:
 
-    def filter(self, something):
+    def filtering(self, something):
         if type(something) == Album:
             self.songs.clear()
             for song in something.songs:
