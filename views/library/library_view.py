@@ -15,7 +15,13 @@ class LibraryView(QtGui.QWidget):
         self.status_bar = Status(self.player)
         self.library = library_vm
         self.song_list = library_vm.songs
+        self.album_list = library_vm.albums
+        self.album_list.itemClicked.connect(self._item_clicked)
         self.song_list.itemDoubleClicked.connect(self._item_double_clicked)
+
+    @abstractmethod
+    def _item_clicked(self, item):
+        self.library.filter(item.data)
 
     @abstractmethod
     def _item_double_clicked(self, item):
