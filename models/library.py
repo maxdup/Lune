@@ -13,7 +13,7 @@ class Library:
         self.artists = []
         self.genres = []
         self.record = []
-        self.lib_vm = LibraryViewModel()
+        self.lib_vm = LibraryViewModel(self)
 
     def add_song(self, song):
         if type(song) == Song:

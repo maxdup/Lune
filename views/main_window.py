@@ -2,11 +2,9 @@
 
 from PySide import QtGui
 
-from views.library.artist_v import Artist_v
-from views.library.album_v import Album_v
-from views.library.song_v import Song_v
-
 from views.settings_view import SettingsView
+from views.status.status import Status
+from views.nav import Nav
 
 
 class MainWindow(QtGui.QWidget):
@@ -14,25 +12,25 @@ class MainWindow(QtGui.QWidget):
         QtGui.QWidget.__init__(self)
         self.stack_container = QtGui.QFrame()
 
-        self.library_v = Artist_v(player, library.lib_vm)
+        self.content_v = QtGui.QWidget()
+        self.content_v.setLayout(QtGui.QVBoxLayout())
+        self.library_v = QtGui.QWidget()
+        self.status_v = Status(player)
         self.settings_v = SettingsView(settings)
 
+        self.content_v.layout().addWidget(self.library_v)
+        self.content_v.layout().addWidget(self.status_v)
+
         self.view_stack = QtGui.QStackedLayout()
-        self.view_stack.addWidget(self.library_v)
+        self.view_stack.addWidget(self.content_v)
         self.view_stack.addWidget(self.settings_v)
 
         self.stack_container.setLayout(self.view_stack)
-
-        self.goto_library = QtGui.QPushButton('Library')
-        self.goto_library.clicked.connect(
-            lambda: self.view_stack.setCurrentIndex(0))
-        self.goto_settings = QtGui.QPushButton('Settings')
-        self.goto_settings.clicked.connect(
-            lambda: self.view_stack.setCurrentIndex(1))
+        self.nav = Nav(self.view_stack, library, self.library_v, player)
 
         self.main_container = QtGui.QVBoxLayout()
-        self.main_container.addWidget(self.goto_library)
-        self.main_container.addWidget(self.goto_settings)
+
+        self.main_container.addWidget(self.nav)
         self.main_container.addWidget(self.stack_container)
         self.setLayout(self.main_container)
 

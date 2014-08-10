@@ -4,12 +4,16 @@ from models.artist import Artist
 from PySide.QtGui import QListWidget, QListWidgetItem
 
 class LibraryViewModel:
-    def __init__(self):
+    def __init__(self, library):
         self.songs = QListWidget()
         self.albums = QListWidget()
         self.artists = QListWidget()
-        self.genras = QListWidget()
+        self.genres = QListWidget()
         self.years = QListWidget()
+        self.records = QListWidget()
+        self.library = library
+
+        self.filtering()
 
     def add_any(self, something):
         if type(something) == Song:
@@ -33,12 +37,24 @@ class LibraryViewModel:
         #elif type(something) == Genre:
         #elif type(something) == Year:
 
-    def filtering(self, something):
-        if type(something) == Album:
+    def filtering(self, something=None):
+
+        if not something:
+            self.songs.clear()
+            self.albums.clear()
+            self.artists.clear()
+            for artist in self.library.artists:
+                self.add_any(artist)
+            for album in self.library.albums:
+                self.add_any(album)
+            for song in self.library.songs:
+                self.add_any(song)
+
+        elif type(something) == Album:
             self.songs.clear()
             for song in something.songs:
                 self.add_any(song)
-        if type(something) == Artist:
+        elif type(something) == Artist:
             self.albums.clear()
             self.songs.clear()
             for album in something.albums:

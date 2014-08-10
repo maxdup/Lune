@@ -13,7 +13,6 @@ class LibraryView(QtGui.QWidget):
         QtGui.QWidget.__init__(self)
 
         self.player = player
-        self.status_bar = Status(self.player)
         self.library = library_vm
 
         self.song_list = library_vm.songs
