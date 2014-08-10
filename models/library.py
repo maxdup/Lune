@@ -45,3 +45,25 @@ class Library:
         elif type(song) == list:
             for s in song:
                 self.add_song(s)
+
+    def remove_song(self, r_song):
+        for album in [album for album in self.albums if r_song in album.songs]:
+            album.songs = [song for song in album.songs if song is not r_song]
+        if len(album.songs) == 0:
+            self.remove_album(album)
+            self.albums.remove(album)
+
+    def remove_album(self, r_album):
+        for artist in [artist for artist in self.artists if r_album in artist.albums]:
+            artist.albums = [album for album in artist.albums if album is not r_album]
+        if len(artist.albums) == 0:
+            self.remove_artist(artist)
+
+    def remove_artist(self, artist):
+        self.artists.remove(artist)
+
+    def remove_path(self, path):
+        for song in [song for song in self.songs if song.path.startswith(path)]:
+            self.remove_song(song)
+        self.songs = [song for song in self.songs if not song.path.startswith(path)]
+        self.lib_vm.rebuild(self)

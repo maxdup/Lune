@@ -31,7 +31,7 @@ class UserSettings:
                 self.path_list.remove(path)
                 self.settings.del_path(path)
 
-        self.settings.write_path(path_obj.path)
+        self.settings.add_path(path_obj.path)
         self.path_list.append(path_obj)
         self.collector.search_dir(path_obj)
         return path_obj
@@ -49,4 +49,4 @@ class LibPath:
     def remove(self):
         self.user_settings.path_list.remove(self)
         self.user_settings.settings.del_path(self.path)
-        # todo clean the library of files that used this path
+        self.user_settings.collector.library.remove_path(self.path)

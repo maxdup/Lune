@@ -45,3 +45,14 @@ class LibraryViewModel:
                 self.add_any(album)
                 for song in album.songs:
                     self.add_any(song)
+
+    def rebuild(self, library):
+        self.songs.clear()
+        self.albums.clear()
+        self.artists.clear()
+        for artist in library.artists:
+            self.add_any(artist)
+        for album in library.albums:
+            self.add_any(album)
+        for song in library.songs:
+            self.add_any(song)
