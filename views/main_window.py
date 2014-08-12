@@ -10,6 +10,9 @@ from views.nav import Nav
 class MainWindow(QtGui.QWidget):
     def __init__(self, library, player, settings):
         QtGui.QWidget.__init__(self)
+        with open('views/qss/general.qss', 'r') as stylesheet:
+            self.setStyleSheet(stylesheet.read())
+        self.setObjectName('mainwindow')
         self.stack_container = QtGui.QFrame()
 
         self.content_v = QtGui.QWidget()

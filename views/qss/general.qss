@@ -1,0 +1,23 @@
+QWidget#mainwindow {
+	background: #444;
+}
+
+
+QListWidget {
+	background: #333;
+	padding: 4px;
+	border-style: outset;
+	border-width: 0px;
+}
+QListWidget::item {
+	color: #EEE;
+}
+QListWidget::item:selected {
+	background: #888888;
+	border-style: outset;
+	border-width: 1px;
+	border-color: #EB008B;
+}
+QListWidget::item:hover {
+	background: #666666;
+}

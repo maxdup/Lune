@@ -6,40 +6,10 @@ from PySide import QtGui
 
 
 class PlaybackControls(QtGui.QWidget):
-    STYLE = '''QPushButton{
-        background-color: transparent;
-        border-style: solid;
-        border-width:3px;
-        border-radius:15px;
-        color:gray;
-        min-height:24px;
-        min-width:24px;
-        max-height:24px;
-        max-width:24px;
-        font-size:15px;
-        font-family:webdings;
-    }
-    QPushButton#stop{
-        border-radius:18px;
-        min-height:32px;
-        min-width:32px;
-        max-height:32px;
-        max-width:32px;
-        font-size:20px;
-    }
-    QPushButton#pauseresume{
-        border-radius:22px;
-        min-height:40px;
-        min-width:40px;
-        max-height:40px;
-        max-width:40px;
-        font-size:32px;
-    }
-    '''
-
     def __init__(self, player):
         QtGui.QWidget.__init__(self)
-        self.setStyleSheet(self.STYLE)
+        with open('views/qss/playback_controls.qss','r') as stylesheet:
+            self.setStyleSheet(stylesheet.read())
 
         self.previous = QtGui.QPushButton('7')
         self.previous.clicked.connect(player.previous)
