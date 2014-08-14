@@ -1,0 +1,341 @@
+SplineFontDB: 3.0
+FontName: luneicons
+FullName: luneicons
+FamilyName: luneicons
+Weight: Medium
+Copyright: Created by Maxime,,, with FontForge 2.0 (http://fontforge.sf.net)
+Version: 001.000
+ItalicAngle: 0
+UnderlinePosition: -100
+UnderlineWidth: 50
+Ascent: 800
+Descent: 200
+sfntRevision: 0x00010000
+LayerCount: 2
+Layer: 0 0 "Back"  1
+Layer: 1 0 "Fore"  0
+XUID: [1021 412 2127900334 7008024]
+FSType: 0
+OS2Version: 4
+OS2_WeightWidthSlopeOnly: 0
+OS2_UseTypoMetrics: 1
+CreationTime: 1407963853
+ModificationTime: 1407967681
+PfmFamily: 17
+TTFWeight: 500
+TTFWidth: 5
+LineGap: 90
+VLineGap: 0
+Panose: 2 0 6 9 0 0 0 0 0 0
+OS2TypoAscent: 800
+OS2TypoAOffset: 0
+OS2TypoDescent: -200
+OS2TypoDOffset: 0
+OS2TypoLinegap: 90
+OS2WinAscent: 581
+OS2WinAOffset: 0
+OS2WinDescent: -18
+OS2WinDOffset: 0
+HheadAscent: 581
+HheadAOffset: 0
+HheadDescent: 18
+HheadDOffset: 0
+OS2SubXSize: 650
+OS2SubYSize: 700
+OS2SubXOff: 0
+OS2SubYOff: 140
+OS2SupXSize: 650
+OS2SupYSize: 700
+OS2SupXOff: 0
+OS2SupYOff: 480
+OS2StrikeYSize: 49
+OS2StrikeYPos: 258
+OS2Vendor: 'PfEd'
+OS2CodePages: 00000001.00000000
+OS2UnicodeRanges: 00000001.00000000.00000000.00000000
+MarkAttachClasses: 1
+DEI: 91125
+LangName: 1033 
+Encoding: UnicodeBmp
+UnicodeInterp: none
+NameList: Adobe Glyph List
+DisplaySize: -24
+AntiAlias: 1
+FitToEm: 1
+WinInfo: 64 16 8
+BeginPrivate: 7
+BlueScale 8 0.039625
+BlueShift 1 0
+StdHW 5 [125]
+StdVW 5 [125]
+StemSnapH 15 [31 93 125 375]
+StemSnapV 15 [46 93 125 375]
+ExpansionFactor 4 0.06
+EndPrivate
+BeginChars: 65537 10
+
+StartChar: .notdef
+Encoding: 65536 -1 0
+Width: 1000
+Flags: MW
+HStem: 0 50<100 900 100 950> 483 50<100 900 100 100>
+VStem: 50 50<50 50 50 483> 900 50<50 483 483 483>
+LayerCount: 2
+Fore
+SplineSet
+50 0 m 1
+ 50 533 l 1
+ 950 533 l 1
+ 950 0 l 1
+ 50 0 l 1
+100 50 m 1
+ 900 50 l 1
+ 900 483 l 1
+ 100 483 l 1
+ 100 50 l 1
+EndSplineSet
+EndChar
+
+StartChar: semicolon
+Encoding: 59 59 1
+Width: 1000
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+747.32 458.93 m 1
+ 588.392 300 l 1
+ 747.32 141.07 l 1
+ 658.931 52.6797 l 1
+ 500.001 211.609 l 1
+ 341.071 52.6797 l 1
+ 252.682 141.07 l 1
+ 411.61 300 l 1
+ 252.682 458.93 l 1
+ 341.071 547.319 l 1
+ 500.001 388.391 l 1
+ 658.931 547.319 l 1
+ 747.32 458.93 l 1
+EndSplineSet
+EndChar
+
+StartChar: less
+Encoding: 60 60 2
+Width: 1000
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+687.5 550 m 1
+ 687.5 50 l 1
+ 500 200 l 1
+ 500 50 l 1
+ 187.5 300 l 1
+ 500 550 l 1
+ 500 400 l 1
+ 687.5 550 l 1
+EndSplineSet
+EndChar
+
+StartChar: greater
+Encoding: 62 62 3
+Width: 1000
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+812.5 300 m 1
+ 500 49.9922 l 1
+ 500 200 l 1
+ 312.5 49.9922 l 1
+ 312.5 550 l 1
+ 500 400 l 1
+ 500 550 l 1
+ 812.5 300 l 1
+EndSplineSet
+EndChar
+
+StartChar: question
+Encoding: 63 63 4
+Width: 1000
+GlyphClass: 2
+Flags: MW
+HStem: 253.125 93.75<750 750>
+VStem: 453.125 93.75<50.002 50.002>
+LayerCount: 2
+Fore
+SplineSet
+750 253.125 m 1
+ 681.086 244.518 l 1
+ 667.281 211.182 l 1
+ 709.922 156.369 l 1
+ 643.633 90.0801 l 1
+ 588.828 132.705 l 1
+ 555.484 118.9 l 1
+ 546.875 50.002 l 1
+ 453.125 50.002 l 1
+ 444.516 118.877 l 1
+ 411.164 132.697 l 1
+ 356.367 90.0723 l 1
+ 290.078 156.361 l 1
+ 332.703 211.166 l 1
+ 318.891 244.51 l 1
+ 250 253.127 l 1
+ 250 346.877 l 1
+ 318.883 355.486 l 1
+ 332.694 388.83 l 1
+ 290.069 443.635 l 1
+ 356.358 509.924 l 1
+ 411.163 467.299 l 1
+ 444.507 481.11 l 1
+ 453.124 550.001 l 1
+ 546.874 550.001 l 1
+ 555.483 481.103 l 1
+ 588.812 467.298 l 1
+ 643.633 509.931 l 1
+ 709.922 443.642 l 1
+ 667.281 388.82 l 1
+ 681.086 355.492 l 1
+ 750 346.875 l 1
+ 750 253.125 l 1
+591.844 281.11 m 1
+ 593.75 300.001 l 1
+ 591.828 318.899 l 1
+ 586.367 336.501 l 1
+ 577.728 352.423 l 1
+ 566.281 366.298 l 1
+ 552.406 377.743 l 1
+ 536.484 386.384 l 1
+ 518.892 391.845 l 1
+ 500.001 393.751 l 1
+ 481.095 391.837 l 1
+ 463.501 386.376 l 1
+ 447.579 377.735 l 1
+ 433.704 366.29 l 1
+ 422.259 352.415 l 1
+ 413.618 336.493 l 1
+ 408.157 318.893 l 1
+ 406.251 300.002 l 1
+ 408.173 281.104 l 1
+ 413.634 263.502 l 1
+ 422.273 247.58 l 1
+ 433.72 233.705 l 1
+ 447.595 222.26 l 1
+ 463.517 213.619 l 1
+ 481.109 208.158 l 1
+ 500 206.252 l 1
+ 518.906 208.166 l 1
+ 536.5 213.627 l 1
+ 552.422 222.268 l 1
+ 566.297 233.713 l 1
+ 577.742 247.588 l 1
+ 586.383 263.51 l 1
+ 591.844 281.11 l 1
+EndSplineSet
+EndChar
+
+StartChar: bracketleft
+Encoding: 91 91 5
+Width: 1000
+GlyphClass: 2
+Flags: MW
+VStem: 328.125 125<81.25 518.75 81.25 518.75> 546.875 125<81.25 518.75 81.25 518.75>
+LayerCount: 2
+Fore
+SplineSet
+328.125 81.25 m 1
+ 328.125 518.75 l 1
+ 453.125 518.75 l 1
+ 453.125 81.25 l 1
+ 328.125 81.25 l 1
+546.875 81.25 m 1
+ 546.875 518.75 l 1
+ 671.875 518.75 l 1
+ 671.875 81.25 l 1
+ 546.875 81.25 l 1
+EndSplineSet
+EndChar
+
+StartChar: backslash
+Encoding: 92 92 6
+Width: 1000
+GlyphClass: 2
+Flags: MW
+HStem: 112.5 375<312.5 687.5 312.5 687.5>
+VStem: 312.5 375<112.5 487.5 112.5 487.5>
+LayerCount: 2
+Fore
+SplineSet
+312.5 112.5 m 1
+ 312.5 487.5 l 1
+ 687.5 487.5 l 1
+ 687.5 112.5 l 1
+ 312.5 112.5 l 1
+EndSplineSet
+EndChar
+
+StartChar: bracketright
+Encoding: 93 93 7
+Width: 1000
+GlyphClass: 2
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+281.25 300 m 1
+ 687.5 581.25 l 1
+ 687.5 18.75 l 1
+ 281.25 300 l 1
+EndSplineSet
+EndChar
+
+StartChar: asciicircum
+Encoding: 94 94 8
+Width: 1000
+GlyphClass: 2
+Flags: MW
+HStem: 96.875 31.25<281.25 718.75 234.375 234.375> 425 125<281.25 718.75 234.375 281.25>
+VStem: 234.375 46.875<96.875 128.125 128.125 425> 718.75 46.875<128.125 425 425 425>
+LayerCount: 2
+Fore
+SplineSet
+750 550 m 1
+ 765.625 550 l 1
+ 765.625 128.125 l 1
+ 765.625 96.875 l 1
+ 234.375 96.875 l 1
+ 234.375 128.125 l 1
+ 234.375 550 l 1
+ 250 550 l 1
+ 281.25 550 l 1
+ 718.75 550 l 1
+ 750 550 l 1
+281.25 128.125 m 1
+ 718.75 128.125 l 1
+ 718.75 425 l 1
+ 281.25 425 l 1
+ 281.25 128.125 l 1
+EndSplineSet
+EndChar
+
+StartChar: underscore
+Encoding: 95 95 9
+Width: 1000
+GlyphClass: 2
+Flags: MW
+HStem: 96.875 125<250 750 250 750>
+LayerCount: 2
+Fore
+SplineSet
+250 96.875 m 1
+ 250 221.875 l 1
+ 750 221.875 l 1
+ 750 96.875 l 1
+ 250 96.875 l 1
+EndSplineSet
+EndChar
+EndChars
+EndSplineFont
