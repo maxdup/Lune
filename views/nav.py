@@ -8,6 +8,8 @@ from views.library.song_v import Song_v
 class Nav(QtGui.QWidget):
     def __init__(self, view_stack, library, library_v, player):
         QtGui.QWidget.__init__(self)
+        self.setObjectName('nav')
+
         self.view_stack = view_stack
         self.library = library
         self.library_v = library_v
@@ -23,7 +25,7 @@ class Nav(QtGui.QWidget):
         self.goto_artist = QtGui.QPushButton('artist')
         self.goto_artist.clicked.connect(
             lambda: self.set_lib_view(Artist_v(player, library.lib_vm)))
-        self.goto_lib = QtGui.QPushButton('back to lib')
+        self.goto_lib = QtGui.QPushButton('back')
         self.goto_lib.clicked.connect(
             lambda: self.view_stack.setCurrentIndex(0))
 
@@ -31,6 +33,7 @@ class Nav(QtGui.QWidget):
         self.layout.addWidget(self.goto_album)
         self.layout.addWidget(self.goto_song)
         self.layout.addWidget(self.goto_lib)
+        self.layout.addStretch()
 
         self.setLayout(self.layout)        
 

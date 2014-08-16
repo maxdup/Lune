@@ -13,7 +13,9 @@ class MainWindow(QtGui.QWidget):
         QtGui.QWidget.__init__(self)
 
         with open('views/qss/general.qss', 'r') as stylesheet:
-            self.setStyleSheet(stylesheet.read())
+            self.style = stylesheet.read()
+
+        self.setStyleSheet(self.style)
         self.setObjectName('mainwindow')
 
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)

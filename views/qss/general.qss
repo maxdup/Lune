@@ -1,5 +1,35 @@
+QWidget{
+	color: #eee;
+}
 QWidget#mainwindow {
 	background: #444;
+}
+
+
+QWidget#nav > QPushButton {
+	color: gray;
+	background: transparent;
+	border-width: 0px;
+	font-size: 25px;
+	margin: 0;
+	margin-right: 20px;
+}
+QWidget#nav > QPushButton:hover {
+	color: lightgray;
+}
+
+QWidget#wcontrols > QPushButton {
+	color: gray;
+	background: transparent;
+	border-width: 0px;
+	height: 18px;
+	width: 18px;
+	font-size: 30px;
+	font-family: luneicons;
+	margin: 0;
+}
+QWidget#wcontrols > QPushButton:hover {
+	color: lightgray;
 }
 
 
