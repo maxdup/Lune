@@ -3,11 +3,11 @@ from PySide import QtGui, QtCore
 class TopBar(QtGui.QWidget):
     def __init__(self, mainwindow):
         QtGui.QWidget.__init__(self)
+
         self.mw = mainwindow
+        self.maxed = False
         self.setStyleSheet(self.mw.style)
-
         self.setObjectName('topbar')
-
         layout = QtGui.QHBoxLayout()
         self.setLayout(layout)
 
@@ -17,18 +17,15 @@ class TopBar(QtGui.QWidget):
         controls.setLayout(controls_l)
 
         shutdown = QtGui.QPushButton(';')
-        maximize = QtGui.QPushButton('^')
-        windowed = QtGui.QPushButton('\\')
+        self.resize = QtGui.QPushButton('^')
         minimize = QtGui.QPushButton('_')
         settings = QtGui.QPushButton('?')
         shutdown.clicked.connect(self.shutdown)
-        maximize.clicked.connect(self.maximize)
-        windowed.clicked.connect(self.windowed)
+        self.resize.clicked.connect(self.toggle_maximized)
         minimize.clicked.connect(self.minimize)
         settings.clicked.connect(self.settings)
         controls_l.addWidget(shutdown)
-        controls_l.addWidget(maximize)
-        controls_l.addWidget(windowed)
+        controls_l.addWidget(self.resize)
         controls_l.addWidget(minimize)
         controls_l.addWidget(settings)
 
@@ -40,9 +37,18 @@ class TopBar(QtGui.QWidget):
         QtCore.QCoreApplication.instance().quit()
     def maximize(self):
         self.mw.showMaximized()
+        self.maxed = True
+        self.resize.setText('\\')
     def minimize(self):
         self.mw.showMinimized()
     def windowed(self):
         self.mw.showNormal()
+        self.maxed = False
+        self.resize.setText('^')
     def settings(self):
         self.mw.view_stack.setCurrentIndex(1)
+    def toggle_maximized(self):
+        if self.maxed:
+            self.windowed()
+        else:
+            self.maximize()
