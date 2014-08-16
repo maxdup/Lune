@@ -32,7 +32,7 @@ class MainWindow(QtGui.QWidget):
         window_ctrl_layout.addWidget(grip4, 3, 0)
         self.resize(600, 400)
 
-        topbar = TopBar()
+        topbar = TopBar(self)
         app_container = QtGui.QWidget()
         window_ctrl_layout.addWidget(topbar, 1, 1)
         window_ctrl_layout.addWidget(app_container, 2, 1)

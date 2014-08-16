@@ -23,21 +23,14 @@ class Nav(QtGui.QWidget):
         self.goto_artist = QtGui.QPushButton('artist')
         self.goto_artist.clicked.connect(
             lambda: self.set_lib_view(Artist_v(player, library.lib_vm)))
-
-
         self.goto_lib = QtGui.QPushButton('back to lib')
         self.goto_lib.clicked.connect(
             lambda: self.view_stack.setCurrentIndex(0))
-
-        self.goto_settings = QtGui.QPushButton('Settings')
-        self.goto_settings.clicked.connect(
-            lambda: self.view_stack.setCurrentIndex(1))
 
         self.layout.addWidget(self.goto_artist)
         self.layout.addWidget(self.goto_album)
         self.layout.addWidget(self.goto_song)
         self.layout.addWidget(self.goto_lib)
-        self.layout.addWidget(self.goto_settings)
 
         self.setLayout(self.layout)        
 
