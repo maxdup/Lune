@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import vlc
-
+from urllib.request import url2pathname
 
 class Identifier():
     def __init__(self):
@@ -11,6 +11,7 @@ class Identifier():
         media = self.instance.media_new(song.path)
         media.parse()
         media.get_meta(vlc.Meta.Album)
+        track_info = {}
         try:
             track_info = {
                 'track_nb': media.get_meta(vlc.Meta.TrackNumber),
@@ -20,12 +21,17 @@ class Identifier():
                 'label': media.get_meta(vlc.Meta.Publisher),
                 'date': media.get_meta(vlc.Meta.Date),
                 'genre': media.get_meta(vlc.Meta.Genre),
+                'artwork': media.get_meta(vlc.Meta.ArtworkURL)
             }
+            if track_info['artwork'] is not None:
+                track_info['artwork'] = url2pathname(track_info['artwork'][7:])
+
             print(track_info)
+
         except:
             # TODO:
             # - clean messed up tags
-            # - figure out why TagLib won't shut up about "invalid sample rate"'
+            # - create empty trackinfos
             pass
         # return track_info
         song.track_info = track_info

@@ -16,7 +16,9 @@ class Status(QtGui.QWidget):
         self.trackinfo = Trackinfo(player)
         
         layout = QtGui.QHBoxLayout(self)
-        
+        layout.setContentsMargins(0,10,0,0)
+
+        layout.addWidget(player.status_vm.art)
         layout.addWidget(self.trackinfo)
         layout.addWidget(self.progress)
         layout.addWidget(self.controls)
