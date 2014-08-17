@@ -11,22 +11,27 @@ QWidget#nav > QPushButton {
 	background: transparent;
 	border-width: 0px;
 	font-size: 25px;
-	margin: 0;
+	margin: 0px;
 	margin-right: 20px;
 }
 QWidget#nav > QPushButton:hover {
 	color: lightgray;
 }
 
+QWidget#topbar > QLabel {
+	max-height:20px;
+	min-height:20px;
+	font-size: 20px;
+}
 QWidget#wcontrols > QPushButton {
 	color: gray;
 	background: transparent;
 	border-width: 0px;
-	height: 18px;
-	width: 18px;
+	height: 15px;
+	width: 15px;
 	font-size: 30px;
 	font-family: luneicons;
-	margin: 0;
+	margin: 0px;
 }
 QWidget#wcontrols > QPushButton:hover {
 	color: lightgray;
@@ -35,9 +40,9 @@ QWidget#wcontrols > QPushButton:hover {
 
 QListWidget {
 	background: #333;
-	padding: 4px;
 	border-style: outset;
 	border-width: 0px;
+	padding: 4px;
 }
 QListWidget::item {
 	color: #EEE;

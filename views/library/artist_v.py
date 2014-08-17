@@ -11,6 +11,7 @@ class Artist_v(LibraryView):
         view.addWidget(self.library.artists)
         view.addWidget(self.library.albums)
         view.addWidget(self.library.songs)
+        view.setContentsMargins(0,0,0,0)
 
         self.library.artists.show()
         self.library.albums.show()

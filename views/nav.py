@@ -16,16 +16,16 @@ class Nav(QtGui.QWidget):
 
         self.layout = QtGui.QHBoxLayout()
 
-        self.goto_song = QtGui.QPushButton('song')
+        self.goto_song = QtGui.QPushButton('Song')
         self.goto_song.clicked.connect(
             lambda: self.set_lib_view(Song_v(player, library.lib_vm)))
-        self.goto_album = QtGui.QPushButton('album')
+        self.goto_album = QtGui.QPushButton('Album')
         self.goto_album.clicked.connect(
             lambda: self.set_lib_view(Album_v(player, library.lib_vm)))
-        self.goto_artist = QtGui.QPushButton('artist')
+        self.goto_artist = QtGui.QPushButton('Artist')
         self.goto_artist.clicked.connect(
             lambda: self.set_lib_view(Artist_v(player, library.lib_vm)))
-        self.goto_lib = QtGui.QPushButton('back')
+        self.goto_lib = QtGui.QPushButton('Back')
         self.goto_lib.clicked.connect(
             lambda: self.view_stack.setCurrentIndex(0))
 
@@ -36,7 +36,7 @@ class Nav(QtGui.QWidget):
         self.layout.addStretch()
 
         self.setLayout(self.layout)        
-
+        self.layout.setContentsMargins(0,25,0,0)
         self.set_lib_view(Artist_v(player, library.lib_vm))
 
     def set_lib_view(self, view):
@@ -44,4 +44,5 @@ class Nav(QtGui.QWidget):
         while self.library_v.layout().count() != 0:
             self.library_v.layout().takeAt(0)
         self.library_v.layout().addWidget(view)
+        self.library_v.layout().setContentsMargins(0,0,0,0)
         self.library.lib_vm.filtering()

@@ -9,6 +9,7 @@ class Song_v(LibraryView):
 
         view = QtGui.QHBoxLayout()
         view.addWidget(self.library.songs)
+        view.setContentsMargins(0,0,0,0)
 
         self.library.artists.hide()
         self.library.albums.hide()

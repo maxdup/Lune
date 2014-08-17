@@ -6,7 +6,6 @@ class TopBar(QtGui.QWidget):
 
         self.mw = mainwindow
         self.maxed = False
-        self.setStyleSheet(self.mw.style)
         self.setObjectName('topbar')
         layout = QtGui.QHBoxLayout()
         self.setLayout(layout)
@@ -14,6 +13,7 @@ class TopBar(QtGui.QWidget):
         controls = QtGui.QWidget()
         controls.setObjectName('wcontrols')
         controls_l = QtGui.QBoxLayout(QtGui.QBoxLayout.Direction.RightToLeft)
+        controls_l.setContentsMargins(0,0,0,0)
         controls.setLayout(controls_l)
 
         shutdown = QtGui.QPushButton(';')
@@ -32,6 +32,7 @@ class TopBar(QtGui.QWidget):
         layout.addWidget(QtGui.QLabel('Lune'))
         layout.addStretch()
         layout.addWidget(controls)
+        layout.setContentsMargins(0,15,0,0)
 
     def shutdown(self):
         QtCore.QCoreApplication.instance().quit()

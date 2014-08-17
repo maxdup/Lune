@@ -4,6 +4,7 @@ class PathManager(QtGui.QWidget):
     def __init__(self, user_settings):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
+        layout.setContentsMargins(0,0,0,0)
         self.user_settings = user_settings
         self.library_list = QtGui.QListWidget()
 
