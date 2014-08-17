@@ -6,11 +6,10 @@ from views.library.song_v import Song_v
 
 
 class Nav(QtGui.QWidget):
-    def __init__(self, view_stack, library, library_v, player):
+    def __init__(self, mainwindow, library, library_v, player):
         QtGui.QWidget.__init__(self)
         self.setObjectName('nav')
 
-        self.view_stack = view_stack
         self.library = library
         self.library_v = library_v
 
@@ -27,13 +26,15 @@ class Nav(QtGui.QWidget):
             lambda: self.set_lib_view(Artist_v(player, library.lib_vm)))
         self.goto_lib = QtGui.QPushButton('Back')
         self.goto_lib.clicked.connect(
-            lambda: self.view_stack.setCurrentIndex(0))
+            lambda: mainwindow.change_view('lib'))
 
         self.layout.addWidget(self.goto_artist)
         self.layout.addWidget(self.goto_album)
         self.layout.addWidget(self.goto_song)
         self.layout.addWidget(self.goto_lib)
         self.layout.addStretch()
+
+        self.goto_lib.hide()
 
         self.setLayout(self.layout)        
         self.layout.setContentsMargins(0,25,0,0)
@@ -46,3 +47,15 @@ class Nav(QtGui.QWidget):
         self.library_v.layout().addWidget(view)
         self.library_v.layout().setContentsMargins(0,0,0,0)
         self.library.lib_vm.filtering()
+
+    def change_area(self, area):
+        if area == 'lib':
+            self.goto_song.show()
+            self.goto_album.show()
+            self.goto_artist.show()
+            self.goto_lib.hide()
+        if area == 'settings':
+            self.goto_song.hide()
+            self.goto_album.hide()
+            self.goto_artist.hide()
+            self.goto_lib.show()

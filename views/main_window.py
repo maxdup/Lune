@@ -10,6 +10,7 @@ from views.nav import Nav
 
 
 class MainWindow(QtGui.QWidget):
+
     def __init__(self, library, player, settings):
         QtGui.QWidget.__init__(self)
 
@@ -62,13 +63,19 @@ class MainWindow(QtGui.QWidget):
 
         settings_v = SettingsView(settings)
 
-        view_stack = QtGui.QStackedLayout()
-        view_stack.addWidget(content_v)
-        view_stack.addWidget(settings_v)
+        self.view_stack = QtGui.QStackedLayout()
+        self.view_stack.addWidget(content_v)
+        self.view_stack.addWidget(settings_v)
 
-        stack_container.setLayout(view_stack)
-        nav = Nav(view_stack, library, library_v, player)
-        main_container.addWidget(nav)
+        stack_container.setLayout(self.view_stack)
+        self.nav = Nav(self, library, library_v, player)
+        main_container.addWidget(self.nav)
         main_container.addWidget(stack_container)
 
-
+    def change_view(self, view):
+        if view == 'lib':
+            self.view_stack.setCurrentIndex(0)
+            self.nav.change_area(view)
+        elif view == 'settings':
+            self.view_stack.setCurrentIndex(1)
+            self.nav.change_area(view)

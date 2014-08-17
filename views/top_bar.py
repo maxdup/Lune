@@ -47,7 +47,7 @@ class TopBar(QtGui.QWidget):
         self.maxed = False
         self.resize.setText('^')
     def settings(self):
-        self.mw.view_stack.setCurrentIndex(1)
+        self.mw.change_view('settings')
     def toggle_maximized(self):
         if self.maxed:
             self.windowed()
