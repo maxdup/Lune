@@ -18,10 +18,8 @@ class PlaybackControls(QtGui.QWidget):
         self.stop.clicked.connect(player.stop)
         self.stop.setObjectName('stop')
 
-        self.pause_resume = QtGui.QPushButton(']')
-        self.pause_resume.clicked.connect(player.play_pause)
-        self.pause_resume.setObjectName('pauseresume')
-
+        player.status_vm.pause_resume.clicked.connect(player.play_pause)
+        player.status_vm.pause_resume.setObjectName('pauseresume')
 
         self.skip = QtGui.QPushButton('>')
         self.skip.clicked.connect(player.skip)
@@ -30,5 +28,5 @@ class PlaybackControls(QtGui.QWidget):
 
         layout.addWidget(self.previous)
         layout.addWidget(self.stop)
-        layout.addWidget(self.pause_resume)
+        layout.addWidget(player.status_vm.pause_resume)
         layout.addWidget(self.skip)

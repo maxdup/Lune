@@ -9,12 +9,19 @@ from controllers.bouncer import Bouncer
 
 class Player():
     def __init__(self):
+        self.__state = {'playing': False,
+                      'prepped': False}
         self.queue = SongQueue()
-        self.playing = False
         self.instance = vlc.Instance()
-        self.prepped = False
         self.bouncer = Bouncer(self)
         self.status_vm = StatusViewModel(self)
+
+    def __setitem__(self, key, value):
+        self.__state[key] = value
+        if key == 'playing':
+            self.status_vm.update_playback_state()
+        else:
+            self.status_vm.update_track_info()
 
     def get_count(self):
         return self.queue.count()
@@ -29,52 +36,50 @@ class Player():
         self.events = self.media_player.event_manager()
         self.events.event_attach(
             vlc.EventType.MediaPlayerEndReached, self.songEnded, 1)
-        self.prepped = True
+        self.__state['prepped'] = True
 
     def play(self):
-        if not self.prepped:
+        if not self.__state['prepped']:
             self.play_prep()
         self.media_player.play()
-        self.playing = True
-        self.status_vm.update()
+        self['playing'] = True
         if self.timer is not None:
             self.timer.start()
 
     def stop(self):
-        if self.prepped:
+        if self.__state['prepped']:
             self.media_player.stop()
-            self.playing = False
-            self.prepped = False
+            self['playing'] = False
+            self['prepped'] = False
             self.queue = SongQueue()
-            self.status_vm.update()
 
 
     def play_pause(self):
-        if self.prepped:
+        if self.__state['prepped']:
             if self.media_player.get_time() == -1:
                 self.media_player.play()
             else:
                 self.media_player.pause()
-                if not self.playing:
+                if not self.__state['playing']:
                     self.timer.start()
-            self.playing = not self.playing
+            self['playing'] = not self.__state['playing']
 
     def skip(self):
-        if self.prepped:
+        if self.__state['prepped']:
             self.media_player.stop()
             self.queue.get_text()
             self.play_prep()
-            if self.playing:
+            if self.__state['playing']:
                 self.play()
 
     def previous(self):
-        if self.prepped:
+        if self.__state['prepped']:
             time = self.media_player.get_time() < 2500
             self.media_player.stop()
             if time:
                 self.queue.get_prev()
             self.play_prep()
-            if self.playing:
+            if self['playing']:
                 self.media_player.play()
 
     def set_queue(self, queue):
@@ -92,7 +97,7 @@ class Player():
         return self.media_player.get_position()
 
     def is_playing(self):
-        return self.media_player.is_playing()
+        return self.__state['playing']
 
     def set_timer(self, timer):
         self.timer = timer
@@ -104,6 +109,6 @@ class Player():
             self.play_prep()
             self.play()
         else:
-            self.playing = False
+            self.__state['playing'] = False
             self.queue.reset_queue()
             self.play_prep()
