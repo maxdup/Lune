@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>general.qss</file>
+        <file>playback_controls.qss</file>
+    </qresource>
+</RCC>
