@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     this->setObjectName("mainwindow");
 
+    QFontDatabase::addApplicationFont(":luneicons.otf");
     QFile File(":general.qss");
     File.open(QFile::ReadOnly);
     QString StyleSheet = QLatin1String(File.readAll());

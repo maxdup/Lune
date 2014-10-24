@@ -26,4 +26,5 @@ OTHER_FILES +=
 
 RESOURCES += \
     views/qss/qss.qrc \
-    img/img.qrc
+    img/img.qrc \
+    fonts/fonts.qrc
