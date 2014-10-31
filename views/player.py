@@ -12,6 +12,7 @@ class Player():
         self.__state = {'playing': False,
                       'prepped': False}
         self.queue = SongQueue()
+        self.timer = None
         self.instance = vlc.Instance()
         self.bouncer = Bouncer(self)
         self.status_vm = StatusViewModel(self)
@@ -43,7 +44,7 @@ class Player():
             self.play_prep()
         self.media_player.play()
         self['playing'] = True
-        if self.timer is not None:
+        if self.timer:
             self.timer.start()
 
     def stop(self):
@@ -79,7 +80,7 @@ class Player():
             if time:
                 self.queue.get_prev()
             self.play_prep()
-            if self['playing']:
+            if self.__state['playing']:
                 self.media_player.play()
 
     def set_queue(self, queue):

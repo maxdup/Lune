@@ -23,7 +23,7 @@ class MainWindow(QtGui.QWidget):
         self.setObjectName('mainwindow')
 
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.setWindowIcon(QtGui.QIcon(':lune.png'))
+        self.setWindowIcon(QtGui.QIcon(':/img/lune.png'))
         self.setWindowTitle('Lune')
 
         window_ctrl_layout = QtGui.QGridLayout(self)

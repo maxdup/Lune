@@ -11,9 +11,13 @@ from models.library import Library
 from models.song_queue import SongQueue
 from views.main_window import MainWindow
 from views.player import Player
+from controllers.arg_parser import argParser
 
 
 def main():
+
+    args = str(sys.argv)
+
     app = QtGui.QApplication(sys.argv)
 
     signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -23,10 +27,16 @@ def main():
     settings = UserSettings(collector)
 
     song_queue = SongQueue()
-    song_queue.add_last(library.songs)
+    argsongs = None
+    if len(sys.argv) > 1:
+        argsongs = argParser.get_queue(sys.argv)
+    if argsongs:
+        song_queue.add_last(argsongs)
 
     player = Player()
     player.set_queue(song_queue)
+    if not song_queue.is_empty():
+        player.play()
 
     if sys.platform == 'win32':
         import ctypes
