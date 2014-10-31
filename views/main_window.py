@@ -8,20 +8,22 @@ from views.status.status import Status
 from views.top_bar import TopBar
 from views.nav import Nav
 
+import resources
 
 class MainWindow(QtGui.QWidget):
 
     def __init__(self, library, player, settings):
         QtGui.QWidget.__init__(self)
 
-        with open('views/qss/general.qss', 'r') as stylesheet:
-            self.style = stylesheet.read()
+        QtGui.QFontDatabase.addApplicationFont(":/fonts/luneicons.otf")
 
-        self.setStyleSheet(self.style)
+        stylesheet = QtCore.QFile(':/views/qss/general.qss')
+        if stylesheet.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text):
+            self.setStyleSheet(str(stylesheet.readAll()))
         self.setObjectName('mainwindow')
 
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.setWindowIcon(QtGui.QIcon('lune.png'))
+        self.setWindowIcon(QtGui.QIcon(':lune.png'))
         self.setWindowTitle('Lune')
 
         window_ctrl_layout = QtGui.QGridLayout(self)

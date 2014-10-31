@@ -1,0 +1,8 @@
+<RCC>
+    <qresource>
+        <file>lune.png</file>
+        <file>fonts/luneicons.otf</file>
+        <file>views/qss/general.qss</file>
+        <file>views/qss/playback_controls.qss</file>
+    </qresource>
+</RCC>

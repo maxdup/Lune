@@ -2,14 +2,16 @@
 
 from sys import platform
 
-from PySide import QtGui
+from PySide import QtGui, QtCore
 
 
 class PlaybackControls(QtGui.QWidget):
     def __init__(self, player):
         QtGui.QWidget.__init__(self)
-        with open('views/qss/playback_controls.qss','r') as stylesheet:
-            self.setStyleSheet(stylesheet.read())
+
+        stylesheet = QtCore.QFile(':/views/qss/playback_controls.qss')
+        if stylesheet.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text):
+            self.setStyleSheet(str(stylesheet.readAll()))
 
         self.previous = QtGui.QPushButton('<')
         self.previous.clicked.connect(player.previous)
