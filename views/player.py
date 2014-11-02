@@ -36,7 +36,7 @@ class Player():
         self.events = self.media_player.event_manager()
         self.events.event_attach(
             vlc.EventType.MediaPlayerEndReached, self.songEnded, 1)
-        self.__state['prepped'] = True
+        self['prepped'] = True
 
     def play(self):
         if not self.__state['prepped']:
@@ -56,12 +56,10 @@ class Player():
 
     def play_pause(self):
         if self.__state['prepped']:
-            if self.media_player.get_time() == -1:
+            if not self.__state['playing']:
                 self.media_player.play()
             else:
                 self.media_player.pause()
-                if not self.__state['playing']:
-                    self.timer.start()
             self['playing'] = not self.__state['playing']
 
     def skip(self):
@@ -74,13 +72,12 @@ class Player():
 
     def previous(self):
         if self.__state['prepped']:
-            time = self.media_player.get_time() < 2500
-            self.media_player.stop()
-            if time:
+            if self.media_player.get_time() < 2500:
                 self.queue.get_prev()
+            self.media_player.stop()
             self.play_prep()
             if self.__state['playing']:
-                self.media_player.play()
+                self.play()
 
     def set_queue(self, queue):
         self.queue = queue

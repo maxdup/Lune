@@ -47,9 +47,8 @@ class SongQueue:
     def get_prev(self):
         if not self.at:
             self.at = self.start_from
-        else:
-            if self.has_prev():
-                self.at -= 1
+        if self.has_prev():
+            self.at -= 1
         return self.get_current()
 
     def has_index(self, index):

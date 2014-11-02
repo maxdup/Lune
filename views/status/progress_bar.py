@@ -24,6 +24,4 @@ class ProgressBar(QtGui.QWidget):
         layout.addWidget(self.position_slider)
 
     def update(self):
-        if not self.player.is_playing():
-            self.timer.stop()
         self.position_slider.setValue(self.player.get_position() * 500)
