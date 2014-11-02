@@ -18,8 +18,11 @@ class SongQueue:
         else:
             self.queue.append(songs)
 
-    def is_empty(self):
+    def __nonzero__(self):
         return len(self.queue) == 0
+
+    def __len__(self):
+        return len(self.queue)
 
     def get_current(self):
         if self.is_empty():
@@ -31,7 +34,7 @@ class SongQueue:
     def has_next(self):
         return not self.is_empty() and self.at + 1 != len(self.queue)
 
-    def get_text(self):
+    def get_next(self):
         if self.at is None:
             self.at = self.start_from
         else:
