@@ -6,17 +6,9 @@ from models.song import Song
 class SongQueue:
     def __init__(self, queue=[], start_from=0):
         self.queue = []
-        if len(queue) != 0:
-            self.add_last(queue)
+        self.add_last(queue)
         self.start_from = start_from
         self.at = None
-
-    def add_last(self, songs):
-        if type(songs) == list:
-            for song in songs:
-                self.queue.append(song)
-        else:
-            self.queue.append(songs)
 
     def __nonzero__(self):
         return len(self.queue) == 0
@@ -24,15 +16,20 @@ class SongQueue:
     def __len__(self):
         return len(self.queue)
 
+    def add_last(self, songs):
+        if songs and type(songs) != list:
+            songs = [songs]
+        self.queue += songs
+
     def get_current(self):
-        if self.is_empty():
+        if not self:
             return None
         if self.at is None:
             self.at = self.start_from
         return self.queue[self.at]
 
     def has_next(self):
-        return not self.is_empty() and self.at + 1 != len(self.queue)
+        return self and self.at + 1 != len(self.queue)
 
     def get_next(self):
         if self.at is None:
@@ -45,7 +42,7 @@ class SongQueue:
         return self.get_current()
 
     def has_prev(self):
-        return self.at != self.start_from and not self.is_empty()
+        return self.at != self.start_from and self
 
     def get_prev(self):
         if not self.at:
