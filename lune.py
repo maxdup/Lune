@@ -26,7 +26,7 @@ def main():
     collector = Collector(library)
     settings = UserSettings(collector)
 
-    song_queue = SongQueue()
+    song_queue = SongQueue() #this should not be here tho
     argsongs = None
     if len(sys.argv) > 1:
         argsongs = argParser.get_queue(sys.argv)
@@ -35,7 +35,7 @@ def main():
 
     player = Player()
     player.set_queue(song_queue)
-    if not song_queue.is_empty():
+    if song_queue:
         player.play()
 
     if sys.platform == 'win32':

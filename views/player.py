@@ -21,8 +21,7 @@ class Player():
         self.__state[key] = value
         if key == 'playing':
             self.status_vm.update_playback_state()
-        else:
-            self.status_vm.update_track_info()
+        self.status_vm.update_track_info()
 
     def get_count(self):
         return self.queue.count()
@@ -68,7 +67,7 @@ class Player():
     def skip(self):
         if self.__state['prepped']:
             self.media_player.stop()
-            self.queue.get_text()
+            self.queue.get_next()
             self.play_prep()
             if self.__state['playing']:
                 self.play()
@@ -85,7 +84,7 @@ class Player():
 
     def set_queue(self, queue):
         self.queue = queue
-        if not queue.is_empty():
+        if queue:
             self.play_prep()
 
     def set_volume(self, volume):
@@ -103,10 +102,8 @@ class Player():
     def set_timer(self, timer):
         self.timer = timer
 
-    # todo, figure out what's being sent by the callback
-    # altho it's probably not useful all that useful
     def songEnded(self, data, moredata):
-        if self.queue.get_text():
+        if self.queue.get_next():
             self.play_prep()
             self.play()
         else:
