@@ -18,6 +18,7 @@ QWidget#nav > QPushButton:hover {
 	color: lightgray;
 }
 
+
 QWidget#topbar > QLabel {
 	max-height:20px;
 	min-height:20px;
@@ -55,4 +56,30 @@ QListWidget::item:selected {
 }
 QListWidget::item:hover {
 	background: #666666;
+}
+
+
+
+QSlider::groove:horizontal {
+    height: 6px;
+    background: grey;
+}
+
+QSlider::handle:horizontal {
+     background: transparent;
+     width: 6px;
+     margin: -8px 0;
+}
+QSlider::handle:horizontal:hover {
+     background: #BBBBBB;
+}
+
+QSlider::add-page:horizontal {
+    height: 6px;
+    background: grey;
+}
+
+QSlider::sub-page:horizontal {
+    height: 6px;
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #EB008B, stop:0.5 #2E3191, stop:1 #00A3E5);
 }
