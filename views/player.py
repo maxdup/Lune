@@ -49,10 +49,9 @@ class Player():
     def stop(self):
         if self.__state['prepped']:
             self.media_player.stop()
+            self.queue = SongQueue()
             self['playing'] = False
             self['prepped'] = False
-            self.queue = SongQueue()
-
 
     def play_pause(self):
         if self.__state['prepped']:

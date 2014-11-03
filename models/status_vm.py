@@ -27,6 +27,7 @@ class StatusViewModel:
             if self.song.album:
                 self.album_art = QtGui.QPixmap(self.song.album.get_art())
         else:
+            self.album_art = None
             self.song = Song(None,
                              {'title':'', 'album':'', 'artist':'', 'artwork':''},
                              None)
@@ -35,8 +36,11 @@ class StatusViewModel:
         self.album_display.setText(self.song.track_info['album'])
         self.artist_display.setText(self.song.track_info['artist'])
 
-        self.album_art_display.setPixmap(self.album_art.scaled(QtCore.QSize(70,70),
+        if self.album_art:
+            self.album_art_display.setPixmap(self.album_art.scaled(QtCore.QSize(70,70),
                                       QtCore.Qt.KeepAspectRatio))
+        else:
+            self.album_art_display.setPixmap(QtGui.QPixmap())
 
     def update_playback_state(self):
         #todo: handle disabled states for skip/previous buttons
