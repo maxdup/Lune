@@ -37,6 +37,7 @@ class Library:
                 self.albums.append(album)
                 self.lib_vm.add_any(album)
                 artist.albums.append(album)
+            song.album = album
 
 
             self.songs.append(song)
