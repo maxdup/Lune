@@ -17,7 +17,6 @@ class SongFilterProxy:
         self.proxymodel = QSortFilterProxyModel()
         self.proxymodel.setSourceModel(self.model)
         self.proxymodel.setDynamicSortFilter(True)
-x
         self.qlist.setModel(self.proxymodel)
 
     def add(self, song):
