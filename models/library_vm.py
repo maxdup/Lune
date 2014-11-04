@@ -1,7 +1,7 @@
 from models.song import Song
 from models.album import Album
 from models.artist import Artist
-from PySide.QtGui import QListWidget, QListWidgetItem
+from PySide.QtGui import QListWidget, QListWidgetItem, QIcon
 
 class LibraryViewModel:
     def __init__(self, library):
@@ -26,6 +26,7 @@ class LibraryViewModel:
             item.setText(something.title)
             item.setData(1001, something)
             item.setData(1002, something)
+            item.setIcon(QIcon(something.get_art()))
             self.albums.addItem(item)
         elif type(something) == Artist:
             item = QListWidgetItem(self.artists)
