@@ -6,29 +6,30 @@ from PySide.QtGui import QSortFilterProxyModel
 
 class SongFilterProxy:
     
-    SONG, ARTIST, ALBUM = range(0,3)
+    SONG, ARTIST, ALBUM = range(20,23)
 
     def __init__(self, qlist):
 
         self.qlist = qlist
 
+        self.model = QtGui.QStandardItemModel(self.qlist)
+
         self.proxymodel = QSortFilterProxyModel()
-        self.proxymodel.setDynamicSortFilter(True)
-        
-        self.model = QtGui.QStandardItemModel(0, 3, self.qlist)
-        self.model.setHeaderData(0, QtCore.Qt.Horizontal, 'song')
-        self.model.setHeaderData(1, QtCore.Qt.Horizontal, 'artist')
-        self.model.setHeaderData(2, QtCore.Qt.Horizontal, 'album')
-        
         self.proxymodel.setSourceModel(self.model)
+        self.proxymodel.setDynamicSortFilter(True)
+x
         self.qlist.setModel(self.proxymodel)
 
     def add(self, song):
-        self.model.insertRow(0)
-        self.model.setData(self.model.index(0, 0), song.track_info['title'])
-        self.model.setData(self.model.index(1, 1), song.track_info['artist'])
-        self.model.setData(self.model.index(2, 2), song.track_info['album'])
-        
+        item = QtGui.QStandardItem()
+        item.setData(song.track_info['title'], self.SONG)
+        item.setData(song.track_info['artist'], self.ARTIST)
+        item.setData(song.track_info['album'], self.ALBUM)
+        item.setData(song, 1001)
+        item.setData(song, 1002)
+        item.setText(song.track_info['title'])
+        self.model.appendRow(item)
+
     def filter(self, field, value):
-        self.proxymodel.setFilterKeyColumn(field)
+        self.proxymodel.setFilterRole(field)
         self.proxymodel.setFilterFixedString(value)

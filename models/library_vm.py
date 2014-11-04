@@ -8,6 +8,8 @@ from views.library.song_proxy import SongFilterProxy
 class LibraryViewModel:
     def __init__(self, library):
         self.songs = QListView()
+        self.songs.setEditTriggers(
+            QtGui.QAbstractItemView.NoEditTriggers)
         self.song_proxy = SongFilterProxy(self.songs)
 
         self.albums = QListWidget()
