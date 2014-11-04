@@ -48,6 +48,7 @@ QListWidget {
 QListWidget::item {
 	color: #EEE;
 }
+
 QListWidget::item:selected {
 	background: #888888;
 	border-style: outset;
@@ -56,6 +57,10 @@ QListWidget::item:selected {
 }
 QListWidget::item:hover {
 	background: #666666;
+}
+
+QListView{
+    background: #666
 }
 
 
