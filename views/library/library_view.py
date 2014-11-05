@@ -18,22 +18,27 @@ class LibraryView(QtGui.QWidget):
         self.song_list.doubleClicked.connect(self._item_double_clicked)
 
         self.album_list = library_vm.albums
-        self.album_list.itemSelectionChanged.connect(
+        model = self.album_list.selectionModel()
+        model.selectionChanged.connect(
             self._album_selection_changed)
-        self.album_list.itemDoubleClicked.connect(self._item_double_clicked)
+
+        self.album_list.doubleClicked.connect(self._item_double_clicked)
 
         self.artist_list = library_vm.artists
-        self.artist_list.itemSelectionChanged.connect(
+        model = self.artist_list.selectionModel()
+        model.selectionChanged.connect(
             self._artist_selection_changed)
-        self.artist_list.itemDoubleClicked.connect(self._item_double_clicked)
+        self.artist_list.doubleClicked.connect(self._item_double_clicked)
 
     def _artist_selection_changed(self):
-        for item in self.artist_list.selectedItems():
+        for index in self.artist_list.selectedIndexes():
+            item = self.artist_list.model().mapToSource(index)
             self.library.filtering(
                 item.data(ModelToItemStrat.FILTER))
 
     def _album_selection_changed(self):
-        for item in self.album_list.selectedItems():
+        for index in self.album_list.selectedIndexes():
+            item = self.album_list.model().mapToSource(index)
             self.library.filtering(
                 item.data(ModelToItemStrat.FILTER))
 

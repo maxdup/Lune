@@ -1,4 +1,4 @@
-from PySide.QtGui import QStandardItem
+from PySide.QtGui import QStandardItem, QIcon
 
 
 class ModelToItemStrat:
@@ -25,6 +25,18 @@ def get_song_item(song):
     return item
     
 def get_album_item(album):
-    return
+    item = QStandardItem()
+    item.setData(album.title, ModelToItemStrat.ALBUM)
+    item.setData(album.artist.name, ModelToItemStrat.ARTIST)
+    item.setData(album, ModelToItemStrat.FILTER)
+    item.setData(album, ModelToItemStrat.PLAY)
+    item.setIcon(QIcon(album.get_art()))
+    item.setText(album.title)
+    return item
+
 def get_artist_item(artist):
-    return
+    item = QStandardItem()
+    item.setData(artist, ModelToItemStrat.FILTER)
+    item.setData(artist, ModelToItemStrat.PLAY)
+    item.setText(artist.name)
+    return item

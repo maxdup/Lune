@@ -1,7 +1,8 @@
 class Album:
-    def __init__(self, title='unknown', songs=[]):
+    def __init__(self, title='unknown', songs=[], artist=None):
         self.title = title
         self.songs = songs
+        self.artist = artist
         self.artwork = None
 
     def get_art(self):
