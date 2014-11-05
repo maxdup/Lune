@@ -4,9 +4,8 @@ from PySide.QtCore import QModelIndex
 
 from views.status.status import Status
 from models.library_vm import LibraryViewModel
+from views.library.model_to_item_strategy import ModelToItemStrat
 
-FILTER = 1001
-PLAY = 1002
 
 class LibraryView(QtGui.QWidget):
     def __init__(self, player, library_vm):
@@ -30,11 +29,14 @@ class LibraryView(QtGui.QWidget):
 
     def _artist_selection_changed(self):
         for item in self.artist_list.selectedItems():
-            self.library.filtering(item.data(FILTER))
+            self.library.filtering(
+                item.data(ModelToItemStrat.FILTER))
 
     def _album_selection_changed(self):
         for item in self.album_list.selectedItems():
-            self.library.filtering(item.data(FILTER))
+            self.library.filtering(
+                item.data(ModelToItemStrat.FILTER))
 
     def _item_double_clicked(self, item):
-        self.player.bouncer.ask_nicely(item.data(PLAY))
+        self.player.bouncer.ask_nicely(
+            item.data(ModelToItemStrat.PLAY))

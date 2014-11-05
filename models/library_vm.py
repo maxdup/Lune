@@ -1,16 +1,21 @@
+from PySide.QtGui import QListWidget, QListWidgetItem, QIcon, QSortFilterProxyModel, QListView
+from PySide import QtGui, QtCore
+
 from models.song import Song
 from models.album import Album
 from models.artist import Artist
-from PySide.QtGui import QListWidget, QListWidgetItem, QIcon, QSortFilterProxyModel, QListView
-from PySide import QtGui, QtCore
-from views.library.song_proxy import SongFilterProxy
+from views.library.model_to_item_strategy import ModelToItemStrat, get_song_item
+from views.library.sort_filter_proxy import SortFilterProxy
+
 
 class LibraryViewModel:
     def __init__(self, library):
         self.songs = QListView()
         self.songs.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
-        self.song_proxy = SongFilterProxy(self.songs)
+
+        self.songs_proxylist = SortFilterProxy(
+            self.songs, ModelToItemStrat(get_song_item))
 
         self.albums = QListWidget()
         self.albums.setObjectName('list_albums')
@@ -25,21 +30,21 @@ class LibraryViewModel:
     def add_any(self, something):
 
         if type(something) == Song:
-            self.song_proxy.add(something)
+            self.songs_proxylist.add(something)
 
         elif type(something) == Album:
             item = QListWidgetItem(self.albums)
             item.setText(something.title)
-            item.setData(1001, something)
-            item.setData(1002, something)
+            item.setData(ModelToItemStrat.FILTER, something)
+            item.setData(ModelToItemStrat.PLAY, something)
             item.setIcon(QIcon(something.get_art()))
             self.albums.addItem(item)
 
         elif type(something) == Artist:
             item = QListWidgetItem(self.artists)
             item.setText(something.name)
-            item.setData(1001, something)
-            item.setData(1002, something)
+            item.setData(ModelToItemStrat.FILTER, something)
+            item.setData(ModelToItemStrat.PLAY, something)
             self.artists.addItem(item)
         #elif type(something) == Record:
         #elif type(something) == Genre:
@@ -56,13 +61,13 @@ class LibraryViewModel:
                 self.add_any(album)
 
         elif type(something) == Album:
-            self.song_proxy.filter(SongFilterProxy.ALBUM, something.title)
+            self.songs_proxylist.filter(ModelToItemStrat.ALBUM, something.title)
 
         elif type(something) == Artist:
             self.albums.clear()
             for album in something.albums:
                 self.add_any(album)
-            self.song_proxy.filter(SongFilterProxy.ARTIST, something.name)
+            self.songs_proxylist.filter(ModelToItemStrat.ARTIST, something.name)
 
     def rebuild(self, library):
 
