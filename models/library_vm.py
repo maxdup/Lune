@@ -18,8 +18,8 @@ class LibraryViewModel:
         self.albums.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
         self.albums.setObjectName('list_albums')
-        self.albums.setGridSize(QtCore.QSize(100,100))
-        self.albums.setIconSize(QtCore.QSize(80,80))
+        self.albums.setGridSize(QtCore.QSize(128,128))
+        self.albums.setIconSize(QtCore.QSize(100,100))
         self.albums.setViewMode(QListView.IconMode)
         self.albums.setResizeMode(QListView.Adjust)
 
@@ -57,8 +57,9 @@ class LibraryViewModel:
     def filtering(self, something=None):
 
         if not something:
-            #reset filters
-            return NotImplemented
+            self.songs_proxylist.filter(ModelToItemStrat.ALBUM, "")
+            self.songs_proxylist.filter(ModelToItemStrat.ARTIST, "")
+            self.albums_proxylist.filter(ModelToItemStrat.ARTIST, "")
 
         elif type(something) == Album:
             self.songs_proxylist.filter(ModelToItemStrat.ALBUM, something.title)
