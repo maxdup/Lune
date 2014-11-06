@@ -1,5 +1,6 @@
 from PySide import QtGui, QtCore
 from PySide.QtGui import QSortFilterProxyModel
+from models.album import Album
 
 
 class SortFilterProxy:
@@ -15,8 +16,13 @@ class SortFilterProxy:
         self.proxymodel.setDynamicSortFilter(True)
         self.qlist.setModel(self.proxymodel)
 
+        self.icon = QtGui.QIcon(':img/placeholder.jpg')
+
     def add(self, obj):
-        self.model.appendRow(self.item_strat.get_item(obj))
+        item = self.item_strat.get_item(obj)
+        if type(obj) == Album:
+            item.setIcon(self.icon)
+        self.model.appendRow(item)
 
     def filter(self, field, value):
         self.proxymodel.setFilterRole(field)

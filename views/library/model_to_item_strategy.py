@@ -30,7 +30,6 @@ def get_album_item(album):
     item.setData(album.artist.name, ModelToItemStrat.ARTIST)
     item.setData(album, ModelToItemStrat.FILTER)
     item.setData(album, ModelToItemStrat.PLAY)
-    item.setIcon(QIcon(album.get_art()))
     item.setText(album.title)
     return item
 
