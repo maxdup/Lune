@@ -5,6 +5,11 @@ QWidget#mainwindow {
     background: #444;
 }
 
+QWidget#status{
+    height: 80px;
+    max-height: 80px;
+}
+
 
 QWidget#nav > QPushButton {
     color: gray;
