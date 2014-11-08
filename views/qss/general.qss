@@ -1,75 +1,104 @@
 QWidget{
-	color: #eee;
+    color: #eee;
 }
 QWidget#mainwindow {
-	background: #444;
+    background: #444;
+}
+
+QWidget#status{
+    height: 80px;
+    max-height: 80px;
 }
 
 
 QWidget#nav > QPushButton {
-	color: gray;
-	background: transparent;
-	border-width: 0px;
-	font-size: 25px;
-	margin: 0px;
-	margin-right: 20px;
+    color: gray;
+    background: transparent;
+    border-width: 0px;
+    font-size: 25px;
+    margin: 0px;
+    margin-right: 20px;
 }
 QWidget#nav > QPushButton:hover {
-	color: lightgray;
+    color: lightgray;
 }
-
 
 QWidget#topbar > QLabel {
-	max-height:20px;
-	min-height:20px;
-	font-size: 20px;
+    max-height:20px;
+    min-height:20px;
+    font-size: 20px;
 }
+
 QWidget#wcontrols > QPushButton {
-	color: gray;
-	background: transparent;
-	border-width: 0px;
-	height: 15px;
-	width: 15px;
-	font-size: 30px;
-	font-family: luneicons;
-	margin: 0px;
+    color: gray;
+    background: transparent;
+    border-width: 0px;
+    height: 15px;
+    width: 15px;
+    font-size: 30px;
+    font-family: luneicons;
+    margin: 0px;
 }
 QWidget#wcontrols > QPushButton:hover {
-	color: lightgray;
+    color: lightgray;
 }
 
+QPushButton{
+    background: #CCC;
+    color: #111;
+    border: none;
+}
+
+QPushButton#smallX {
+    background: #555;
+    margin: 0px;
+    height: 15px;
+    width: 15px;
+    border: none;
+}
 
 QListWidget {
-	background: #333;
-	border-style: outset;
-	border-width: 0px;
-	padding: 4px;
+    background: #333;
+    border: none;
+    padding: 4px;
 }
 QListWidget::item {
-	color: #EEE;
+    color: #EEE;
 }
-
 QListWidget::item:selected {
-	background: #888888;
-	border-style: outset;
-	border-width: 1px;
-	border-color: #EB008B;
+    background: #888888;
+    border-style: outset;
+    border-width: 1px;
+    border-color: #EB008B;
 }
 QListWidget::item:hover {
-	background: #666666;
+    background: #666;
 }
 
-QListView{
-    background: #666
+QListView {
+    background: #333;
+    border: none;
+    padding: 4px;
+    outline: none;
 }
-
+QListView::item {
+    color: #EEE;
+}
+QListView::item:selected {
+    background: #888888;
+    border-style: outset;
+    border-width: 1px;
+    border-color: #EB008B;
+}
+QListView::item:hover {
+    background: #666;
+}
 
 
 QSlider::groove:horizontal {
     height: 6px;
     background: transparent;
 }
-
 QSlider::handle:horizontal {
     background: transparent;
     width: 6px;

@@ -53,3 +53,13 @@ class TopBar(QtGui.QWidget):
             self.windowed()
         else:
             self.maximize()
+
+    def mousePressEvent(self, event):
+        self.mw.offset = event.pos()
+
+    def mouseMoveEvent(self, event):
+        x=event.globalX()
+        y=event.globalY()
+        x_w = self.mw.offset.x()
+        y_w = self.mw.offset.y()
+        self.mw.move(x-x_w, y-y_w)

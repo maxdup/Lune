@@ -1,16 +1,13 @@
-from models.song import Song
-
 from PySide import QtGui, QtCore
 from PySide.QtGui import QSortFilterProxyModel
+from models.album import Album
 
 
-class SongFilterProxy:
-    
-    SONG, ARTIST, ALBUM = range(20,23)
+class SortFilterProxy:
 
-    def __init__(self, qlist):
-
+    def __init__(self, qlist, strategy):        
         self.qlist = qlist
+        self.item_strat = strategy
 
         self.model = QtGui.QStandardItemModel(self.qlist)
 
@@ -19,14 +16,12 @@ class SongFilterProxy:
         self.proxymodel.setDynamicSortFilter(True)
         self.qlist.setModel(self.proxymodel)
 
-    def add(self, song):
-        item = QtGui.QStandardItem()
-        item.setData(song.track_info['title'], self.SONG)
-        item.setData(song.track_info['artist'], self.ARTIST)
-        item.setData(song.track_info['album'], self.ALBUM)
-        item.setData(song, 1001)
-        item.setData(song, 1002)
-        item.setText(song.track_info['title'])
+        self.icon = QtGui.QIcon(':img/placeholder.jpg')
+
+    def add(self, obj):
+        item = self.item_strat.get_item(obj)
+        if type(obj) == Album:
+            item.setIcon(self.icon)
         self.model.appendRow(item)
 
     def filter(self, field, value):

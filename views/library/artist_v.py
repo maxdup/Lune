@@ -8,9 +8,11 @@ class Artist_v(LibraryView):
         super(Artist_v, self).__init__(player, lib_vm)
 
         view = QtGui.QHBoxLayout()
-        view.addWidget(self.library.artists)
-        view.addWidget(self.library.albums)
-        view.addWidget(self.library.songs)
+        splitter = QtGui.QSplitter()
+        splitter.addWidget(self.library.artists)
+        splitter.addWidget(self.library.albums)
+        splitter.addWidget(self.library.songs)
+        view.addWidget(splitter)
         view.setContentsMargins(0,0,0,0)
 
         self.library.artists.show()
