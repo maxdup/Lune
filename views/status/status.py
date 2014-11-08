@@ -8,7 +8,7 @@ from views.status.trackinfo import Trackinfo
 class Status(QtGui.QWidget):
     def __init__(self, player):
         QtGui.QWidget.__init__(self)
-
+        self.setObjectName('status')
         self.player = player
 
         self.controls = PlaybackControls(player)

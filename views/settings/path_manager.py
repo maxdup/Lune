@@ -25,7 +25,7 @@ class PathManager(QtGui.QWidget):
         self.setLayout(layout)
 
     def add_path(self, path_obj):
-        size = QtCore.QSize(40, 40)
+        size = QtCore.QSize(25, 25)
         item = QtGui.QListWidgetItem(self.library_list)
         item.setSizeHint(size)
         item_widget = ItemPath(path_obj, item, self)
@@ -42,9 +42,13 @@ class ItemPath(QtGui.QWidget):
 
         label = QtGui.QLabel(path_obj.path)
         remove = QtGui.QPushButton('x')
+        remove.setObjectName('smallX')
         remove.clicked.connect(self.remove)
 
+        layout.setContentsMargins(5,0,5,0)
+
         layout.addWidget(label)
+        layout.addStretch()
         layout.addWidget(remove)
         self.setLayout(layout)
 

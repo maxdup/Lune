@@ -33,7 +33,7 @@ class Library:
                 album = album[0]
                 album.songs.append(song)
             else:
-                album = Album(song.track_info['album'], [song])
+                album = Album(song.track_info['album'], [song], artist)
                 self.albums.append(album)
                 self.lib_vm.add_any(album)
                 artist.albums.append(album)
@@ -67,4 +67,4 @@ class Library:
         for song in [song for song in self.songs if song.path.startswith(path)]:
             self.remove_song(song)
         self.songs = [song for song in self.songs if not song.path.startswith(path)]
-        self.lib_vm.rebuild(self)
+        #todo, clean library viewmodel

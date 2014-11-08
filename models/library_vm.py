@@ -1,21 +1,38 @@
+from PySide.QtGui import QListWidget, QListWidgetItem, QIcon, QSortFilterProxyModel, QListView
+from PySide import QtGui, QtCore
+
 from models.song import Song
 from models.album import Album
 from models.artist import Artist
-from PySide.QtGui import QListWidget, QListWidgetItem, QIcon, QSortFilterProxyModel, QListView
-from PySide import QtGui, QtCore
-from views.library.song_proxy import SongFilterProxy
+from views.library.model_to_item_strategy import ModelToItemStrat, get_song_item, get_album_item, get_artist_item
+from views.library.sort_filter_proxy import SortFilterProxy
+
 
 class LibraryViewModel:
     def __init__(self, library):
         self.songs = QListView()
         self.songs.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
-        self.song_proxy = SongFilterProxy(self.songs)
 
-        self.albums = QListWidget()
+        self.albums = QListView()
+        self.albums.setEditTriggers(
+            QtGui.QAbstractItemView.NoEditTriggers)
         self.albums.setObjectName('list_albums')
+        self.albums.setGridSize(QtCore.QSize(128,128))
+        self.albums.setIconSize(QtCore.QSize(100,100))
+        self.albums.setViewMode(QListView.IconMode)
+        self.albums.setResizeMode(QListView.Adjust)
 
-        self.artists = QListWidget()
+        self.artists = QListView()
+        self.artists.setEditTriggers(
+            QtGui.QAbstractItemView.NoEditTriggers)
+
+        self.songs_proxylist = SortFilterProxy(
+            self.songs, ModelToItemStrat(get_song_item))
+        self.albums_proxylist = SortFilterProxy(
+            self.albums, ModelToItemStrat(get_album_item))
+        self.artists_proxylist = SortFilterProxy(
+            self.artists, ModelToItemStrat(get_artist_item))
 
         self.genres = QListWidget()
         self.years = QListWidget()
@@ -25,22 +42,14 @@ class LibraryViewModel:
     def add_any(self, something):
 
         if type(something) == Song:
-            self.song_proxy.add(something)
+            self.songs_proxylist.add(something)
 
         elif type(something) == Album:
-            item = QListWidgetItem(self.albums)
-            item.setText(something.title)
-            item.setData(1001, something)
-            item.setData(1002, something)
-            item.setIcon(QIcon(something.get_art()))
-            self.albums.addItem(item)
+            self.albums_proxylist.add(something)
 
         elif type(something) == Artist:
-            item = QListWidgetItem(self.artists)
-            item.setText(something.name)
-            item.setData(1001, something)
-            item.setData(1002, something)
-            self.artists.addItem(item)
+            self.artists_proxylist.add(something)
+
         #elif type(something) == Record:
         #elif type(something) == Genre:
         #elif type(something) == Year:
@@ -48,29 +57,13 @@ class LibraryViewModel:
     def filtering(self, something=None):
 
         if not something:
-            self.albums.clear()
-            self.artists.clear()
-            for artist in self.library.artists:
-                self.add_any(artist)
-            for album in self.library.albums:
-                self.add_any(album)
+            self.songs_proxylist.filter(ModelToItemStrat.ALBUM, "")
+            self.songs_proxylist.filter(ModelToItemStrat.ARTIST, "")
+            self.albums_proxylist.filter(ModelToItemStrat.ARTIST, "")
 
         elif type(something) == Album:
-            self.song_proxy.filter(SongFilterProxy.ALBUM, something.title)
+            self.songs_proxylist.filter(ModelToItemStrat.ALBUM, something.title)
 
         elif type(something) == Artist:
-            self.albums.clear()
-            for album in something.albums:
-                self.add_any(album)
-            self.song_proxy.filter(SongFilterProxy.ARTIST, something.name)
-
-    def rebuild(self, library):
-
-        self.albums.clear()
-        self.artists.clear()
-        for artist in library.artists:
-            self.add_any(artist)
-        for album in library.albums:
-            self.add_any(album)
-        #for song in library.songs:
-        #    self.add_any(song)
+            self.albums_proxylist.filter(ModelToItemStrat.ARTIST, something.name)
+            self.songs_proxylist.filter(ModelToItemStrat.ARTIST, something.name)
