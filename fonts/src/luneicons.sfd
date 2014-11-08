@@ -20,7 +20,7 @@ OS2Version: 4
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1407963853
-ModificationTime: 1408212437
+ModificationTime: 1415444833
 PfmFamily: 17
 TTFWeight: 500
 TTFWidth: 5
@@ -62,7 +62,7 @@ NameList: Adobe Glyph List
 DisplaySize: -24
 AntiAlias: 1
 FitToEm: 1
-WinInfo: 64 16 8
+WinInfo: 48 16 8
 BeginPrivate: 7
 BlueScale 8 0.039625
 BlueShift 1 0
@@ -72,7 +72,7 @@ StemSnapH 15 [31 93 125 375]
 StemSnapV 15 [46 93 125 375]
 ExpansionFactor 4 0.06
 EndPrivate
-BeginChars: 65537 10
+BeginChars: 65537 11
 
 StartChar: .notdef
 Encoding: 65536 -1 0
@@ -94,6 +94,7 @@ SplineSet
  100 483 l 1
  100 50 l 1
 EndSplineSet
+Validated: 1
 EndChar
 
 StartChar: semicolon
@@ -118,6 +119,7 @@ SplineSet
  658.931 547.319 l 1
  747.32 458.93 l 1
 EndSplineSet
+Validated: 524289
 EndChar
 
 StartChar: less
@@ -137,6 +139,7 @@ SplineSet
  500 400 l 1
  687.5 550 l 1
 EndSplineSet
+Validated: 524289
 EndChar
 
 StartChar: greater
@@ -156,6 +159,7 @@ SplineSet
  500 550 l 1
  812.5 300 l 1
 EndSplineSet
+Validated: 524289
 EndChar
 
 StartChar: question
@@ -235,6 +239,7 @@ SplineSet
  586.383 263.51 l 1
  591.844 281.11 l 1
 EndSplineSet
+Validated: 524289
 EndChar
 
 StartChar: bracketleft
@@ -257,6 +262,7 @@ SplineSet
  671.875 81.25 l 1
  546.875 81.25 l 1
 EndSplineSet
+Validated: 524289
 EndChar
 
 StartChar: backslash
@@ -275,13 +281,14 @@ SplineSet
  687.5 112.5 l 1
  312.5 112.5 l 1
 EndSplineSet
+Validated: 524289
 EndChar
 
 StartChar: bracketright
 Encoding: 93 93 7
 Width: 1000
 GlyphClass: 2
-Flags: HW
+Flags: W
 LayerCount: 2
 Fore
 SplineSet
@@ -290,6 +297,7 @@ SplineSet
  281.25 581.25 l 1
  687.5 300 l 1
 EndSplineSet
+Validated: 524289
 EndChar
 
 StartChar: asciicircum
@@ -319,6 +327,7 @@ SplineSet
  281.25 425 l 1
  281.25 128.125 l 1
 EndSplineSet
+Validated: 524289
 EndChar
 
 StartChar: underscore
@@ -335,6 +344,41 @@ SplineSet
  750 221.875 l 1
  750 96.875 l 1
  250 96.875 l 1
+EndSplineSet
+Validated: 524289
+EndChar
+
+StartChar: asciitilde
+Encoding: 126 126 10
+Width: 1000
+VWidth: 0
+Flags: HO
+HStem: 96.875 45<295 580> 190.625 46.875<640.625 687.5> 411.25 45<295 580> 471.875 78.125<359.375 406.25> 503.125 46.875<406.25 687.5>
+VStem: 250 45<141.875 411.25> 359.375 46.875<471.875 503.125> 580 45<141.875 411.25> 640.625 93.75<190.625 237.5> 687.5 46.875<237.5 503.125>
+LayerCount: 2
+Fore
+SplineSet
+580 411.25 m 1xe7
+ 295 411.25 l 1
+ 295 141.875 l 1
+ 580 141.875 l 1
+ 580 411.25 l 1xe7
+625 456.25 m 1
+ 625 96.875 l 1
+ 250 96.875 l 1
+ 250 456.25 l 1
+ 625 456.25 l 1
+359.375 550 m 1xf740
+ 734.375 550 l 1xef40
+ 734.375 190.625 l 1
+ 640.625 190.625 l 1
+ 640.625 237.5 l 1xef80
+ 687.5 237.5 l 1
+ 687.5 503.125 l 1
+ 406.25 503.125 l 1xef40
+ 406.25 471.875 l 1
+ 359.375 471.875 l 1
+ 359.375 550 l 1xf740
 EndSplineSet
 EndChar
 EndChars
