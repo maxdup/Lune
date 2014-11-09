@@ -84,6 +84,7 @@ QListView {
 QListView::item {
     color: #EEE;
 }
+
 QListView::item:selected {
     background: #888888;
     border-style: outset;
@@ -93,6 +94,21 @@ QListView::item:selected {
 QListView::item:hover {
     background: #666;
 }
+
+QListView#albums::item {
+    padding: 6px;
+    height: 148px;
+    width: 128px;
+    background: transparent;
+}
+QListView#albums::item:hover {
+    background: #666;
+}
+QListView#albums::item:selected {
+    background: #666;
+    padding: 5px;
+}
+
 
 
 QSlider::groove:horizontal {
