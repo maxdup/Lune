@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+
 from PySide import QtGui, QtCore
 from PySide.QtCore import QModelIndex
 
@@ -66,4 +68,6 @@ class LibraryView(QtGui.QWidget):
             modelindex = self.album_list.model().mapToSource(id)
             album = modelindex.data(ModelToItemStrat.PLAY)
             item = self.library.albums_proxylist.model.itemFromIndex(modelindex)
-            item.setIcon(QtGui.QIcon(album.get_art()))
+            artwork = album.get_art()
+            if artwork:
+                item.setIcon(QtGui.QIcon(artwork))

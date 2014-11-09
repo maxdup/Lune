@@ -1,4 +1,5 @@
 from PySide.QtGui import QStandardItem, QIcon
+from PySide.QtCore import QSize
 
 
 class ModelToItemStrat:
@@ -31,6 +32,7 @@ def get_album_item(album):
     item.setData(album, ModelToItemStrat.FILTER)
     item.setData(album, ModelToItemStrat.PLAY)
     item.setText(album.title)
+    item.setSizeHint(QSize(128,148))
     return item
 
 def get_artist_item(artist):

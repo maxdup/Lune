@@ -20,7 +20,6 @@ class SortFilterProxy:
 
     def add(self, obj):
         item = self.item_strat.get_item(obj)
-        item.setSizeHint(QSize(128,148))
         if type(obj) == Album:
             item.setIcon(self.icon)
         self.model.appendRow(item)
