@@ -10,12 +10,16 @@ class Album:
     def get_art(self):
         if self.songs and not self.artwork:
             for song in self.songs:
+
                 self.artwork = song.track_info['artwork']  #directly in track info
-                if not self.artwork:
-                    folderjpg = os.path.split(song.path)[0] + '/Folder.jpg'
-                    #multiplatform?
-                    if os.path.exists(folderjpg):
-                        self.artwork = folderjpg
+                if not self.artwork or not os.path.exists(self.artwork):
+                    filenames = ['/Folder.jpg', '/folder.jpg']
+
+                    for name in filenames:
+                        path = os.path.split(song.path)[0] + name
+                        if os.path.exists(path):
+                            self.artwork = path
+                            break
                 if self.artwork:
                     break
         return self.artwork
