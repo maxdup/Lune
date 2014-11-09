@@ -18,8 +18,6 @@ class LibraryViewModel:
         self.albums.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
         self.albums.setObjectName('list_albums')
-        self.albums.setGridSize(QtCore.QSize(128,128))
-        self.albums.setIconSize(QtCore.QSize(100,100))
         self.albums.setViewMode(QListView.IconMode)
         self.albums.setResizeMode(QListView.Adjust)
 

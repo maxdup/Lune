@@ -23,7 +23,10 @@ class LibraryView(QtGui.QWidget):
             self._album_selection_changed)
         self.album_list.doubleClicked.connect(self._item_double_clicked)
         self.album_list.verticalScrollBar().valueChanged.connect(self.test)
+        self.album_list.setGridSize(QtCore.QSize(128,148))
+        self.album_list.setIconSize(QtCore.QSize(100,100))
         self.album_list.setUniformItemSizes(True)
+        self.album_list.setObjectName('albums')
 
         self.artist_list = library_vm.artists
         model = self.artist_list.selectionModel()
@@ -48,13 +51,19 @@ class LibraryView(QtGui.QWidget):
             item.data(ModelToItemStrat.PLAY))
 
     def test(self):
-        print(self.album_list.viewport().rect())
-        index = self.album_list.indexAt(QtCore.QPoint(64,64))
-        #QtCore.QPoint(0, self.album_list.visualRect(index).y() +
-        #              self.album_list.visualRect(index).height()+1)))
+        indexes = []
+        x, y = 64, 64
+        index = self.album_list.indexAt(QtCore.QPoint(x,y))
+        if not index.isValid():
+            y -= 32
+            index = self.album_list.indexAt(QtCore.QPoint(x,y))
+        while(index.isValid()):
+            indexes.append(index)
+            x += 128
+            index = self.album_list.indexAt(QtCore.QPoint(x,y))
 
-        modelindex = self.album_list.model().mapToSource(index)
-
-        album = modelindex.data(ModelToItemStrat.FILTER)
-        item = self.library.albums_proxylist.model.itemFromIndex(modelindex)
-        item.setIcon(QtGui.QIcon(album.get_art()))
+        for id in indexes:
+            modelindex = self.album_list.model().mapToSource(id)
+            album = modelindex.data(ModelToItemStrat.PLAY)
+            item = self.library.albums_proxylist.model.itemFromIndex(modelindex)
+            item.setIcon(QtGui.QIcon(album.get_art()))

@@ -1,5 +1,5 @@
-from PySide import QtGui, QtCore
-from PySide.QtGui import QSortFilterProxyModel
+from PySide.QtGui import QSortFilterProxyModel, QStandardItemModel, QIcon
+from PySide.QtCore import QSize
 from models.album import Album
 
 
@@ -9,17 +9,18 @@ class SortFilterProxy:
         self.qlist = qlist
         self.item_strat = strategy
 
-        self.model = QtGui.QStandardItemModel(self.qlist)
+        self.model = QStandardItemModel(self.qlist)
 
         self.proxymodel = QSortFilterProxyModel()
         self.proxymodel.setSourceModel(self.model)
         self.proxymodel.setDynamicSortFilter(True)
         self.qlist.setModel(self.proxymodel)
 
-        self.icon = QtGui.QIcon(':img/placeholder.jpg')
+        self.icon = QIcon(':img/placeholder.jpg')
 
     def add(self, obj):
         item = self.item_strat.get_item(obj)
+        item.setSizeHint(QSize(128,148))
         if type(obj) == Album:
             item.setIcon(self.icon)
         self.model.appendRow(item)
