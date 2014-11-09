@@ -24,11 +24,13 @@ class LibraryView(QtGui.QWidget):
         model.selectionChanged.connect(
             self._album_selection_changed)
         self.album_list.doubleClicked.connect(self._item_double_clicked)
-        self.album_list.verticalScrollBar().valueChanged.connect(self.test)
+        self.album_list.verticalScrollBar().valueChanged.connect(
+            self._album_viewport_moved)
         self.album_list.setGridSize(QtCore.QSize(128,148))
         self.album_list.setIconSize(QtCore.QSize(100,100))
         self.album_list.setUniformItemSizes(True)
         self.album_list.setObjectName('albums')
+        self._album_viewport_moved()
 
         self.artist_list = library_vm.artists
         model = self.artist_list.selectionModel()
@@ -52,22 +54,34 @@ class LibraryView(QtGui.QWidget):
         self.player.bouncer.ask_nicely(
             item.data(ModelToItemStrat.PLAY))
 
-    def test(self):
+    def _album_viewport_moved(self):
         indexes = []
+        height = self.album_list.size().height() + 128
         x, y = 64, 64
+
         index = self.album_list.indexAt(QtCore.QPoint(x,y))
         if not index.isValid():
             y -= 32
             index = self.album_list.indexAt(QtCore.QPoint(x,y))
-        while(index.isValid()):
+
+        while(index.isValid() and y < height):
+
             indexes.append(index)
-            x += 128
+
+            while(index.isValid()):
+                indexes.append(index)
+                x += 148
+                index = self.album_list.indexAt(QtCore.QPoint(x,y))
+            x = 64
+
+            y += 128
             index = self.album_list.indexAt(QtCore.QPoint(x,y))
 
         for id in indexes:
             modelindex = self.album_list.model().mapToSource(id)
             album = modelindex.data(ModelToItemStrat.PLAY)
             item = self.library.albums_proxylist.model.itemFromIndex(modelindex)
-            artwork = album.get_art()
-            if artwork:
-                item.setIcon(QtGui.QIcon(artwork))
+            if item.icon().cacheKey() == self.library.albums_proxylist.placeholder.cacheKey():
+                artwork = album.get_art()
+                if artwork:
+                    item.setIcon(QtGui.QIcon(artwork))
