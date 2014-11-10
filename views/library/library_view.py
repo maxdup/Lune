@@ -55,27 +55,26 @@ class LibraryView(QtGui.QWidget):
             item.data(ModelToItemStrat.PLAY))
 
     def _album_viewport_moved(self):
+        # begin lazy loading
         indexes = []
         height = self.album_list.size().height() + 128
         x, y = 64, 64
 
         index = self.album_list.indexAt(QtCore.QPoint(x,y))
-        if not index.isValid():
-            y -= 32
-            index = self.album_list.indexAt(QtCore.QPoint(x,y))
 
-        while(index.isValid() and y < height):
+        while index.isValid() and y < height:
 
             indexes.append(index)
 
-            while(index.isValid()):
+            while index.isValid():
                 indexes.append(index)
-                x += 148
+                x += 128
                 index = self.album_list.indexAt(QtCore.QPoint(x,y))
             x = 64
 
-            y += 128
+            y += 148
             index = self.album_list.indexAt(QtCore.QPoint(x,y))
+
 
         for id in indexes:
             modelindex = self.album_list.model().mapToSource(id)
@@ -85,3 +84,29 @@ class LibraryView(QtGui.QWidget):
                 artwork = album.get_art()
                 if artwork:
                     item.setIcon(QtGui.QIcon(artwork))
+
+        # end loading, start lazy unloading
+
+        x, y = 64, 256
+        indexes = []
+        index = self.album_list.indexAt(QtCore.QPoint(x,y))
+        while index.isValid():
+
+            indexes.append(index)
+
+            while index.isValid():
+                indexes.append(index)
+                x += 128
+                index= self.album_list.indexAt(QtCore.QPoint(x,y))
+            x = 64
+
+            y -= 148
+            index = self.album_list.indexAt(QtCore.QPoint(x,y))
+
+
+        for id in indexes:
+            modelindex = self.album_list.model().mapToSource(id)
+            item = self.library.albums_proxylist.model.itemFromIndex(modelindex)
+            if item.icon().cacheKey != self.library.albums_proxylist.placeholder.cacheKey():
+                item.setIcon(self.library.albums_proxylist.placeholder)
+        # end lazy unloading
