@@ -12,6 +12,7 @@ class Artist_v(LibraryView):
         splitter.addWidget(self.library.artists)
         splitter.addWidget(self.library.albums)
         splitter.addWidget(self.library.songs)
+        splitter.setStretchFactor(1, 2)
         view.addWidget(splitter)
         view.setContentsMargins(0,0,0,0)
 
