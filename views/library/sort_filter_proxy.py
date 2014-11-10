@@ -16,13 +16,10 @@ class SortFilterProxy:
         self.proxymodel.setDynamicSortFilter(True)
         self.qlist.setModel(self.proxymodel)
 
-        self.placeholder = QIcon(':img/placeholder.jpg')
-
     def add(self, obj):
         item = self.item_strat.get_item(obj)
-        if type(obj) == Album:
-            item.setIcon(self.placeholder)
         self.model.appendRow(item)
+        return item
 
     def filter(self, field, value):
         self.proxymodel.setFilterRole(field)

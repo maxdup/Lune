@@ -4,22 +4,24 @@ from PySide import QtGui, QtCore
 from models.song import Song
 from models.album import Album
 from models.artist import Artist
+from views.library.qlistalbum import QListAlbum
 from views.library.model_to_item_strategy import ModelToItemStrat, get_song_item, get_album_item, get_artist_item
+
 from views.library.sort_filter_proxy import SortFilterProxy
 
 
 class LibraryViewModel:
     def __init__(self, library):
+
+        self.placeholder = QIcon(':img/placeholder.jpg')
+
         self.songs = QListView()
         self.songs.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
 
-        self.albums = QListView()
+        self.albums = QListAlbum(self.placeholder)
         self.albums.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
-        self.albums.setObjectName('list_albums')
-        self.albums.setViewMode(QListView.IconMode)
-        self.albums.setResizeMode(QListView.Adjust)
 
         self.artists = QListView()
         self.artists.setEditTriggers(
@@ -32,10 +34,12 @@ class LibraryViewModel:
         self.artists_proxylist = SortFilterProxy(
             self.artists, ModelToItemStrat(get_artist_item))
 
-        self.genres = QListWidget()
-        self.years = QListWidget()
-        self.records = QListWidget()
+        #self.genres = QListWidget()
+        #self.years = QListWidget()
+        #self.records = QListWidget()
+
         self.library = library
+
 
     def add_any(self, something):
 
@@ -43,7 +47,8 @@ class LibraryViewModel:
             self.songs_proxylist.add(something)
 
         elif type(something) == Album:
-            self.albums_proxylist.add(something)
+            item = self.albums_proxylist.add(something)
+            item.setIcon(self.placeholder)
 
         elif type(something) == Artist:
             self.artists_proxylist.add(something)
