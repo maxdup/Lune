@@ -106,3 +106,9 @@ class Player():
             self.__state['playing'] = False
             self.queue.reset_queue()
             self.play_prep()
+
+    def hold(self):
+        self.media_player.pause()
+    def unhold(self):
+        if self.__state['playing']:
+            self.media_player.play()
