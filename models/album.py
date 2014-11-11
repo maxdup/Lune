@@ -1,9 +1,10 @@
 import os
+from models.playlist import Playlist
 
-class Album:
+class Album(Playlist):
     def __init__(self, title='unknown', songs=[], artist=None):
+        Playlist.__init__(self, songs, 0)
         self.title = title
-        self.songs = songs
         self.artist = artist
         self.artwork = None
         self.placeholder = None

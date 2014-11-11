@@ -6,6 +6,7 @@ from PySide.QtCore import QModelIndex
 
 from views.status.status import Status
 from models.library_vm import LibraryViewModel
+from models.playlist import Playlist
 from views.library.model_to_item_strategy import ModelToItemStrat
 
 
@@ -17,7 +18,7 @@ class LibraryView(QtGui.QWidget):
         self.library = library_vm
 
         self.song_list = library_vm.songs
-        self.song_list.doubleClicked.connect(self._item_double_clicked)
+        self.song_list.doubleClicked.connect(self._song_double_clicked)
 
         self.album_list = library_vm.albums
         model = self.album_list.selectionModel()
@@ -45,3 +46,12 @@ class LibraryView(QtGui.QWidget):
         self.player.bouncer.ask_nicely(
             item.data(ModelToItemStrat.PLAY))
 
+    def _song_double_clicked(self, item):
+        songs = []
+        start_at = None
+        for i in range(0, self.song_list.model().rowCount()):
+            song = self.song_list.model().index(i,0).data(ModelToItemStrat.PLAY)
+            if not start_at and song == item.data(ModelToItemStrat.PLAY):
+                start_at = i
+            songs.append(song)
+        self.player.bouncer.ask_nicely(Playlist(songs, start_at))
