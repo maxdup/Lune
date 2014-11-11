@@ -13,7 +13,7 @@ class Status(QtGui.QWidget):
 
         self.controls = PlaybackControls(player)
         self.progress = ProgressBar(player)
-        self.trackinfo = Trackinfo(player)
+        self.trackinfo = Trackinfo(player.status_vm)
         
         layout = QtGui.QHBoxLayout(self)
         layout.setContentsMargins(0,10,0,0)
