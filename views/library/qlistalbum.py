@@ -18,6 +18,10 @@ class QListAlbum(QtGui.QListView):
         self.placeholder = placeholder
         self.loaded_icons = []
 
+    def resizeEvent(self, event):
+        QListView.resizeEvent(self, event)
+        self._album_viewport_moved()
+
     def _album_viewport_moved(self):
 
         # lazy unloading
