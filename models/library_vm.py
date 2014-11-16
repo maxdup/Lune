@@ -13,15 +13,11 @@ from views.library.librarylistview import LibraryListView
 class LibraryViewModel:
     def __init__(self, library):
 
-        self.placeholder = QIcon(':img/placeholder.jpg')
-
         self.songs = LibraryListView(ModelToItemStrat(get_song_item))
-        self.albums = QListAlbum(
-            ModelToItemStrat(get_album_item), self.placeholder)
+        self.albums = QListAlbum(ModelToItemStrat(get_album_item))
         self.artists = LibraryListView(ModelToItemStrat(get_artist_item))
 
         self.library = library
-
 
     def add_any(self, something):
 
@@ -29,8 +25,7 @@ class LibraryViewModel:
             self.songs.add(something)
 
         elif type(something) == Album:
-            item = self.albums.add(something)
-            item.setIcon(self.placeholder)
+            self.albums.add(something)
 
         elif type(something) == Artist:
             self.artists.add(something)

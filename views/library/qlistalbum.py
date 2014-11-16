@@ -1,11 +1,11 @@
 from PySide import QtGui, QtCore
-from PySide.QtGui import QListView
+from PySide.QtGui import QListView, QIcon
 from views.library.model_to_item_strategy import ModelToItemStrat
 from views.library.librarylistview import LibraryListView
 
 
 class QListAlbum(LibraryListView):
-    def __init__(self, strategy,  placeholder):
+    def __init__(self, strategy):
         LibraryListView.__init__(self, strategy)
         self.setGridSize(QtCore.QSize(128,148))
         self.setIconSize(QtCore.QSize(100,100))
@@ -15,12 +15,17 @@ class QListAlbum(LibraryListView):
         self.setResizeMode(QListView.Adjust)
         self.verticalScrollBar().valueChanged.connect(self.reload)
 
-        self.placeholder = placeholder
+        self.placeholder = QIcon(':img/placeholder.jpg')
+
         self.loaded_icons = []
 
     def resizeEvent(self, event):
         QListView.resizeEvent(self, event)
         self.reload()
+
+    def add(self, album):
+        item = LibraryListView.add(self, album)
+        item.setIcon(self.placeholder)
 
     def filter(self, field, value):
         self.unload()
