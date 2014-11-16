@@ -1,11 +1,12 @@
 from PySide import QtGui, QtCore
 from PySide.QtGui import QListView
 from views.library.model_to_item_strategy import ModelToItemStrat
+from views.library.librarylistview import LibraryListView
 
 
-class QListAlbum(QtGui.QListView):
-    def __init__(self, placeholder):
-        QListView.__init__(self)
+class QListAlbum(LibraryListView):
+    def __init__(self, strategy,  placeholder):
+        LibraryListView.__init__(self, strategy)
         self.setGridSize(QtCore.QSize(128,148))
         self.setIconSize(QtCore.QSize(100,100))
         self.setUniformItemSizes(True)
