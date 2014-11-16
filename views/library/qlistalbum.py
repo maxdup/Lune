@@ -13,28 +13,21 @@ class QListAlbum(LibraryListView):
         self.setObjectName('albums')
         self.setViewMode(QListView.IconMode)
         self.setResizeMode(QListView.Adjust)
-        self.verticalScrollBar().valueChanged.connect(
-            self._album_viewport_moved)
+        self.verticalScrollBar().valueChanged.connect(self.reload)
 
         self.placeholder = placeholder
         self.loaded_icons = []
 
     def resizeEvent(self, event):
         QListView.resizeEvent(self, event)
-        self._album_viewport_moved()
+        self.reload()
 
-    def _album_viewport_moved(self):
+    def filter(self, field, value):
+        self.unload()
+        LibraryListView.filter(self, field, value)
+        self.load()
 
-        # lazy unloading
-        for id in self.loaded_icons:
-            viewport = self.viewport().rect()
-            if not viewport.contains(self.visualRect(id)):
-                modelindex = self.model().mapToSource(id)
-                item = self.model().sourceModel().itemFromIndex(modelindex)
-                item.setIcon(self.placeholder)
-        self.loaded_icons = []
-
-        # lazy loading
+    def load(self):
         indexes = []
         height = self.size().height() + 128
         x, y = 64, 64
@@ -64,3 +57,21 @@ class QListAlbum(LibraryListView):
                 artwork = album.get_art()
                 if artwork:
                     item.setIcon(QtGui.QIcon(artwork))
+
+    def unload(self):
+        for id in self.loaded_icons:
+            viewport = self.viewport().rect()
+            modelindex = self.model().mapToSource(id)
+            item = self.model().sourceModel().itemFromIndex(modelindex)
+            item.setIcon(self.placeholder)
+        self.loaded_icons = []
+
+    def reload(self):
+        for id in self.loaded_icons:
+            viewport = self.viewport().rect()
+            if not viewport.contains(self.visualRect(id)):
+                modelindex = self.model().mapToSource(id)
+                item = self.model().sourceModel().itemFromIndex(modelindex)
+                item.setIcon(self.placeholder)
+        self.loaded_icons = []
+        self.load()
