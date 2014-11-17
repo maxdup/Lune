@@ -1,6 +1,7 @@
 from PySide import QtGui, QtCore
 
 class PathManager(QtGui.QWidget):
+
     def __init__(self, user_settings):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
@@ -28,10 +29,10 @@ class PathManager(QtGui.QWidget):
         size = QtCore.QSize(25, 25)
         item = QtGui.QListWidgetItem(self.library_list)
         item.setSizeHint(size)
-        item_widget = ItemPath(path_obj, item, self)
+        item_widget = PathToItem(path_obj, item, self)
         self.library_list.setItemWidget(item, item_widget)
 
-class ItemPath(QtGui.QWidget):
+class PathToItem(QtGui.QWidget):
     def __init__(self, path_obj, item, path_manager):
         self.path_obj = path_obj
         self.item = item

@@ -10,21 +10,21 @@ from .model_to_item_strategy import ModelToItemStrat
 
 
 class LibraryView(QtGui.QWidget):
-    def __init__(self, player, library_vm):
+    def __init__(self, bouncer, library_vm):
         QtGui.QWidget.__init__(self)
 
-        self.player = player
-        self.library = library_vm
+        self.bouncer = bouncer
+        self.lib_vm = library_vm
 
-        self.song_list = library_vm.songs
+        self.song_list = self.lib_vm.songs
         self.song_list.doubleClicked.connect(self._song_double_clicked)
 
-        self.album_list = library_vm.albums
+        self.album_list = self.lib_vm.albums
         model = self.album_list.selectionModel()
         model.selectionChanged.connect(self._album_selection_changed)
         self.album_list.doubleClicked.connect(self._item_double_clicked)
 
-        self.artist_list = library_vm.artists
+        self.artist_list = self.lib_vm.artists
         model = self.artist_list.selectionModel()
         model.selectionChanged.connect(self._artist_selection_changed)
         self.artist_list.doubleClicked.connect(self._item_double_clicked)
@@ -32,17 +32,17 @@ class LibraryView(QtGui.QWidget):
     def _artist_selection_changed(self):
         for index in self.artist_list.selectedIndexes():
             item = self.artist_list.model().mapToSource(index)
-            self.library.filtering(
+            self.lib_vm.filtering(
                 item.data(ModelToItemStrat.FILTER))
 
     def _album_selection_changed(self):
         for index in self.album_list.selectedIndexes():
             item = self.album_list.model().mapToSource(index)
-            self.library.filtering(
+            self.lib_vm.filtering(
                 item.data(ModelToItemStrat.FILTER))
 
     def _item_double_clicked(self, item):
-        self.player.bouncer.ask_nicely(
+        self.bouncer.ask_nicely(
             item.data(ModelToItemStrat.PLAY))
 
     def _song_double_clicked(self, item):
@@ -53,4 +53,4 @@ class LibraryView(QtGui.QWidget):
             if not start_at and song == item.data(ModelToItemStrat.PLAY):
                 start_at = i
             songs.append(song)
-        self.player.bouncer.ask_nicely(Playlist(songs, start_at))
+        self.bouncer.ask_nicely(Playlist(songs, start_at))

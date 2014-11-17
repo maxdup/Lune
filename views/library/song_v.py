@@ -8,11 +8,11 @@ class Song_v(LibraryView):
         super(Song_v, self).__init__(player, lib_vm)
 
         view = QtGui.QHBoxLayout()
-        view.addWidget(self.library.songs)
+        view.addWidget(self.lib_vm.songs)
         view.setContentsMargins(0,0,0,0)
 
-        self.library.artists.hide()
-        self.library.albums.hide()
-        self.library.songs.show()
+        self.lib_vm.artists.hide()
+        self.lib_vm.albums.hide()
+        self.lib_vm.songs.show()
 
         self.setLayout(view)

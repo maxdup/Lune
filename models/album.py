@@ -13,7 +13,7 @@ class Album(Playlist):
         if not self.songs:
             return
         if not self.artwork or not os.path.exists(self.artwork):
-            filenames = ['/Folder.jpg', '/folder.jpg']
+            filenames = ['/Folder.jpg', '/folder.jpg', '/Cover.jpg', '/cover.jpg']
             for name in filenames:
                 path = os.path.split(self.songs[0].path)[0] + name
                 if os.path.exists(path):

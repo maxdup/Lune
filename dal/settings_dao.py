@@ -4,7 +4,7 @@ import json
 import os
 
 
-class Settings():
+class SettingsDAO():
     '''
     settings are saved as json.
     the json object should look something like:

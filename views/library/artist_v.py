@@ -9,16 +9,16 @@ class Artist_v(LibraryView):
 
         view = QtGui.QHBoxLayout()
         splitter = QtGui.QSplitter()
-        splitter.addWidget(self.library.artists)
-        splitter.addWidget(self.library.albums)
-        splitter.addWidget(self.library.songs)
+        splitter.addWidget(self.lib_vm.artists)
+        splitter.addWidget(self.lib_vm.albums)
+        splitter.addWidget(self.lib_vm.songs)
         splitter.setStretchFactor(1, 2)
         view.addWidget(splitter)
-        view.setContentsMargins(0,0,0,0)
+        view.setContentsMargins(0, 0, 0, 0)
 
-        self.library.artists.show()
-        self.library.albums.show()
-        self.library.songs.show()
+        self.lib_vm.artists.show()
+        self.lib_vm.albums.show()
+        self.lib_vm.songs.show()
 
         self.setLayout(view)
 
