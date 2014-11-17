@@ -10,8 +10,8 @@ base = None
 if sys.platform == "win32":
     base = "Win32GUI"
 
-setup(  name = "Lune",
-        version = "0.1",
-        description = "A cross platform media player",
-        options = {"build_exe": build_exe_options},
-        executables = [Executable("lune.py", base=base)])
+setup(name="Lune",
+      version="0.1",
+      description="A cross platform media player",
+      options={"build_exe": build_exe_options},
+      executables=[Executable("lune.py", base=base)])

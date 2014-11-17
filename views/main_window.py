@@ -61,7 +61,7 @@ class MainWindow(QtGui.QWidget):
         content_v.setLayout(QtGui.QVBoxLayout())
         content_v.layout().addWidget(library_v)
         content_v.layout().addWidget(status_v)
-        content_v.layout().setContentsMargins(0,0,0,0)
+        content_v.layout().setContentsMargins(0, 0, 0, 0)
 
         settings_v = SettingsView(settings)
 

@@ -16,8 +16,6 @@ from controllers.arg_parser import argParser
 
 def main():
 
-    args = str(sys.argv)
-
     app = QtGui.QApplication(sys.argv)
 
     signal.signal(signal.SIGINT, signal.SIG_DFL)

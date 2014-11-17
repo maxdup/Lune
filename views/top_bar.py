@@ -13,7 +13,7 @@ class TopBar(QtGui.QWidget):
         controls = QtGui.QWidget()
         controls.setObjectName('wcontrols')
         controls_l = QtGui.QBoxLayout(QtGui.QBoxLayout.Direction.RightToLeft)
-        controls_l.setContentsMargins(0,0,0,0)
+        controls_l.setContentsMargins(0, 0, 0, 0)
         controls.setLayout(controls_l)
 
         shutdown = QtGui.QPushButton(';')
@@ -32,7 +32,7 @@ class TopBar(QtGui.QWidget):
         layout.addWidget(QtGui.QLabel('Lune'))
         layout.addStretch()
         layout.addWidget(controls)
-        layout.setContentsMargins(0,15,0,0)
+        layout.setContentsMargins(0, 15, 0, 0)
 
     def shutdown(self):
         QtCore.QCoreApplication.instance().quit()
@@ -58,8 +58,8 @@ class TopBar(QtGui.QWidget):
         self.mw.offset = event.pos()
 
     def mouseMoveEvent(self, event):
-        x=event.globalX()
-        y=event.globalY()
+        x = event.globalX()
+        y = event.globalY()
         x_w = self.mw.offset.x()
         y_w = self.mw.offset.y()
         self.mw.move(x-x_w, y-y_w)

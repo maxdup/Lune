@@ -7,7 +7,7 @@ from models.status_vm import StatusViewModel
 from controllers.bouncer import Bouncer
 
 
-class Player():
+class Player:
     def __init__(self):
         self.__state = {'playing': False,
                       'prepped': False}
@@ -35,7 +35,7 @@ class Player():
         self.media_player.set_media(self.media)
         self.events = self.media_player.event_manager()
         self.events.event_attach(
-            vlc.EventType.MediaPlayerEndReached, self.songEnded, 1)
+            vlc.EventType.MediaPlayerEndReached, self.song_ended, 1)
         self['prepped'] = True
 
     def play(self):
@@ -83,9 +83,6 @@ class Player():
         if queue:
             self.play_prep()
 
-    def set_volume(self, volume):
-        return None
-
     def seek(self, position):
         self.media_player.set_position(position / 500)
 
@@ -98,7 +95,7 @@ class Player():
     def set_timer(self, timer):
         self.timer = timer
 
-    def songEnded(self, data, moredata):
+    def song_ended(self, data, moredata):
         if self.queue.get_next():
             self.play_prep()
             self.play()
@@ -109,6 +106,7 @@ class Player():
 
     def hold(self):
         self.media_player.pause()
+
     def unhold(self):
         if self.__state['playing']:
             self.media_player.play()

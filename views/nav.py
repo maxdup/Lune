@@ -36,8 +36,8 @@ class Nav(QtGui.QWidget):
 
         self.goto_lib.hide()
 
-        self.setLayout(self.layout)        
-        self.layout.setContentsMargins(0,25,0,0)
+        self.setLayout(self.layout)
+        self.layout.setContentsMargins(0, 25, 0, 0)
         self.set_lib_view(Artist_v(player, library.lib_vm))
 
     def set_lib_view(self, view):
@@ -45,7 +45,7 @@ class Nav(QtGui.QWidget):
         while self.library_v.layout().count() != 0:
             self.library_v.layout().takeAt(0)
         self.library_v.layout().addWidget(view)
-        self.library_v.layout().setContentsMargins(0,0,0,0)
+        self.library_v.layout().setContentsMargins(0, 0, 0, 0)
         self.library.lib_vm.filtering()
 
     def change_area(self, area):
