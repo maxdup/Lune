@@ -1,13 +1,10 @@
-from PySide.QtGui import QListWidget, QListWidgetItem, QIcon, QSortFilterProxyModel, QListView
-from PySide import QtGui, QtCore
-
-from models.song import Song
-from models.album import Album
-from models.artist import Artist
+from .song import Song
+from .album import Album
+from .artist import Artist
 from views.library.qlistalbum import QListAlbum
-from views.library.model_to_item_strategy import ModelToItemStrat, get_song_item, get_album_item, get_artist_item
-
 from views.library.librarylistview import LibraryListView
+from views.library.model_to_item_strategy import ModelToItemStrat, \
+    get_song_item, get_album_item, get_artist_item
 
 
 class LibraryViewModel:

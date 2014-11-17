@@ -1,7 +1,8 @@
-from PySide import QtGui, QtCore
+from PySide import QtCore
 from PySide.QtGui import QListView, QIcon
-from views.library.model_to_item_strategy import ModelToItemStrat
-from views.library.librarylistview import LibraryListView
+
+from .model_to_item_strategy import ModelToItemStrat
+from .librarylistview import LibraryListView
 
 
 class QListAlbum(LibraryListView):
@@ -61,7 +62,7 @@ class QListAlbum(LibraryListView):
             if item.icon().cacheKey() == self.placeholder.cacheKey():
                 artwork = album.get_art()
                 if artwork:
-                    item.setIcon(QtGui.QIcon(artwork))
+                    item.setIcon(QIcon(artwork))
 
     def unload(self):
         for id in self.loaded_icons:

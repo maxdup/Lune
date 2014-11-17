@@ -1,4 +1,4 @@
-from PySide.QtGui import QStandardItem, QIcon
+from PySide.QtGui import QStandardItem
 from PySide.QtCore import QSize
 
 

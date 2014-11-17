@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from PySide import QtGui, QtCore
+from PySide import QtGui
 
 from views.settings.path_manager import PathManager
+
 
 class SettingsView(QtGui.QWidget):
     def __init__(self, user_settings):

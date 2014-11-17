@@ -9,7 +9,7 @@ class Settings():
     settings are saved as json.
     the json object should look something like:
     {
-        'libpaths':['library path 1', library path 2]
+        'libpaths':['library path 1', 'library path 2']
     }
     (plz update this schema as things move forward)
     '''

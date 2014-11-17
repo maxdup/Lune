@@ -12,7 +12,7 @@ class StatusViewModel:
         self.album_art_display = QtGui.QLabel()
 
         self.album_art = QtGui.QPixmap()
-        
+
         self.pause_resume = QtGui.QPushButton(']')
 
         self.curr_song = None

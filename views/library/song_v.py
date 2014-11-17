@@ -1,6 +1,6 @@
 from PySide import QtGui
 
-from . library_view import LibraryView
+from .library_view import LibraryView
 
 
 class Song_v(LibraryView):

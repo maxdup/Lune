@@ -1,8 +1,8 @@
 from PySide import QtGui
 
-from views.status.playback_controls import PlaybackControls
-from views.status.progress_bar import ProgressBar
-from views.status.trackinfo import Trackinfo
+from .playback_controls import PlaybackControls
+from .progress_bar import ProgressBar
+from .trackinfo import Trackinfo
 
 
 class Status(QtGui.QWidget):

@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
 
-from PySide import QtGui, QtCore
-from PySide.QtCore import QModelIndex
+from PySide import QtGui
 
-from views.status.status import Status
-from models.library_vm import LibraryViewModel
 from models.playlist import Playlist
-from views.library.model_to_item_strategy import ModelToItemStrat
+from models.library_vm import LibraryViewModel
+
+from .model_to_item_strategy import ModelToItemStrat
 
 
 class LibraryView(QtGui.QWidget):
