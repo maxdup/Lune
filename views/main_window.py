@@ -70,7 +70,7 @@ class MainWindow(QtGui.QWidget):
         self.view_stack.addWidget(settings_v)
 
         stack_container.setLayout(self.view_stack)
-        self.nav = Nav(self, library, library_v, player)
+        self.nav = Nav(self, library, library_v, player.bouncer)
         main_container.addWidget(self.nav)
         main_container.addWidget(stack_container)
 

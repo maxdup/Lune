@@ -6,7 +6,7 @@ from views.library.song_v import Song_v
 
 
 class Nav(QtGui.QWidget):
-    def __init__(self, mainwindow, library, library_v, player):
+    def __init__(self, mainwindow, library, library_v, bouncer):
         QtGui.QWidget.__init__(self)
         self.setObjectName('nav')
 
@@ -17,13 +17,13 @@ class Nav(QtGui.QWidget):
 
         self.goto_song = QtGui.QPushButton('Song')
         self.goto_song.clicked.connect(
-            lambda: self.set_lib_view(Song_v(player, library.lib_vm)))
+            lambda: self.set_lib_view(Song_v(bouncer, library.lib_vm)))
         self.goto_album = QtGui.QPushButton('Album')
         self.goto_album.clicked.connect(
-            lambda: self.set_lib_view(Album_v(player, library.lib_vm)))
+            lambda: self.set_lib_view(Album_v(bouncer, library.lib_vm)))
         self.goto_artist = QtGui.QPushButton('Artist')
         self.goto_artist.clicked.connect(
-            lambda: self.set_lib_view(Artist_v(player, library.lib_vm)))
+            lambda: self.set_lib_view(Artist_v(bouncer, library.lib_vm)))
         self.goto_lib = QtGui.QPushButton('Back')
         self.goto_lib.clicked.connect(
             lambda: mainwindow.change_view('lib'))
@@ -38,7 +38,7 @@ class Nav(QtGui.QWidget):
 
         self.setLayout(self.layout)
         self.layout.setContentsMargins(0, 25, 0, 0)
-        self.set_lib_view(Artist_v(player, library.lib_vm))
+        self.set_lib_view(Artist_v(bouncer, library.lib_vm))
 
     def set_lib_view(self, view):
         self.library_v.setLayout(QtGui.QHBoxLayout())
