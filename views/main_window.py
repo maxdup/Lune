@@ -12,7 +12,7 @@ import resources
 
 class MainWindow(QtGui.QWidget):
 
-    def __init__(self, library, player, settings):
+    def __init__(self, library, player, settings, worker_queue):
         QtGui.QWidget.__init__(self)
 
         QtGui.QFontDatabase.addApplicationFont(":/fonts/luneicons.otf")
@@ -25,6 +25,9 @@ class MainWindow(QtGui.QWidget):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setWindowIcon(QtGui.QIcon(':/img/lune.png'))
         self.setWindowTitle('Lune')
+
+        self.library = library
+        self.worker_queue = worker_queue
 
         window_ctrl_layout = QtGui.QGridLayout(self)
         window_ctrl_layout.setContentsMargins(0, 0, 0, 0)
@@ -74,6 +77,11 @@ class MainWindow(QtGui.QWidget):
         main_container.addWidget(self.nav)
         main_container.addWidget(stack_container)
 
+        self.timer = QtCore.QTimer(self)
+        self.timer.setInterval(1000)
+        self.connect(self.timer, QtCore.SIGNAL("timeout()"), self.work_queue)
+        self.timer.start()
+
     def change_view(self, view):
         if view == 'lib':
             self.view_stack.setCurrentIndex(0)
@@ -81,3 +89,8 @@ class MainWindow(QtGui.QWidget):
         elif view == 'settings':
             self.view_stack.setCurrentIndex(1)
             self.nav.change_area(view)
+
+    def work_queue(self):
+        if not self.worker_queue.empty():
+            while not self.worker_queue.empty():
+                self.library.add_song(self.worker_queue.get())

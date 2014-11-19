@@ -9,11 +9,10 @@ from models.song import Song
 class Collector():
     FORMATS = ['mp3', 'flac', 'aac', 'ogg']
 
-    def __init__(self, library):
-        self.library = library
+    def __init__(self):
         self.identifier = Identifier()
 
-    def search_dir(self, path_obj):
+    def search_dir(self, work_queue, path_obj):
         found = []
         directory = os.walk(path_obj.path)
         for root, dirs, files in directory:
@@ -22,6 +21,4 @@ class Collector():
                     song = Song(os.path.join(root, file))
                     self.identifier.identify(song)
                     found.append(song)
-
-        self.library.add_song(found)
-        print(('Found ' + str(len(self.library.songs)) + ' audio files'))
+        work_queue.put(found)

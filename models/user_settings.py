@@ -4,14 +4,12 @@ from dal.settings_dao import SettingsDAO
 
 
 class UserSettings:
-    def __init__(self, collector):
-        self.collector = collector
+    def __init__(self):
         self.settings_dao = SettingsDAO()
         self.path_list = []
         for path in self.settings_dao.get_paths():
             path_obj = LibPath(path, self)
             self.path_list.append(path_obj)  # use self.addPath instead?
-            self.collector.search_dir(path_obj)
 
     def add_path(self, path):
         path_obj = LibPath(path, self)
@@ -33,7 +31,6 @@ class UserSettings:
 
         self.settings_dao.add_path(path_obj.path)
         self.path_list.append(path_obj)
-        self.collector.search_dir(path_obj)
         return path_obj
 
 
@@ -49,4 +46,3 @@ class LibPath:
     def remove(self):
         self.user_settings.path_list.remove(self)
         self.user_settings.settings_dao.del_path(self.path)
-        self.user_settings.collector.library.remove_path(self.path)
