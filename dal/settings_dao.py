@@ -26,7 +26,6 @@ class SettingsDAO():
         return self.settings['libpaths']
 
     def add_path(self, path):
-        # validate path?
         self.settings['libpaths'].append(path)
         self.save()
 

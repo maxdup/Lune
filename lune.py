@@ -6,7 +6,7 @@ import signal
 from PySide import QtGui
 
 from dal.collector import Collector
-from models.user_settings import UserSettings
+from models.settings.user_settings import UserSettings
 from models.library import Library
 from models.song_queue import SongQueue
 from views.main_window import MainWindow
