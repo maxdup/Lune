@@ -3,7 +3,7 @@
 from PySide import QtGui, QtCore
 from PySide.QtGui import QSizePolicy
 
-from .settings_view import SettingsView
+from .settings.settings_view import SettingsView
 from .status.status import Status
 from .top_bar import TopBar
 from .nav import Nav

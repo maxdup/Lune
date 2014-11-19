@@ -29,10 +29,10 @@ class PathManager(QtGui.QWidget):
         size = QtCore.QSize(25, 25)
         item = QtGui.QListWidgetItem(self.library_list)
         item.setSizeHint(size)
-        item_widget = PathToItem(path_obj, item, self)
+        item_widget = PathItem(path_obj, item, self)
         self.library_list.setItemWidget(item, item_widget)
 
-class PathToItem(QtGui.QWidget):
+class PathItem(QtGui.QWidget):
     def __init__(self, path_obj, item, path_manager):
         self.path_obj = path_obj
         self.item = item
