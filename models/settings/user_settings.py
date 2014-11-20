@@ -5,6 +5,6 @@ from models.settings.path_list import PathList
 
 
 class UserSettings:
-    def __init__(self):
+    def __init__(self, result_queue):
         self._settings_dao = SettingsDAO()
-        self.path_list = PathList(self._settings_dao)
+        self.path_list = PathList(self._settings_dao, result_queue)
