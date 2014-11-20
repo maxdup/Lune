@@ -7,7 +7,7 @@ from models.song import Song
 
 
 class Collector():
-    FORMATS = ['mp3', 'flac', 'aac', 'ogg']
+    FORMATS = ['mp3', 'flac', 'aac', 'opus', 'ogg', 'oga', 'ape', 'mpc', 'wav', 'pcm', 'aiff', 'm4a']
 
     def __init__(self):
         self.identifier = Identifier()
