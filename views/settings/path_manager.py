@@ -12,7 +12,7 @@ class PathManager(QtGui.QWidget):
         def add_path_dialog():
             path = QtGui.QFileDialog.getExistingDirectory()
             if path:
-                path_obj = self.user_settings.add_path(path)
+                path_obj = self.user_settings.path_list.append(path)
                 self.add_path(path_obj)
 
         btn_add_paths = QtGui.QPushButton('add paths')

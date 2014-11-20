@@ -37,6 +37,7 @@ var/
 *.mp3
 *.flac
 
+*.db
 resources.py
 settings.json
 

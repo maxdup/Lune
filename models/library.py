@@ -4,6 +4,7 @@ from models.song import Song
 from models.album import Album
 from models.artist import Artist
 from models.library_vm import LibraryViewModel
+from dal.library_db import LibraryDB
 
 
 class Library:
@@ -14,35 +15,21 @@ class Library:
         self.genres = []
         self.record = []
         self.lib_vm = LibraryViewModel(self)
+        self.library_db = LibraryDB()
 
-    def add_song(self, song):
-        if type(song) == Song:
-            artist = list(artist for artist in self.artists \
-                          if artist.name == song.track_info['artist'])
-            if artist:
-                artist = artist[0]
-            else:
-                artist = Artist(song.track_info['artist'])
-                self.artists.append(artist)
-                self.lib_vm.add_any(artist)
-
-            album = list(album for album in artist.albums \
-                     if album.title == song.track_info['album'])
-
-            if album:
-                album = album[0]
-                album.songs.append(song)
-            else:
-                album = Album(song.track_info['album'], [song], artist)
-                self.albums.append(album)
-                self.lib_vm.add_any(album)
-                artist.albums.append(album)
-            song.album = album
-
-
+    def load(self):
+        for song in self.library_db.get_all():
+            self.group(song)
             self.songs.append(song)
             self.lib_vm.add_any(song)
 
+    def add_song(self, song):
+
+        if type(song) == Song:
+            self.group(song)
+            self.songs.append(song)
+            self.lib_vm.add_any(song)
+            self.library_db.add_song(song)
         elif type(song) == list:
             for s in song:
                 self.add_song(s)
@@ -68,3 +55,27 @@ class Library:
             self.remove_song(song)
         self.songs = [song for song in self.songs if not song.path.startswith(path)]
         #todo, clean library viewmodel
+
+    def group(self, song):
+
+        artist = list(artist for artist in self.artists \
+                if artist.name == song.track_info['artist'])
+        if artist:
+            artist = artist[0]
+        else:
+            artist = Artist(song.track_info['artist'])
+            self.artists.append(artist)
+            self.lib_vm.add_any(artist)
+
+        album = list(album for album in artist.albums \
+                if album.title == song.track_info['album'])
+
+        if album:
+            album = album[0]
+            album.songs.append(song)
+        else:
+            album = Album(song.track_info['album'], [song], artist)
+            self.albums.append(album)
+            self.lib_vm.add_any(album)
+            artist.albums.append(album)
+        song.album = album

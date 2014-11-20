@@ -44,9 +44,7 @@ def main():
 
 
     result_queue = multiprocessing.Queue()
-    for path in settings.path_list:
-        p = multiprocessing.Process(target=worker, args=(result_queue,path,))
-        p.start()
+    library.load()
 
     view = MainWindow(library, player, settings, result_queue)
     view.show()
