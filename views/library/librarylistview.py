@@ -1,4 +1,4 @@
-from PySide import QtGui
+from PySide import QtGui, QtCore
 from PySide.QtGui import QListView, QStandardItemModel, QSortFilterProxyModel
 
 
@@ -14,17 +14,16 @@ class LibraryListView(QListView):
         self.proxymodel.setDynamicSortFilter(True)
         self.setModel(self.proxymodel)
         self.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.proxymodel.setSortCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
+        self.proxymodel.sort(0)
 
     def add(self, obj):
         item = self.item_strat.get_item(obj)
         self.itemmodel.appendRow(item)
+        print(self.proxymodel.columnCount())
+
         return item
 
     def filter(self, field, value):
         self.proxymodel.setFilterRole(field)
         self.proxymodel.setFilterFixedString(value)
-        
-
-
-        
-    

@@ -4,7 +4,7 @@ from PySide.QtCore import QSize
 
 class ModelToItemStrat:
 
-    TRACK_TITLE, ARTIST, ALBUM = range(1000, 1003)
+    TRACK_TITLE, TRACK_NB, ARTIST, ALBUM = range(1000, 1004)
     FILTER, PLAY = range(1101, 1103)
 
     def __init__(self, func=None):
@@ -18,6 +18,7 @@ class ModelToItemStrat:
 def get_song_item(song):
     item = QStandardItem()
     item.setData(song.track_info['title'], ModelToItemStrat.TRACK_TITLE)
+    item.setData(song.track_info['track_nb'], ModelToItemStrat.TRACK_NB)
     item.setData(song.track_info['artist'], ModelToItemStrat.ARTIST)
     item.setData(song.track_info['album'], ModelToItemStrat.ALBUM)
     item.setData(song, ModelToItemStrat.FILTER)
