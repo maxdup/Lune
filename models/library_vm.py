@@ -13,7 +13,7 @@ from views.library.lunesortfilterproxymodel import \
 class LibraryViewModel:
     def __init__(self, library):
 
-        self.songs = LibraryListView(ModelToItemStrat(get_song_item), LuneSortFilterProxyModel())
+        self.songs = LibraryListView(ModelToItemStrat(get_song_item))
         self.albums = QListAlbum(ModelToItemStrat(get_album_item))
         self.artists = LibraryListView(ModelToItemStrat(get_artist_item))
 
@@ -42,8 +42,12 @@ class LibraryViewModel:
             self.albums.filter(ModelToItemStrat.ARTIST, "")
 
         elif type(something) == Album:
+            self.songs.proxymodel.setSort(ModelToItemStrat.TRACK_NB)
             self.songs.filter(ModelToItemStrat.ALBUM, something.title)
 
         elif type(something) == Artist:
+            self.songs.proxymodel.setSort(ModelToItemStrat.TRACK_TITLE)
+            self.albums.proxymodel.setSort(ModelToItemStrat.DATE, False)
+
             self.albums.filter(ModelToItemStrat.ARTIST, something.name)
             self.songs.filter(ModelToItemStrat.ARTIST, something.name)

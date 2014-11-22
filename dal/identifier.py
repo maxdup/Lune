@@ -14,19 +14,19 @@ class Identifier():
         track_info = {}
         try:
             track_info = {
-                'track_nb': media.get_meta(vlc.Meta.TrackNumber),
+                'track_nb': int(media.get_meta(vlc.Meta.TrackNumber)),
                 'title': media.get_meta(vlc.Meta.Title),
                 'album': media.get_meta(vlc.Meta.Album),
                 'artist': media.get_meta(vlc.Meta.Artist),
                 'label': media.get_meta(vlc.Meta.Publisher),
-                'date': media.get_meta(vlc.Meta.Date),
+                'date': media.get_meta(vlc.Meta.Date) or 0,
                 'genre': media.get_meta(vlc.Meta.Genre),
                 'artwork': media.get_meta(vlc.Meta.ArtworkURL)
             }
             if track_info['artwork'] is not None:
                 track_info['artwork'] = url2pathname(track_info['artwork'][7:])
 
-            print(track_info)
+            #print(track_info)
 
         except:
             # TODO:

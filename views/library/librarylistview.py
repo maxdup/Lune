@@ -1,15 +1,16 @@
 from PySide import QtGui, QtCore
 from PySide.QtGui import QListView, QStandardItemModel, QSortFilterProxyModel
+from views.library.lunesortfilterproxymodel import LuneSortFilterProxyModel
 
 
 class LibraryListView(QListView):
-    def __init__(self, strategy, sortProxyModel=None):
+    def __init__(self, strategy):
         QListView.__init__(self)
 
         self.item_strat = strategy
 
         self.itemmodel = QStandardItemModel()
-        self.proxymodel = sortProxyModel or QSortFilterProxyModel()
+        self.proxymodel = LuneSortFilterProxyModel()
         self.proxymodel.setSourceModel(self.itemmodel)
         self.proxymodel.setDynamicSortFilter(True)
         self.setModel(self.proxymodel)
@@ -20,8 +21,6 @@ class LibraryListView(QListView):
     def add(self, obj):
         item = self.item_strat.get_item(obj)
         self.itemmodel.appendRow(item)
-        print(self.proxymodel.columnCount())
-
         return item
 
     def filter(self, field, value):
