@@ -6,11 +6,14 @@ from views.library.librarylistview import LibraryListView
 from views.library.model_to_item_strategy import ModelToItemStrat, \
     get_song_item, get_album_item, get_artist_item
 
+from views.library.lunesortfilterproxymodel import \
+    LuneSortFilterProxyModel
+
 
 class LibraryViewModel:
     def __init__(self, library):
 
-        self.songs = LibraryListView(ModelToItemStrat(get_song_item))
+        self.songs = LibraryListView(ModelToItemStrat(get_song_item), LuneSortFilterProxyModel())
         self.albums = QListAlbum(ModelToItemStrat(get_album_item))
         self.artists = LibraryListView(ModelToItemStrat(get_artist_item))
 

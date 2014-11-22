@@ -3,13 +3,13 @@ from PySide.QtGui import QListView, QStandardItemModel, QSortFilterProxyModel
 
 
 class LibraryListView(QListView):
-    def __init__(self, strategy):
+    def __init__(self, strategy, sortProxyModel=None):
         QListView.__init__(self)
 
         self.item_strat = strategy
 
         self.itemmodel = QStandardItemModel()
-        self.proxymodel = QSortFilterProxyModel()
+        self.proxymodel = sortProxyModel or QSortFilterProxyModel()
         self.proxymodel.setSourceModel(self.itemmodel)
         self.proxymodel.setDynamicSortFilter(True)
         self.setModel(self.proxymodel)
