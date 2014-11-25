@@ -4,6 +4,12 @@ from models.song import Song
 
 
 class SongQueue:
+
+    class Order:
+        RANDOM = -1
+        TRACKNB = 0
+        ALPHA = 1
+
     def __init__(self, queue=[], start_from=0):
         self.queue = []
         self.add_last(queue)
@@ -57,6 +63,11 @@ class SongQueue:
     def get_at_index(self, index):
         if self.has_index(index):
             self.at = index
+
+    def order_by(self, order, reverted=False):
+        if order == self.Order.TRACKNB:
+            self.queue.sort(
+                key=lambda x: x.track_info['track_nb'], reverse=reverted)
 
     def reset_queue(self):
         self.at = None
