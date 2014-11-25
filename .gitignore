@@ -38,6 +38,9 @@ var/
 *.flac
 
 *.db
+*.db.bak
+*.db.dat
+*.db.dir
 resources.py
 settings.json
 
