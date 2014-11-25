@@ -9,18 +9,24 @@ class SettingsDAO():
     settings are saved as json.
     the json object should look something like:
     {
-        'libpaths':['library path 1', 'library path 2']
+        'libpaths': ['library path 1', 'library path 2'],
+        'extensions': ['mp3', 'flac']
     }
     (plz update this schema as things move forward)
     '''
 
     def __init__(self):
         self.settings = {
-            'libpaths': []
+            'libpaths': [],
+            'extensions': []
         }
         if os.path.isfile('settings.json'):
             with open('settings.json', 'r') as input_file:
                 self.settings = json.load(input_file)
+
+    def save(self):
+        with open('settings.json', 'w') as outfile:
+            json.dump(self.settings, outfile)
 
     def get_paths(self):
         return self.settings['libpaths']
@@ -34,6 +40,15 @@ class SettingsDAO():
             self.settings['libpaths'].remove(path)
             self.save()
 
-    def save(self):
-        with open('settings.json', 'w') as outfile:
-            json.dump(self.settings, outfile)
+    def get_exts(self):
+        return self.settings['extensions']
+
+    def add_ext(self, ext):
+        if ext not in self.settings:
+            self.settings['extensions'].add(ext)
+            self.save()
+
+    def remove_ext(self, ext):
+        if ext in self.settings['extensions']:
+            self.settings['extensions'].remove(ext)
+            self.save()
