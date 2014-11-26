@@ -1,8 +1,8 @@
 from PySide import QtGui, QtCore
+from models.settings.extension_list import ExtensionList
+
 
 class ExtensionManager(QtGui.QWidget):
-
-    FORMATS = ['mp3', 'flac', 'aac', 'opus', 'ogg', 'oga', 'ape', 'mpc', 'wav', 'pcm', 'aiff', 'm4a']
 
     def __init__(self, user_settings):
         QtGui.QWidget.__init__(self)
@@ -13,10 +13,12 @@ class ExtensionManager(QtGui.QWidget):
 
         self.boxes = QtGui.QButtonGroup()
         self.boxes.setExclusive(False)
-        for i, ext in enumerate(self.FORMATS):
+        for i, ext in enumerate(ExtensionList.FORMATS):
             ext_checkbox = QtGui.QCheckBox(ext)
             self.boxes.addButton(ext_checkbox)
             layout.addWidget(ext_checkbox, i)
+            if ext in self.user_settings.extension_list:
+                ext_checkbox.setCheckState(QtCore.Qt.CheckState.Checked)
 
         self.boxes.buttonReleased.connect(self.value_changed)
 

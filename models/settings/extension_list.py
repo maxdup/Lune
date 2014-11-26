@@ -1,5 +1,8 @@
-
 class ExtensionList(list):
+
+    FORMATS = ['mp3', 'flac', 'aac', 'opus', 'ogg', 'oga',
+               'ape', 'mpc', 'wav', 'pcm', 'aiff', 'm4a']
+
     def __init__(self, settings_dao, *args):
         list.__init__(self, *args)
         self._settings_dao = settings_dao
