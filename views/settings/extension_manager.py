@@ -11,7 +11,19 @@ class ExtensionManager(QtGui.QWidget):
 
         layout.addWidget(QtGui.QLabel('include these formats in my library:'))
 
-        for ext in self.FORMATS:
-            layout.addWidget(QtGui.QCheckBox(ext))
+        self.boxes = QtGui.QButtonGroup()
+        self.boxes.setExclusive(False)
+        for i, ext in enumerate(self.FORMATS):
+            ext_checkbox = QtGui.QCheckBox(ext)
+            self.boxes.addButton(ext_checkbox)
+            layout.addWidget(ext_checkbox, i)
+
+        self.boxes.buttonReleased.connect(self.value_changed)
 
         self.setLayout(layout)
+
+    def value_changed(self, cb):
+        if cb.isChecked():
+            self.user_settings._settings_dao.add_ext(cb.text())
+        else:
+            self.user_settings._settings_dao.del_ext(cb.text())

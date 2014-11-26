@@ -44,11 +44,11 @@ class SettingsDAO():
         return self.settings['extensions']
 
     def add_ext(self, ext):
-        if ext not in self.settings:
-            self.settings['extensions'].add(ext)
+        if ext not in self.settings['extensions']:
+            self.settings['extensions'].append(ext)
             self.save()
 
-    def remove_ext(self, ext):
+    def del_ext(self, ext):
         if ext in self.settings['extensions']:
             self.settings['extensions'].remove(ext)
             self.save()
