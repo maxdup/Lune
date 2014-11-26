@@ -24,6 +24,6 @@ class ExtensionManager(QtGui.QWidget):
 
     def value_changed(self, cb):
         if cb.isChecked():
-            self.user_settings._settings_dao.add_ext(cb.text())
+            self.user_settings.extension_list.append(cb.text())
         else:
-            self.user_settings._settings_dao.del_ext(cb.text())
+            self.user_settings.extension_list.remove(cb.text())
