@@ -1,3 +1,4 @@
+
 from PySide import QtGui, QtCore
 from PySide.QtGui import QListView, QStandardItemModel, QSortFilterProxyModel
 from views.library.lunesortfilterproxymodel import LuneSortFilterProxyModel
@@ -21,8 +22,16 @@ class LibraryListView(QListView):
     def add(self, obj):
         item = self.item_strat.get_item(obj)
         self.itemmodel.appendRow(item)
+        if self.ctrl:
+            self.ctrl.update()
+
         return item
 
     def filter(self, field, value):
         self.proxymodel.setFilterRole(field)
         self.proxymodel.setFilterFixedString(value)
+        if self.ctrl:
+            self.ctrl.update()
+
+    def set_ctrl(self, ctrl):
+        self.ctrl = ctrl
