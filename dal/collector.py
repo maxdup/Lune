@@ -7,17 +7,15 @@ from models.song import Song
 
 
 class Collector():
-    FORMATS = ['mp3', 'flac', 'aac', 'opus', 'ogg', 'oga', 'ape', 'mpc', 'wav', 'pcm', 'aiff', 'm4a']
-
     def __init__(self):
         self.identifier = Identifier()
 
-    def search_dir(self, work_queue, path_obj):
+    def search_dir(self, work_queue, path_obj, extension_list):
         found = []
         directory = os.walk(path_obj.path)
         for root, dirs, files in directory:
             for file in files:
-                if file.split('.').pop() in self.FORMATS:
+                if file.split('.').pop() in extension_list:
                     song = Song(os.path.join(root, file))
                     self.identifier.identify(song)
                     found.append(song)

@@ -32,7 +32,7 @@ class PathList(list):
         list.append(self, libpath)
 
         p = multiprocessing.Process(target=worker,
-                                    args=(self.result_queue,libpath,))
+                                    args=(self.result_queue,libpath,self._settings_dao.get_exts(),))
         p.start()
 
         return libpath
@@ -41,9 +41,9 @@ class PathList(list):
         list.remove(self, libpath)
         self._settings_dao.del_path(libpath.path)
 
-def worker(result_queue, path):
+def worker(result_queue, path, exts):
     collect = Collector()
-    collect.search_dir(result_queue, path)
+    collect.search_dir(result_queue, path, exts)
 
 class LibPath:
     def __init__(self, path, path_list):

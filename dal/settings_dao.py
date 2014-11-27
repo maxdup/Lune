@@ -23,6 +23,9 @@ class SettingsDAO():
         if os.path.isfile('settings.json'):
             with open('settings.json', 'r') as input_file:
                 self.settings = json.load(input_file)
+        if 'extensions' not in self.settings or not self.settings['extensions']:
+            #default setting
+            self.settings['extensions'] = ['mp3', 'flac', 'm4a', 'wav']
 
     def save(self):
         with open('settings.json', 'w') as outfile:
