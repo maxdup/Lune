@@ -1,3 +1,5 @@
+from PySide import QtCore
+
 from .song import Song
 from .album import Album
 from .artist import Artist
@@ -48,12 +50,13 @@ class LibraryViewModel:
             self.songs.filter(ModelToItemStrat.ARTIST, "")
             self.albums.filter(ModelToItemStrat.ARTIST, "")
         elif type(something) == Album:
-            self.songs.proxymodel.setSort(ModelToItemStrat.TRACK_NB)
+            self.songs.proxymodel.setSortRole(ModelToItemStrat.TRACK_NB)
             self.songs.filter(ModelToItemStrat.ALBUM, something.title)
 
         elif type(something) == Artist:
-            self.songs.proxymodel.setSort(ModelToItemStrat.TRACK_TITLE)
-            self.albums.proxymodel.setSort(ModelToItemStrat.DATE, False)
+            self.songs.proxymodel.setSortRole(ModelToItemStrat.TRACK_TITLE)
+            self.albums.proxymodel.setSortRole(ModelToItemStrat.DATE)
+            self.albums.proxymodel.setSortOrder(QtCore.Qt.AscendingOrder)
 
             self.albums.filter(ModelToItemStrat.ARTIST, something.name)
             self.songs.filter(ModelToItemStrat.ARTIST, something.name)
