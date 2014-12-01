@@ -28,6 +28,5 @@ class Artist_v(LibraryView):
         col.setLayout(QtGui.QVBoxLayout())
         col.layout().addWidget(listview)
         col.layout().addWidget(ctrl)
-        col.layout().setContentsMargins(0,0,0,0)
-        ctrl.setSorts(listview.item_strat.get_sorts())
+        col.layout().setContentsMargins(0, 0, 0, 0)
         return col
