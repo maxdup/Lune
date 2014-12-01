@@ -1,5 +1,6 @@
 from PySide.QtGui import QStandardItem
 from PySide.QtCore import QSize
+from views.library.librarysort import LibrarySort
 
 
 class ModelToItemStrat:
@@ -34,7 +35,8 @@ def get_song_item(song):
     return item
 
 def get_song_sorts():
-    return [ModelToItemStrat.TRACK_TITLE, ModelToItemStrat.TRACK_NB]
+    return [LibrarySort('A-Z', ModelToItemStrat.TRACK_TITLE),
+            LibrarySort('Album', ModelToItemStrat.TRACK_NB)]
 
 def get_album_item(album):
     if not album:
@@ -50,7 +52,8 @@ def get_album_item(album):
     return item
 
 def get_album_sorts():
-    return [ModelToItemStrat.ALBUM, ModelToItemStrat.DATE]
+    return [LibrarySort('A-Z', ModelToItemStrat.ALBUM),
+            LibrarySort('Release Date', ModelToItemStrat.DATE, False)]
 
 def get_artist_item(artist):
     if not artist:
@@ -63,4 +66,5 @@ def get_artist_item(artist):
     return item
 
 def get_artist_sorts():
-    return [ModelToItemStrat.ARTIST]
+    return [LibrarySort('A-Z', ModelToItemStrat.ARTIST),
+            LibrarySort('Z-A', 0, False)]

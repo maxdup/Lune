@@ -17,6 +17,7 @@ class LibraryListCtrl(QtGui.QWidget):
         self.sort = QtGui.QPushButton('sorts')
         self.sort.clicked.connect(self.cycle_sort)
 
+        self.layout().addWidget(QtGui.QLabel('sorted by'))
         self.layout().addWidget(self.sort)
 
         self.sorts = listview.item_strat.get_sorts()
@@ -29,5 +30,6 @@ class LibraryListCtrl(QtGui.QWidget):
         self.at += 1
         if self.at == len(self.sorts):
             self.at = 0
-        self.sort.setText(str(self.sorts[self.at]))
-        self.listview.proxymodel.setSortRole(self.sorts[self.at])
+        self.sort.setText(self.sorts[self.at].text)
+        self.listview.proxymodel.setSortOrder(self.sorts[self.at].order)
+        self.listview.proxymodel.setSortRole(self.sorts[self.at].role)
