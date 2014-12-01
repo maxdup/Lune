@@ -29,4 +29,5 @@ class Artist_v(LibraryView):
         col.layout().addWidget(listview)
         col.layout().addWidget(ctrl)
         col.layout().setContentsMargins(0,0,0,0)
+        ctrl.setSorts([1001,1003])
         return col
