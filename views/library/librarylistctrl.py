@@ -21,15 +21,19 @@ class LibraryListCtrl(QtGui.QWidget):
         self.layout().addWidget(self.sort)
 
         self.sorts = listview.item_strat.get_sorts()
-        self.at = 0
+        self.set_sort(0)
+        self.update()
 
-    def update(self):
-        self.count.setText(str(self.listview.model().rowCount()))
-
-    def cycle_sort(self):
-        self.at += 1
-        if self.at == len(self.sorts):
+    def set_sort(self, index):
+        self.at = index
+        if self.at  == len(self.sorts):
             self.at = 0
         self.sort.setText(self.sorts[self.at].text)
         self.listview.proxymodel.setSortOrder(self.sorts[self.at].order)
         self.listview.proxymodel.setSortRole(self.sorts[self.at].role)
+
+    def cycle_sort(self):
+        self.set_sort(self.at + 1)
+
+    def update(self):
+        self.count.setText(str(self.listview.model().rowCount()))
