@@ -44,19 +44,19 @@ class LibraryViewModel:
         #elif type(something) == Year:
 
     def filtering(self, something=None):
-
+        #hardcoded indexes are prone to break
         if not something:
             self.songs.filter(ModelToItemStrat.ALBUM, "")
             self.songs.filter(ModelToItemStrat.ARTIST, "")
             self.albums.filter(ModelToItemStrat.ARTIST, "")
+
         elif type(something) == Album:
-            self.songs.proxymodel.setSortRole(ModelToItemStrat.TRACK_NB)
+            self.songs.sort(1)
             self.songs.filter(ModelToItemStrat.ALBUM, something.title)
 
         elif type(something) == Artist:
-            self.songs.proxymodel.setSortRole(ModelToItemStrat.TRACK_TITLE)
-            self.albums.proxymodel.setSortRole(ModelToItemStrat.DATE)
-            self.albums.proxymodel.setSortOrder(QtCore.Qt.AscendingOrder)
+            self.songs.sort(0)
+            self.albums.sort(1)
 
             self.albums.filter(ModelToItemStrat.ARTIST, something.name)
             self.songs.filter(ModelToItemStrat.ARTIST, something.name)

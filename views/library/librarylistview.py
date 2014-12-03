@@ -33,5 +33,8 @@ class LibraryListView(QListView):
         if self.ctrl:
             self.ctrl.update()
 
+    def sort(self, sort):
+        self.ctrl.set_sort(sort)
+
     def set_ctrl(self, ctrl):
         self.ctrl = ctrl
