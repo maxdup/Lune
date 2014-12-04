@@ -2,23 +2,23 @@ from PySide import QtGui, QtCore
 
 class PathManager(QtGui.QWidget):
 
-    def __init__(self, user_settings):
+    def __init__(self, path_list):
         QtGui.QWidget.__init__(self)
         layout = QtGui.QVBoxLayout()
         layout.setContentsMargins(0,0,0,0)
-        self.user_settings = user_settings
+        self._path_list = path_list
         self.library_list = QtGui.QListWidget()
 
         def add_path_dialog():
             path = QtGui.QFileDialog.getExistingDirectory()
             if path:
-                path_obj = self.user_settings.path_list.append(path)
+                path_obj = self._.path_list.append(path)
                 self.add_path(path_obj)
 
         btn_add_paths = QtGui.QPushButton('add paths')
         btn_add_paths.clicked.connect(add_path_dialog)
 
-        for path_obj in self.user_settings.path_list.get_LibPaths():
+        for path_obj in self._path_list.get_LibPaths():
             self.add_path(path_obj)
 
         layout.addWidget(self.library_list)
