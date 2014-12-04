@@ -12,7 +12,10 @@ class LuneSortFilterProxyModel(QSortFilterProxyModel):
         self.sort_order = sort_order
 
     def lessThan(self, left, right):
-        ordered = left.data(QSortFilterProxyModel.sortRole(self)) < right.data(QSortFilterProxyModel.sortRole(self))
+        try:
+            ordered = left.data(QSortFilterProxyModel.sortRole(self)) < right.data(QSortFilterProxyModel.sortRole(self))
+        except Exception as e:
+            ordered = not bool(left.data(QSortFilterProxyModel.sortRole(self)))
         if self.sortOrder() == QtCore.Qt.AscendingOrder:
             return ordered
         else:

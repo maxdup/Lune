@@ -45,7 +45,6 @@ class PathList(list):
         self.user_settings.notify()
 
     def get_LibPaths(self):
-        print([LibPath(path, self) for path in self])
         return [LibPath(path, self) for path in self]
 
 def worker(result_queue, path, exts):

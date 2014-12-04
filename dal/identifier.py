@@ -14,7 +14,7 @@ class Identifier():
         track_info = {}
         try:
             track_info = {
-                'track_nb': int(media.get_meta(vlc.Meta.TrackNumber)),
+                'track_nb': int(media.get_meta(vlc.Meta.TrackNumber) or 0),
                 'title': media.get_meta(vlc.Meta.Title),
                 'album': media.get_meta(vlc.Meta.Album),
                 'artist': media.get_meta(vlc.Meta.Artist),
@@ -28,7 +28,8 @@ class Identifier():
 
             #print(track_info)
 
-        except:
+        except Exception as e:
+            print(e)
             # TODO:
             # - clean messed up tags
             # - create empty trackinfos
