@@ -69,7 +69,8 @@ class QListAlbum(LibraryListView):
             viewport = self.viewport().rect()
             modelindex = self.model().mapToSource(id)
             item = self.model().sourceModel().itemFromIndex(modelindex)
-            item.setIcon(self.placeholder)
+            if item:
+                item.setIcon(self.placeholder)
         self.loaded_icons = []
 
     def reload(self):
