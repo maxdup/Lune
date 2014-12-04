@@ -4,46 +4,49 @@ import multiprocessing
 from dal.collector import Collector
 
 class PathList(list):
-    def __init__(self, settings_dao, result_queue, library, *args):
+    def __init__(self, user_settings, result_queue, library, *args):
+        list.__init__(self)
 
-        self._settings_dao = settings_dao
+        self.user_settings = user_settings
         self.result_queue = result_queue
         self.library = library
-        list.__init__(self, *args)
 
-        for path in self._settings_dao.get_paths():
-            libpath = LibPath(path, self)
-            list.append(self, libpath)
+        for path in args[0]:
+            list.append(self, path)
 
     def append(self, path):
-        libpath = LibPath(path, self)
         if self:
             for old_path in self:
-                if libpath.path.startswith(old_path.path):
+                if path.startswith(old_path):
                     # this means it's a subpath, we ignore it
                     return None
 
             marked_for_delete = []
             for old_path in self:
-                if old_path.path.startswith(libpath.path):
+                if old_path.startswith(path):
                     # this means a path has been made redundant by the new path
                     marked_for_delete.append(old_path)
             for path in marked_for_delete:
                 self.remove(path)
 
-        self._settings_dao.add_path(libpath.path)
-        list.append(self, libpath)
+        list.append(self, path)
+        self.user_settings.notify()
 
         p = multiprocessing.Process(target=worker,
-                                    args=(self.result_queue,libpath,self._settings_dao.get_exts(),))
+            args=(self.result_queue,path,
+                  self.user_settings.extension_list,))
         p.start()
 
-        return libpath
+        return LibPath(path, self)
 
-    def remove(self, libpath):
-        list.remove(self, libpath)
-        self._settings_dao.del_path(libpath.path)
-        self.library.remove_path(libpath.path)
+    def remove(self, path):
+        list.remove(self, path)
+        self.library.remove_path(path)
+        self.user_settings.notify()
+
+    def get_LibPaths(self):
+        print([LibPath(path, self) for path in self])
+        return [LibPath(path, self) for path in self]
 
 def worker(result_queue, path, exts):
     collect = Collector()
@@ -60,5 +63,5 @@ class LibPath:
             # could be an unmounted drive
 
     def remove(self):
-        self._path_list.remove(self)
+        self._path_list.remove(self.path)
 

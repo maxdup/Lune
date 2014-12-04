@@ -1,12 +1,19 @@
 import os
 
-from dal.settings_dao import SettingsDAO
+from dal.settings_dao import read, save
 from models.settings.path_list import PathList
 from models.settings.extension_list import ExtensionList
 
 
 class UserSettings:
     def __init__(self, result_queue, library):
-        self._settings_dao = SettingsDAO()
-        self.path_list = PathList(self._settings_dao, result_queue, library)
-        self.extension_list = ExtensionList(self._settings_dao)
+
+        self.filename = 'settings.json'
+
+        saved = read(self.filename)
+
+        self.path_list = PathList(self, result_queue, library, saved['libpaths'])
+        self.extension_list = ExtensionList(self, saved['extensions'])
+
+    def notify(self):
+        save(self)

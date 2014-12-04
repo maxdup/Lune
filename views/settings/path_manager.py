@@ -18,7 +18,7 @@ class PathManager(QtGui.QWidget):
         btn_add_paths = QtGui.QPushButton('add paths')
         btn_add_paths.clicked.connect(add_path_dialog)
 
-        for path_obj in self.user_settings.path_list:
+        for path_obj in self.user_settings.path_list.get_LibPaths():
             self.add_path(path_obj)
 
         layout.addWidget(self.library_list)
