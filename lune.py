@@ -23,7 +23,7 @@ def main():
     result_queue = multiprocessing.Queue()
 
     library = Library()
-    settings = UserSettings(result_queue)
+    settings = UserSettings(result_queue, library)
 
     song_queue = SongQueue() #this should not be here tho
     argsongs = None

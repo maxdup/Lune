@@ -20,6 +20,11 @@ class LibraryDB:
         s.close()
         return
 
+    def del_song(self, song):
+        s = shelve.open(self.db_file)
+        del s[song.path]
+        s.close()
+
 class SongAdapter:
     def __init__(self, song):
         self.path = song.path

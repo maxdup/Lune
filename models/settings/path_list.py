@@ -4,10 +4,13 @@ import multiprocessing
 from dal.collector import Collector
 
 class PathList(list):
-    def __init__(self, settings_dao, result_queue, *args):
-        self.result_queue = result_queue
-        list.__init__(self, *args)
+    def __init__(self, settings_dao, result_queue, library, *args):
+
         self._settings_dao = settings_dao
+        self.result_queue = result_queue
+        self.library = library
+        list.__init__(self, *args)
+
         for path in self._settings_dao.get_paths():
             libpath = LibPath(path, self)
             list.append(self, libpath)
@@ -40,6 +43,7 @@ class PathList(list):
     def remove(self, libpath):
         list.remove(self, libpath)
         self._settings_dao.del_path(libpath.path)
+        self.library.remove_path(libpath.path)
 
 def worker(result_queue, path, exts):
     collect = Collector()

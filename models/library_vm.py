@@ -43,6 +43,16 @@ class LibraryViewModel:
         #elif type(something) == Genre:
         #elif type(something) == Year:
 
+    def remove_any(self, something):
+        if type(something) == Song:
+            self.songs.remove(something)
+
+        elif type(something) == Album:
+            self.albums.remove(something)
+
+        elif type(something) == Artist:
+            self.artists.remove(something)
+
     def filtering(self, something=None):
         #hardcoded indexes are prone to break
         if not something:

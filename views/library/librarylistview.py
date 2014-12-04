@@ -27,6 +27,13 @@ class LibraryListView(QListView):
 
         return item
 
+    def remove(self, obj):
+        for i in range(0, self.model().sourceModel().rowCount()):
+            if obj == self.model().sourceModel().index(i,0).data(1101):
+                self.model().sourceModel().removeRow(i)
+                break
+        return
+
     def filter(self, field, value):
         self.proxymodel.setFilterRole(field)
         self.proxymodel.setFilterFixedString(value)

@@ -34,27 +34,35 @@ class Library:
             for s in song:
                 self.add_song(s)
 
-    def remove_song(self, r_song):
-        for album in [album for album in self.albums if r_song in album.songs]:
-            album.songs = [song for song in album.songs if song is not r_song]
+    def remove_song(self, song):
+        self.library_db.del_song(song)
+        self.lib_vm.remove_any(song)
+        self.songs.remove(song)
+
+        for album in [album for album in self.albums if song in album.songs]:
+            album.songs.remove(song)
         if len(album.songs) == 0:
             self.remove_album(album)
-            self.albums.remove(album)
 
-    def remove_album(self, r_album):
-        for artist in [artist for artist in self.artists if r_album in artist.albums]:
-            artist.albums = [album for album in artist.albums if album is not r_album]
+    def remove_album(self, album):
+        self.lib_vm.filtering()
+        self.lib_vm.remove_any(album)
+        self.albums.remove(album)
+
+        for artist in [artist for artist in self.artists if album in artist.albums]:
+            artist.albums.remove(album)
         if len(artist.albums) == 0:
             self.remove_artist(artist)
 
     def remove_artist(self, artist):
+        self.lib_vm.filtering()
+        self.lib_vm.remove_any(artist)
         self.artists.remove(artist)
 
     def remove_path(self, path):
+        # startswith() is not 100% accurate
         for song in [song for song in self.songs if song.path.startswith(path)]:
             self.remove_song(song)
-        self.songs = [song for song in self.songs if not song.path.startswith(path)]
-        #todo, clean library viewmodel
 
     def group(self, song):
 

@@ -6,7 +6,7 @@ from models.settings.extension_list import ExtensionList
 
 
 class UserSettings:
-    def __init__(self, result_queue):
+    def __init__(self, result_queue, library):
         self._settings_dao = SettingsDAO()
-        self.path_list = PathList(self._settings_dao, result_queue)
+        self.path_list = PathList(self._settings_dao, result_queue, library)
         self.extension_list = ExtensionList(self._settings_dao)
