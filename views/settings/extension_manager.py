@@ -24,8 +24,8 @@ class ExtensionManager(QtGui.QWidget):
 
         self.setLayout(layout)
 
-    def value_changed(self, cb):
-        if cb.isChecked():
-            self._ext_list.append(cb.text())
+    def value_changed(self, checkbox):
+        if checkbox.isChecked():
+            self._ext_list.append(checkbox.text())
         else:
-            self._ext_list.remove(cb.text())
+            self._ext_list.remove(checkbox.text())
