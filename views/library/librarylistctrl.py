@@ -29,8 +29,7 @@ class LibraryListCtrl(QtGui.QWidget):
         if self.at  == len(self.sorts):
             self.at = 0
         self.sort.setText(self.sorts[self.at].text)
-        self.listview.proxymodel.setSortOrder(self.sorts[self.at].order)
-        self.listview.proxymodel.setSortRole(self.sorts[self.at].role)
+        self.listview.proxymodel.set_library_sort = self.sorts[self.at]
 
     def cycle_sort(self):
         self.set_sort(self.at + 1)

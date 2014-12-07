@@ -52,8 +52,10 @@ def get_album_item(album):
     return item
 
 def get_album_sorts():
-    return [LibrarySort('A-Z', ModelToItemStrat.ALBUM),
-            LibrarySort('Release Date', ModelToItemStrat.DATE, False)]
+    az = LibrarySort('A-Z', ModelToItemStrat.ALBUM)
+    date = LibrarySort('Release Date', ModelToItemStrat.DATE, False)
+    date.fallback = az
+    return [az, date]
 
 def get_artist_item(artist):
     if not artist:

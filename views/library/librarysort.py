@@ -1,9 +1,10 @@
 from PySide import QtCore
 
 class LibrarySort:
-    def __init__(self, text, role=0, order=True):
+    def __init__(self, text='', role=0, order=True):
         self.text = text
         self.role = role
+        self.fallback = None
         if order:
             self.order = QtCore.Qt.AscendingOrder
         else:

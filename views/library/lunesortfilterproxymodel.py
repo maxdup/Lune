@@ -1,22 +1,28 @@
 from PySide.QtGui import QSortFilterProxyModel
 from PySide import QtCore
+
+from views.library.librarysort import LibrarySort
+
+
 class LuneSortFilterProxyModel(QSortFilterProxyModel):
     def __init__(self):
         QSortFilterProxyModel.__init__(self)
-        self.sort_order = QtCore.Qt.AscendingOrder
+        self.library_sort = LibrarySort()
 
-    def sortOrder(self):
-        return self.sort_order
-
-    def setSortOrder(self, sort_order):
-        self.sort_order = sort_order
+    def set_library_sort(self, lib_sort):
+        self.library_sort = lib_sort
+        self.setSortRole(self.library_sort.role)
 
     def lessThan(self, left, right):
+        sort = self.library_sort
+        while left.data(sort.role) == right.data(sort.role) and sort.fallback:
+            sort = sort.fallback
+
         try:
-            ordered = left.data(QSortFilterProxyModel.sortRole(self)) < right.data(QSortFilterProxyModel.sortRole(self))
+            ordered = left.data(sort.role) < right.data(sort.role)
         except Exception as e:
-            ordered = not bool(left.data(QSortFilterProxyModel.sortRole(self)))
-        if self.sortOrder() == QtCore.Qt.AscendingOrder:
+            ordered = not bool(left.data(sort.role))
+        if self.library_sort.order == QtCore.Qt.AscendingOrder:
             return ordered
         else:
             return not ordered
