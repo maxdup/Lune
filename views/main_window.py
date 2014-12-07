@@ -94,3 +94,4 @@ class MainWindow(QtGui.QWidget):
         if not self.worker_queue.empty():
             while not self.worker_queue.empty():
                 self.library.add_song(self.worker_queue.get())
+                self.library.lib_vm.sort()

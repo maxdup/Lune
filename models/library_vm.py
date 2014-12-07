@@ -53,6 +53,11 @@ class LibraryViewModel:
         elif type(something) == Artist:
             self.artists.remove(something)
 
+    def sort(self):
+        self.songs.proxymodel.resort()
+        self.albums.proxymodel.resort()
+        self.artists.proxymodel.resort()
+
     def filtering(self, something=None):
         #hardcoded indexes are prone to break
         if not something:

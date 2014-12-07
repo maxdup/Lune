@@ -12,6 +12,13 @@ class LuneSortFilterProxyModel(QSortFilterProxyModel):
     def set_library_sort(self, lib_sort):
         self.library_sort = lib_sort
         self.setSortRole(self.library_sort.role)
+        self.resort()
+
+    def resort(self):
+        print('sort called')
+        # big hack, oh yeah!
+        self.setDynamicSortFilter(True)
+        self.setDynamicSortFilter(False)
 
     def lessThan(self, left, right):
         sort = self.library_sort

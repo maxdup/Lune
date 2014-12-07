@@ -13,7 +13,6 @@ class LibraryListView(QListView):
         self.itemmodel = QStandardItemModel()
         self.proxymodel = LuneSortFilterProxyModel()
         self.proxymodel.setSourceModel(self.itemmodel)
-        self.proxymodel.setDynamicSortFilter(True)
         self.setModel(self.proxymodel)
         self.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.proxymodel.setSortCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
