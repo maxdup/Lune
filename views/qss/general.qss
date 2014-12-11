@@ -22,6 +22,9 @@ QWidget#nav > QPushButton {
 QWidget#nav > QPushButton:hover {
     color: lightgray;
 }
+QWidget#nav > QPushButton:checked {
+    color: #CCC;
+}
 
 QWidget#topbar > QLabel {
     max-height:20px;

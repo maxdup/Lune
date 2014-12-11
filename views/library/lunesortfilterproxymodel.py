@@ -15,7 +15,6 @@ class LuneSortFilterProxyModel(QSortFilterProxyModel):
         self.resort()
 
     def resort(self):
-        print('sort called')
         # big hack, oh yeah!
         self.setDynamicSortFilter(True)
         self.setDynamicSortFilter(False)

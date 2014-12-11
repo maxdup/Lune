@@ -15,13 +15,19 @@ class Nav(QtGui.QWidget):
 
         self.layout = QtGui.QHBoxLayout()
 
+        self.nav_group = QtGui.QButtonGroup()
+        self.nav_group.setExclusive(True)
+
         self.goto_song = QtGui.QPushButton('Song')
+        self.goto_song.setCheckable(True)
         self.goto_song.clicked.connect(
             lambda: self.set_lib_view(Song_v(bouncer, library.lib_vm)))
         self.goto_album = QtGui.QPushButton('Album')
+        self.goto_album.setCheckable(True)
         self.goto_album.clicked.connect(
             lambda: self.set_lib_view(Album_v(bouncer, library.lib_vm)))
         self.goto_artist = QtGui.QPushButton('Artist')
+        self.goto_artist.setCheckable(True)
         self.goto_artist.clicked.connect(
             lambda: self.set_lib_view(Artist_v(bouncer, library.lib_vm)))
         self.goto_lib = QtGui.QPushButton('Back')
@@ -29,8 +35,11 @@ class Nav(QtGui.QWidget):
             lambda: mainwindow.change_view('lib'))
 
         self.layout.addWidget(self.goto_artist)
+        self.nav_group.addButton(self.goto_artist)
         self.layout.addWidget(self.goto_album)
+        self.nav_group.addButton(self.goto_album)
         self.layout.addWidget(self.goto_song)
+        self.nav_group.addButton(self.goto_song)
         self.layout.addWidget(self.goto_lib)
         self.layout.addStretch()
 
