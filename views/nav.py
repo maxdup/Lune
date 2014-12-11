@@ -47,7 +47,9 @@ class Nav(QtGui.QWidget):
 
         self.setLayout(self.layout)
         self.layout.setContentsMargins(0, 25, 0, 0)
+
         self.set_lib_view(Artist_v(bouncer, library.lib_vm))
+        self.goto_artist.setChecked(True)
 
     def set_lib_view(self, view):
         self.library_v.setLayout(QtGui.QHBoxLayout())
