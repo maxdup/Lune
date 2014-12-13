@@ -10,7 +10,7 @@ class ProgressBar(QtGui.QWidget):
 
         self.player = player
 
-        layout = QtGui.QHBoxLayout(self)
+        layout = QtGui.QVBoxLayout(self)
 
         self.position_slider = QtGui.QSlider(QtCore.Qt.Horizontal, self)
         self.position_slider.setToolTip("Position")
@@ -23,9 +23,19 @@ class ProgressBar(QtGui.QWidget):
         self.connect(self.timer, QtCore.SIGNAL("timeout()"), self.update)
         self.player.set_timer(self.timer)
 
+        self.timein = QtGui.QLabel('time elapsed')
+        self.timeleft = QtGui.QLabel('time left')
+
+        time_container = QtGui.QWidget()
+        time_container.setLayout(QtGui.QHBoxLayout())
+        time_container.layout().addWidget(self.timein)
+        time_container.layout().addStretch()
+        time_container.layout().addWidget(self.timeleft)
+
         self.held = False
 
         layout.addWidget(self.position_slider)
+        layout.addWidget(time_container)
 
     def update(self):
         if not self.held:
