@@ -95,6 +95,9 @@ class Player:
     def set_timer(self, timer):
         self.timer = timer
 
+    def get_time(self):
+        return self.media.get_duration()
+
     def song_ended(self, data, moredata):
         if self.queue.get_next():
             self.play_prep()
