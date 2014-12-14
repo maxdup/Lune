@@ -23,14 +23,14 @@ class ProgressBar(QtGui.QWidget):
         self.connect(self.timer, QtCore.SIGNAL("timeout()"), self.update)
         self.player.set_timer(self.timer)
 
-        self.timein = QtGui.QLabel('time elapsed')
-        self.timeleft = QtGui.QLabel('time left')
+        self.time_in = QtGui.QLabel()
+        self.time_left = QtGui.QLabel()
 
         time_container = QtGui.QWidget()
         time_container.setLayout(QtGui.QHBoxLayout())
-        time_container.layout().addWidget(self.timein)
+        time_container.layout().addWidget(self.time_in)
         time_container.layout().addStretch()
-        time_container.layout().addWidget(self.timeleft)
+        time_container.layout().addWidget(self.time_left)
 
         self.held = False
 
@@ -43,18 +43,21 @@ class ProgressBar(QtGui.QWidget):
             self.time_update()
 
     def time_update(self):
-        t = self.player.get_time()/1000
-        if t >= 3600:
-            self.timein.setText(time.strftime("%H:%M:%S", time.gmtime(t)))
+        time_total = self.player.get_length()/1000
+        time_in = self.player.get_time()/1000
+        time_left = time_total - time_in
+        if self.player.queue:
+            if time_total >= 3600:
+                time_in = time.strftime("%H:%M:%S", time.gmtime(time_in))
+                time_left = time.strftime("%H:%M:%S", time.gmtime(time_left))
+            else:
+                time_in = time.strftime("%M:%S", time.gmtime(time_in))
+                time_left = time.strftime("%M:%S", time.gmtime(time_left))
         else:
-            self.timein.setText(time.strftime("%M:%S", time.gmtime(t)))
+            time_in = time_left = ''
 
-        t = self.player.get_length()/1000
-        if t >= 3600:
-            self.timeleft.setText(time.strftime("%H:%M:%S", time.gmtime(t)))
-        else:
-            self.timeleft.setText(time.strftime("%M:%S", time.gmtime(t)))
-
+        self.time_in.setText(time_in)
+        self.time_left.setText(time_left)
 
     def _slider_lifted(self):
         self.held = True
