@@ -40,11 +40,21 @@ class ProgressBar(QtGui.QWidget):
     def update(self):
         if not self.held:
             self.position_slider.setValue(self.player.get_position() * 500)
-            t = self.player.get_time()/1000
-            if t >= 3600:
-                self.timeleft.setText(time.strftime("%H:%M:%S", time.gmtime(t)))
-            else:
-                self.timeleft.setText(time.strftime("%M:%S", time.gmtime(t)))
+            self.time_update()
+
+    def time_update(self):
+        t = self.player.get_time()/1000
+        if t >= 3600:
+            self.timein.setText(time.strftime("%H:%M:%S", time.gmtime(t)))
+        else:
+            self.timein.setText(time.strftime("%M:%S", time.gmtime(t)))
+
+        t = self.player.get_length()/1000
+        if t >= 3600:
+            self.timeleft.setText(time.strftime("%H:%M:%S", time.gmtime(t)))
+        else:
+            self.timeleft.setText(time.strftime("%M:%S", time.gmtime(t)))
+
 
     def _slider_lifted(self):
         self.held = True
