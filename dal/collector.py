@@ -11,12 +11,10 @@ class Collector():
         self.identifier = Identifier()
 
     def search_dir(self, work_queue, path, extension_list):
-        found = []
         directory = os.walk(path)
         for root, dirs, files in directory:
             for file in files:
                 if file.split('.').pop() in extension_list:
                     song = Song(os.path.join(root, file))
                     self.identifier.identify(song)
-                    found.append(song)
-        work_queue.put(found)
+                    work_queue.put(song)
