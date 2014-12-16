@@ -21,6 +21,7 @@ class ExtensionManager(QtGui.QWidget):
                 ext_checkbox.setCheckState(QtCore.Qt.CheckState.Checked)
 
         self.boxes.buttonReleased.connect(self.value_changed)
+        layout.addStretch()
 
         self.setLayout(layout)
 

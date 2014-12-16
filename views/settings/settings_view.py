@@ -15,4 +15,14 @@ class SettingsView(QtGui.QWidget):
         layout.addWidget(path_manager)
         layout.addWidget(extension_manager)
 
+
+        update_manager = QtGui.QWidget()
+        update_layout = QtGui.QVBoxLayout()
+        update_layout.addWidget(QtGui.QLabel('Update yout library:'))
+        update_layout.addWidget(QtGui.QPushButton('Update'))
+        update_layout.addStretch()
+        update_manager.setLayout(update_layout)
+
+        layout.addWidget(update_manager)
+
         self.setLayout(layout)
