@@ -18,8 +18,10 @@ class SettingsView(QtGui.QWidget):
 
         update_manager = QtGui.QWidget()
         update_layout = QtGui.QVBoxLayout()
-        update_layout.addWidget(QtGui.QLabel('Update yout library:'))
+        update_layout.addWidget(QtGui.QLabel('Update your library:'))
         update_layout.addWidget(QtGui.QPushButton('Update'))
+        update_layout.addWidget(QtGui.QLabel('Clean your library:'))
+        update_layout.addWidget(QtGui.QPushButton('Clean'))
         update_layout.addStretch()
         update_manager.setLayout(update_layout)
 
