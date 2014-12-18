@@ -4,6 +4,8 @@ import os
 
 from dal.identifier import Identifier
 from models.song import Song
+from models.lib_operation import LibOperation, add_song
+
 
 
 class Collector():
@@ -17,4 +19,5 @@ class Collector():
                 if file.split('.').pop() in extension_list:
                     song = Song(os.path.join(root, file))
                     self.identifier.identify(song)
-                    work_queue.put(song)
+                    op = LibOperation(song, add_song)
+                    work_queue.put(op)

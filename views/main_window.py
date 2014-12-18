@@ -94,7 +94,8 @@ class MainWindow(QtGui.QWidget):
         if not self.worker_queue.empty():
             batch = 100
             while not self.worker_queue.empty() and batch:
-                self.library.add_song(self.worker_queue.get())
+                operation = self.worker_queue.get()
+                operation.execute(self.library)
                 batch -= 1
 
             self.library.lib_vm.sort()
