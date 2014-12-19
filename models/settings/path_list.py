@@ -41,7 +41,7 @@ class PathList(list):
 
     def remove(self, path):
         list.remove(self, path)
-        self.library.remove_path(path)
+        self.library.remove_path(path, self.result_queue)
         self.user_settings.notify()
 
     def get_LibPaths(self):

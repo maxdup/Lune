@@ -14,4 +14,4 @@ def add_song(library, subject):
     library.add_song(subject)
 
 def remove_song(library, subject):
-    return NotImplemented
+    library.library_db.del_song(subject)

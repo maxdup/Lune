@@ -4,6 +4,7 @@ from models.song import Song
 from models.album import Album
 from models.artist import Artist
 from models.library_vm import LibraryViewModel
+from models.lib_operation import LibOperation, remove_song
 from dal.library_db import LibraryDB
 
 
@@ -36,7 +37,6 @@ class Library:
                 self.add_song(s)
 
     def remove_song(self, song):
-        self.library_db.del_song(song)
         self.lib_vm.remove_any(song)
         self.songs.remove(song)
 
@@ -60,10 +60,12 @@ class Library:
         self.lib_vm.remove_any(artist)
         self.artists.remove(artist)
 
-    def remove_path(self, path):
+    def remove_path(self, path, work_queue):
         # startswith() is not 100% accurate
+        operations = []
         for song in [song for song in self.songs if song.path.startswith(path)]:
             self.remove_song(song)
+            work_queue.put(LibOperation(song, remove_song))
 
     def group(self, song):
 
