@@ -20,10 +20,11 @@ def main():
 
     signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-    result_queue = multiprocessing.Queue()
+    multi_queue = multiprocessing.Queue()
+    gui_queue = []
 
     library = Library()
-    settings = UserSettings(result_queue, library)
+    settings = UserSettings(multi_queue, gui_queue, library)
 
     song_queue = SongQueue() #this should not be here tho
     argsongs = None
@@ -46,7 +47,7 @@ def main():
 
     library.load()
 
-    view = MainWindow(library, player, settings, result_queue)
+    view = MainWindow(library, player, settings, multi_queue, gui_queue)
     view.show()
 
     app.exec_()

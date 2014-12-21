@@ -37,6 +37,7 @@ class Library:
                 self.add_song(s)
 
     def remove_song(self, song):
+        self.library_db.del_song(song)
         self.lib_vm.remove_any(song)
         self.songs.remove(song)
 
@@ -65,7 +66,7 @@ class Library:
         operations = []
         for song in [song for song in self.songs if song.path.startswith(path)]:
             self.remove_song(song)
-            work_queue.put(LibOperation(song, remove_song))
+            work_queue.append(LibOperation(song, remove_song))
 
     def group(self, song):
 

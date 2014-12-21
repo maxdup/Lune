@@ -12,7 +12,7 @@ import resources
 
 class MainWindow(QtGui.QWidget):
 
-    def __init__(self, library, player, settings, multi_queue):
+    def __init__(self, library, player, settings, multi_queue, gui_queue):
         QtGui.QWidget.__init__(self)
 
         QtGui.QFontDatabase.addApplicationFont(":/fonts/luneicons.otf")
