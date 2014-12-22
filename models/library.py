@@ -61,12 +61,11 @@ class Library:
         self.lib_vm.remove_any(artist)
         self.artists.remove(artist)
 
-    def remove_path(self, path, work_queue):
+    def remove_path(self, path, operation_queue):
         # startswith() is not 100% accurate
         operations = []
         for song in [song for song in self.songs if song.path.startswith(path)]:
-            self.remove_song(song)
-            work_queue.append(LibOperation(song, remove_song))
+            operation_queue.push(LibOperation(song, remove_song))
 
     def group(self, song):
 

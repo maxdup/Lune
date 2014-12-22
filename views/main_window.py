@@ -12,7 +12,7 @@ import resources
 
 class MainWindow(QtGui.QWidget):
 
-    def __init__(self, library, player, settings, multi_queue, gui_queue):
+    def __init__(self, library, player, settings, operation_queue):
         QtGui.QWidget.__init__(self)
 
         QtGui.QFontDatabase.addApplicationFont(":/fonts/luneicons.otf")
@@ -27,8 +27,7 @@ class MainWindow(QtGui.QWidget):
         self.setWindowTitle('Lune')
 
         self.library = library
-        self.multi_queue = multi_queue
-        self.gui_queue = []
+        self.operation_queue = operation_queue
 
         window_ctrl_layout = QtGui.QGridLayout(self)
         window_ctrl_layout.setContentsMargins(0, 0, 0, 0)
@@ -92,14 +91,10 @@ class MainWindow(QtGui.QWidget):
             self.nav.change_area(view)
 
     def work_queue(self):
-        while not self.multi_queue.empty():
-            self.gui_queue.append(self.multi_queue.get())
-
-        if self.gui_queue:
+        if self.operation_queue:
             batch = 100
-            while self.gui_queue and batch:
-                operation = self.gui_queue.pop()
+            while self.operation_queue and batch:
+                operation = self.operation_queue.shift()
                 operation.execute(self.library)
                 batch -= 1
-
             self.library.lib_vm.sort()

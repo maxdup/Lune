@@ -4,12 +4,11 @@ import multiprocessing
 from dal.collector import Collector
 
 class PathList(list):
-    def __init__(self, user_settings, result_queue, gui_queue, library, *args):
+    def __init__(self, user_settings, operation_queue, library, *args):
         list.__init__(self)
 
         self.user_settings = user_settings
-        self.result_queue = result_queue
-        self.gui_queue = gui_queue
+        self.operation_queue = operation_queue
         self.library = library
 
         for path in args[0]:
@@ -34,7 +33,7 @@ class PathList(list):
         self.user_settings.notify()
 
         p = multiprocessing.Process(target=worker,
-            args=(self.result_queue,path,
+            args=(self.operation_queue.multi_queue,path,
                   self.user_settings.extension_list,))
         p.start()
 
@@ -42,7 +41,7 @@ class PathList(list):
 
     def remove(self, path):
         list.remove(self, path)
-        self.library.remove_path(path, self.gui_queue)
+        self.library.remove_path(path, self.operation_queue)
         self.user_settings.notify()
 
     def get_LibPaths(self):

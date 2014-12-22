@@ -11,8 +11,7 @@ from models.song_queue import SongQueue
 from views.main_window import MainWindow
 from views.player import Player
 from controllers.arg_parser import argParser
-
-import multiprocessing
+from models.gui_operation_queue import GuiOperationQueue
 
 def main():
 
@@ -20,11 +19,10 @@ def main():
 
     signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-    multi_queue = multiprocessing.Queue()
-    gui_queue = []
+    operation_queue = GuiOperationQueue()
 
     library = Library()
-    settings = UserSettings(multi_queue, gui_queue, library)
+    settings = UserSettings(operation_queue, library)
 
     song_queue = SongQueue() #this should not be here tho
     argsongs = None
@@ -44,10 +42,9 @@ def main():
         myappid = 'Lune.Atlas'
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
-
     library.load()
 
-    view = MainWindow(library, player, settings, multi_queue, gui_queue)
+    view = MainWindow(library, player, settings, operation_queue)
     view.show()
 
     app.exec_()
