@@ -32,6 +32,7 @@ def get_song_item(song):
     item.setData(song, ModelToItemStrat.FILTER)
     item.setData(song, ModelToItemStrat.PLAY)
     item.setText(song.track_info['title'])
+    song.item = item
     return item
 
 def get_song_sorts():
@@ -49,6 +50,7 @@ def get_album_item(album):
     item.setData(album, ModelToItemStrat.PLAY)
     item.setText(album.title)
     item.setSizeHint(QSize(128,148))
+    album.item = item
     return item
 
 def get_album_sorts():
@@ -65,6 +67,7 @@ def get_artist_item(artist):
     item.setData(artist, ModelToItemStrat.FILTER)
     item.setData(artist, ModelToItemStrat.PLAY)
     item.setText(artist.name)
+    artist.item = item
     return item
 
 def get_artist_sorts():

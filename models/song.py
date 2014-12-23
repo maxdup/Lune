@@ -6,6 +6,7 @@ class Song:
         self.path = path
         self.track_info = track_info
         self.album = album
+        self.item = None
 
     def setAlbum(self, album):
         self.album = album

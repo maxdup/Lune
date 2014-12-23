@@ -8,6 +8,7 @@ class Album(Playlist):
         self.artist = artist
         self.artwork = None
         self.placeholder = None
+        self.item = None
 
     def get_art(self):
         if not self.songs:

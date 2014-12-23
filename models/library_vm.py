@@ -32,12 +32,15 @@ class LibraryViewModel:
 
         if type(something) == Song:
             self.songs.add(something)
+            self.songs.proxymodel.resort()
 
         elif type(something) == Album:
             self.albums.add(something)
+            self.albums.proxymodel.resort()
 
         elif type(something) == Artist:
             self.artists.add(something)
+            self.artists.proxymodel.resort()
 
         #elif type(something) == Record:
         #elif type(something) == Genre:

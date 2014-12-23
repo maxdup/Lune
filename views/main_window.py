@@ -97,4 +97,3 @@ class MainWindow(QtGui.QWidget):
                 operation = self.operation_queue.shift()
                 operation.execute(self.library)
                 batch -= 1
-            self.library.lib_vm.sort()
