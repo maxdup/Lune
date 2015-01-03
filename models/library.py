@@ -19,7 +19,7 @@ class Library:
         self.library_db = LibraryDB()
 
     def load(self):
-        for song in self.library_db.get_all():
+        for song in self.library_db.get_all_songs():
             self.group(song)
             self.songs.append(song)
             self.lib_vm.add_any(song)
@@ -63,7 +63,6 @@ class Library:
 
     def remove_path(self, path, operation_queue):
         # startswith() is not 100% accurate
-        operations = []
         for song in [song for song in self.songs if song.path.startswith(path)]:
             operation_queue.push(LibOperation(song, remove_song))
 

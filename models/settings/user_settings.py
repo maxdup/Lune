@@ -9,6 +9,7 @@ class UserSettings:
     def __init__(self, operation_queue, library):
 
         self.filename = 'settings.json'
+        self.library = library
         self.operation_queue = operation_queue
 
         saved = read(self.filename)

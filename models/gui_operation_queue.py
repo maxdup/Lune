@@ -1,5 +1,6 @@
 import multiprocessing
 from dal.collector import Collector
+from dal.registrar import Registrar
 
 
 class GuiOperationQueue:
@@ -35,6 +36,10 @@ class GuiOperationQueue:
         while not self.multi_queue.empty():
             self.push(self.multi_shift())
 
-def collect_worker(result_queue, path, exts):
+def collect_worker(multi_queue, paths, exts):
     collect = Collector()
-    collect.search_dir(result_queue, path, exts)
+    collect.search_dir(multi_queue, paths, exts)
+
+def cleaning_worker(multi_queue, library):
+    registrar = Registrar(library)
+    registrar.clean_library(multi_queue)

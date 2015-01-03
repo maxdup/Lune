@@ -1,5 +1,5 @@
 from PySide import QtGui, QtCore
-from models.gui_operation_queue import collect_worker, clean_worker
+from models.gui_operation_queue import collect_worker, cleaning_worker
 
 import multiprocessing
 
@@ -31,7 +31,7 @@ class LibraryManager(QtGui.QWidget):
                           self.user_settings.path_list,
                           self.user_settings.extension_list,))
         p.start()
-        return
 
     def clean_lib(self):
-        return
+        cleaning_worker(self.user_settings.operation_queue,
+                        self.user_settings.library)

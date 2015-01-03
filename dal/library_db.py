@@ -5,13 +5,17 @@ class LibraryDB:
     def __init__(self):
         self.db_file = 'Library.db'
 
-    def get_all(self):
+    def get_all_songs(self):
         songs = []
         s = shelve.open(self.db_file)
         for key in s.keys():
             entry = s[key]
             songs.append(Song(entry.path, entry.track_info))
         return songs
+
+    def get_all_keys(self):
+        s = shelve.open(self.db_file)
+        return s.keys()
 
     def add_song(self, song):
         entry = SongAdapter(song)
