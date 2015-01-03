@@ -1,7 +1,7 @@
 import os
 import multiprocessing
 
-from dal.collector import Collector
+from models.gui_operation_queue import collect_worker
 
 class PathList(list):
     def __init__(self, user_settings, operation_queue, library, *args):
@@ -32,7 +32,7 @@ class PathList(list):
         list.append(self, path)
         self.user_settings.notify()
 
-        p = multiprocessing.Process(target=worker,
+        p = multiprocessing.Process(target=collect_worker,
             args=(self.operation_queue.multi_queue,path,
                   self.user_settings.extension_list,))
         p.start()
@@ -46,10 +46,6 @@ class PathList(list):
 
     def get_LibPaths(self):
         return [LibPath(path, self) for path in self]
-
-def worker(result_queue, path, exts):
-    collect = Collector()
-    collect.search_dir(result_queue, path, exts)
 
 class LibPath:
     def __init__(self, path, path_list):

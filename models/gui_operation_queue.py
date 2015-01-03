@@ -1,4 +1,5 @@
 import multiprocessing
+from dal.collector import Collector
 
 
 class GuiOperationQueue:
@@ -33,3 +34,7 @@ class GuiOperationQueue:
     def __unload_multi(self):
         while not self.multi_queue.empty():
             self.push(self.multi_shift())
+
+def collect_worker(result_queue, path, exts):
+    collect = Collector()
+    collect.search_dir(result_queue, path, exts)

@@ -11,12 +11,17 @@ class Collector():
     def __init__(self):
         self.identifier = Identifier()
 
-    def search_dir(self, multiprocess_queue, path, extension_list):
-        directory = os.walk(path)
-        for root, dirs, files in directory:
-            for file in files:
-                if file.split('.').pop() in extension_list:
-                    song = Song(os.path.join(root, file))
-                    self.identifier.identify(song)
-                    op = LibOperation(song, add_song)
-                    multiprocess_queue.put(op)
+    def search_dir(self, multiprocess_queue, paths, extension_list):
+        if not isinstance(paths, list):
+            paths = [paths]
+
+        for path in paths:
+            print(path)
+            directory = os.walk(path)
+            for root, dirs, files in directory:
+                for file in files:
+                    if file.split('.').pop() in extension_list:
+                        song = Song(os.path.join(root, file))
+                        self.identifier.identify(song)
+                        op = LibOperation(song, add_song)
+                        multiprocess_queue.put(op)

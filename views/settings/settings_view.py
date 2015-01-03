@@ -13,7 +13,7 @@ class SettingsView(QtGui.QWidget):
 
         path_manager = PathManager(user_settings.path_list)
         extension_manager = ExtensionManager(user_settings.extension_list)
-        library_manager = LibraryManager()
+        library_manager = LibraryManager(user_settings)
 
         layout.addWidget(path_manager)
         layout.addWidget(extension_manager)
