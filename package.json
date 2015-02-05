@@ -1,0 +1,27 @@
+{
+  "name": "Lune",
+  "version": "0.1.0",
+  "description": "a cross-platform music player for Windows, linux and mac aiming to provide the widest possible support of audio formats and the best user experience.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maxdup/Lune"
+  },
+  "author": "Maxime Dupuis",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/maxdup/Lune/issues"
+  },
+  "dependencies": {
+    "grunt": "~0.4.5",
+    "grunt-shell": "~1.1.1",
+    "grunt-contrib-watch": "~0.6.1"
+  }
+}
