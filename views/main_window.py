@@ -8,6 +8,8 @@ from .status.status import Status
 from .top_bar import TopBar
 from .nav import Nav
 
+from models.lib_operation import LibOperation, load_song
+
 import resources
 
 class MainWindow(QtGui.QWidget):
@@ -82,6 +84,9 @@ class MainWindow(QtGui.QWidget):
         self.connect(self.timer, QtCore.SIGNAL("timeout()"), self.work_queue)
         self.timer.start()
 
+        for song in self.library.library_db.get_all_songs():
+            operation_queue.push(LibOperation(song, load_song))
+
     def change_view(self, view):
         if view == 'lib':
             self.view_stack.setCurrentIndex(0)
@@ -92,7 +97,7 @@ class MainWindow(QtGui.QWidget):
 
     def work_queue(self):
         if self.operation_queue:
-            batch = 100
+            batch = 10
             while self.operation_queue and batch:
                 operation = self.operation_queue.shift()
                 operation.execute(self.library)

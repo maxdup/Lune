@@ -18,13 +18,6 @@ class Library:
         self.lib_vm = LibraryViewModel(self)
         self.library_db = LibraryDB()
 
-    def load(self):
-        for song in self.library_db.get_all_songs():
-            self.group(song)
-            self.songs.append(song)
-            self.lib_vm.add_any(song)
-        self.lib_vm.sort()
-
     def add_song(self, song):
 
         if type(song) == Song:

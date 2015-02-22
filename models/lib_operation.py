@@ -13,5 +13,10 @@ class LibOperation():
 def add_song(library, subject):
     library.add_song(subject)
 
+def load_song(library, subject):
+    library.group(subject)
+    library.songs.append(subject)
+    library.lib_vm.add_any(subject)
+
 def remove_song(library, subject):
     library.remove_song(subject)

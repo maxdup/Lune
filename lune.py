@@ -41,9 +41,6 @@ def main():
         import ctypes
         myappid = 'Lune.Atlas'
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-
-    library.load()
-
     view = MainWindow(library, player, settings, operation_queue)
     view.show()
 
