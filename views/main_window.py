@@ -96,6 +96,7 @@ class MainWindow(QtGui.QWidget):
             self.nav.change_area(view)
 
     def work_queue(self):
+        # change to time based instead of quantity based
         if self.operation_queue:
             batch = 10
             while self.operation_queue and batch:

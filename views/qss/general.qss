@@ -10,7 +10,6 @@ QWidget#status{
     max-height: 80px;
 }
 
-
 QWidget#nav > QPushButton {
     color: gray;
     background: transparent;
@@ -112,7 +111,9 @@ QListView#albums::item:selected {
     padding: 5px;
 }
 
-
+QCheckBox::indicator {
+    color: #EEE;
+}
 
 QSlider::groove:horizontal {
     height: 6px;
