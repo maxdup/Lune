@@ -36,7 +36,6 @@ def main():
     if song_queue:
         player.play()
 
-
     if sys.platform == 'win32':
         import ctypes
         myappid = 'Lune.Atlas'

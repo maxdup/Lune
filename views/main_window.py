@@ -3,6 +3,7 @@
 from PySide import QtGui, QtCore
 from PySide.QtGui import QSizePolicy
 
+from .now_playing.now_view import NowView
 from .settings.settings_view import SettingsView
 from .status.status import Status
 from .top_bar import TopBar
@@ -70,9 +71,12 @@ class MainWindow(QtGui.QWidget):
 
         settings_v = SettingsView(settings)
 
+        now_v = NowView(player)
+
         self.view_stack = QtGui.QStackedLayout()
         self.view_stack.addWidget(content_v)
         self.view_stack.addWidget(settings_v)
+        self.view_stack.addWidget(now_v)
 
         stack_container.setLayout(self.view_stack)
         self.nav = Nav(self, library, library_v, player.bouncer)
@@ -93,6 +97,9 @@ class MainWindow(QtGui.QWidget):
             self.nav.change_area(view)
         elif view == 'settings':
             self.view_stack.setCurrentIndex(1)
+            self.nav.change_area(view)
+        elif view == 'now':
+            self.view_stack.setCurrentIndex(2)
             self.nav.change_area(view)
 
     def work_queue(self):

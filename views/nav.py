@@ -12,6 +12,7 @@ class Nav(QtGui.QWidget):
 
         self.library = library
         self.library_v = library_v
+        self.mainwindow = mainwindow
 
         self.layout = QtGui.QHBoxLayout()
 
@@ -65,7 +66,7 @@ class Nav(QtGui.QWidget):
             self.goto_album.show()
             self.goto_artist.show()
             self.goto_lib.hide()
-        if area == 'settings':
+       else:
             self.goto_song.hide()
             self.goto_album.hide()
             self.goto_artist.hide()

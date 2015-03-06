@@ -34,6 +34,14 @@ class TopBar(QtGui.QWidget):
         layout.addWidget(controls)
         layout.setContentsMargins(0, 15, 0, 0)
 
+        #test stuff
+        now = QtGui.QPushButton('o')
+        controls_l.addWidget(now)
+        now.clicked.connect(self.now)
+    def now(self):
+        self.mw.change_view('now')
+        #end test
+
     def shutdown(self):
         QtCore.QCoreApplication.instance().quit()
     def maximize(self):
