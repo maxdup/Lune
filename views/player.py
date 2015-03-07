@@ -49,7 +49,7 @@ class Player:
     def stop(self):
         if self.__state['prepped']:
             self.media_player.stop()
-            self.queue = SongQueue()
+            self.set_queue(SongQueue())
             self['playing'] = False
             self['prepped'] = False
 
@@ -82,6 +82,7 @@ class Player:
         self.queue = queue
         if queue:
             self.play_prep()
+        self.status_vm.update_track_list()
 
     def seek(self, position):
         self.media_player.set_position(position / 500)

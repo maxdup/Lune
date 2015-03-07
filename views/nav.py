@@ -6,13 +6,12 @@ from views.library.song_v import Song_v
 
 
 class Nav(QtGui.QWidget):
-    def __init__(self, mainwindow, library, library_v, bouncer):
+    def __init__(self, mainwindow, library, bouncer):
         QtGui.QWidget.__init__(self)
         self.setObjectName('nav')
 
         self.library = library
-        self.library_v = library_v
-        self.mainwindow = mainwindow
+        self.library_v = mainwindow.library_v
 
         self.layout = QtGui.QHBoxLayout()
 
@@ -34,6 +33,9 @@ class Nav(QtGui.QWidget):
         self.goto_lib = QtGui.QPushButton('Back')
         self.goto_lib.clicked.connect(
             lambda: mainwindow.change_view('lib'))
+        self.goto_now = QtGui.QPushButton('Now')
+        self.goto_now.clicked.connect(
+            lambda: mainwindow.change_view('now'))
 
         self.layout.addWidget(self.goto_artist)
         self.nav_group.addButton(self.goto_artist)
@@ -43,6 +45,10 @@ class Nav(QtGui.QWidget):
         self.nav_group.addButton(self.goto_song)
         self.layout.addWidget(self.goto_lib)
         self.layout.addStretch()
+
+        self.layout.addWidget(self.goto_now)
+        self.nav_group.addButton(self.goto_now)
+
 
         self.goto_lib.hide()
 
@@ -56,9 +62,10 @@ class Nav(QtGui.QWidget):
         self.library_v.setLayout(QtGui.QHBoxLayout())
         while self.library_v.layout().count() != 0:
             self.library_v.layout().takeAt(0)
-        self.library_v.layout().addWidget(view)
-        self.library_v.layout().setContentsMargins(0, 0, 0, 0)
-        self.library.lib_vm.filtering()
+        if view:
+            self.library_v.layout().addWidget(view)
+            self.library_v.layout().setContentsMargins(0, 0, 0, 0)
+            self.library.lib_vm.filtering()
 
     def change_area(self, area):
         if area == 'lib':
@@ -66,7 +73,7 @@ class Nav(QtGui.QWidget):
             self.goto_album.show()
             self.goto_artist.show()
             self.goto_lib.hide()
-       else:
+        else:
             self.goto_song.hide()
             self.goto_album.hide()
             self.goto_artist.hide()

@@ -13,12 +13,15 @@ class Bouncer():
 
         if type(something) == Song:
             self.player.queue.add_last(something)
+
         elif isinstance(something, Playlist):
             self.player.queue = SongQueue(something.songs, something.start_at)
             if type(something) == Album:
                 self.player.queue.order_by(SongQueue.Order.TRACKNB)
+
         elif type(something) == Artist:
             for album in something.albums:
                 self.player.queue.add_last(album.songs)
 
         self.player.play()
+        self.player.status_vm.update_track_list()

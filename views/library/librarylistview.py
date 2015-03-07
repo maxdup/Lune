@@ -7,7 +7,7 @@ from views.library.lunesortfilterproxymodel import LuneSortFilterProxyModel
 class LibraryListView(QListView):
     def __init__(self, strategy):
         QListView.__init__(self)
-
+        self.ctrl = None
         self.item_strat = strategy
 
         self.itemmodel = QStandardItemModel()

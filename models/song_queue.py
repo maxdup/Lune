@@ -22,6 +22,9 @@ class SongQueue:
     def __len__(self):
         return len(self.queue)
 
+    def __iter__(self):
+        return iter(self.queue)
+
     def add_last(self, songs):
         if songs and type(songs) != list:
             songs = [songs]

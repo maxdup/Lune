@@ -3,7 +3,6 @@
 from PySide import QtGui, QtCore
 from PySide.QtGui import QSizePolicy
 
-from .now_playing.now_view import NowView
 from .settings.settings_view import SettingsView
 from .status.status import Status
 from .top_bar import TopBar
@@ -61,52 +60,56 @@ class MainWindow(QtGui.QWidget):
         content_v = QtGui.QWidget()
         stack_container = QtGui.QFrame()
 
-        library_v = QtGui.QWidget()
-        status_v = Status(player)
+        self.library_v = QtGui.QWidget()
+        self.status_v = Status(player)
 
         content_v.setLayout(QtGui.QVBoxLayout())
-        content_v.layout().addWidget(library_v)
-        content_v.layout().addWidget(status_v)
+        content_v.layout().addWidget(self.library_v)
+        content_v.layout().addWidget(self.status_v)
         content_v.layout().setContentsMargins(0, 0, 0, 0)
 
         settings_v = SettingsView(settings)
 
-        now_v = NowView(player)
 
         self.view_stack = QtGui.QStackedLayout()
         self.view_stack.addWidget(content_v)
         self.view_stack.addWidget(settings_v)
-        self.view_stack.addWidget(now_v)
 
         stack_container.setLayout(self.view_stack)
-        self.nav = Nav(self, library, library_v, player.bouncer)
+        self.nav = Nav(self, library, player.bouncer)
         main_container.addWidget(self.nav)
         main_container.addWidget(stack_container)
 
         self.timer = QtCore.QTimer(self)
-        self.timer.setInterval(1000)
+        self.timer.setInterval(200)
         self.connect(self.timer, QtCore.SIGNAL("timeout()"), self.work_queue)
         self.timer.start()
 
         for song in self.library.library_db.get_all_songs():
             operation_queue.push(LibOperation(song, load_song))
 
+        self.chrono = QtCore.QTime()
+
+
     def change_view(self, view):
         if view == 'lib':
+            self.status_v.make_small()
+            self.library_v.show()
+            self.view_stack.setCurrentIndex(0)
+            self.nav.change_area(view)
+        elif view == 'now':
+            self.status_v.make_large()
+            self.library_v.hide()
             self.view_stack.setCurrentIndex(0)
             self.nav.change_area(view)
         elif view == 'settings':
             self.view_stack.setCurrentIndex(1)
             self.nav.change_area(view)
-        elif view == 'now':
-            self.view_stack.setCurrentIndex(2)
-            self.nav.change_area(view)
 
     def work_queue(self):
-        # change to time based instead of quantity based
         if self.operation_queue:
-            batch = 10
-            while self.operation_queue and batch:
+            self.chrono.restart()
+            while self.chrono.elapsed() < 150:
                 operation = self.operation_queue.shift()
-                operation.execute(self.library)
-                batch -= 1
+                if operation:
+                    operation.execute(self.library)

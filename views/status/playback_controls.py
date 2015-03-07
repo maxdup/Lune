@@ -28,7 +28,9 @@ class PlaybackControls(QtGui.QWidget):
 
         layout = QtGui.QHBoxLayout(self)
 
+        layout.addStretch()
         layout.addWidget(self.previous)
         layout.addWidget(self.stop)
         layout.addWidget(player.status_vm.pause_resume)
         layout.addWidget(self.skip)
+        layout.addStretch()

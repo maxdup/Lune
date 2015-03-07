@@ -1,6 +1,9 @@
 from PySide import QtGui, QtCore
 
 from models.song import Song
+from views.library.model_to_item_strategy import ModelToItemStrat, get_song_item
+from views.library.librarylistview import LibraryListView
+
 
 class StatusViewModel:
     def __init__(self, player):
@@ -17,9 +20,18 @@ class StatusViewModel:
 
         self.curr_song = None
 
+        self.queue = LibraryListView(ModelToItemStrat(get_song_item))
+        self.item_strat = ModelToItemStrat(get_song_item)
+
     def update(self):
         self.update_track_info()
         self.update_playback_state()
+        self.update_track_list()
+
+    def update_track_list(self):
+        self.queue.itemmodel.clear()
+        for song in self.player.queue:
+            self.queue.add(song)
 
     def update_track_info(self):
         if self.player.get_current():
