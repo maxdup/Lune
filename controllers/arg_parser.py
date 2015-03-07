@@ -10,6 +10,5 @@ class argParser():
         for arg in args:
             arg = str(arg)
             if os.path.isfile(arg) and arg.split('.').pop() in FORMATS:
-                print("yes, that is a file")
                 songs.append(Song(arg))
         return songs

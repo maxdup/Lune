@@ -11,8 +11,7 @@ class SongQueue:
         ALPHA = 1
 
     def __init__(self, queue=[], start_from=0):
-        self.queue = []
-        self.add_last(queue)
+        self.queue = queue
         self.start_from = start_from
         self.at = None
 

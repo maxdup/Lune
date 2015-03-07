@@ -23,17 +23,11 @@ def main():
 
     library = Library()
     settings = UserSettings(operation_queue, library)
+    player = Player()
 
-    song_queue = SongQueue() #this should not be here tho
-    argsongs = None
     if len(sys.argv) > 1:
         argsongs = argParser.get_queue(sys.argv)
-    if argsongs:
-        song_queue.add_last(argsongs)
-
-    player = Player()
-    player.set_queue(song_queue)
-    if song_queue:
+        player.setQueue(SongQueue(argsongs))
         player.play()
 
     if sys.platform == 'win32':
