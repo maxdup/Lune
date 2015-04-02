@@ -72,9 +72,11 @@ class Nav(QtGui.QWidget):
             self.goto_song.show()
             self.goto_album.show()
             self.goto_artist.show()
+            self.goto_now.show()
             self.goto_lib.hide()
         else:
             self.goto_song.hide()
             self.goto_album.hide()
             self.goto_artist.hide()
+            self.goto_now.hide()
             self.goto_lib.show()

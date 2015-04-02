@@ -13,7 +13,7 @@ class StatusViewModel:
         self.album_display = QtGui.QLabel()
         self.artist_display = QtGui.QLabel()
         self.album_art_display = QtGui.QLabel()
-
+        self.album_art_size = 70
         self.album_art = QtGui.QPixmap()
 
         self.pause_resume = QtGui.QPushButton(']')
@@ -49,8 +49,10 @@ class StatusViewModel:
         self.artist_display.setText(self.song.track_info['artist'])
 
         if self.album_art:
-            self.album_art_display.setPixmap(self.album_art.scaled(QtCore.QSize(70,70),
-                                      QtCore.Qt.KeepAspectRatio))
+            self.album_art_display.setPixmap(self.album_art.scaled(
+                QtCore.QSize(self.album_art_size,
+                             self.album_art_size),
+                QtCore.Qt.KeepAspectRatio))
         else:
             self.album_art_display.setPixmap(QtGui.QPixmap())
 

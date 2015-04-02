@@ -18,7 +18,6 @@ class Status(QtGui.QWidget):
         self.layout.setContentsMargins(0,10,0,0)
         self.make_small()
 
-
     def make_large(self):
         self.clear()
         self.playing.set_compact(False)
@@ -26,6 +25,8 @@ class Status(QtGui.QWidget):
         self.layout.addWidget(self.progress,2,0,3,0,0)
         self.layout.addWidget(self.controls,3,0,0)
         self.setObjectName('status')
+        self.player.status_vm.album_art_size = 250
+        self.player.status_vm.update_track_info()
         self.update_style()
 
     def make_small(self):
@@ -35,6 +36,8 @@ class Status(QtGui.QWidget):
         self.layout.addWidget(self.progress,0,2,0)
         self.layout.addWidget(self.controls,0,3,0)
         self.setObjectName('statuscompact')
+        self.player.status_vm.album_art_size = 50
+        self.player.status_vm.update_track_info()
         self.update_style()
 
     def clear(self):

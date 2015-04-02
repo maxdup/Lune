@@ -7,6 +7,7 @@ class ProgressBar(QtGui.QWidget):
     def __init__(self, player):
         self.player = player
         QtGui.QWidget.__init__(self)
+        self.setObjectName('ProgressBar')
 
         self.player = player
 
@@ -36,6 +37,7 @@ class ProgressBar(QtGui.QWidget):
 
         layout.addWidget(self.position_slider)
         layout.addWidget(time_container)
+        layout.addStretch()
 
     def update(self):
         if not self.held:

@@ -5,11 +5,19 @@ QWidget#mainwindow {
     background: #444;
 }
 
-QWidget#statuscompact{
+QWidget#statuscompact {
     max-height: 80px;
 }
-QWidget#status{
+
+QWidget#status {
     max-height: 1000px;
+}
+
+QWidget#PlaybackControls {
+    min-height: 80px;
+}
+QWidget#ProgressBar {
+    min-height: 100px;
 }
 
 QWidget#nav > QPushButton {

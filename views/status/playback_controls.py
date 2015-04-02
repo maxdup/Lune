@@ -8,7 +8,7 @@ from PySide import QtGui, QtCore
 class PlaybackControls(QtGui.QWidget):
     def __init__(self, player):
         QtGui.QWidget.__init__(self)
-
+        self.setObjectName('PlaybackControls')
         stylesheet = QtCore.QFile(':/views/qss/playback_controls.qss')
         if stylesheet.open(QtCore.QIODevice.ReadOnly | QtCore.QIODevice.Text):
             self.setStyleSheet(str(stylesheet.readAll()))
